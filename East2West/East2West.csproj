@@ -137,6 +137,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Car.cs" />
+    <Compile Include="Models\CarBrand.cs" />
+    <Compile Include="Models\CarModel.cs" />
+    <Compile Include="Models\CarSchedule.cs" />
+    <Compile Include="Models\CarType.cs" />
+    <Compile Include="Models\Feedback.cs" />
+    <Compile Include="Models\Flight.cs" />
+    <Compile Include="Models\Hotel.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\OrderCar.cs" />
+    <Compile Include="Models\OrderCarDetail.cs" />
+    <Compile Include="Models\OrderTour.cs" />
+    <Compile Include="Models\OrderTourDetail.cs" />
+    <Compile Include="Models\Refund.cs" />
+    <Compile Include="Models\Tour.cs" />
+    <Compile Include="Models\TourDetail.cs" />
+    <Compile Include="Models\TourSchedule.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +174,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -186,7 +205,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
