@@ -146,10 +146,9 @@
     <Compile Include="Models\Flight.cs" />
     <Compile Include="Models\Hotel.cs" />
     <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderCar.cs" />
-    <Compile Include="Models\OrderCarDetail.cs" />
     <Compile Include="Models\OrderTour.cs" />
-    <Compile Include="Models\OrderTourDetail.cs" />
     <Compile Include="Models\Refund.cs" />
     <Compile Include="Models\Tour.cs" />
     <Compile Include="Models\TourDetail.cs" />
