@@ -7,7 +7,7 @@ using System.Web;
 
 namespace East2West.Models
 {
-    [Table("Tour")]
+    [Table("Tours")]
     public class Tour
     {
         [Key]
@@ -40,7 +40,7 @@ namespace East2West.Models
 
         [StringLength(50)]
         [Required]
-        public Double Duration { get; set; }
+        public String Duration { get; set; }
 
         [Required]
         public Double Rating { get; set; }
@@ -58,8 +58,8 @@ namespace East2West.Models
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime DeletedAt { get; set; }
-        public Location LocationDeparture { get; set; }
-        public Location LocationDestination { get; set; }
+        public virtual Location LocationDeparture { get; set; }
+        public virtual Location LocationDestination { get; set; }
         public ICollection<TourDetail> TourDetails { get; set; }
         public ICollection<TourSchedule> TourSchedules { get; set; }
     }
