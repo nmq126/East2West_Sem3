@@ -7,12 +7,12 @@ using System.Web;
 
 namespace East2West.Models
 {
-    [Table("OrderTour")]
+    [Table("OrderTours")]
     public class OrderTour
     {
         [Key]
         [Column(Order = 0)]
-        public String UserId { get; set; }
+        public String OrderId { get; set; }
 
         [Key]
         [Column(Order = 1)]
@@ -23,5 +23,7 @@ namespace East2West.Models
 
         [Required]
         public int Quantity { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual TourDetail TourDetail { get; set; }
     }
 }

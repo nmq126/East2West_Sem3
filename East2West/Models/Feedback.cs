@@ -7,7 +7,7 @@ using System.Web;
 
 namespace East2West.Models
 {
-    [Table("Feedback")]
+    [Table("Feedbacks")]
     public class Feedback
     {
         [Key]

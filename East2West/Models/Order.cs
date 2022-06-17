@@ -7,7 +7,7 @@ using System.Web;
 
 namespace East2West.Models
 {
-    [Table("Order")]
+    [Table("Orders")]
     public class Order
     {
         [Key]
@@ -32,7 +32,7 @@ namespace East2West.Models
         public DateTime UpdatedAt { get; set; }
         public DateTime DeletedAt { get; set; }
 
-        [ForeignKey("RefundId")]
+        [ForeignKey("Id")]
         public virtual Refund Refund { get; set; }
 
         public virtual User User { get; set; }
