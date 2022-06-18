@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="Elisyam is a Web App and Admin Dashboard Template built with Bootstrap 4">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Google Fonts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: { "families": ["Montserrat:400,500,600,700", "Noto+Sans:400,700"] },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+    <!-- Favicon -->
+    @*<link rel="apple-touch-icon" sizes="180x180" href="@Url.Content("~/Content/admin_img/apple-touch-icon.png")" />
+        <link rel="icon" type="image/png" sizes="32x32" href="@Url.Content("~/Content/admin_img/favicon-32x32.png")" />
+        <link rel="icon" type="image/png" sizes="16x16" href="@Url.Content("~/Content/admin_img/favicon-16x16.png")" />*@
+    <link rel="icon" type="image/png" href="@Url.Content("~/Content/client_img/logoFavicontuche.png")">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/admin_vendor/css/base/bootstrap.min.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/admin_vendor/css/base/elisyam-1.5.css")" media="screen" type="text/css" />
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/toastr.css")" media="screen" type="text/css" />
+
+</head>
+<body id="page-top">
+    <div id="preloader">
+        <div class="canvas">
+            <img src="@Url.Content("~/Content/admin_img/logo.png")" alt="logo" class="loader-logo">
+            <div class="spinner"></div>
+        </div>
+    </div>
+    <div class="page">
+        <!-- Begin Header -->
+        <header class="header">
+            <nav class="navbar fixed-top">
+                <!-- Begin Search Box-->
+                <div class="search-box">
+                    <button class="dismiss"><i class="ion-close-round"></i></button>
+                    <form id="searchForm" action="#" role="search">
+                        <input type="search" placeholder="Search something ..." class="form-control">
+                    </form>
+                </div>
+                <!-- End Search Box-->
+                <!-- Begin Topbar -->
+                <div class="navbar-holder d-flex align-items-center align-middle justify-content-between">
+                    <!-- Begin Logo -->
+                    <div class="navbar-header">
+                        <a href="db-default.html" class="navbar-brand">
+                            <div class="brand-image brand-big">
+                                <img src="@Url.Content("~/Content/client_img/logoTuche2.png")" alt="logo" class="logo-big">
+                            </div>
+                            <div class="brand-image brand-small">
+                                <img src="~/Content/client_img/logoFavicontuche.png" alt="logo" class="logo-small">
+                            </div>
+                        </a>
+                        <!-- Toggle Button -->
+                        <a id="toggle-btn" href="#" class="menu-btn active">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </a>
+                        <!-- End Toggle -->
+                    </div>
+                    <!-- End Logo -->
+                    <!-- Begin Navbar Menu -->
+                    <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center pull-right">
+                        <!-- Search -->
+                        <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="la la-search"></i></a></li>
+                        <!-- End Search -->
+                        <!-- User -->
+                        <li class="nav-item dropdown">
+                            <a id="user" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><img src="@Url.Content("~/Content/admin_img/avatar/avatar-01.jpg")" alt="..." class="avatar rounded-circle"></a>
+                            <ul aria-labelledby="user" class="user-size dropdown-menu">
+                                <li class="welcome">
+                                    <a href="#" class="edit-profil"><i class="la la-gear"></i></a>
+                                    <img src="@Url.Content("~/Content/admin_img/avatar/avatar-01.jpg")" alt="..." class="rounded-circle">
+                                </li>
+                                <li>
+                                    <a href="pages-profile.html" class="dropdown-item">
+                                        Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="app-mail.html" class="dropdown-item">
+                                        Messages
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item no-padding-bottom">
+                                        Settings
+                                    </a>
+                                </li>
+                                <li class="separator"></li>
+                                <li>
+                                    <a href="pages-faq.html" class="dropdown-item no-padding-top">
+                                        Faq
+                                    </a>
+                                </li>
+                                <li><a rel="nofollow" href="pages-login.html" class="dropdown-item logout text-center"><i class="ti-power-off"></i></a></li>
+                            </ul>
+                        </li>
+                        <!-- End User -->
+                    </ul>
+                    <!-- End Navbar Menu -->
+                </div>
+                <!-- End Topbar -->
+            </nav>
+        </header>
+        <!-- End Header -->
+        <!-- Begin Page Content -->
+        <div class="page-content d-flex align-items-stretch">
+            <div class="default-sidebar">
+                <!-- Begin Side Navbar -->
+                <nav class="side-navbar box-scroll sidebar-scroll">
+                    <!-- Begin Main Navigation -->
+                    <ul class="list-unstyled">
+                        <li class="@(Request.Url.ToString().Contains("/Dashboard") ? "active" : "" )">
+                            <a class="@(Request.Url.ToString().Contains("/Dashboard") ? "active" : "" )" href="@Url.Action("Index", "Dashboard")"><i class="la la la-columns"></i><span>Dashboard</span></a>
+
+                        </li>
+                        <li class="@(Request.Url.ToString().Contains("/Courses") ? "active" : "" )">
+                            <a href="#dropdown-db1" aria-expanded="false" data-toggle="collapse"><i class="la la-book"></i><span>Course</span></a>
+                            <ul id="dropdown-db1" class="collapse list-unstyled @(Request.Url.ToString().Contains("/Courses") ? "show" : "" ) pt-0">
+                                <li><a class="@(Request.RawUrl.Equals("/Courses") ? "active" : "" )" href="@Url.Action("Index", "Courses")">Courses List</a></li>
+                                <li><a class="@(Request.RawUrl.Equals("/Courses/Create") ? "active" : "" )" href="@Url.Action("Create", "Courses")">Create Course</a></li>
+                            </ul>
+                        </li>
+                        <li class="@(Request.Url.ToString().Contains("/Levels") ? "active" : "" )">
+                            <a href="#dropdown-db2" aria-expanded="false" data-toggle="collapse"><i class="la la-star-half-o"></i><span>Level</span></a>
+                            <ul id="dropdown-db2" class="collapse list-unstyled @(Request.Url.ToString().Contains("/Levels") ? "show" : "" ) pt-0">
+                                <li><a class="@(Request.RawUrl.Equals("/Levels") ? "active" : "" )" href="@Url.Action("Index", "Levels")">Level List</a></li>
+                                <li><a class="@(Request.RawUrl.Equals("/Levels/Create") ? "active" : "" )" href="@Url.Action("Create", "Levels")">Create Level</a></li>
+                            </ul>
+                        </li>
+                        <li class="@(Request.Url.ToString().Contains("/Categories") ? "active" : "" )">
+                            <a href="#dropdown-db3" aria-expanded="false" data-toggle="collapse"><i class="la la-file-text-o"></i><span>Category</span></a>
+                            <ul id="dropdown-db3" class="collapse list-unstyled @(Request.Url.ToString().Contains("/Categories") ? "show" : "" ) pt-0">
+                                <li><a @(Request.RawUrl.Equals("/Categories") ? "active" : "" ) href="@Url.Action("Index", "Categories")">Category List</a></li>
+                                <li><a @(Request.RawUrl.Equals("/Categories/Create") ? "active" : "" ) href="@Url.Action("Create", "Categories")">Create Category</a></li>
+                            </ul>
+                        </li>
+                        <li class="@(Request.Url.ToString().Contains("/Orders") ? "active" : "" )">
+                            <a class="@(Request.Url.ToString().Contains("/Orders") ? "active" : "" )" href="@Url.Action("Index", "Orders")"><i class="la la-cart-plus"></i><span>Order List</span></a>
+
+                        </li>
+                        <li class="@(Request.Url.ToString().Contains("/Users") ? "active" : "" )">
+                            <a class="@(Request.Url.ToString().Contains("/Orders") ? "active" : "" )" href="@Url.Action("Index", "Users")"><i class="la la-user"></i><span>User List</span></a>
+
+                        </li>
+
+                    </ul>
+                    <!-- End Main Navigation -->
+                </nav>
+                <!-- End Side Navbar -->
+            </div>
+            <!-- End Left Sidebar -->
+            <div class="content-inner">
+                <div class="container-fluid">
+                    <!-- Begin Page Header-->
+                    <div class="row">
+                        <div class="page-header">
+                            <div class="d-flex align-items-center">
+                                <h2 class="page-header-title">@ViewBag.BreadCrumb</h2>
+                                <div>
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="db-default.html"><i class="ti ti-home"></i></a></li>
+                                        <li class="breadcrumb-item active">@ViewBag.BreadCrumb</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Page Header -->
+                    
+                    @RenderBody()
+                    
+                </div>
+                <!-- End Container -->
+                <!-- Begin Page Footer-->
+                <!-- End Page Footer -->
+                <a href="#" class="go-top"><i class="la la-arrow-up"></i></a>
+                <!-- Offcanvas Sidebar -->
+                <!-- End Offcanvas Sidebar -->
+            </div>
+        </div>
+        <!-- End Page Content -->
+    </div>
+    <script src="~/Content/admin_vendor/js/base/jquery.min.js"></script>
+    <script src="~/Content/admin_vendor/js/base/core.min.js"></script>
+
+    <!-- End Vendor Js -->
+    <!-- Begin Page Vendor Js -->
+    <script src="~/Content/admin_vendor/js/nicescroll/nicescroll.min.js"></script>
+    <script src="~/Content/admin_vendor/js/app/app.min.js"></script>
+    <!-- End Page Vendor Js -->
+    @RenderSection("scripts", required: false)
+</body>
+</html>
