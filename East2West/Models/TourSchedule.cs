@@ -21,7 +21,7 @@ namespace East2West.Models
         [Required]
         public int ScheduleOrder { get; set; }
 
-        [StringLength(50)]
+        [StringLength(250)]
         [Required]
         public String Name { get; set; }
 

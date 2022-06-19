@@ -38,9 +38,8 @@ namespace East2West.Models
         [Required]
         public String Thumbnail { get; set; }
 
-        [StringLength(50)]
         [Required]
-        public String Duration { get; set; }
+        public int Duration { get; set; }
 
         [Required]
         public Double Rating { get; set; }

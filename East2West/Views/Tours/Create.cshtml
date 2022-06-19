@@ -1,0 +1,281 @@
+﻿@model East2West.Models.Tour
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-12">
+        <!-- Form -->
+        <div class="widget has-shadow">
+            <div class="widget-header bordered no-actions d-flex align-items-center">
+                <h4>Create new Tour</h4>
+            </div>
+            <div class="widget-body">
+                <div class="row flex-row justify-content-center">
+                    <div class="col-xl-10">
+                        <div id="rootwizard">
+                            <div class="step-container">
+                                <div class="step-wizard">
+                                    <div class="progress">
+                                        <div class="progressbar"></div>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <a href="#tab1" data-toggle="tab">
+                                                <span class="step">1</span>
+                                                <span class="title">Step 1</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#tab2" data-toggle="tab">
+                                                <span class="step">2</span>
+                                                <span class="title">Step 2</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#tab3" data-toggle="tab">
+                                                <span class="step">3</span>
+                                                <span class="title">Step 3</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            @using (Html.BeginForm("Create", "Tours", FormMethod.Post, new { id = "tour-create" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="tab-content">
+                                    <div class="tab-pane" id="tab1">
+                                        <div class="section-title mt-5 mb-5">
+                                            <h4>Tour General Informations</h4>
+                                        </div>
+
+                                        <div class="form-horizontal">
+                                            <hr />
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Thumbnail, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    <button id="upload_widget" class="cloudinary-button">Upload files</button>
+                                                    <div class="upload_button_holder" style="display:flex;flex-wrap:wrap;">
+                                                    </div>
+                                                    @*@Html.EditorFor(model => model.Thumbnail, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
+                    @Html.ValidationMessageFor(model => model.Thumbnail, "", new { @class = "text-danger" })*@
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.DepartureId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.DropDownListFor(model => model.DepartureId, ViewBag.CategoryList as SelectList, new { @class = "custom-select form-control" })
+                                                    @Html.ValidationMessageFor(model => model.DepartureId, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.DestinationId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.DropDownListFor(model => model.DestinationId, ViewBag.LevelList as SelectList, new { @class = "custom-select form-control" })
+                                                    @Html.ValidationMessageFor(model => model.DestinationId, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = 3 })
+                                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.TextAreaFor(model => model.Detail, new { @class = "form-control", @rows = 6 })
+                                                    @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.SummarySchedule, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.SummarySchedule, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.SummarySchedule, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Policy, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.Policy, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Policy, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <ul class="pager wizard text-right">
+                                            <li class="previous d-inline-block">
+                                                <a href="javascript:;" class="btn btn-secondary ripple">Previous</a>
+                                            </li>
+                                            <li class="next d-inline-block">
+                                                <a href="javascript:;" class="btn btn-gradient-01">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane" id="tab2">
+                                        <div class="section-title mt-5 mb-5">
+                                            <h4>Add Tour Schedule</h4>
+                                        </div>
+                                        <div class="form-group">
+                                            <button id="addTourSchedule" type="button" class='btn btn-primary mb-5'>Add Tour Schedule</button>
+
+                                            <div id="new-TourSchedule">
+                                                @if (Model?.TourSchedules != null && Model?.TourSchedules?.Any() != null)
+                                                {
+                                                    foreach (var TourSchedules in Model.TourSchedules)
+                                                    {
+                                                        Html.RenderPartial("TourScheduleRow", TourSchedules);
+                                                    }
+                                                }
+                                            </div>
+
+                                            @*<div id="Sections" style="margin-top:10px">
+                                                </div>*@
+                                        </div>
+                                        <ul class="pager wizard text-right">
+                                            <li class="previous d-inline-block">
+                                                <a href="javascript:;" class="btn btn-secondary ripple">Previous</a>
+                                            </li>
+                                            <li class="next d-inline-block">
+                                                <a href="javascript:;" class="btn btn-gradient-01">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane" id="tab3">
+                                        <div class="section-title mt-5 mb-5">
+                                            <h4>Confirmation</h4>
+                                        </div>
+                                        @*<div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Create" class="btn btn-default" />
+                                                </div>
+                                            </div>*@
+                                        <ul class="pager wizard text-right">
+                                            <li class="previous d-inline-block">
+                                                <a href="javascript:void(0)" class="btn btn-secondary ripple">Previous</a>
+                                            </li>
+                                            <li class="next d-inline-block">
+                                                <input type="submit" form="tour-create" value="Create" class="btn btn-gradient-01" />
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Form -->
+    </div>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Content/admin_vendor/js/bootstrap-wizard/bootstrap.wizard.min.js"></script>
+        <script src="~/Content/admin_js/components/wizard/form-wizard.min.js"></script>
+        <script>
+        var number = 1;
+        $('#addTourSchedule').on('click', function () {
+            $.ajax({
+                type: "POST",
+                url: "AddNewTourSchedule",
+                data: {
+                    number: number
+                },
+                success: function (partialView) {
+                    $('#new-TourSchedule').append(partialView);
+                }
+            });
+            number++;
+        });
+
+        $("#deleteRow").live("click", function () {
+            $(this).parents("#sectionRow:first").remove();
+            return false;
+        });
+
+        //function deleteRow(element) {
+        //    var currentRow = parseInt($(element).val());
+        //    let nextsiblings = document.querySelectorAll('.taskRow:nth-child(' + (currentRow + 1) + ') ~ *');
+        //    for (var i = 0; i < nextsiblings.length; i++) {
+        //        var childElements = nextsiblings[i].children;
+        //        childElements[0].textContent = "Task" + (currentRow + 1);
+        //        childElements[1].setAttribute("name", "BucketListElement.Progression.BLETasks[" + currentRow + "].Text");
+        //        childElements[2].setAttribute("name", "BucketListElement.Progression.BLETasks[" + currentRow + "].Completed");
+        //        childElements[3].setAttribute("value", currentRow)
+        //        currentRow++;
+        //    }
+        //    $(element).closest("div").remove();
+        //    count--;
+        //}
+        </script>
+        <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+        var myWidget = cloudinary.createUploadWidget({
+            cloudName: 'nmq126',
+            uploadPreset: 'jkyvknsj'
+        }, (error, result) => {
+            if (!error && result && result.event === "success") {
+                $(".Thumbnail").val(result.info.secure_url)
+                console.log('Done! Here is the image info: ', result.info);
+                $(".upload_button_holder").html(function () {
+                    return `
+                    <div class="p-2" style="position: relative;width:200px">
+                        <input type="hidden" value="${result.info.secure_url}" id="Thumbnail", name="Thumbnail"/>
+                        <img data-delete="${result.info.delete_token}" class="border border-primary" style="margin:5px;padding:5px;height:150px;object-fit:cover;width:200px;" src="${result.info.secure_url}" />
+                        <input onclick="removeImg()" class="btn btn-warning uk-padding-remove" style="position:absolute;top:0;left:90%;height:30px;" type="button" value="Remove">
+                    </div>`;
+                })
+            }
+        }
+        )
+
+        document.getElementById("upload_widget").addEventListener("click", function () {
+            myWidget.open();
+        }, false);
+
+        function removeImg() {
+            $(".uk-padding-remove").click(function () {
+                var parent = $(this).parent(".p-2");
+                var delete_token = $(this).prev().attr("data-delete");
+                $.ajax({
+                    type: "POST",
+                    url: "https://api.cloudinary.com/v1_1/nmq126/delete_by_token",
+                    cache: false,
+                    data: { token: delete_token },// serializes the form's elements.
+                    success: function (data) {
+                        console.log(data.result);
+                        parent.remove();
+                    }
+                }, parent);
+
+    });
+}
+        </script>
+    }
+</div>
