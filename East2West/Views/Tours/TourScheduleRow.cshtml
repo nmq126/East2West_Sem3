@@ -1,0 +1,30 @@
+﻿@model East2West.Models.TourSchedule
+@using HtmlHelpers.BeginCollectionItem
+
+@using (Html.BeginCollectionItem("TourSchedules"))
+{
+    <div id="tourScheduleRow" class="tourScheduleRow has-shadow">
+        <a class="card-header collapsed d-flex align-items-center" data-toggle="collapse" href=@("#IconRightCollapse" + ViewBag.Number) aria-expanded="true">
+            <div class="card-title w-100">@ViewBag.Number. Tour Schedule #@ViewBag.Number</div>
+        </a>
+        <div id=@("#IconRightCollapse" + ViewBag.Number) class="card-body collapse show mb-3" data-parent="#accordion-icon-right">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Detail, new { @class = "form-control", @rows = 3 })
+                    @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.EditorFor(model => model.TourId, new { htmlAttributes = new { @class = "form-control", @Value = 1, style = "display:none" } })
+            @Html.EditorFor(model => model.ScheduleOrder, new { htmlAttributes = new { @class = "form-control", @Value = 1, style = "display:none" } })
+        </div>
+    </div>
+}

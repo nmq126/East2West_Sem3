@@ -20,6 +20,9 @@ namespace East2West.Models
 
         [Required]
         public Double Rating { get; set; }
+        [Column(TypeName = "ntext")]
+        [Required]
+        public String Name { get; set; }
 
         [Column(TypeName = "ntext")]
         [Required]
