@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using East2West.Data;
 using East2West.Models;
+using PagedList;
 
 namespace East2West.Controllers
 {
@@ -16,10 +17,65 @@ namespace East2West.Controllers
         private DBContext db = new DBContext();
 
         // GET: Tours
-        public ActionResult Index()
+        public ActionResult Index(string id, string sortType, string keyword, string departureId, string destinationId, int? page)
         {
-            var tours = db.Tours.Include(t => t.LocationDeparture).Include(t => t.LocationDestination);
-            return View(tours.ToList());
+            ViewBag.BreadCrumb = "Tour List";
+            var tours = from t in db.Tours select t;
+
+            ViewBag.LocationList = from l in db.Locations select l;
+            ViewBag.Keyword = keyword;
+            ViewBag.Id = id;
+            ViewBag.SortType = sortType;
+            ViewBag.DepartureId = departureId;
+            ViewBag.DestinationId = destinationId;
+            int pageNumber = (page ?? 1);
+            int pageSize = 10;
+
+            if (!String.IsNullOrEmpty(id))
+            {
+                tours = tours.Where(t => t.Id.Contains(id));
+            }
+
+            if (!String.IsNullOrEmpty(keyword))
+            {
+                tours = tours.Where(s => s.Name.Contains(keyword) || s.Description.Contains(keyword) || s.Detail.Contains(keyword) || s.SummarySchedule.Contains(keyword));
+            }
+
+            if (!String.IsNullOrEmpty(departureId))
+            {
+                tours = tours.Where(t => t.DepartureId == departureId);
+            }
+
+            if (!String.IsNullOrEmpty(destinationId))
+            {
+                tours = tours.Where(t => t.DestinationId == destinationId);
+            }
+
+            switch (sortType)
+            {
+                case "createdAt_asc":
+                    tours = tours.OrderBy(s => s.CreatedAt);
+                    break;
+                case "createdAt_desc":
+                    tours = tours.OrderByDescending(s => s.CreatedAt);
+                    break;
+                case "duration_asc":
+                    tours = tours.OrderBy(t => t.Duration);
+                    break;
+                case "duration_desc":
+                    tours = tours.OrderByDescending(t => t.Duration);
+                    break;
+                case "rating_asc":
+                    tours = tours.OrderBy(t => t.Rating);
+                    break;
+                case "rating_desc":
+                    tours = tours.OrderByDescending(t => t.Rating);
+                    break;
+                default:
+                    tours = tours.OrderBy(s => s.CreatedAt);
+                    break;
+            }
+            return View(tours.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Tours/Details/5
@@ -61,7 +117,7 @@ namespace East2West.Controllers
                 tour.CreatedAt = tour.UpdatedAt = tour.DeletedAt = DateTime.Now;
                 do
                 {
-                    tour.Id = String.Concat("TOUR", Guid.NewGuid().ToString("N").Substring(0, 5));
+                    tour.Id = String.Concat("TOUR_", Guid.NewGuid().ToString("N").Substring(0, 5));
                 } while (db.Tours.FirstOrDefault(c => c.Id == tour.Id) != null);
                 if (tour.TourSchedules == null || tour.TourSchedules.Count() == 0)
                 {

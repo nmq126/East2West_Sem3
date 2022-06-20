@@ -153,6 +153,10 @@
     <Compile Include="Migrations\202206191534304_update-db-again-1.Designer.cs">
       <DependentUpon>202206191534304_update-db-again-1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206201455252_update-db-again-2.cs" />
+    <Compile Include="Migrations\202206201455252_update-db-again-2.Designer.cs">
+      <DependentUpon>202206201455252_update-db-again-2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\CarBrand.cs" />
@@ -553,6 +557,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206191534304_update-db-again-1.resx">
       <DependentUpon>202206191534304_update-db-again-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206201455252_update-db-again-2.resx">
+      <DependentUpon>202206201455252_update-db-again-2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

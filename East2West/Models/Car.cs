@@ -28,7 +28,6 @@ namespace East2West.Models
 
         [Column(TypeName = "ntext")]
         [Required]
-        //[RegularExpression(@"(.*\.)(jpg|JPG|gif|GIF|png|PNG)$", ErrorMessage = "Only Image files allowed.")]
         public String Thumbnail { get; set; }
 
         [StringLength(50)]

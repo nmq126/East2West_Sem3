@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace East2West.Models
 {
@@ -32,6 +33,7 @@ namespace East2West.Models
 
         [Column(TypeName = "ntext")]
         [Required]
+        [AllowHtml]
         public String Detail { get; set; }
 
         [Column(TypeName = "ntext")]
@@ -46,6 +48,7 @@ namespace East2West.Models
 
         [Column(TypeName = "ntext")]
         [Required]
+        [AllowHtml]
         public String Policy { get; set; }
 
         [Column(TypeName = "ntext")]

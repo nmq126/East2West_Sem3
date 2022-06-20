@@ -14,9 +14,13 @@ namespace East2West.Models
         [StringLength(50)]
         public String Id { get; set; }
 
+        [Column(TypeName = "ntext")]
+        [Required]
+        public String Thumbnail { get; set; }
+
         [StringLength(50)]
         [Required]
-        public String LocaltionId { get; set; }
+        public String LocationId { get; set; }
 
         [Required]
         public Double Rating { get; set; }
