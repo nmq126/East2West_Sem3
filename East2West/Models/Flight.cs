@@ -14,6 +14,10 @@ namespace East2West.Models
         [StringLength(50)]
         public String Id { get; set; }
 
+        [Column(TypeName = "ntext")]
+        [Required]
+        public String Thumbnail { get; set; }
+
         [Required]
         public Boolean IsRoundTicket { get; set; }
 
