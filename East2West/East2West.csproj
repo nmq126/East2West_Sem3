@@ -165,6 +165,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ToursController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Data\DBContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -185,7 +186,10 @@
     <Compile Include="Migrations\202206201455252_update-db-again-2.Designer.cs">
       <DependentUpon>202206201455252_update-db-again-2.cs</DependentUpon>
     </Compile>
-
+    <Compile Include="Migrations\202206211315402_fix-db-n.cs" />
+    <Compile Include="Migrations\202206211315402_fix-db-n.Designer.cs">
+      <DependentUpon>202206211315402_fix-db-n.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\202206211325031_update-database-1.cs" />
     <Compile Include="Migrations\202206211325031_update-database-1.Designer.cs">
       <DependentUpon>202206211325031_update-database-1.cs</DependentUpon>
@@ -932,13 +936,14 @@
     <EmbeddedResource Include="Migrations\202206201455252_update-db-again-2.resx">
       <DependentUpon>202206201455252_update-db-again-2.cs</DependentUpon>
     </EmbeddedResource>
-
+    <EmbeddedResource Include="Migrations\202206211315402_fix-db-n.resx">
+      <DependentUpon>202206211315402_fix-db-n.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206211325031_update-database-1.resx">
       <DependentUpon>202206211325031_update-database-1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206211327589_updatedatabase2.resx">
       <DependentUpon>202206211327589_updatedatabase2.cs</DependentUpon>
-
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
