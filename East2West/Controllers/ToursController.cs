@@ -243,8 +243,13 @@ namespace East2West.Controllers
                 return "Tour not found";
             }
             tour.Status = status;
+            string newStatus = "ACTIVE";
+            if (status == 0)
+            {
+                newStatus = "DISABLE";
+            }
             db.SaveChanges();
-            return "Update success";
+            return  "Tour #" + id + " status change to " + newStatus;
         }
 
         protected override void Dispose(bool disposing)
