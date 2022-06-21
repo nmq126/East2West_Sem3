@@ -1,4 +1,5 @@
 ﻿using East2West.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,7 +8,7 @@ using System.Web;
 
 namespace East2West.Data
 {
-    public class DBContext : DbContext
+    public class DBContext :  IdentityDbContext<User>
     {
         public DBContext()
             : base("name=DBContext")
