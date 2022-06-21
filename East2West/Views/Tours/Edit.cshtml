@@ -132,6 +132,7 @@
                             </div>
                         </div>
 
+                        @Html.EditorFor(model => model.Thumbnail, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
                         @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
                         @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
                         @Html.EditorFor(model => model.DeletedAt, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
