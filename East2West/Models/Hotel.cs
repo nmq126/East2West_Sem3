@@ -33,7 +33,7 @@ namespace East2West.Models
         public String Address { get; set; }
 
         [Required]
-        public String Price { get; set; }
+        public double Price { get; set; }
 
         [Column(TypeName = "ntext")]
         [Required]

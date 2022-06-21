@@ -279,7 +279,6 @@
             }, false);
 
             function deleteByToken(cloud_name, token) {
-                cloudinary.DeleteResources(delResParams);
                 $.ajax({
                     url: "https://api.cloudinary.com/v1_1/" + cloud_name + "/delete_by_token",
                     method: 'POST',
