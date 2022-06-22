@@ -863,6 +863,7 @@
     <Content Include="Views\Tours\TourScheduleRow.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
     <Content Include="Views\Shared\_LayoutPageClient.cshtml" />
+    <Content Include="Views\Home\GetListTour.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

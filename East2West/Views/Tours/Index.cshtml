@@ -125,12 +125,9 @@
                                 <button type="submit" class="btn btn-primary mr-1 mb-2">Search</button>
                                 <button type="reset" class="btn btn btn-outline-secondary mr-1 mb-2"><a href="/Courses">Clear</a></button>
                             </div>
-
                         </div>
                     </div>
                 }
-
-
             </div>
         </div>
         <!-- Default -->
@@ -157,7 +154,7 @@
                             {
                                 var i = 1;
                                 var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
-                                if(item.Thumbnail != null)
+                                if (item.Thumbnail != null)
                                 {
                                     img = item.Thumbnail.Split(',').ToList<String>().First();
                                 }
@@ -182,7 +179,6 @@
                                 </tr>
 
                             }
-
                         </tbody>
                     </table>
                     @Html.PagedListPager(Model, page => Url.Action("Index",
