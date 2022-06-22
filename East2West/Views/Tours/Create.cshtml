@@ -112,7 +112,7 @@
                                             <div class="form-group">
                                                 @Html.LabelFor(model => model.Policy, htmlAttributes: new { @class = "control-label col-md-2" })
                                                 <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.Policy, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.TextAreaFor(model => model.Policy, new { htmlAttributes = new { @class = "form-control" } })
                                                     @Html.ValidationMessageFor(model => model.Policy, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
@@ -298,25 +298,9 @@
 
         <script src="https://cdn.ckeditor.com/4.17.1/standard-all/ckeditor.js"></script>
         <script>
-            CKEDITOR.replace('Detail');
+           
             CKEDITOR.replace('Policy');
-        </script>
-
-        @Scripts.Render("~/Scripts/jquery.validate.min.js")
-        @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#tour-create").validate({
-                    rules: {
-                        Name: {
-                            required: true
-                        },
-                    },
-                    messages: {
-
-                    }
-                });
-            });
+            CKEDITOR.replace('Detail');
         </script>
     }
 </div>

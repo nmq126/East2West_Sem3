@@ -54,7 +54,7 @@ namespace East2West.Models
         [Column(TypeName = "ntext")]
         [Required]
         public String SummarySchedule { get; set; }
-
+        // 1 = active, 0 = disable
         public int Status { get; set; }
 
         public DateTime CreatedAt { get; set; }
