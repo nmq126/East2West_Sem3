@@ -1,9 +1,11 @@
 ﻿using East2West.Data;
+using East2West.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace East2West.Controllers
 {
@@ -14,11 +16,6 @@ namespace East2West.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-
-        public ActionResult GetListTour()
-        {
-            return View(db.Tours.ToList());
         }
 
         public ActionResult About()
