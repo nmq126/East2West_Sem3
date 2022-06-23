@@ -516,6 +516,7 @@
     <Content Include="Content\admin_vendor\js\progress\circle-progress.min.js" />
     <Content Include="Content\admin_vendor\js\tabledit\jquery.tabledit.js" />
     <Content Include="Content\admin_vendor\js\tabledit\jquery.tabledit.min.js" />
+    <Content Include="Content\assets\validate.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -914,6 +915,7 @@
     <Content Include="Views\Shared\_LayoutPageClient.cshtml" />
     <Content Include="Views\Home\GetListTour.cshtml" />
     <Content Include="Views\ClientTour\GetListTour.cshtml" />
+    <Content Include="Views\ClientTour\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
