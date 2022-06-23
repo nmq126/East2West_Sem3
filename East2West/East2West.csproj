@@ -173,41 +173,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202206171509433_init-data.cs" />
-    <Compile Include="Migrations\202206171509433_init-data.designer.cs">
-      <DependentUpon>202206171509433_init-data.cs</DependentUpon>
+    <Compile Include="Migrations\202206230956206_init-database.cs" />
+    <Compile Include="Migrations\202206230956206_init-database.Designer.cs">
+      <DependentUpon>202206230956206_init-database.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202206171514458_update-table-name.cs" />
-    <Compile Include="Migrations\202206171514458_update-table-name.designer.cs">
-      <DependentUpon>202206171514458_update-table-name.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206191534304_update-db-again-1.cs" />
-    <Compile Include="Migrations\202206191534304_update-db-again-1.Designer.cs">
-      <DependentUpon>202206191534304_update-db-again-1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206201455252_update-db-again-2.cs" />
-    <Compile Include="Migrations\202206201455252_update-db-again-2.Designer.cs">
-      <DependentUpon>202206201455252_update-db-again-2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206211315402_fix-db-n.cs" />
-    <Compile Include="Migrations\202206211315402_fix-db-n.Designer.cs">
-      <DependentUpon>202206211315402_fix-db-n.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206211325031_update-database-1.cs" />
-    <Compile Include="Migrations\202206211325031_update-database-1.Designer.cs">
-      <DependentUpon>202206211325031_update-database-1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206211327589_updatedatabase2.cs" />
-    <Compile Include="Migrations\202206211327589_updatedatabase2.Designer.cs">
-      <DependentUpon>202206211327589_updatedatabase2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206211402504_update-db.cs" />
-    <Compile Include="Migrations\202206211402504_update-db.Designer.cs">
-      <DependentUpon>202206211402504_update-db.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206230256582_update-model-user.cs" />
-    <Compile Include="Migrations\202206230256582_update-model-user.Designer.cs">
-      <DependentUpon>202206230256582_update-model-user.cs</DependentUpon>
+    <Compile Include="Migrations\202206231004441_update-database1.cs" />
+    <Compile Include="Migrations\202206231004441_update-database1.Designer.cs">
+      <DependentUpon>202206231004441_update-database1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppRole.cs" />
@@ -945,32 +917,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202206171509433_init-data.resx">
-      <DependentUpon>202206171509433_init-data.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206230956206_init-database.resx">
+      <DependentUpon>202206230956206_init-database.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206171514458_update-table-name.resx">
-      <DependentUpon>202206171514458_update-table-name.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206191534304_update-db-again-1.resx">
-      <DependentUpon>202206191534304_update-db-again-1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206201455252_update-db-again-2.resx">
-      <DependentUpon>202206201455252_update-db-again-2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206211315402_fix-db-n.resx">
-      <DependentUpon>202206211315402_fix-db-n.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206211325031_update-database-1.resx">
-      <DependentUpon>202206211325031_update-database-1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206211327589_updatedatabase2.resx">
-      <DependentUpon>202206211327589_updatedatabase2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206211402504_update-db.resx">
-      <DependentUpon>202206211402504_update-db.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206230256582_update-model-user.resx">
-      <DependentUpon>202206230256582_update-model-user.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206231004441_update-database1.resx">
+      <DependentUpon>202206231004441_update-database1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
