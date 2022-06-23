@@ -205,6 +205,10 @@
     <Compile Include="Migrations\202206211402504_update-db.Designer.cs">
       <DependentUpon>202206211402504_update-db.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206230256582_update-model-user.cs" />
+    <Compile Include="Migrations\202206230256582_update-model-user.Designer.cs">
+      <DependentUpon>202206230256582_update-model-user.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppRole.cs" />
     <Compile Include="Models\Car.cs" />
@@ -916,6 +920,10 @@
     <Content Include="Views\Home\GetListTour.cshtml" />
     <Content Include="Views\ClientTour\GetListTour.cshtml" />
     <Content Include="Views\ClientTour\Details.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\TourDetails\Index.cshtml" />
+    <Content Include="Views\TourDetails\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -959,6 +967,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206211402504_update-db.resx">
       <DependentUpon>202206211402504_update-db.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206230256582_update-model-user.resx">
+      <DependentUpon>202206230256582_update-model-user.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
