@@ -119,7 +119,7 @@ namespace East2West.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tour tour = db.Tours.Include(t => t.TourSchedules).FirstOrDefault(t => t.Id == id);
+            Tour tour = db.Tours.Include(t => t.TourSchedules).Include(t => t.TourDetails).FirstOrDefault(t => t.Id == id);
             if (tour == null)
             {
                 return HttpNotFound();

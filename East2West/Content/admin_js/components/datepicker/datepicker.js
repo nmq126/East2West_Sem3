@@ -23,6 +23,9 @@
 		//single date
 		$('#date').daterangepicker({
 			singleDatePicker: true,
+			locale: {
+				format: 'DD/MM/YYYY'
+			}
 		});
 	});
 	

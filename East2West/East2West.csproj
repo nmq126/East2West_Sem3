@@ -165,6 +165,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClientTourController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TourDetailsController.cs" />
+    <Compile Include="Controllers\TourSchedulesController.cs" />
     <Compile Include="Controllers\ToursController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Data\DBContext.cs" />
@@ -916,6 +918,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\TourSchedules\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
