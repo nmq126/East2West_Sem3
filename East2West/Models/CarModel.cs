@@ -18,7 +18,7 @@ namespace East2West.Models
         [Required]
         public String CarBrandId { get; set; }
 
-        [StringLength(50)]
+        [Column(TypeName = "ntext")]
         [Required]
         public String Name { get; set; }
 
