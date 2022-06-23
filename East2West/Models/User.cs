@@ -9,16 +9,8 @@ using System.Web;
 namespace East2West.Models
 {
     [Table("Users")]
-    public class User : IdentityUser
+    public class User : Microsoft.AspNet.Identity.EntityFramework.IdentityUser
     {
-        [Key]
-        [StringLength(50)]
-        public String Id { get; set; }
-
-        [StringLength(50)]
-        [Required]
-        public String UserName { get; set; }
-
         [StringLength(50)]
         [Required]
         public String FirstName { get; set; }
@@ -26,10 +18,6 @@ namespace East2West.Models
         [StringLength(50)]
         [Required]
         public String LastName { get; set; }
-
-        [StringLength(250)]
-        [Required]
-        public String Email { get; set; }
 
         [DataType(DataType.Password)]
         public string Password { get; set; }
