@@ -19,9 +19,15 @@ namespace East2West.Models
         public String CarId { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
+        [Column(TypeName = "Date")]
+        [DisplayFormat(DataFormatString = "{0:MM/DD/YYYY}", ApplyFormatInEditMode = true)]
         public DateTime StartDay { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/DD/YYYY}", ApplyFormatInEditMode = true)]
+        [Column(TypeName = "Date")]
         public DateTime EndDay { get; set; }
 
         public int Status { get; set; }

@@ -77,14 +77,14 @@
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Departure</label>
                                                 <div class="col-md-10">
-                                                    @Html.DropDownListFor(model => model.DepartureId, ViewBag.CategoryList as SelectList, new { @class = "custom-select form-control" })
+                                                    @Html.DropDownListFor(model => model.DepartureId, ViewBag.DepartureId as SelectList, new { @class = "custom-select form-control" })
                                                     @Html.ValidationMessageFor(model => model.DepartureId, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Destination</label>
                                                 <div class="col-md-10">
-                                                    @Html.DropDownListFor(model => model.DestinationId, ViewBag.LevelList as SelectList, new { @class = "custom-select form-control" })
+                                                    @Html.DropDownListFor(model => model.DestinationId, ViewBag.DestinationId as SelectList, new { @class = "custom-select form-control" })
                                                     @Html.ValidationMessageFor(model => model.DestinationId, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>

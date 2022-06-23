@@ -19,6 +19,9 @@ namespace East2West.Models
         public String TourId { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/DD/YYYY}", ApplyFormatInEditMode = true)]
+        [Column(TypeName = "Date")]
         public DateTime DepartureDay { get; set; }
 
         [Required]
