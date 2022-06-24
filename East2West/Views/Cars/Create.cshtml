@@ -1,0 +1,164 @@
+﻿@model East2West.Models.Car
+
+@{
+    ViewBag.Title = "Create car";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="widget has-shadow">
+            <div class="widget-header bordered no-actions d-flex align-items-center">
+                <h4>Create new car</h4>
+            </div>
+            <div class="widget-body">
+                @using (Html.BeginForm("Create", "Cars", FormMethod.Post, new { id = "car-create" }))
+                {
+                    @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Thumbnail, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <button id="upload_widget" class="cloudinary-button">Upload images</button>
+                            <div id="upload_button_holder" style="display:flex;flex-wrap:wrap;">
+                            </div>
+                            <input type="hidden" class="form-control"
+                                   placeholder="Upload thumbnail!"
+                                   name="Thumbnail" , id="Thumbnail">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Location</label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.LocationId, ViewBag.LocationId as SelectList, new { @class = "custom-select form-control" })
+                            @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Model</label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.CarModelId, ViewBag.CarModelId as SelectList, new { @class = "custom-select form-control" })
+                            @Html.ValidationMessageFor(model => model.CarModelId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Type</label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.CarTypeId, ViewBag.CarTypeId as SelectList, new { @class = "custom-select form-control" })
+                            @Html.ValidationMessageFor(model => model.CarTypeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">License Plate</label>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.LisencePlate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LisencePlate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Price per day</label>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.PricePerDay, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PricePerDay, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Seat Capacity</label>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.SeatCapacity, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SeatCapacity, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label class="control-label">Has Air Conditioner</label>
+                            <div class="styled-checkbox">
+                                <input type="checkbox" name="HasAirConditioner" id="HasAirConditioner" value="true">
+                                <label for="HasAirConditioner">Yes</label>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.HasAirConditioner, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <ul class="pager wizard text-right">
+                        <li class="next d-inline-block">
+                            <input type="submit" form="car-create" value="Create" class="btn btn-gradient-01" />
+                        </li>
+                        <li class="previous d-inline-block">
+                            <input type="reset" form="car-create" value="Reset" class="btn btn-secondary ripple" />
+                        </li>
+                    </ul>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+            var i = 0;
+            var myWidget = cloudinary.createUploadWidget({
+                cloudName: 'nmq126',
+                uploadPreset: 'jkyvknsj'
+            }, function (error, result) {
+                if (!error && result && result.event === "success") {
+                    document.forms['car-create']['Thumbnail'].value += result.info.secure_url + ',';
+                    console.log('Done! Here is the image info: ', result.info);
+                    var imgTag = document.getElementById('upload_button_holder');
+                    imgTag.innerHTML +=
+                        `<div class="p-2" style="position: relative">
+                                                                            <button id="button_${i}" class="cls_btn" data-token="${result.info.delete_token}" data-url="${result.info.secure_url}" type="button" style="position: absolute; right: 0px"><span>x</span></button>
+                                                                            <img style="height: 150px" src="${result.info.secure_url}" alt="" class="img-thumbnail mr-2">
+                                                                        </div>`;
+
+                    var doButtonPress = function (id, delete_token, secure_url) {
+                        deleteByToken('nmq126', delete_token);//xoa anh tren cloudinary
+                        $("#" + id).parent().remove();//xoa div
+                        //sua lai value thumbnail
+                        var array_thumbnail = document.forms['car-create']['Thumbnail'].value.split(',');
+                        array_thumbnail.pop();
+                        var new_array_thumbnail = array_thumbnail.filter(item => item != secure_url);
+                        if (new_array_thumbnail.length > 0) {
+                            document.forms['car-create']['Thumbnail'].value = new_array_thumbnail.join(',') + ',';
+                        } else {
+                            document.forms['car-create']['Thumbnail'].value = "";
+                        }
+                    }
+
+                    $('.cls_btn').click(function () {
+                        doButtonPress(this.id, this.getAttribute('data-token'), this.getAttribute('data-url'));
+                    });
+                    i += 1;
+                }
+            })
+
+            document.getElementById("upload_widget").addEventListener("click", function () {
+                myWidget.open();
+            }, false);
+
+            function deleteByToken(cloud_name, token) {
+                $.ajax({
+                    url: "https://api.cloudinary.com/v1_1/" + cloud_name + "/delete_by_token",
+                    method: 'POST',
+                    data: {
+                        token: token
+                    },
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    } //default là xmlhttprequest
+                }).done(function (data) {
+                    console.log("dc ban");
+                }).fail(function (data) {
+                    console.log("ko dc ban");
+                })
+            }
+        </script>
+    }
+</div>
+
