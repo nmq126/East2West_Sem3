@@ -154,6 +154,13 @@
                                 <li><a class="@(Request.RawUrl.Equals("/Flights/Create") ? "active" : "" )" href="@Url.Action("Create", "Flights")">Create Flight</a></li>
                             </ul>
                         </li>
+                        <li class="@(Request.Url.ToString().Contains("/Hotels") ? "active" : "" )">
+                            <a href="#dropdown-db3" aria-expanded="false" data-toggle="collapse"><i class="la la-hotel"></i><span>Hotels</span></a>
+                            <ul id="dropdown-db3" class="collapse list-unstyled @(Request.Url.ToString().Contains("/Hotels") ? "show" : "" ) pt-0">
+                                <li><a class="@(Request.RawUrl.Equals("/Hotels") || Request.RawUrl.Equals("/Hotels/Index") ? "active" : "" )" href="@Url.Action("Index", "Hotels")">Hotels List</a></li>
+                                <li><a class="@(Request.RawUrl.Equals("/Hotels/Create") ? "active" : "" )" href="@Url.Action("Create", "Hotels")">Create Hotel</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <!-- End Main Navigation -->
                 </nav>

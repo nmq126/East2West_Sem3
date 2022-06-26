@@ -65,6 +65,12 @@ namespace East2West.Controllers
                 case "createdAt_desc":
                     hotels = hotels.OrderByDescending(s => s.CreatedAt);
                     break;
+                case "price_asc":
+                    hotels = hotels.OrderBy(s => s.Price);
+                    break;
+                case "price_desc":
+                    hotels = hotels.OrderByDescending(s => s.Price);
+                    break;
                 case "rating_asc":
                     hotels = hotels.OrderBy(t => t.Rating);
                     break;

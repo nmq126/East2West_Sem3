@@ -79,8 +79,8 @@
                                         <option value="">Sort by (Lastest default)</option>
                                         <option value="createdAt_asc" @(ViewBag.SortType == "createdAt_asc" ? "selected" : "")>Latest</option>
                                         <option value="createdAt_desc" @(ViewBag.SortType == "createdAt_desc" ? "selected" : "")>Oldest</option>
-                                        <option value="duration_asc" @(ViewBag.SortType == "duration_asc" ? "selected" : "")>Duration (Increase)</option>
-                                        <option value="duration_desc" @(ViewBag.SortType == "duration_desc" ? "selected" : "")>Duration (Decrease)</option>
+                                        <option value="price_asc" @(ViewBag.SortType == "price_asc" ? "selected" : "")>Price (Increase)</option>
+                                        <option value="price_desc" @(ViewBag.SortType == "price_desc" ? "selected" : "")>Price (Decrease)</option>
                                         <option value="rating_asc" @(ViewBag.SortType == "rating_asc" ? "selected" : "")>Rating (Increase)</option>
                                         <option value="rating_desc" @(ViewBag.SortType == "rating_desc" ? "selected" : "")>Rating (Decrease)</option>
                                     </select>
@@ -108,7 +108,7 @@
                             <div class="col-lg-3">
                                 <label class="form-control-label">Search by keyword</label>
                                 <div class="">
-                                    @Html.TextBox("keyword", ViewBag.Keyword as string, new { @class = "form-control", placeholder = "Name/Description/Detail/Teacher" })
+                                    @Html.TextBox("keyword", ViewBag.Keyword as string, new { @class = "form-control", placeholder = "Name/Description/Detail/Address" })
                                 </div>
                             </div>
                             <div class="col-lg-3 text-right">
