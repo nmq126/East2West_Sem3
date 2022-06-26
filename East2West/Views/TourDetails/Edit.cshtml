@@ -1,0 +1,112 @@
+﻿@model East2West.Models.TourDetail
+
+@{
+    ViewBag.Title = "Edit tour detail";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-12">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="widget has-shadow">
+                <div class="widget-header bordered no-actions d-flex align-items-center">
+                    <h4>Edit Tour #@Html.DisplayFor(model => model.Id)</h4>
+                </div>
+                <div class="widget-body">
+                    <div class="col-10 ml-auto">
+                        <div class="section-title mt-3 mb-5">
+                            <h4>01. General Informations</h4>
+                        </div>
+                    </div>
+                    <form class="form-horizontal">
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Id</label>
+                            <div class="col-lg-6">
+                                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Departure Date</label>
+                            <div class="input-group col-lg-6">
+                                <span class="input-group-addon addon-secondary">
+                                    <i class="la la-calendar"></i>
+                                </span>
+                                <input type="text" class="form-control" name="DepartureDay" id="date" placeholder="Select value" value=@Model.DepartureDay.ToShortDateString()>
+                                @*@Html.EditorFor(model => model.DepartureDay, new { htmlAttributes = new { @class = "form-control", @id = "date", type = "text" } })*@
+                            </div>
+                            <div class="col-md-6">
+                                @Html.ValidationMessageFor(model => model.DepartureDay, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Tour</label>
+                            <div class="col-lg-6 select">
+                                @Html.DropDownListFor(model => model.TourId, ViewBag.Id as SelectList, new { @class = "custom-select form-control" })
+                                @Html.ValidationMessageFor(model => model.TourId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Price</label>
+                            <div class="col-lg-6">
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Discount (%)</label>
+                            <div class="col-lg-6">
+                                @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Available Seat</label>
+                            <div class="col-lg-6">
+                                @Html.EditorFor(model => model.AvailableSeat, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AvailableSeat, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
+                        @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
+                        @Html.EditorFor(model => model.DeletedAt, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
+
+                    </form>
+
+                    <div class="em-separator separator-dashed"></div>
+                    <div class="text-left">
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/admin_vendor/js/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="~/Content/admin_vendor/js/datepicker/moment.min.js"></script>
+    <script src="~/Content/admin_vendor/js/datepicker/daterangepicker.js"></script>
+    <script src="~/Content/admin_js/components/datepicker/datepicker.js"></script>
+    <script>
+                //$("select").attr('data-live-search', true);
+        $('#date').daterangepicker({
+            singleDatePicker: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            },
+            minDate: new Date()
+        });
+    </script>
+
+}
