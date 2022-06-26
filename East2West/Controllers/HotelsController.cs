@@ -18,7 +18,7 @@ namespace East2West.Controllers
     {
         private DBContext db = new DBContext();
         // GET: Hotels
-        public ActionResult Index(int? status, string id, string sortType, string keyword, string duration_range, string localtionId, int? page)
+        public ActionResult Index(int? status, string id, string sortType, string keyword, string duration_range, string locationId, int? page)
 
         {
             ViewBag.BreadCrumb = "Hotel List";
@@ -30,7 +30,7 @@ namespace East2West.Controllers
             ViewBag.SortType = sortType;
             ViewBag.Keyword = keyword;
             ViewBag.DurationRange = duration_range;
-            ViewBag.LocaltionId = localtionId;
+            ViewBag.LocationId = locationId;
             ViewBag.Page = page;
             int pageNumber = (page ?? 1);
             int pageSize = 10;
@@ -42,9 +42,9 @@ namespace East2West.Controllers
             {
                 hotels = hotels.Where(s => s.Name.Contains(keyword) || s.Description.Contains(keyword) || s.Detail.Contains(keyword) || s.Address.Contains(keyword));
             }
-            if (!String.IsNullOrEmpty(localtionId))
+            if (!String.IsNullOrEmpty(locationId))
             {
-                hotels = hotels.Where(t => t.LocationId == localtionId);
+                hotels = hotels.Where(t => t.LocationId == locationId);
             }
             switch (status)
             {
@@ -95,7 +95,6 @@ namespace East2West.Controllers
         {
             if (ModelState.IsValid)
             {
-                hotel.Rating = 5;
                 hotel.Status = 1;
                 hotel.CreatedAt = hotel.UpdatedAt = hotel.DeletedAt = DateTime.Now;
                 do

@@ -49,49 +49,29 @@
 
     <div class="col-xl-12">
         <div class="widget has-shadow">
-            @*<div class="widget-body">
-                    @using (Html.BeginForm("Index", "Tours", FormMethod.Get))
+            <div class="widget-body">
+                    @using (Html.BeginForm("Index", "Hotels", FormMethod.Get))
                     {
                         <div class="row">
                             <div class="col-lg-3">
-                                <label class="form-control-label">Select Depature location</label>
+                                <label class="form-control-label">Select location</label>
                                 <div class="select mb-3">
-                                    <select name="categoryId" id="categoryId" class="custom-select form-control">
-                                        <option value="">Select Departure</option>
-                                        @foreach (var departure in ViewBag.LocationList)
+                                    <select name="locationId" id="locationId" class="custom-select form-control">
+                                        <option value="">Select Location</option>
+                                        @foreach (var location in ViewBag.LocationList)
                                         {
-                                            if (departure.Id == ViewBag.DepartureId)
+                                            if (location.Id == ViewBag.LocationId)
                                             {
-                                                <option value=@departure.Id selected>@departure.Name</option>
+                                                <option value=@location.Id selected>@location.Name</option>
                                             }
                                             else
                                             {
-                                                <option value=@departure.Id>@departure.Name</option>
+                                                <option value=@location.Id>@location.Name</option>
                                             }
                                         }
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
-                                <label class="form-control-label">Select Destination location</label>
-                                <div class="select mb-3">
-                                    <select name="destinationId" id="destinationId" class="custom-select form-control">
-                                        <option value="">Select Destination</option>
-                                        @foreach (var destination in ViewBag.LocationList)
-                                        {
-                                            if (destination.Id == ViewBag.DestinationId)
-                                            {
-                                                <option value=@destination.Id selected>@destination.Name</option>
-                                            }
-                                            else
-                                            {
-                                                <option value=@destination.Id>@destination.Name</option>
-                                            }
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-
                             <div class="col-lg-3">
                                 <label class="form-control-label">Sort by</label>
                                 <div class="select mb-3">
@@ -120,18 +100,6 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-3">
-                                <label class="form-control-label">Duration</label>
-                                <div class="select mb-3">
-                                    <select name="duration_range" id="duration_range" class="custom-select form-control">
-                                        <option value="all" @(ViewBag.DurationRange == "all" ? "selected" : "")>All</option>
-                                        <option value="lte3" @(ViewBag.DurationRange == "lte3" ? "selected" : "")><= 3 days</option>
-                                        <option value="4to7" @(ViewBag.DurationRange == "4to7" ? "selected" : "")>4 - 7 days</option>
-                                        <option value="gt7" @(ViewBag.DurationRange == "gt7" ? "selected" : "")>> 7 days</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
                                 <label class="form-control-label">Search by Id</label>
                                 <div class="">
                                     @Html.TextBox("id", ViewBag.Id as string, new { @class = "form-control", placeholder = "Find by id" })
@@ -147,7 +115,7 @@
                                 <div style="height:28px"></div>
                                 <div>
                                     <button type="submit" class="btn btn-primary mr-1 mb-2">Search</button>
-                                    <button type="reset" class="btn btn btn-outline-secondary mr-1 mb-2"><a href="/Tours">Clear</a></button>
+                                    <button type="reset" class="btn btn btn-outline-secondary mr-1 mb-2"><a href="/Hotels">Clear</a></button>
                                 </div>
 
                             </div>
@@ -155,7 +123,7 @@
                     }
 
 
-                </div>*@
+                </div>
         </div>
         <!-- Default -->
         <div class="widget has-shadow">
