@@ -3,7 +3,9 @@ using East2West.Models;
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -48,6 +50,38 @@ namespace East2West.Controllers
                 return RedirectToAction("Index");   
             }
 
+            ViewBag.TourId = new SelectList(db.Tours, "Id", "Name");
+            return View(tourDetail);
+        }
+
+        public ActionResult Edit(string id)
+        {
+            ViewBag.BreadCrumb = "Edit Tour detail";
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TourDetail tourDetail = db.TourDetails.FirstOrDefault(t => t.Id == id);
+            if (tourDetail == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.TourId = new SelectList(db.Tours, "Id", "Name");
+            return View(tourDetail);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(TourDetail tourDetail)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(tourDetail).State = EntityState.Modified;
+                tourDetail.UpdatedAt = DateTime.Now;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
             ViewBag.TourId = new SelectList(db.Tours, "Id", "Name");
             return View(tourDetail);
         }

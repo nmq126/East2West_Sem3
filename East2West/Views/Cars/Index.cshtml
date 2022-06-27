@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<East2West.Models.Tour>
+﻿@model PagedList.IPagedList<East2West.Models.Car>
 @using PagedList.Mvc;
 
 @{
@@ -50,48 +50,88 @@
     <div class="col-xl-12">
         <div class="widget has-shadow">
             <div class="widget-body">
-                @using (Html.BeginForm("Index", "Tours", FormMethod.Get))
+                @using (Html.BeginForm("Index", "Cars", FormMethod.Get))
                 {
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label class="form-control-label">Select Brand</label>
+                        <div class="select mb-3">
+                            <select name="brandId" id="brandId" class="custom-select form-control">
+                                <option value="">Select Brand</option>
+                                @foreach (var brand in ViewBag.BrandList)
+                                {
+                                    if (brand.Id == ViewBag.BrandId)
+                                    {
+                                        <option value=@brand.Id selected>@brand.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@brand.Id>@brand.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-control-label">Select Model</label>
+                        <div class="select mb-3">
+                            <select name="modelId" id="modelId" class="custom-select form-control">
+                                <option value="">Select Model</option>
+                                @foreach (var cModel in ViewBag.ModelList)
+                                {
+                                    if (cModel.Id == ViewBag.ModelId)
+                                    {
+                                        <option value=@cModel.Id selected>@cModel.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@cModel.Id>@cModel.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-control-label">Select Type</label>
+                        <div class="select mb-3">
+                            <select name="brandId" id="brandId" class="custom-select form-control">
+                                <option value="">Select Type</option>
+                                @foreach (var type in ViewBag.TypeList)
+                                {
+                                    if (type.Id == ViewBag.TypeId)
+                                    {
+                                        <option value=@type.Id selected>@type.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@type.Id>@type.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3">
+                        <label class="form-control-label">Select location</label>
+                        <div class="select mb-3">
+                            <select name="locationId" id="locationId" class="custom-select form-control">
+                                <option value="">Select Location</option>
+                                @foreach (var location in ViewBag.LocationList)
+                                {
+                                    if (location.Id == ViewBag.DepartureId)
+                                    {
+                                        <option value=@location.Id selected>@location.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@location.Id>@location.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
                     <div class="row">
-                        <div class="col-lg-3">
-                            <label class="form-control-label">Select Depature location</label>
-                            <div class="select mb-3">
-                                <select name="departureId" id="departureId" class="custom-select form-control">
-                                    <option value="">Select Departure</option>
-                                    @foreach (var departure in ViewBag.LocationList)
-                                    {
-                                        if (departure.Id == ViewBag.DepartureId)
-                                        {
-                                            <option value=@departure.Id selected>@departure.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value=@departure.Id>@departure.Name</option>
-                                        }
-                                    }
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <label class="form-control-label">Select Destination location</label>
-                            <div class="select mb-3">
-                                <select name="destinationId" id="destinationId" class="custom-select form-control">
-                                    <option value="">Select Destination</option>
-                                    @foreach (var destination in ViewBag.LocationList)
-                                    {
-                                        if (destination.Id == ViewBag.DestinationId)
-                                        {
-                                            <option value=@destination.Id selected>@destination.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value=@destination.Id>@destination.Name</option>
-                                        }
-                                    }
-                                </select>
-                            </div>
-                        </div>
-
                         <div class="col-lg-3">
                             <label class="form-control-label">Sort by</label>
                             <div class="select mb-3">
@@ -99,10 +139,20 @@
                                     <option value="">Sort by (Lastest default)</option>
                                     <option value="createdAt_asc" @(ViewBag.SortType == "createdAt_asc" ? "selected" : "")>Latest</option>
                                     <option value="createdAt_desc" @(ViewBag.SortType == "createdAt_desc" ? "selected" : "")>Oldest</option>
-                                    <option value="duration_asc" @(ViewBag.SortType == "duration_asc" ? "selected" : "")>Duration (Increase)</option>
-                                    <option value="duration_desc" @(ViewBag.SortType == "duration_desc" ? "selected" : "")>Duration (Decrease)</option>
-                                    <option value="rating_asc" @(ViewBag.SortType == "rating_asc" ? "selected" : "")>Rating (Increase)</option>
-                                    <option value="rating_desc" @(ViewBag.SortType == "rating_desc" ? "selected" : "")>Rating (Decrease)</option>
+                                    <option value="price_asc" @(ViewBag.SortType == "price_asc" ? "selected" : "")>Price (Increase)</option>
+                                    <option value="price_desc" @(ViewBag.SortType == "price_desc" ? "selected" : "")>Price (Decrease)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Has AC</label>
+                            <div class="select mb-3">
+                                <select name="hasAC" id="hasAC" class="custom-select form-control">
+                                    <option value="2" @(ViewBag.HasAC == 2 ? "selected" : "")>All</option>
+                                    <option value="1" @(ViewBag.HasAC == 1 ? "selected" : "")>Yes</option>
+                                    <option value="0" @(ViewBag.HasAC == 0 ? "selected" : "")>No</option>
+
                                 </select>
                             </div>
                         </div>
@@ -110,25 +160,18 @@
                             <label class="form-control-label">Status</label>
                             <div class="select mb-3">
                                 <select name="status" id="status" class="custom-select form-control">
-                                    <option value="2" @(ViewBag.Status == 2 ? "selected" : "")>All</option>
-                                    <option value="1" @(ViewBag.Status == 1 ? "selected" : "")>Active</option>
+                                    <option value="3" @(ViewBag.Status == 3 ? "selected" : "")>All</option>
+                                    <option value="3" @(ViewBag.Status == 2 ? "selected" : "")>In use</option>
+                                    <option value="1" @(ViewBag.Status == 1 ? "selected" : "")>Available</option>
                                     <option value="0" @(ViewBag.Status == 0 ? "selected" : "")>Disable</option>
+
                                 </select>
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
-                        <div class="col-lg-3">
-                            <label class="form-control-label">Duration</label>
-                            <div class="select mb-3">
-                                <select name="duration_range" id="duration_range" class="custom-select form-control">
-                                    <option value="all" @(ViewBag.DurationRange == "all" ? "selected" : "")>All</option>
-                                    <option value="lte3" @(ViewBag.DurationRange == "lte3" ? "selected" : "")><= 3 days</option>
-                                    <option value="4to7" @(ViewBag.DurationRange == "4to7" ? "selected" : "")>4 - 7 days</option>
-                                    <option value="gt7" @(ViewBag.DurationRange == "gt7" ? "selected" : "")>> 7 days</option>
-                                </select>
-                            </div>
-                        </div>
+
                         <div class="col-lg-3">
                             <label class="form-control-label">Search by Id</label>
                             <div class="">
@@ -136,20 +179,25 @@
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            <label class="form-control-label">Search by keyword</label>
+                            <label class="form-control-label">Search by license plate</label>
                             <div class="">
-                                @Html.TextBox("keyword", ViewBag.Keyword as string, new { @class = "form-control", placeholder = "Name/Description/Detail/Schedule" })
+                                @Html.TextBox("licensePlate", ViewBag.LicensePlate as string, new { @class = "form-control", placeholder = "Find by license plate" })
                             </div>
+                        </div>
+                        <div class="col-lg-3">
                         </div>
                         <div class="col-lg-3 text-right">
                             <div style="height:28px"></div>
                             <div>
                                 <button type="submit" class="btn btn-primary mr-1 mb-2">Search</button>
-                                <button type="reset" class="btn btn btn-outline-secondary mr-1 mb-2"><a href="/Tours">Clear</a></button>
+                                <button type="reset" class="btn btn btn-outline-secondary mr-1 mb-2"><a href="/Cars">Clear</a></button>
                             </div>
+
                         </div>
                     </div>
                 }
+
+
             </div>
         </div>
         <!-- Default -->
@@ -161,13 +209,15 @@
                             <tr>
                                 <th width="5%">#</th>
                                 <th width="5%">Id</th>
-                                <th width="20%">Name</th>
                                 <th width="15%">Thumbnail</th>
-                                <th width="10%">Departure</th>
-                                <th width="10%">Destination</th>
-                                <th width="15%">Status</th>
-                                <th width="5%">Rating</th>
-                                <th width="5%">Duration</th>
+                                <th width="10%">Brand</th>
+                                <th width="10%">Model</th>
+                                <th width="10%">Type</th>
+                                <th width="10%">Location</th>
+                                <th width="5%">License Plate</th>
+                                <th width="5%">Price</th>
+                                <th width="5%">AC</th>
+                                <th width="10%">Status</th>
                                 <th width="10%">Action</th>
                             </tr>
                         </thead>
@@ -184,23 +234,25 @@
                                     <tr>
                                         <td><span class="text-primary">@i</span></td>
                                         <td><span>@Html.DisplayFor(modelItem => item.Id)</span></td>
-                                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
                                         <td><img width="150" src=@img alt="thumbnail" /></td>
-                                        <td>@item.LocationDeparture.Name</td>
-                                        <td>@Html.DisplayFor(modelItem => item.LocationDestination.Name)</td>
+                                        <td>@item.CarModel.CarBrand.Name</td>
+                                        <td>@item.CarModel.Name</td>
+                                        <td>@item.CarType.Name</td>
+                                        <td>@item.Location.Name</td>
+                                        <td>@item.LisencePlate</td>
+                                        <td>$@item.PricePerDay</td>
+                                        <td><p>@(item.HasAirConditioner == true ? "✅" : "")</p></td>
                                         <td>
                                             <select id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control">
                                                 <option value="1" @(item.Status == 1 ? "selected" : "")>Active</option>
                                                 <option value="0" @(item.Status == 0 ? "selected" : "")>Disable</option>
                                             </select>
                                         </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Rating)</td>
-                                        <td>@item.Duration days</td>
                                         <td class="td-actions">
-                                            <a href="@Url.Action("Details", "Tours", new { id = item.Id })">
+                                            <a href="@Url.Action("Details", "Cars", new { id = item.Id })">
                                                 <i class="la la-info-circle" data-toggle="tooltip" title="Information"></i>
                                             </a>
-                                            <a href="@Url.Action("Edit", "Tours", new { id = item.Id })">
+                                            <a href="@Url.Action("Edit", "Cars", new { id = item.Id })">
                                                 <i class="la la-edit" data-toggle="tooltip" title="Edit"></i>
                                             </a>
                                         </td>
