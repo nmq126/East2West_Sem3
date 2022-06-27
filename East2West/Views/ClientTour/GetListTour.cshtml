@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<East2West.Models.Tour>
 
 @{
-    ViewBag.Title = "GetListTour";
+    ViewBag.Title = "East2West - List Tour";
     Layout = "~/Views/Shared/_LayoutPageClient.cshtml";
 }
 
@@ -215,7 +215,7 @@
                                     <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
                                 </div>
                                 <div class="img_list">
-                                    <a href="single_tour.html">
+                                    <a href="/ClientTour/Details?id=@tour.Id">
                                         <img src="@img" alt="Image">
                                         <div class="short_info"><i class="icon_set_1_icon-4"></i>Museums </div>
                                     </a>

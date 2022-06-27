@@ -1,7 +1,7 @@
 ﻿@model East2West.Models.Tour
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "East2West - " + @Model.Name;
     Layout = "~/Views/Shared/_LayoutPageClient.cshtml";
 }
 @section Section
@@ -72,7 +72,6 @@
                     </ul>
                 </div>
 
-                <p class="d-block d-lg-none"><a class="btn_map" data-bs-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a></p>
                 <!-- Map button for tablets/mobiles -->
 
                 @{
@@ -124,35 +123,7 @@
                         <h3>Description</h3>
                     </div>
                     <div class="col-lg-9">
-                        <h4>Paris in love</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi. Eu ponderum mediocrem has, vitae adolescens in pro. Mea liber ridens inermis ei, mei legendos vulputate an, labitur tibique te qui.
-                        </p>
-                        <h4>What's include</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
-                        </p>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <ul class="list_ok">
-                                    <li>Lorem ipsum dolor sit amet</li>
-                                    <li>No scripta electram necessitatibus sit</li>
-                                    <li>Quidam percipitur instructior an eum</li>
-                                    <li>Ut est saepe munere ceteros</li>
-                                    <li>No scripta electram necessitatibus sit</li>
-                                    <li>Quidam percipitur instructior an eum</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <ul class="list_ok">
-                                    <li>Lorem ipsum dolor sit amet</li>
-                                    <li>No scripta electram necessitatibus sit</li>
-                                    <li>Quidam percipitur instructior an eum</li>
-                                    <li>No scripta electram necessitatibus sit</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- End row  -->
+                        @Html.Raw(HttpUtility.HtmlDecode(Model.Detail))
                     </div>
                 </div>
                 <hr>
@@ -161,162 +132,13 @@
                         <h3>Schedule</h3>
                     </div>
                     <div class="col-lg-9">
-
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2">
-                                            1st March to 31st October
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Monday
-                                        </td>
-                                        <td>
-                                            10.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Tuesday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Wednesday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Thursday
-                                        </td>
-                                        <td>
-                                            <span class="label label-danger">Closed</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Friday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Saturday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Sunday
-                                        </td>
-                                        <td>
-                                            10.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong><em>Last Admission</em></strong>
-                                        </td>
-                                        <td>
-                                            <strong>17.00</strong>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2">
-                                            1st November to 28th February
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Monday
-                                        </td>
-                                        <td>
-                                            10.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Tuesday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Wednesday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Thursday
-                                        </td>
-                                        <td>
-                                            <span class="label label-danger">Closed</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Friday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Saturday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Sunday
-                                        </td>
-                                        <td>
-                                            10.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong><em>Last Admission</em></strong>
-                                        </td>
-                                        <td>
-                                            <strong>17.00</strong>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        @foreach (var schedule in Model.TourSchedules)
+                        {
+                            <div class="table-responsive">
+                                @schedule.Name
+                                @Html.Raw(HttpUtility.HtmlDecode(@schedule.Detail))
+                            </div>
+                        }
                     </div>
                 </div>
                 <hr>
@@ -413,40 +235,34 @@
             <!--End  single_tour_desc-->
 
             <aside class="col-lg-4" id="sidebar">
-                <p class="d-none d-xl-block d-lg-block">
-                    <a class="btn_map" data-bs-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
-                </p>
+
                 <div class="theiaStickySidebar">
                     <div class="box_style_1 expose" id="booking_box">
                         <h3 class="inner">- Booking -</h3>
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="form-group scroll-fix">
-                                    <label><i class="icon-calendar-7"></i> Date</label>
-                                    <input class="date-pick form-control" type="text">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group scroll-fix-time">
-                                    <label><i class=" icon-clock"></i> Time</label>
-                                    <input class="time-pick form-control" value="12:00 AM" type="text">
+                                    <label><i class="icon-calendar-7"></i> Choose tour</label>
+                                    <select class="form-select" aria-label="Default select example" id="selected_id" data-id="@Model.Id">
+                                        @foreach (var tourDetail in Model.TourDetails)
+                                        {
+                                            <option value="@tourDetail.Id">@tourDetail.Id</option>
+                                        }
+                                    </select>
+                                    <input id="detailPrice" class="form-control mt-2" value="Price: @ViewBag.TourDetailPrice$" readonly />
+                                    <input id="detailSeat" class="form-control mt-2" value="Available seat: @ViewBag.TourDetailSeat" readonly />
+                                    <input id="startDay" class="form-control mt-2" value="Departure Day: @ViewBag.TourDetailDate" readonly />
+                                    <input id="detailPriceHidden" value="@ViewBag.TourDetailPrice" hidden />
+                                    <input id="userId" value="@ViewBag.UserId" hidden />
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="form-group">
-                                    <label>Adults</label>
+                                    <label>Person</label>
                                     <div class="numbers-row">
-                                        <input type="text" value="1" id="adults" class="qty2 form-control" name="quantity">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Children</label>
-                                    <div class="numbers-row">
-                                        <input type="text" value="0" id="children" class="qty2 form-control" name="quantity">
+                                        <input type="text" value="1" id="person" class="qty2 form-control" name="quantity" data-target="#target_person">
                                     </div>
                                 </div>
                             </div>
@@ -456,40 +272,39 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        Adults
+                                        Tour Id
                                     </td>
-                                    <td class="text-end">
-                                        2
+                                    <td class="text-end" id="selected_tour">
+                                        @ViewBag.TourDetailId
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Children
+                                        Person
                                     </td>
-                                    <td class="text-end">
-                                        0
+                                    <td class="text-end" id="target_person">
+                                        1
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         Total amount
                                     </td>
-                                    <td class="text-end">
-                                        3x $52
+                                    <td class="text-end" id="total_amount">
+                                        1x $@ViewBag.TourDetailPrice
                                     </td>
                                 </tr>
                                 <tr class="total">
                                     <td>
                                         Total cost
                                     </td>
-                                    <td class="text-end">
+                                    <td class="text-end" id="total_cost">
                                         $154
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <a class="btn_full" href="cart.html">Book now</a>
-                        <a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Add to whislist</a>
+                        <a id="submit_button" class="btn_full" href="#">Book now</a>
                     </div>
                     <!--/box_style_1 -->
                 </div>
@@ -503,55 +318,3 @@
     <div id="overlay"></div>
     <!-- Mask on input focus -->
 </main>
-
-<script src="~/Content/client_js/theia-sticky-sidebar.js"></script>
-<script>
-    jQuery('#sidebar').theiaStickySidebar({
-        additionalMarginTop: 80
-    });
-</script>
-
-<script src="~/Content/assets/validate.js"></script>
-<script src="~/Content/client_js/jquery.sliderPro.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function ($) {
-        $('#Img_carousel').sliderPro({
-            width: 960,
-            height: 500,
-            fade: true,
-            arrows: true,
-            buttons: false,
-            fullScreen: false,
-            smallSize: 500,
-            startSlide: 0,
-            mediumSize: 1000,
-            largeSize: 3000,
-            thumbnailArrows: true,
-            autoplay: false
-        });
-    });
-</script>
-
-<!-- Date and time pickers -->
-<script>
-    $(function () {
-        $('input.date-pick').daterangepicker({
-            autoUpdateInput: true,
-            parentEl: '.scroll-fix',
-            singleDatePicker: true,
-            autoApply: true,
-            minDate: new Date(),
-            showCustomRangeLabel: false,
-            locale: {
-                format: 'MM-DD-YYYY'
-            }
-        }, function (start, end, label) {
-            console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('DD-MM-YYYY') + ' (predefined range: ' + label + ')');
-        });
-        $('input.time-pick').timepicker({
-            appendWidgetTo: '.scroll-fix-time',
-            minuteStep: 15,
-            showInpunts: false
-        })
-    });
-</script>
