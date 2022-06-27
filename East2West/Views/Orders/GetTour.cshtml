@@ -1,10 +1,11 @@
-﻿@model PagedList.IPagedList<East2West.Models.Tour>
+﻿@model PagedList.IPagedList<East2West.Models.Order>
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "List tour";
+    ViewBag.Title = "List Orders";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <style>
     .pagination-container {
         display: flex;
@@ -50,7 +51,7 @@
     <div class="col-xl-12">
         <div class="widget has-shadow">
             <div class="widget-body">
-                @using (Html.BeginForm("Index", "Tours", FormMethod.Get))
+                @using (Html.BeginForm("GetTour", "Orders", FormMethod.Get))
                 {
                     <div class="row">
                         <div class="col-lg-3">
@@ -99,10 +100,10 @@
                                     <option value="">Sort by (Lastest default)</option>
                                     <option value="createdAt_asc" @(ViewBag.SortType == "createdAt_asc" ? "selected" : "")>Latest</option>
                                     <option value="createdAt_desc" @(ViewBag.SortType == "createdAt_desc" ? "selected" : "")>Oldest</option>
-                                    <option value="duration_asc" @(ViewBag.SortType == "duration_asc" ? "selected" : "")>Duration (Increase)</option>
-                                    <option value="duration_desc" @(ViewBag.SortType == "duration_desc" ? "selected" : "")>Duration (Decrease)</option>
-                                    <option value="rating_asc" @(ViewBag.SortType == "rating_asc" ? "selected" : "")>Rating (Increase)</option>
-                                    <option value="rating_desc" @(ViewBag.SortType == "rating_desc" ? "selected" : "")>Rating (Decrease)</option>
+                                    <option value="departureAt_asc" @(ViewBag.SortType == "departureAt_asc" ? "selected" : "")>Departure Date (Increase)</option>
+                                    <option value="departureAt_desc" @(ViewBag.SortType == "departureAt_desc" ? "selected" : "")>Departure Date (Decrease)</option>
+                                    <option value="totalPrice_asc" @(ViewBag.SortType == "rating_asc" ? "selected" : "")>Total price (Increase)</option>
+                                    <option value="totalPrice_desc" @(ViewBag.SortType == "rating_desc" ? "selected" : "")>Total price (Decrease)</option>
                                 </select>
                             </div>
                         </div>
@@ -111,13 +112,55 @@
                             <div class="select mb-3">
                                 <select name="status" id="status" class="custom-select form-control">
                                     <option value="2" @(ViewBag.Status == 2 ? "selected" : "")>All</option>
-                                    <option value="1" @(ViewBag.Status == 1 ? "selected" : "")>Active</option>
-                                    <option value="0" @(ViewBag.Status == 0 ? "selected" : "")>Disable</option>
+                                    <option value="1" @(ViewBag.Status == 1 ? "selected" : "")>Paid</option>
+                                    <option value="0" @(ViewBag.Status == 0 ? "selected" : "")>Cancel</option>
+                                    <option value="-1" @(ViewBag.Status == -1 ? "selected" : "")>Refunded</option>
 
                                 </select>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Unit price range</label>
+                            <div class="select mb-3">
+                                <select name="unit_price_range" id="unit_price_range" class="custom-select form-control">
+                                    <option value="all" @(ViewBag.UnitPriceRange == "all" ? "selected" : "")>All</option>
+                                    <option value="lte200" @(ViewBag.UnitPriceRange == "lte200" ? "selected" : "")>Ticket<= $200</option>
+                                    <option value="200to500" @(ViewBag.UnitPriceRange == "200to500" ? "selected" : "")>$200 < Ticket < $500</option>
+                                    <option value="gt500" @(ViewBag.UnitPriceRange == "gt500" ? "selected" : "")>Ticket > $500</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Numbers of ticket</label>
+                            <div class="select mb-3">
+                                <select name="ticket_number" id="ticket_number" class="custom-select form-control">
+                                    <option value="all" @(ViewBag.TicketNumber == "all" ? "selected" : "")>All</option>
+                                    <option value="lte2" @(ViewBag.TicketNumber == "lte2" ? "selected" : "")><= 2 tickets</option>
+                                    <option value="2to5" @(ViewBag.TicketNumber == "2to5" ? "selected" : "")>2 < ticket < 5</option>
+                                    <option value="gt5" @(ViewBag.TicketNumber == "gt5" ? "selected" : "")>5 tickets</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label class="form-control-label">Departure Date Range</label>
+                            <div class="input-group col-md-6">
+                                <span class="input-group-addon addon-secondary">
+                                    <i class="la la-calendar"></i>
+                                </span>
+                                <input type="text" class="form-control" name="daterange" id="daterange" value="">
+                                <input type="hidden" class="form-control" name="StartDay" , id="StartDay" value="">
+                                <input type="hidden" class="form-control" name="EndDay" , id="EndDay" value="">
+
+                            </div>
+                        </div>
+
+                    </div>
+
                     <div class="row">
                         <div class="col-lg-3">
                             <label class="form-control-label">Duration</label>
@@ -132,15 +175,15 @@
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            <label class="form-control-label">Search by Id</label>
+                            <label class="form-control-label">Search by Order Id</label>
                             <div class="">
-                                @Html.TextBox("id", ViewBag.Id as string, new { @class = "form-control", placeholder = "Find by id" })
+                                @Html.TextBox("id", ViewBag.OrderId as string, new { @class = "form-control", placeholder = "Enter order id" })
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            <label class="form-control-label">Search by keyword</label>
+                            <label class="form-control-label">Search by username</label>
                             <div class="">
-                                @Html.TextBox("keyword", ViewBag.Keyword as string, new { @class = "form-control", placeholder = "Name/Description/Detail/Schedule" })
+                                @Html.TextBox("keyword", ViewBag.Username as string, new { @class = "form-control", placeholder = "Enter username" })
                             </div>
                         </div>
                         <div class="col-lg-3 text-right">
@@ -154,7 +197,8 @@
                     </div>
                 }
 
-
+                <div class="em-separator separator-dashed"></div>
+                <div style="color: #5d5386">Total Revenue: $10000</div>
             </div>
         </div>
         <!-- Default -->
@@ -166,47 +210,41 @@
                             <tr>
                                 <th width="5%">#</th>
                                 <th width="5%">Id</th>
-                                <th width="20%">Name</th>
-                                <th width="15%">Thumbnail</th>
-                                <th width="10%">Departure</th>
-                                <th width="10%">Destination</th>
-                                <th width="15%">Status</th>
-                                <th width="5%">Rating</th>
-                                <th width="5%">Duration</th>
-                                <th width="10%">Action</th>
+                                <th width="15%">Tour</th>
+                                <th width="15%">Departure At</th>
+                                <th width="10%">Username</th>
+                                <th width="10%">Unit Price</th>
+                                <th width="5%">Quantity</th>
+                                <th width="10%">Total Price</th>
+                                <th width="10%">Status</th>
+                                <th width="10%">Created At</th>
+                                <th width="5%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @{var i = 1;
                                 foreach (var item in Model)
                                 {
-
-                                    var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
-                                    if (item.Thumbnail != null)
-                                    {
-                                        img = item.Thumbnail.Split(',').ToList<String>().First();
-                                    }
                                     <tr>
                                         <td><span class="text-primary">@i</span></td>
                                         <td><span>@Html.DisplayFor(modelItem => item.Id)</span></td>
-                                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                        <td><img width="150" src=@img alt="thumbnail" /></td>
-                                        <td>@item.LocationDeparture.Name</td>
-                                        <td>@Html.DisplayFor(modelItem => item.LocationDestination.Name)</td>
+                                        <td>@Html.ActionLink(@item.OrderTours.First().TourDetail.Tour.Name, "Details", "Tours", new { id = @item.OrderTours.First().TourDetail.Tour.Id }, null)</td>
+                                        <td>@Html.ActionLink(@item.OrderTours.First().TourDetail.DepartureDay.ToShortDateString(), "Details", "TourDetails", new { id = @item.OrderTours.First().TourDetail.Id }, null)</td>
+                                        <td>@item.User.UserName</td>
+                                        <td>$@item.OrderTours.First().UnitPrice</td>
+                                        <td>@item.OrderTours.First().Quantity</td>
+                                        <td>$@item.TotalPrice</td>
                                         <td>
-                                            <select id="Status" name="Status" data-name="@(item.Name)" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
+                                            <select id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
                                                 <option value="1" @(item.Status == 1 ? "selected" : "")>Active</option>
                                                 <option value="0" @(item.Status == 0 ? "selected" : "")>Disable</option>
+                                                <option value="-1" @(item.Status == -1 ? "selected" : "")>Chiu</option>
                                             </select>
                                         </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Rating)</td>
-                                        <td>@item.Duration days</td>
+                                        <td>@item.CreatedAt</td>
                                         <td class="td-actions">
-                                            <a href="@Url.Action("Details", "Tours", new { id = item.Id })">
+                                            <a href="@Url.Action("Details", "Orders", new { id = item.Id })">
                                                 <i class="la la-info-circle" data-toggle="tooltip" title="Information"></i>
-                                            </a>
-                                            <a href="@Url.Action("Edit", "Tours", new { id = item.Id })">
-                                                <i class="la la-edit" data-toggle="tooltip" title="Edit"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -240,6 +278,24 @@
 
 @section Scripts{
     <script src="~/Content/admin_vendor/js/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="~/Content/admin_vendor/js/datepicker/moment.min.js"></script>
+    <script src="~/Content/admin_vendor/js/datepicker/daterangepicker.js"></script>
+    <script src="~/Content/admin_js/components/datepicker/datepicker.js"></script>
+    <script>
+        $('#daterange').daterangepicker({
+            autoUpdateInput: false,
+            autoApply: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            },
+            }
+        });
+        $('#daterange').on('apply.daterangepicker', function (ev, picker) {
+            $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            $('#StartDay').val(picker.startDate.format('DD/MM/YYYY'))
+            $('#EndDay').val(picker.endDate.format('DD/MM/YYYY'))
+        });
+    </script>
     <script src="~/Scripts/toastr.js"></script>
     <script>
         toastr.options = {
@@ -268,7 +324,7 @@
             if (confirm(cnfrmMsg)) {
                 $.ajax({
                     type: "GET",
-                    url: "/Tours/ChangeStatus",
+                    url: "/Orders/ChangeStatusTour",
                     data: {
                         id: id,
                         status: status
