@@ -1035,6 +1035,7 @@
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutSidePage.cshtml" />
     <Content Include="Views\User\ShowInformation.cshtml" />
+    <Content Include="Views\Orders\GetTour.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
