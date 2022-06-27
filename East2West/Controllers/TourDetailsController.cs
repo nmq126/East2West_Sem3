@@ -29,7 +29,7 @@ namespace East2West.Controllers
         {
             ViewBag.BreadCrumb = "Create Tour detail";
 
-            ViewBag.TourId = new SelectList(db.Tours, "Id", "Name");
+            ViewBag.TourId = new SelectList(db.Tours.Where(t => t.Status == 1), "Id", "Name");
             return View();
         }
 
@@ -50,7 +50,23 @@ namespace East2West.Controllers
                 return RedirectToAction("Index");   
             }
 
-            ViewBag.TourId = new SelectList(db.Tours, "Id", "Name");
+            ViewBag.TourId = new SelectList(db.Tours.Where(t => t.Status == 1), "Id", "Name");
+            return View(tourDetail);
+        }
+
+        public ActionResult Details(string id)
+        {
+            ViewBag.BreadCrumb = "Tour detail";
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TourDetail tourDetail = db.TourDetails.FirstOrDefault(t => t.Id == id);
+            if (tourDetail == null)
+            {
+                return HttpNotFound();
+            }
             return View(tourDetail);
         }
 

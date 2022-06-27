@@ -1,0 +1,115 @@
+﻿@model East2West.Models.TourDetail
+
+@{
+    ViewBag.Title = "Tour detail";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    body, table {
+        color: black;
+    }
+</style>
+<div class="row">
+    <div class="col-xl-12">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="widget has-shadow">
+                <div class="widget-header bordered no-actions d-flex align-items-center">
+                    <h4>#@Html.DisplayFor(model => model.Id)</h4>
+                </div>
+                <div class="widget-body">
+                    <div class="col-10">
+                        <div class="section-title mt-3 mb-5">
+                            <h2>01. General Informations</h2>
+                        </div>
+                    </div>
+                    <form class="form-horizontal">
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Id:</div>
+                            <div class="col-lg-6">
+                                @Model.Id
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Departure Date:</div>
+                            <div class="col-lg-6">
+                                @Model.DepartureDay.ToShortDateString()
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Tour:</div>
+                            <div class="col-lg-6">
+                                @Model.Tour.Name <a href="@Url.Action("Details", "Tours", new { id = Model.TourId })">(View Tour Detail)</a>
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Price:</div>
+                            <div class="col-lg-6">
+                                @Model.Price
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Discount (%):</div>
+                            <div class="col-lg-6">
+                                @Model.Discount
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Available seat:</div>
+                            <div class="col-lg-6">
+                                @Model.AvailableSeat
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Tickets Sold:</div>
+                            <div class="col-lg-6">
+                                6
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Created At:</div>
+                            <div class="col-lg-6">
+                                @Model.CreatedAt
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Updated At:</div>
+                            <div class="col-lg-6">
+                                @Model.UpdatedAt
+                            </div>
+                        </div>
+
+                    </form>
+                    <div class="em-separator separator-dashed"></div>
+                    <div class="text-right">
+                        <button class="btn btn-outline-dark" type="button">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</button>
+                        <button class="btn btn-light" type="button">@Html.ActionLink("Back to List", "Index")</button>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/admin_vendor/js/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="~/Content/admin_vendor/js/datepicker/moment.min.js"></script>
+    <script src="~/Content/admin_vendor/js/datepicker/daterangepicker.js"></script>
+    <script src="~/Content/admin_js/components/datepicker/datepicker.js"></script>
+    <script>
+                //$("select").attr('data-live-search', true);
+        $('#date').daterangepicker({
+            singleDatePicker: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            },
+            minDate: new Date()
+        });
+    </script>
+
+}
