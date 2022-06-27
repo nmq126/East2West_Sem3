@@ -88,6 +88,9 @@
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -166,8 +169,10 @@
     <Compile Include="Controllers\CarSchedulesController.cs" />
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\FlightsController.cs" />
+    <Compile Include="Controllers\ClientTourController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\TourDetailsController.cs" />
     <Compile Include="Controllers\TourSchedulesController.cs" />
@@ -199,6 +204,8 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderCar.cs" />
     <Compile Include="Models\OrderTour.cs" />
+    <Compile Include="Models\PaypalConfiguration.cs" />
+    <Compile Include="Models\PaypalLogger.cs" />
     <Compile Include="Models\Refund.cs" />
     <Compile Include="Models\Tour.cs" />
     <Compile Include="Models\TourDetail.cs" />
@@ -585,6 +592,7 @@
     <Content Include="Content\admin_vendor\js\progress\circle-progress.min.js" />
     <Content Include="Content\admin_vendor\js\tabledit\jquery.tabledit.js" />
     <Content Include="Content\admin_vendor\js\tabledit\jquery.tabledit.min.js" />
+    <Content Include="Content\assets\validate.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -967,6 +975,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\checkout.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config" />
@@ -991,11 +1000,13 @@
     <Content Include="Views\Tours\TourScheduleRow.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
     <Content Include="Views\Shared\_LayoutPageClient.cshtml" />
+    <Content Include="Views\Home\GetListTour.cshtml" />
+    <Content Include="Views\ClientTour\GetListTour.cshtml" />
+    <Content Include="Views\ClientTour\Details.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\TourDetails\Index.cshtml" />
     <Content Include="Views\TourDetails\Create.cshtml" />
-    <Content Include="Views\TourDetails\Edit.cshtml" />
     <Content Include="Views\Cars\Create.cshtml" />
     <Content Include="Views\Cars\Delete.cshtml" />
     <Content Include="Views\Cars\Details.cshtml" />
@@ -1006,11 +1017,6 @@
     <Content Include="Views\CarSchedules\Details.cshtml" />
     <Content Include="Views\CarSchedules\Edit.cshtml" />
     <Content Include="Views\CarSchedules\Index.cshtml" />
-    <Content Include="Views\Orders\Create.cshtml" />
-    <Content Include="Views\Orders\Delete.cshtml" />
-    <Content Include="Views\Orders\Details.cshtml" />
-    <Content Include="Views\Orders\Edit.cshtml" />
-    <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Flights\Create.cshtml" />
     <Content Include="Views\Flights\Delete.cshtml" />
     <Content Include="Views\Flights\Details.cshtml" />
@@ -1021,10 +1027,20 @@
     <Content Include="Views\Hotels\Details.cshtml" />
     <Content Include="Views\Hotels\Edit.cshtml" />
     <Content Include="Views\Hotels\Index.cshtml" />
+    <Content Include="Views\Home\Page_404.cshtml" />
+    <Content Include="Views\Home\ThankYou.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutSidePage.cshtml" />
+    <Content Include="Views\User\ShowInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\Order\" />
     <Folder Include="Views\TourSchedules\" />
   </ItemGroup>
   <ItemGroup>
