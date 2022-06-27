@@ -56,5 +56,7 @@ namespace East2West.Data
                         .WillCascadeOnDelete(false);
             base.OnModelCreating(modelBuilder);
         }
+
+        public System.Data.Entity.DbSet<East2West.Models.CarSchedule> CarSchedules { get; set; }
     }
 }

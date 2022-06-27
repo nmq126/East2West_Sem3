@@ -1,3 +1,5 @@
+const { moment } = require("../../../admin_vendor/js/calendar/fullcalendar");
+
 (function ($) {
 
     'use strict';
@@ -25,7 +27,7 @@
 			singleDatePicker: true,
 			locale: {
 				format: 'DD/MM/YYYY'
-			}
+			},
 		});
 	});
 	

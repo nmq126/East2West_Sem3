@@ -14,62 +14,61 @@
                 @using (Html.BeginForm("Create", "TourDetails", FormMethod.Post, new { id = "tour-detail-create" }))
                 {
                     @Html.AntiForgeryToken()
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                    <div class="form-group">
-                        <label class="col-md-6 control-label">Departure Date</label>
-                        <div class="input-group col-md-6">
-                            <span class="input-group-addon addon-secondary">
-                                <i class="la la-calendar"></i>
-                            </span>
-                            @*<input type="text" class="form-control" name="DepartureDay" id="date" placeholder="Select value">*@
-                            @Html.EditorFor(model => model.DepartureDay, new { htmlAttributes = new { @class = "form-control", @id = "date", type = "text" } })
+                        <div class="form-group">
+                            <label class="col-md-6 control-label">Departure Date</label>
+                            <div class="input-group col-md-6">
+                                <span class="input-group-addon addon-secondary">
+                                    <i class="la la-calendar"></i>
+                                </span>
+                                <input type="text" class="form-control" name="DepartureDay" id="date" placeholder="Select value">
+                                @*@Html.EditorFor(model => model.DepartureDay, new { htmlAttributes = new { @class = "form-control", @id = "date", type = "text" } })*@
+                            </div>
+                            <div class="col-md-9">
+                                @Html.ValidationMessageFor(model => model.DepartureDay, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                        <div class="col-md-9">
-                            @Html.ValidationMessageFor(model => model.DepartureDay, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label class="col-md-6 control-label">Tour</label>
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(model => model.TourId, ViewBag.TourId as SelectList, new { @class = "custom-select form-control" })
+                                @Html.ValidationMessageFor(model => model.TourId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
+                        <div class="form-group">
+                            <label class="col-md-6 control-label">Price</label>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-6 control-label">Tour</label>
-                        <div class="col-md-6">
-                            @Html.DropDownListFor(model => model.TourId, ViewBag.TourId as SelectList, new { @class = "custom-select form-control" })
-                            @Html.ValidationMessageFor(model => model.TourId, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label class="col-md-6 control-label">Discount (%)</label>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label class="col-md-6 control-label">Available Seat</label>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.AvailableSeat, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AvailableSeat, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label class="col-md-6 control-label">Price</label>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-                        </div>
+                        <ul class="pager wizard text-right">
+                            <li class="next d-inline-block">
+                                <input type="submit" form="tour-detail-create" value="Create" class="btn btn-gradient-01" />
+                            </li>
+                            <li class="previous d-inline-block">
+                                <input type="reset" form="tour-detail-create" value="Reset" class="btn btn-secondary ripple" />
+                            </li>
+                        </ul>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-6 control-label">Discount (%)</label>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-6 control-label">Available Seat</label>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.AvailableSeat, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.AvailableSeat, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <ul class="pager wizard text-right">
-                        <li class="next d-inline-block">
-                            <input type="submit" form="tour-detail-create" value="Create" class="btn btn-gradient-01" />
-                        </li>
-                        <li class="previous d-inline-block">
-                            <input type="reset" form="tour-detail-create" value="Reset" class="btn btn-secondary ripple" />
-                        </li>
-                    </ul>
-                </div>
                 }
             </div>
         </div>
@@ -77,12 +76,20 @@
 </div>
 
 @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Content/admin_vendor/js/bootstrap-select/bootstrap-select.min.js"></script>
     <script src="~/Content/admin_vendor/js/datepicker/moment.min.js"></script>
     <script src="~/Content/admin_vendor/js/datepicker/daterangepicker.js"></script>
     <script src="~/Content/admin_js/components/datepicker/datepicker.js"></script>
     <script>
-            //$("select").attr('data-live-search', true);
+                    //$("select").attr('data-live-search', true);
+        $('#date').daterangepicker({
+            singleDatePicker: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            },
+            minDate: new Date()
+        });
 
     </script>
 
