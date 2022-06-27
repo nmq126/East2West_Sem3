@@ -64,10 +64,12 @@
                     <table class="table">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.LocationDeparture.Name)
+                                Location Departure Name
+                                @*@Html.DisplayNameFor(model => model.LocationDeparture.Name)*@
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.LocationDestination.Name)
+                                Location Destination Name
+                                @*@Html.DisplayNameFor(model => model.LocationDestination.Name)*@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Thumbnail)
@@ -86,9 +88,6 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.ReturnAt)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Detail)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Status)
@@ -115,10 +114,14 @@
                                     @Html.DisplayFor(modelItem => item.LocationDestination.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Thumbnail)
+                                    <img src="@Html.DisplayFor(modelItem => item.Thumbnail)" alt="Alternate Text" width="90" height="90"/>
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IsRoundTicket)
+                                <td style="text-align:center">
+                                    @{
+                                        string isRound = item.IsRoundTicket == true ? "X" : "";
+                                    }
+                                    @isRound
+                                    @*@Html.DisplayFor(modelItem => item.IsRoundTicket)*@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.DepartureAt)
@@ -133,10 +136,11 @@
                                     @Html.DisplayFor(modelItem => item.ReturnAt)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Detail)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Status)
+                                    @{
+                                        string statusName = (item.Status == 1) ? "Active" : "Disable";
+                                    }
+                                    @statusName
+                                    @*@Html.DisplayFor(modelItem => item.Status)*@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.CreatedAt)
@@ -154,7 +158,6 @@
                                 </td>
                             </tr>
                         }
-
                     </table>
             </div>
         </div>

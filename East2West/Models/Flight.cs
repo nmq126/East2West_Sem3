@@ -30,6 +30,7 @@ namespace East2West.Models
         public String DestinationId { get; set; }
 
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTime DepartureAt { get; set; }
 
         [StringLength(50)]
@@ -40,6 +41,7 @@ namespace East2West.Models
         public Double Price { get; set; }
 
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTime ReturnAt { get; set; }
 
         [Column(TypeName = "ntext")]
@@ -49,8 +51,8 @@ namespace East2West.Models
         public int Status { get; set; }
 
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime DeletedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
         public Location LocationDeparture { get; set; }
         public Location LocationDestination { get; set; }
     }
