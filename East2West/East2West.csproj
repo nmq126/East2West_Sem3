@@ -54,12 +54,42 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.2\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.2.2\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -134,26 +164,34 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CarSchedulesController.cs" />
+    <Compile Include="Controllers\CarsController.cs" />
+    <Compile Include="Controllers\FlightsController.cs" />
+    <Compile Include="Controllers\ClientTourController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HotelsController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\TourDetailsController.cs" />
+    <Compile Include="Controllers\TourSchedulesController.cs" />
     <Compile Include="Controllers\ToursController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Data\DBContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202206171509433_init-data.cs" />
-    <Compile Include="Migrations\202206171509433_init-data.designer.cs">
-      <DependentUpon>202206171509433_init-data.cs</DependentUpon>
+    <Compile Include="Migrations\202206230956206_init-database.cs" />
+    <Compile Include="Migrations\202206230956206_init-database.Designer.cs">
+      <DependentUpon>202206230956206_init-database.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202206171514458_update-table-name.cs" />
-    <Compile Include="Migrations\202206171514458_update-table-name.designer.cs">
-      <DependentUpon>202206171514458_update-table-name.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206191534304_update-db-again-1.cs" />
-    <Compile Include="Migrations\202206191534304_update-db-again-1.Designer.cs">
-      <DependentUpon>202206191534304_update-db-again-1.cs</DependentUpon>
+    <Compile Include="Migrations\202206231004441_update-database1.cs" />
+    <Compile Include="Migrations\202206231004441_update-database1.Designer.cs">
+      <DependentUpon>202206231004441_update-database1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AppRole.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\CarBrand.cs" />
     <Compile Include="Models\CarModel.cs" />
@@ -166,6 +204,8 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderCar.cs" />
     <Compile Include="Models\OrderTour.cs" />
+    <Compile Include="Models\PaypalConfiguration.cs" />
+    <Compile Include="Models\PaypalLogger.cs" />
     <Compile Include="Models\Refund.cs" />
     <Compile Include="Models\Tour.cs" />
     <Compile Include="Models\TourDetail.cs" />
@@ -175,6 +215,95 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\Antlr3.Runtime.pdb" />
+    <Content Include="bin\BeginCollectionItem.dll" />
+    <Content Include="bin\East2West.dll" />
+    <Content Include="bin\East2West.pdb" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\EntityFramework.xml" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Core.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Core.xml" />
+    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.xml" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Owin.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Owin.xml" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+    <Content Include="bin\Microsoft.Owin.dll" />
+    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.dll" />
+    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.Cookies.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.Cookies.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.OAuth.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.OAuth.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.xml" />
+    <Content Include="bin\Microsoft.Owin.xml" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="bin\Owin.dll" />
+    <Content Include="bin\PagedList.dll" />
+    <Content Include="bin\PagedList.Mvc.dll" />
+    <Content Include="bin\PagedList.Mvc.xml" />
+    <Content Include="bin\PagedList.xml" />
+    <Content Include="bin\roslyn\csc.exe" />
+    <Content Include="bin\roslyn\csi.exe" />
+    <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
+    <Content Include="bin\roslyn\Microsoft.Win32.Primitives.dll" />
+    <Content Include="bin\roslyn\System.AppContext.dll" />
+    <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
+    <Content Include="bin\roslyn\System.Console.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.DiagnosticSource.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.FileVersionInfo.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.StackTrace.dll" />
+    <Content Include="bin\roslyn\System.Globalization.Calendars.dll" />
+    <Content Include="bin\roslyn\System.IO.Compression.dll" />
+    <Content Include="bin\roslyn\System.IO.Compression.ZipFile.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\roslyn\System.Net.Http.dll" />
+    <Content Include="bin\roslyn\System.Net.Sockets.dll" />
+    <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
+    <Content Include="bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\roslyn\System.Text.Encoding.CodePages.dll" />
+    <Content Include="bin\roslyn\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\roslyn\System.ValueTuple.dll" />
+    <Content Include="bin\roslyn\System.Xml.ReaderWriter.dll" />
+    <Content Include="bin\roslyn\System.Xml.XmlDocument.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.XDocument.dll" />
+    <Content Include="bin\roslyn\vbc.exe" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Helpers.xml" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Mvc.xml" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Optimization.xml" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.xml" />
+    <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\admin_css\animate\animate.css" />
     <Content Include="Content\admin_css\animate\animate.min.css" />
     <Content Include="Content\admin_css\bootstrap-select\bootstrap-select.css" />
@@ -463,10 +592,319 @@
     <Content Include="Content\admin_vendor\js\progress\circle-progress.min.js" />
     <Content Include="Content\admin_vendor\js\tabledit\jquery.tabledit.js" />
     <Content Include="Content\admin_vendor\js\tabledit\jquery.tabledit.min.js" />
+    <Content Include="Content\assets\validate.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\client_css\admin.css" />
+    <Content Include="Content\client_css\blog.css" />
+    <Content Include="Content\client_css\bootstrap.min.css" />
+    <Content Include="Content\client_css\extralayers.css" />
+    <Content Include="Content\client_css\finaltilesgallery.css" />
+    <Content Include="Content\client_css\fontello\font\fontello4508.html" />
+    <Content Include="Content\client_css\fontello\font\fontello4508.svg" />
+    <Content Include="Content\client_css\fontello\font\icon_set_10367.html" />
+    <Content Include="Content\client_css\fontello\font\icon_set_10367.svg" />
+    <Content Include="Content\client_css\fontello\font\icon_set_22249.html" />
+    <Content Include="Content\client_css\fontello\font\icon_set_22249.svg" />
+    <Content Include="Content\client_css\icon_restaurant\fonts\Glyphter.html" />
+    <Content Include="Content\client_css\icon_restaurant\fonts\Glyphter.svg" />
+    <Content Include="Content\client_css\images\blank.gif" />
+    <Content Include="Content\client_css\lightbox2.css" />
+    <Content Include="Content\client_css\new_icons\font\ElegantIcons.html" />
+    <Content Include="Content\client_css\new_icons\font\ElegantIcons.svg" />
+    <Content Include="Content\client_css\new_icons\font\Pe-icon-7-strokebb1d.html" />
+    <Content Include="Content\client_css\new_icons\font\Pe-icon-7-strokebb1d.svg" />
+    <Content Include="Content\client_css\owl.video.play.png" />
+    <Content Include="Content\client_css\shop.css" />
+    <Content Include="Content\client_css\style.css" />
+    <Content Include="Content\client_css\timeline.css" />
+    <Content Include="Content\client_css\vendors.css" />
+    <Content Include="Content\client_img\adventure_icon_1.svg" />
+    <Content Include="Content\client_img\adventure_icon_2.svg" />
+    <Content Include="Content\client_img\adventure_icon_3.svg" />
+    <Content Include="Content\client_img\anh_bia1.jpg" />
+    <Content Include="Content\client_img\anh_bia2.jpg" />
+    <Content Include="Content\client_img\anh_bia3.jpg" />
+    <Content Include="Content\client_img\apple-touch-icon-114x114-precomposed.png" />
+    <Content Include="Content\client_img\apple-touch-icon-144x144-precomposed.png" />
+    <Content Include="Content\client_img\apple-touch-icon-57x57-precomposed.png" />
+    <Content Include="Content\client_img\apple-touch-icon-72x72-precomposed.png" />
+    <Content Include="Content\client_img\arrow_down.svg" />
+    <Content Include="Content\client_img\arrow_down_2.png" />
+    <Content Include="Content\client_img\avatar1.jpg" />
+    <Content Include="Content\client_img\avatar2.jpg" />
+    <Content Include="Content\client_img\avatar3.jpg" />
+    <Content Include="Content\client_img\badge_save.png" />
+    <Content Include="Content\client_img\bag.png" />
+    <Content Include="Content\client_img\banner_bg.png" />
+    <Content Include="Content\client_img\banner_bg_colored.png" />
+    <Content Include="Content\client_img\banner_bg_desktop.jpg" />
+    <Content Include="Content\client_img\bg_login.jpg" />
+    <Content Include="Content\client_img\blog-1.jpg" />
+    <Content Include="Content\client_img\blog-2.jpg" />
+    <Content Include="Content\client_img\blog-3.jpg" />
+    <Content Include="Content\client_img\bus.jpg" />
+    <Content Include="Content\client_img\cards.png" />
+    <Content Include="Content\client_img\carousel\1.jpg" />
+    <Content Include="Content\client_img\carousel\2.jpg" />
+    <Content Include="Content\client_img\carousel\3.jpg" />
+    <Content Include="Content\client_img\carousel\4.jpg" />
+    <Content Include="Content\client_img\close.png" />
+    <Content Include="Content\client_img\credit-card-icon.png" />
+    <Content Include="Content\client_img\down_arrow_select.png" />
+    <Content Include="Content\client_img\down_arrow_select_filters.png" />
+    <Content Include="Content\client_img\drag_icon.svg" />
+    <Content Include="Content\client_img\favicon.ico" />
+    <Content Include="Content\client_img\features-intro-01.jpg" />
+    <Content Include="Content\client_img\footergallery1.jpg" />
+    <Content Include="Content\client_img\footergallery2.jpg" />
+    <Content Include="Content\client_img\footergallery3.jpg" />
+    <Content Include="Content\client_img\footergallery4.jpg" />
+    <Content Include="Content\client_img\footergallery5.jpg" />
+    <Content Include="Content\client_img\footergallery6.jpg" />
+    <Content Include="Content\client_img\guide.jpg" />
+    <Content Include="Content\client_img\guide_1.jpg" />
+    <Content Include="Content\client_img\guide_2.jpg" />
+    <Content Include="Content\client_img\header_bg.jpg" />
+    <Content Include="Content\client_img\hero_3.jpg" />
+    <Content Include="Content\client_img\hinh-nen-vinh-ha-long-quang-ninh-dep.jpg" />
+    <Content Include="Content\client_img\home_bg_2.jpg" />
+    <Content Include="Content\client_img\hotel.jpg" />
+    <Content Include="Content\client_img\hotel_1.jpg" />
+    <Content Include="Content\client_img\hotel_2.jpg" />
+    <Content Include="Content\client_img\hotel_3.jpg" />
+    <Content Include="Content\client_img\hotel_4.jpg" />
+    <Content Include="Content\client_img\hotel_5.jpg" />
+    <Content Include="Content\client_img\hotel_6.jpg" />
+    <Content Include="Content\client_img\icon-select.png" />
+    <Content Include="Content\client_img\icons_search\bar.png" />
+    <Content Include="Content\client_img\icons_search\chinese.png" />
+    <Content Include="Content\client_img\icons_search\churches.png" />
+    <Content Include="Content\client_img\icons_search\eat.png" />
+    <Content Include="Content\client_img\icons_search\fast_food.png" />
+    <Content Include="Content\client_img\icons_search\historic.png" />
+    <Content Include="Content\client_img\icons_search\international.png" />
+    <Content Include="Content\client_img\icons_search\japanese.png" />
+    <Content Include="Content\client_img\icons_search\museums.png" />
+    <Content Include="Content\client_img\icons_search\pizza_italian.png" />
+    <Content Include="Content\client_img\icons_search\sightseeing.png" />
+    <Content Include="Content\client_img\icons_search\skyline.png" />
+    <Content Include="Content\client_img\icons_search\walking.png" />
+    <Content Include="Content\client_img\icon_ccv.gif" />
+    <Content Include="Content\client_img\img_cat_home_1.jpg" />
+    <Content Include="Content\client_img\img_cat_home_2.jpg" />
+    <Content Include="Content\client_img\img_cat_home_3.jpg" />
+    <Content Include="Content\client_img\img_cat_home_4.jpg" />
+    <Content Include="Content\client_img\lang_de.png" />
+    <Content Include="Content\client_img\lang_en.png" />
+    <Content Include="Content\client_img\lang_es.png" />
+    <Content Include="Content\client_img\lang_fr.png" />
+    <Content Include="Content\client_img\laptop.png" />
+    <Content Include="Content\client_img\loading.gif" />
+    <Content Include="Content\client_img\logo.png" />
+    <Content Include="Content\client_img\logo_2x.png" />
+    <Content Include="Content\client_img\logo_sticky.png" />
+    <Content Include="Content\client_img\logo_sticky_2x.png" />
+    <Content Include="Content\client_img\logo_sticky_colored.png" />
+    <Content Include="Content\client_img\logo_sticky_colored_2x.png" />
+    <Content Include="Content\client_img\may_bay.jpg" />
+    <Content Include="Content\client_img\minus.png" />
+    <Content Include="Content\client_img\news_home_1.jpg" />
+    <Content Include="Content\client_img\news_home_2.jpg" />
+    <Content Include="Content\client_img\news_home_3.jpg" />
+    <Content Include="Content\client_img\news_home_4.jpg" />
+    <Content Include="Content\client_img\next.png" />
+    <Content Include="Content\client_img\notredame.jpg" />
+    <Content Include="Content\client_img\pattern_3.png" />
+    <Content Include="Content\client_img\pattern_4.png" />
+    <Content Include="Content\client_img\pattern_5.png" />
+    <Content Include="Content\client_img\payments.png" />
+    <Content Include="Content\client_img\paypal_bt.png" />
+    <Content Include="Content\client_img\plus.png" />
+    <Content Include="Content\client_img\post-thumb-1.jpg" />
+    <Content Include="Content\client_img\post-thumb-2.jpg" />
+    <Content Include="Content\client_img\post-thumb-3.jpg" />
+    <Content Include="Content\client_img\prev.png" />
+    <Content Include="Content\client_img\products\image-1.jpg" />
+    <Content Include="Content\client_img\products\image-2.jpg" />
+    <Content Include="Content\client_img\products\image-3.jpg" />
+    <Content Include="Content\client_img\products\image-4.jpg" />
+    <Content Include="Content\client_img\products\image-5.jpg" />
+    <Content Include="Content\client_img\products\image-6.jpg" />
+    <Content Include="Content\client_img\products\thumb-1.jpg" />
+    <Content Include="Content\client_img\products\thumb-2.jpg" />
+    <Content Include="Content\client_img\products\thumb-3.jpg" />
+    <Content Include="Content\client_img\restaurant_box_1.jpg" />
+    <Content Include="Content\client_img\restaurant_box_2.jpg" />
+    <Content Include="Content\client_img\restaurant_box_3.jpg" />
+    <Content Include="Content\client_img\restaurant_box_4.jpg" />
+    <Content Include="Content\client_img\restaurant_box_5.jpg" />
+    <Content Include="Content\client_img\restaurant_box_6.jpg" />
+    <Content Include="Content\client_img\restaurant_box_7.jpg" />
+    <Content Include="Content\client_img\restaurant_box_8.jpg" />
+    <Content Include="Content\client_img\ribbon.png" />
+    <Content Include="Content\client_img\ribbon_popular.png" />
+    <Content Include="Content\client_img\ribbon_top_rated.png" />
+    <Content Include="Content\client_img\search-bt.png" />
+    <Content Include="Content\client_img\senna.jpg" />
+    <Content Include="Content\client_img\shadow-bg.png" />
+    <Content Include="Content\client_img\slider_single_tour\1_large.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\1_medium.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\2_large.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\2_medium.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\3_large.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\3_medium.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\4_large.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\4_medium.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\5_large.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\5_medium.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\6_large.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\6_medium.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\7_large.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\7_medium.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\8_large.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\8_medium.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\9_large.jpg" />
+    <Content Include="Content\client_img\slider_single_tour\9_medium.jpg" />
+    <Content Include="Content\client_img\slides\slide_1.jpg" />
+    <Content Include="Content\client_img\slides\slide_2.jpg" />
+    <Content Include="Content\client_img\slides\slide_3.jpg" />
+    <Content Include="Content\client_img\slides\slide_4.jpg" />
+    <Content Include="Content\client_img\slides\slide_home_1.jpg" />
+    <Content Include="Content\client_img\slides\slide_home_2.jpg" />
+    <Content Include="Content\client_img\slides\slide_home_3.jpg" />
+    <Content Include="Content\client_img\slides_bg\dummy.png" />
+    <Content Include="Content\client_img\slide_hero.jpg" />
+    <Content Include="Content\client_img\sprite-skin-flat.png" />
+    <Content Include="Content\client_img\tag_bg.png" />
+    <Content Include="Content\client_img\tape.png" />
+    <Content Include="Content\client_img\thumb_cart_1.jpg" />
+    <Content Include="Content\client_img\thumb_cart_2.jpg" />
+    <Content Include="Content\client_img\thumb_cart_3.jpg" />
+    <Content Include="Content\client_img\thumb_home_tabs_1.jpg" />
+    <Content Include="Content\client_img\thumb_home_tabs_10.jpg" />
+    <Content Include="Content\client_img\thumb_home_tabs_2.jpg" />
+    <Content Include="Content\client_img\thumb_home_tabs_3.jpg" />
+    <Content Include="Content\client_img\thumb_home_tabs_4.jpg" />
+    <Content Include="Content\client_img\thumb_home_tabs_5.jpg" />
+    <Content Include="Content\client_img\thumb_home_tabs_6.jpg" />
+    <Content Include="Content\client_img\thumb_home_tabs_7.jpg" />
+    <Content Include="Content\client_img\thumb_home_tabs_8.jpg" />
+    <Content Include="Content\client_img\thumb_home_tabs_9.jpg" />
+    <Content Include="Content\client_img\tourist_guide_pic.jpg" />
+    <Content Include="Content\client_img\tour_box_1.jpg" />
+    <Content Include="Content\client_img\tour_box_11.jpg" />
+    <Content Include="Content\client_img\tour_box_12.jpg" />
+    <Content Include="Content\client_img\tour_box_13.jpg" />
+    <Content Include="Content\client_img\tour_box_14.jpg" />
+    <Content Include="Content\client_img\tour_box_2.jpg" />
+    <Content Include="Content\client_img\tour_box_3.jpg" />
+    <Content Include="Content\client_img\tour_box_4.jpg" />
+    <Content Include="Content\client_img\tour_box_5.jpg" />
+    <Content Include="Content\client_img\tour_box_8.jpg" />
+    <Content Include="Content\client_img\tour_box_9.jpg" />
+    <Content Include="Content\client_img\transfer.jpg" />
+    <Content Include="Content\client_img\transfer_1.jpg" />
+    <Content Include="Content\client_img\transfer_2.jpg" />
+    <Content Include="Content\client_img\transfer_3.jpg" />
+    <Content Include="Content\client_img\transfer_4.jpg" />
+    <Content Include="Content\client_img\twitter_icon.svg" />
+    <Content Include="Content\client_img\ve-may-bay-di-vietnam-airlines.jpg" />
+    <Content Include="Content\client_img\video_fix.png" />
+    <Content Include="Content\client_img\xe.jpg" />
+    <Content Include="Content\client_js\cat_nav_mobile.js" />
+    <Content Include="Content\client_js\common_scripts_min.js" />
+    <Content Include="Content\client_js\functions.js" />
+    <Content Include="Content\client_js\infobox.js" />
+    <Content Include="Content\client_js\input_qty.js" />
+    <Content Include="Content\client_js\isotope.min.js" />
+    <Content Include="Content\client_js\jquery-3.6.0.min.js" />
+    <Content Include="Content\client_js\jquery-migrate.min.js" />
+    <Content Include="Content\client_js\jquery.bxslider.min.js" />
+    <Content Include="Content\client_js\jquery.cookiebar.js" />
+    <Content Include="Content\client_js\jquery.ddslick.js" />
+    <Content Include="Content\client_js\jquery.finaltilesgallery.js" />
+    <Content Include="Content\client_js\jquery.selectbox-0.2.js" />
+    <Content Include="Content\client_js\jquery.sliderPro.min.js" />
+    <Content Include="Content\client_js\jquery.tweet.min.js" />
+    <Content Include="Content\client_js\jquery.validate.js" />
+    <Content Include="Content\client_js\lightbox2.js" />
+    <Content Include="Content\client_js\map.js" />
+    <Content Include="Content\client_js\map_contact.js" />
+    <Content Include="Content\client_js\map_full_page.js" />
+    <Content Include="Content\client_js\map_home.js" />
+    <Content Include="Content\client_js\map_hotels.js" />
+    <Content Include="Content\client_js\map_listing_hotels.js" />
+    <Content Include="Content\client_js\map_listing_restaurants.js" />
+    <Content Include="Content\client_js\map_listing_tours.js" />
+    <Content Include="Content\client_js\map_restaurants.js" />
+    <Content Include="Content\client_js\map_single_restaurant.js" />
+    <Content Include="Content\client_js\map_transfer.js" />
+    <Content Include="Content\client_js\modernizr.js" />
+    <Content Include="Content\client_js\morphext.min.js" />
+    <Content Include="Content\client_js\notify_func.js" />
+    <Content Include="Content\client_js\pop_up.min.js" />
+    <Content Include="Content\client_js\pop_up_func.js" />
+    <Content Include="Content\client_js\pw_strenght.js" />
+    <Content Include="Content\client_js\revolution_func.js" />
+    <Content Include="Content\client_js\switcher.js" />
+    <Content Include="Content\client_js\tabs.js" />
+    <Content Include="Content\client_js\theia-sticky-sidebar.js" />
+    <Content Include="Content\client_js\video_header.js" />
+    <Content Include="Content\client_rev-slider-files\assets\bluebar.png" />
+    <Content Include="Content\client_rev-slider-files\assets\blurflake1.png" />
+    <Content Include="Content\client_rev-slider-files\assets\blurflake2.png" />
+    <Content Include="Content\client_rev-slider-files\assets\blurflake3.png" />
+    <Content Include="Content\client_rev-slider-files\assets\blurflake4.png" />
+    <Content Include="Content\client_rev-slider-files\assets\coloredbg.html" />
+    <Content Include="Content\client_rev-slider-files\assets\gridtile.html" />
+    <Content Include="Content\client_rev-slider-files\assets\gridtile_3x3.html" />
+    <Content Include="Content\client_rev-slider-files\assets\gridtile_3x3_white.html" />
+    <Content Include="Content\client_rev-slider-files\assets\gridtile_white.html" />
+    <Content Include="Content\client_rev-slider-files\assets\iceberg.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\loader.html" />
+    <Content Include="Content\client_rev-slider-files\assets\newspaper_bg1.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\newspaper_bg2.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\newspaper_bg3.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\notgeneric_bg1.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\notgeneric_bg2.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\notgeneric_bg3.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\notgeneric_bg5.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\slide_1.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\slide_2.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\slide_3.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\slide_4.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\slide_5.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\slide_6.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\travel1.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\travel2.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\travel3.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\travel4.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\vimeobg.jpg" />
+    <Content Include="Content\client_rev-slider-files\assets\youtubebg.jpg" />
+    <Content Include="Content\client_rev-slider-files\css\layers.css" />
+    <Content Include="Content\client_rev-slider-files\css\navigation.css" />
+    <Content Include="Content\client_rev-slider-files\css\settings.css" />
+    <Content Include="Content\client_rev-slider-files\fonts\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\client_rev-slider-files\fonts\font-awesome\fonts\fontawesome-webfont3e6e-2.html" />
+    <Content Include="Content\client_rev-slider-files\fonts\font-awesome\fonts\fontawesome-webfont3e6e.html" />
+    <Content Include="Content\client_rev-slider-files\fonts\font-awesome\fonts\fontawesome-webfont3e6e.svg" />
+    <Content Include="Content\client_rev-slider-files\fonts\revicons\revicons90c6.html" />
+    <Content Include="Content\client_rev-slider-files\fonts\revicons\revicons90c6.svg" />
+    <Content Include="Content\client_rev-slider-files\js\extensions\revolution.addon.slicey.min.js" />
+    <Content Include="Content\client_rev-slider-files\js\extensions\revolution.extension.actions.min.js" />
+    <Content Include="Content\client_rev-slider-files\js\extensions\revolution.extension.carousel.min.js" />
+    <Content Include="Content\client_rev-slider-files\js\extensions\revolution.extension.kenburn.min.js" />
+    <Content Include="Content\client_rev-slider-files\js\extensions\revolution.extension.layeranimation.min.js" />
+    <Content Include="Content\client_rev-slider-files\js\extensions\revolution.extension.migration.min.js" />
+    <Content Include="Content\client_rev-slider-files\js\extensions\revolution.extension.navigation.min.js" />
+    <Content Include="Content\client_rev-slider-files\js\extensions\revolution.extension.parallax.min.js" />
+    <Content Include="Content\client_rev-slider-files\js\extensions\revolution.extension.slideanims.min.js" />
+    <Content Include="Content\client_rev-slider-files\js\extensions\revolution.extension.video.min.js" />
+    <Content Include="Content\client_rev-slider-files\js\jquery.themepunch.revolution.min.js" />
+    <Content Include="Content\client_rev-slider-files\js\jquery.themepunch.tools.min.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
@@ -491,6 +929,41 @@
     <Content Include="Content\admin_icon\themify\fonts\themify.eot" />
     <Content Include="Content\admin_icon\themify\fonts\themify.ttf" />
     <Content Include="Content\admin_icon\themify\fonts\themify.woff" />
+    <Content Include="Content\client_css\fontello\font\fontello4508.eot" />
+    <Content Include="Content\client_css\fontello\font\fontello4508.woff" />
+    <Content Include="Content\client_css\fontello\font\icon_set_10367.eot" />
+    <Content Include="Content\client_css\fontello\font\icon_set_10367.woff" />
+    <Content Include="Content\client_css\fontello\font\icon_set_22249.eot" />
+    <Content Include="Content\client_css\fontello\font\icon_set_22249.woff" />
+    <Content Include="Content\client_css\icon_restaurant\fonts\Glyphter.eot" />
+    <Content Include="Content\client_css\icon_restaurant\fonts\Glyphter.woff" />
+    <Content Include="Content\client_css\icon_restaurant\fonts\Glyphterd41d.eot" />
+    <Content Include="Content\client_css\images\closedhand.123" />
+    <Content Include="Content\client_css\images\openhand.123" />
+    <Content Include="Content\client_css\new_icons\font\ElegantIcons.eot" />
+    <Content Include="Content\client_css\new_icons\font\ElegantIcons.woff" />
+    <Content Include="Content\client_css\new_icons\font\ElegantIconsd41d.eot" />
+    <Content Include="Content\client_css\new_icons\font\Pe-icon-7-strokebb1d.eot" />
+    <Content Include="Content\client_css\new_icons\font\Pe-icon-7-strokebb1d.woff" />
+    <Content Include="Content\client_css\new_icons\font\Pe-icon-7-stroked41d.eot" />
+    <Content Include="Content\client_rev-slider-files\css\closedhand.123" />
+    <Content Include="Content\client_rev-slider-files\css\openhand.123" />
+    <Content Include="Content\client_rev-slider-files\fonts\font-awesome\fonts\fontawesome-webfont3e6e.eot" />
+    <Content Include="Content\client_rev-slider-files\fonts\font-awesome\fonts\fontawesome-webfont3e6e.woff" />
+    <Content Include="Content\client_rev-slider-files\fonts\font-awesome\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="Content\client_rev-slider-files\fonts\revicons\revicons90c6.eot" />
+    <Content Include="Content\client_rev-slider-files\fonts\revicons\revicons90c6.woff" />
+    <Content Include="bin\East2West.dll.config" />
+    <Content Include="bin\roslyn\csc.exe.config" />
+    <Content Include="bin\roslyn\csc.rsp" />
+    <Content Include="bin\roslyn\csi.exe.config" />
+    <Content Include="bin\roslyn\csi.rsp" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="bin\roslyn\vbc.exe.config" />
+    <Content Include="bin\roslyn\vbc.rsp" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -502,6 +975,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\checkout.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config" />
@@ -520,16 +994,54 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Tours\Create.cshtml" />
-    <Content Include="Views\Tours\Delete.cshtml" />
     <Content Include="Views\Tours\Details.cshtml" />
     <Content Include="Views\Tours\Edit.cshtml" />
     <Content Include="Views\Tours\Index.cshtml" />
     <Content Include="Views\Tours\TourScheduleRow.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageClient.cshtml" />
+    <Content Include="Views\Home\GetListTour.cshtml" />
+    <Content Include="Views\ClientTour\GetListTour.cshtml" />
+    <Content Include="Views\ClientTour\Details.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\TourDetails\Index.cshtml" />
+    <Content Include="Views\TourDetails\Create.cshtml" />
+    <Content Include="Views\Cars\Create.cshtml" />
+    <Content Include="Views\Cars\Delete.cshtml" />
+    <Content Include="Views\Cars\Details.cshtml" />
+    <Content Include="Views\Cars\Edit.cshtml" />
+    <Content Include="Views\Cars\Index.cshtml" />
+    <Content Include="Views\CarSchedules\Create.cshtml" />
+    <Content Include="Views\CarSchedules\Delete.cshtml" />
+    <Content Include="Views\CarSchedules\Details.cshtml" />
+    <Content Include="Views\CarSchedules\Edit.cshtml" />
+    <Content Include="Views\CarSchedules\Index.cshtml" />
+    <Content Include="Views\Flights\Create.cshtml" />
+    <Content Include="Views\Flights\Delete.cshtml" />
+    <Content Include="Views\Flights\Details.cshtml" />
+    <Content Include="Views\Flights\Edit.cshtml" />
+    <Content Include="Views\Flights\Index.cshtml" />
+    <Content Include="Views\Hotels\Create.cshtml" />
+    <Content Include="Views\Hotels\Delete.cshtml" />
+    <Content Include="Views\Hotels\Details.cshtml" />
+    <Content Include="Views\Hotels\Edit.cshtml" />
+    <Content Include="Views\Hotels\Index.cshtml" />
+    <Content Include="Views\Home\Page_404.cshtml" />
+    <Content Include="Views\Home\ThankYou.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutSidePage.cshtml" />
+    <Content Include="Views\User\ShowInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\Order\" />
+    <Folder Include="Views\TourSchedules\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -545,14 +1057,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202206171509433_init-data.resx">
-      <DependentUpon>202206171509433_init-data.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206230956206_init-database.resx">
+      <DependentUpon>202206230956206_init-database.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206171514458_update-table-name.resx">
-      <DependentUpon>202206171514458_update-table-name.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206191534304_update-db-again-1.resx">
-      <DependentUpon>202206191534304_update-db-again-1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206231004441_update-database1.resx">
+      <DependentUpon>202206231004441_update-database1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,3 +1,5 @@
+const { moment } = require("../../../admin_vendor/js/calendar/fullcalendar");
+
 (function ($) {
 
     'use strict';
@@ -23,6 +25,9 @@
 		//single date
 		$('#date').daterangepicker({
 			singleDatePicker: true,
+			locale: {
+				format: 'DD/MM/YYYY'
+			},
 		});
 	});
 	

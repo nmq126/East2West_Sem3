@@ -1,4 +1,5 @@
 ﻿using East2West.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,7 +8,7 @@ using System.Web;
 
 namespace East2West.Data
 {
-    public class DBContext : DbContext
+    public class DBContext :  IdentityDbContext<User>
     {
         public DBContext()
             : base("name=DBContext")
@@ -55,5 +56,7 @@ namespace East2West.Data
                         .WillCascadeOnDelete(false);
             base.OnModelCreating(modelBuilder);
         }
+
+        public System.Data.Entity.DbSet<East2West.Models.CarSchedule> CarSchedules { get; set; }
     }
 }

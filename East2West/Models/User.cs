@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,16 +9,8 @@ using System.Web;
 namespace East2West.Models
 {
     [Table("Users")]
-    public class User
+    public class User : Microsoft.AspNet.Identity.EntityFramework.IdentityUser
     {
-        [Key]
-        [StringLength(50)]
-        public String Id { get; set; }
-
-        [StringLength(50)]
-        [Required]
-        public String UserName { get; set; }
-
         [StringLength(50)]
         [Required]
         public String FirstName { get; set; }
@@ -26,9 +19,8 @@ namespace East2West.Models
         [Required]
         public String LastName { get; set; }
 
-        [StringLength(250)]
-        [Required]
-        public String Email { get; set; }
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
 
         [Column(TypeName = "ntext")]
         [Required]
@@ -41,14 +33,6 @@ namespace East2West.Models
         [Column(TypeName = "ntext")]
         [Required]
         public String Description { get; set; }
-
-        [StringLength(250)]
-        [Required]
-        public String PasswordHash { get; set; }
-
-        [StringLength(20)]
-        [Required]
-        public String PhoneNumber { get; set; }
 
         public int Status { get; set; }
         public DateTime CreatedAt { get; set; }
