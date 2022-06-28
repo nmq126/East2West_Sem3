@@ -2,52 +2,52 @@
 
 @{
     ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutPageAuthen.cshtml";
+
 }
 
-<h2>Login</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>User</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-       
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <main>
+        <section id="hero" class="login">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
+                        <div id="login">
+                            <div class="text-center"><img src="@Url.Content("~/Content/client_img/logo_sticky.png")" alt="Image" width="160" height="34"></div>
+                            <hr>
+                            <form>
+                                @Html.ValidationMessage("LoginError", new { @class = "text-danger float-left mb-4" })
+                                <div class="form-group ui search focus">
+                                    <div class=" ui left icon input swdh11 swdh19">
+                                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control prompt srch_explore", placeholder = @Html.DisplayNameFor(m => m.UserName) } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger float-left mt-2 mb-2" })
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+
+                                <div class="form-group ui search focus mt-15">
+                                    <div class=" ui left icon input swdh11 swdh19">
+                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control prompt srch_explore", placeholder = @Html.DisplayNameFor(m => m.Password) } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger float-left mt-2 mb-2" })
+                                </div>
+                                <p class="small">
+                                    <a href="#">Forgot Password?</a>
+                                </p>
+                                <button class="btn_full" type="submit">Login</button>
+                                <a href="User/Register" class="btn_full_outline">Register</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-       
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+        </section>
+    </main><!-- End main -->
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

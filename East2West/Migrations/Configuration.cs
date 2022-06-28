@@ -33,7 +33,9 @@
                 new Location() { Id = "LOCAL_4", Name = "Da Nang", Description = "Da Nang is a city directly under the central government, located in the South Central Coast region of Vietnam, is the central and largest city in the Central - Central Highlands region. " },
                 new Location() { Id = "LOCAL_5", Name = "Phu Quoc", Description = "Phu Quoc is an island located in the Gulf of Thailand and is the largest island in Vietnam. Administratively, Phu Quoc island, together with neighboring smaller islands and Tho Chu archipelago, 55 nautical miles to the southwest, composes Phu Quoc island city under Kien Giang province. " },
                 new Location() { Id = "LOCAL_6", Name = "Scotland", Description = "Scotland is a country in the United Kingdom of Great Britain and Northern Ireland. Scotland occupies the northern third of the island of Great Britain, is bordered by England to the south, the Atlantic Ocean surrounds the remaining sides: of which the North Sea is to the east, and the North Strait and the Irish Sea to the west -male." },
-                new Location() { Id = "LOCAL_7", Name = "Phu Yen", Description = "Phu Yen is known as a wild and beautiful land with many beaches, lagoons, historical and cultural relics such as Nhan Mountain, Da Bia Mountain, Vung Ro, Bai Mon - Mui Dien, O Loan lagoon, Ganh Da Dia, Mang Lang Church, Xuan Dai Bay, Dong Cam Dam. In addition, Phu Yen has many other scenic spots such as Bai Xep, Vinh Hoa beach, Tu Nham sand hill, Nua island, Chua island, Nhat Tu Son island, Bau beach, Yen island, Ganh Den, Cay Du waterfall, H'Ly waterfall. , Van Hoa Plateau..." }
+                new Location() { Id = "LOCAL_7", Name = "Phu Yen", Description = "Phu Yen is known as a wild and beautiful land with many beaches, lagoons, historical and cultural relics such as Nhan Mountain, Da Bia Mountain, Vung Ro, Bai Mon - Mui Dien, O Loan lagoon, Ganh Da Dia, Mang Lang Church, Xuan Dai Bay, Dong Cam Dam. In addition, Phu Yen has many other scenic spots such as Bai Xep, Vinh Hoa beach, Tu Nham sand hill, Nua island, Chua island, Nhat Tu Son island, Bau beach, Yen island, Ganh Den, Cay Du waterfall, H'Ly waterfall. , Van Hoa Plateau..." },
+                new Location() { Id = "LOCAL_8", Name = "TURKEY", Description = "Turkey is a democratic, secular, unitary, and constitutional republic with a diverse cultural heritage." },
+                new Location() { Id = "LOCAL_9", Name = "SRI LANKA", Description = "Sri Lanka, officially the Democratic Socialist Republic of Sri Lanka is an island nation with a majority Buddhist population in South Asia, located about 33 miles off the coast of the southern Indian state of Tamil Nadu. The country is often referred to as the 'Pearl of the Indian Ocean'." }
                 );
             //Tour
             context.Tours.AddOrUpdate(x => x.Id,
@@ -41,15 +43,216 @@
                 new Tour() { Id = "TOUR_2", DepartureId = "LOCAL_1", DestinationId = "LOCAL_4", Name = "Series | Ha Noi - Da Nang", Description = "SERIES | HANOI - DA NANG - BA NA - HOI AN", Detail = "Coming to Da Nang, visitors not only have the opportunity to visit the beautiful scenery of the sea but also have the opportunity to enjoy unforgettable special dishes, visit the charming natural scenery of the river and enjoy many famous specialties here. this. In addition, in the travel itinerary with Hanoitourist's Da Nang - Hoi An tour, you can also feel the peaceful beauty of Hoi An ancient town and the culinary beauty here.", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655794879/e2w/63451_mwh9h0.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655794883/e2w/63453_nq69ji.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655794886/e2w/63455_vsf0fm.png", Duration = 4, Rating = 5, Policy = "<p>Price includes:</p><p>Air tickets and airport fees Hanoi - Da Nang - Hanoi (Vietnam Airlines ticket includes 20kg of checked baggage).</p><p>Modern air-conditioned cars exclusively for the group (with hand sanitizer on board)</p><p>Sekong 3 *** hotel on the seafront (early check-in time from 14h00; check-out at 12h00): 02 adults/room - odd group of guests use room 3, children sleep with parents without standard private room )</p><p>Meals according to the program 120,000 VND / person / main meal * 06 main meals. Breakfast buffet at the hotel.</p><p>You can take care of the entrance tickets at the tourist attractions in the program.</p><p>You can buy travel insurance throughout the route with a maximum compensation of 120,000,000 VND/person.</p><p>Guests are served cold towels, mineral water in the car, the norm is 1 bottle / person / day, the limit is 1 mask / day / person.</p><p>Tour guide picks you up at the airport in Hanoi</p><p>Tour guide in Da Nang, enthusiastic experience, explain the route, serve the group according to the program.</p><p>Price does not include:</p><p>Cable car tickets &amp; games at Ba Na + Eating Ba Na resort: 850,000 VND/pax (fares may change at the time of using the service)</p><p>If going to Cu Lao Cham: 600,000 VND/pax</p><p>If going to Vinpearl Nam Hoi An: 700,000 VND/pax.</p><p>Single room sleep, drinks. Personal expenses other than the program.</p><p>Tipping for drivers and guides.</p><p>SUPPLY FOR SINGLE ROOM: 1,100,000 VND</p><p>Cancellation policy:</p><p>Note:</p><p><br></p><p>The order of attractions can be changed to match the actual program of the group, but still ensure the full range of attractions.</p><p>Flight time may change according to flight time of Vietnam Airlines.</p>", SummarySchedule = "HANOI - DA NANG - BA NA - HUE - HOI AN - HANOI", Status = 1, CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
                 new Tour() { Id = "TOUR_3", DepartureId = "LOCAL_1", DestinationId = "LOCAL_5", Name = "EXPLORE PHU QUOC", Description = "SERIES | HANOI - PHU QUOC", Detail = "Explore Phu Quoc pearl island which is known as the island paradise of Vietnam in 3 days 2 nights.", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655799709/e2w/63543_h9i0wo.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655799719/e2w/63545_imuz24.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655799724/e2w/63547_ubullo.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655799733/e2w/63549_d8sfxk.png", Duration = 4, Rating = 5, Policy = "<p>Price includes:</p><p>Air tickets and airport fees Hanoi - Phu Quoc - Hanoi with BamBoo Airways: group tickets, non-refundable, non-cancellable, unchanged (including 07kg hand baggage, 20kg checked baggage)</p><p>New air-conditioned cars according to the schedule in Phu Quoc.</p><p>Airport pick-up and drop-off from Hanoi - Noi Bai and vice versa</p><p>Standard hotel rooms 3 *, 4 *, 5 * depending on your choice. 02 people/room, if odd men or women use room 03 people.</p><p>3* Hotel: Hotel Happy Phu Quoc 3* or equivalent</p><p>4* Hotel: Sonaga Resort 4* or equivalent</p><p>5* Hotel: Best Western Sonasea Phu Quoc 5* or equivalent</p><p>Meals according to the program: Main meals: 05 meals x 150,000 VND/person/meal, including 01 meal on board. Have breakfast at Hotel.</p><p>Fishing boat, coral viewing, fishing gear, bait, tools.</p><p>Enthusiastic, experienced tour guide welcomes you at Noi Bai airport and follows you throughout the journey in Phu Quoc.</p><p>Sightseeing fees for the first entry points in the program.</p><p>Travel insurance throughout the route (maximum compensation 120,000,000 VND/case).</p><p>Drinking water in the car 01 bottle/person/day.</p><p>Tax</p><p>Price does not include:</p><p>Expenses for swimming, entertainment and personal expenses.</p><p>Round trip ticket for Hon Thom cable car 540,000 VND (According to regulations of Sun Group).</p><p>Tickets for entrance fees at Grand World: Bear Museum 200,000 VND/person, Essence of Vietnam 200,000 VND/person, river cruise 200,000 VND/person. (According to Vin Group&apos;s regulations)</p><p>Personal expenses and other expenses incurred outside the program, sleeping in a single room, overtime travel, drinks, etc.</p><p>Tips for tour guide and driver</p><p>Cancellation policy:</p><p>If you cancel the tour after registration or before 15 days of departure: tour deposit fee will be forfeited</p><p>If you cancel the tour from 10 to 15 days before the departure date: cancellation fee of 70% of the tour value.</p><p>If you cancel the tour within 10 days before departure date: 100% cancellation fee of tour value.</p><p>&nbsp;</p><p><br></p><p>Note : Whichever condition comes first, we will apply that condition.</p>", SummarySchedule = "HANOI - DA NANG - BA NA - HUE - HOI AN - HANOI", Status = 1, CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
                 new Tour() { Id = "TOUR_4", DepartureId = "LOCAL_1", DestinationId = "LOCAL_6", Name = "ENGLAND TOUR", Description = "ENGLAND & SCOTLAND TOUR - LAND OF MOT", Detail = "Price includes urgent visa service. Comfortable 4-star hotel, convenient to visit. Enjoy the taste of typical European dishes. Experienced and enthusiastic guides throughout the route. Visiting Big Ben Clock Tower, Buckingham Palace,.. Visit Bibury Ancient Village - The oldest village in England.", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655802108/e2w/67488_iyg82d.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655802112/e2w/67491_ttrya2.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655802120/e2w/67494_wqnyfn.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655802129/e2w/67552_zid7uq.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655802136/e2w/67555_dvkhsi.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655802143/e2w/67558_fbiorb.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655802150/e2w/67561_cyxazm.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655802155/e2w/67577_odfz6o.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655802163/e2w/67564_kphogt.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655802173/e2w/67596_gw4bol.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655802180/e2w/67599_datxs3.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655802188/e2w/67637_roskwn.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655802199/e2w/67643_hsbkmk.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655802204/e2w/67640_fjmq5i.png", Duration = 11, Rating = 5, Policy = "<p>Price includes:</p><p>Round trip airfare of Vietnamairlines</p><p>Airport fee + airline tax.</p><p>4* standard hotel</p><p>Meals according to the program are from 18 GPB - 20 GPB/meal.</p><p>Tickets to visit places according to the program. Admission to Stonehenge and Scotch Whiskey</p><p>Cars are transported according to the program (10 hours/day)</p><p>Vietnamese tour guide throughout the route from Vietnam</p><p>&nbsp; Fee for translating documents and procedures for UK visa (non-refundable cost 6,000,000 VND) &ndash; The current UK visa application period needs at least 12 weeks</p><p>MIC travel insurance coverage up to 50,000 USD/person/case</p><p>Gifts of Hanoi Tourist</p><p>VAT according to government regulations 0% service abroad and 8% domestic service</p><p>Price does not include:</p><p>Passport fee.</p><p>Tipping for tour guide and driver (about 7 GBP / 1 pax / 1 day tour).</p><p>Personal costs</p><p>Excess baggage</p><p>Excursions outside the program</p><p>Surcharge for single room stay (if any).</p><p>Extra tips for drivers and guides if the time limit is over.</p><p>Urgent visa fee (8,000,000 VND) (If any)</p><p>Cancellation policy:</p><p>Note:</p><p>For objective reasons, the program or route may change or the contents of the itinerary will be rearranged (but still ensuring the existing contents).</p><p>Visiting the cities listed in the program, in case you need services to get out of these cities to a place not listed in the program, you must satisfy agreement on increased costs.</p><p>Request you to comply with the scheduled time, if due to force majeure objective reasons (traffic jams...) or because of your own wishes with the consensus of all members of the team working on time. If there is a shortage of time for that day&apos;s itinerary, it is possible that the next destinations on that day will be skimmed or have to be omitted.</p><p>We are not responsible for refunding services in the program that you do not use.</p><p>We are not responsible for any delay on your part.</p><p>During the journey, you are not allowed to automatically receive more family members or acquaintances on the bus without a service agreement with us in advance.</p><p>Flight and flight time, airline, flight date may change depending on the visa issuance schedule of the embassy. Vehicles transported in England - Scotland will travel no more than 10 hours/day.</p>", SummarySchedule = "LONDON - AMSBURY - BATH - BRITOL - STRAFFORD - UPON - AVON - MANCHESTER - EDINBURGH - YORK - OXFORD - BIBURY - LONDON", Status = 1, CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
-                new Tour() { Id = "TOUR_5", DepartureId = "LOCAL_1", DestinationId = "LOCAL_7", Name = "SERIES | TOURISM TUY HOA", Description = "Phu Yen is developing strongly and is becoming an interesting stop on the tourist map of Vietnam.", Detail = "Conquer Phuong Mai sand dune - the place is known as - A desert in the heart of the blue sea. Sightseeing: Da Dia Ghenh, O Loan lagoon, Mang Lang Church - An ancient French architecture. Twin Towers - a cluster of towers with 02 ancient towers with Angkorian architecture, built in the 12th century. - Cathedral Church. Visit Ghenh Rang Tourist Area with Thi Nhan Hill, Mong Cam Doc, Visit Tomb of poet Han Mac Tu, Fire Pen Dzu Kha,...", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811416/e2w/119178_fqnlmn.jpg , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811302/e2w/74272_vrooht.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811305/e2w/74275_ilyihw.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811312/e2w/74278_ogpcbm.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811318/e2w/74281_jqre1y.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811323/e2w/74284_penfq1.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811334/e2w/74287_cg1s4a.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811342/e2w/74290_yl6cfe.png", Duration = 4, Rating = 4.5, Policy = "<p>Price includes:</p><p>Round-trip flight ticket Hanoi - Quy Nhon - Hanoi (Non-refundable, non-cancellation, change) of Vietnamairlines: including 10kg hand luggage and 1 piece of 23kg checked baggage</p><p>Private transportation service according to the program</p><p>3-star standard hotel according to the program (Flora, Rustic, Yen Vy 4 hotels or equivalent): 02 people/room, if odd, triple room. Children under 12 years old sleep with parents, no standard room.</p><p>Meals according to the program: Breakfast at the hotel. Standard meal 130,000 VND/person/meal x 06 meals.</p><p>Tickets to visit 1 time at the attractions according to the program.</p><p>Experienced tour guide, enthusiastic service according to the program in Quy Nhon &amp; Tuy Hoa</p><p>Guide to pick up &amp; drop off the airport in Hanoi</p><p>Drinking water: 01 bottle of mineral water 500ml/person/day in the car</p><p>Travel hat gift</p><p>Travel insurance pays up to 120,000,000 VND/person/case (depending on each incident)</p><p>VAT invoice as prescribed</p><p>Price does not include:</p><p>Drinks and personal expenses are not included in the program</p><p>Cost of single room (if any)</p><p>Ky Co tour cost (including 1 seafood lunch): 420,000vnd/adult</p><p>Tipping for guides and drivers.</p><p>Cancellation policy:</p><p>Conditions of tour cancellation:</p><p>If you cancel the tour after registration and 30 days before departure: tour deposit fee will be forfeited</p><p>If you cancel the tour from 15-30 days before departure date: 50% cancellation fee of tour value.</p><p>If you cancel the tour from 07-15 days before departure date: 70% cancellation fee of tour value.</p><p>If you cancel the tour within 07 days before departure date: 100% cancellation fee of tour value.</p><p>(Note: Whichever comes first we will apply.)</p><p><br></p><p>Conditions for air tickets:</p><p>Flight time is subject to change according to the airline&apos;s flight time.</p><p>When traveling by plane, you should bring one of the following documents: (valid ID card, ID card, or passport with more than 6 months validity,... birth certificate (for children under 6 months old) 14 years old).</p><p>If you cancel the tour due to being refused to check in at the airport due to identity / identification The travel agency is not responsible for the above incident. Program costs will not be refunded in this case.</p><p>Conditions of safe reception:</p><p>Comply with the &ldquo;5K Message&rdquo;</p><p>Medical declaration according to regulations</p><p>Comply with Hanoitourist&apos;s epidemic prevention and control instructions.</p><p>General regulations:</p><p>Due to the nature of the group, if the group has 10 adults or more, the group will depart on the same day. If the group does not have enough 10 guests, Party B will arrange a new departure date and notify Party A 15 days in advance.</p><p>If Party B does not organize for the delegation to go at the scheduled time due to force majeure causes such as natural disasters, storms, floods, war.... Party B will arrange a new departure date, all costs incurred shall be agreed upon by both parties.</p><p>Price from</p><p><br></p><p>VND 6,290,000</p><p><br></p><p>KEEP ONLY</p><p><br></p><p>REGISTER FOR CONSULTATIONS</p><p><br></p><p>Hotline: 19004518</p><p><br></p><p>Tags: Quy Nhon travel experience, Quy Nhon tourism, Discover Quy Nhon</p><p>ALL QUESTIONS PLEASE CONTACT US</p><p>Phone</p><p>Hotline:</p><p>19004518</p><p>Mail</p><p>Email:</p><p>sales@hanoitourist.vn</p><p>OR LEARN INFORMATION</p><p>First and last name</p><p>Enter your first and last name</p><p>Email or Phone Number</p><p>Enter your email or phone number</p>", SummarySchedule = "HANOI - QUY NHON - TUY HOA - HANOI", Status = 1, CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now }
-                );
+                new Tour() { Id = "TOUR_5", DepartureId = "LOCAL_1", DestinationId = "LOCAL_7", Name = "SERIES | TOURISM TUY HOA", Description = "Phu Yen is developing strongly and is becoming an interesting stop on the tourist map of Vietnam.", Detail = "Conquer Phuong Mai sand dune - the place is known as - A desert in the heart of the blue sea. Sightseeing: Da Dia Ghenh, O Loan lagoon, Mang Lang Church - An ancient French architecture. Twin Towers - a cluster of towers with 02 ancient towers with Angkorian architecture, built in the 12th century. - Cathedral Church. Visit Ghenh Rang Tourist Area with Thi Nhan Hill, Mong Cam Doc, Visit Tomb of poet Han Mac Tu, Fire Pen Dzu Kha,...", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811416/e2w/119178_fqnlmn.jpg , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811302/e2w/74272_vrooht.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811305/e2w/74275_ilyihw.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811312/e2w/74278_ogpcbm.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811318/e2w/74281_jqre1y.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811323/e2w/74284_penfq1.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811334/e2w/74287_cg1s4a.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655811342/e2w/74290_yl6cfe.png", Duration = 4, Rating = 4.5, Policy = "<p>Price includes:</p><p>Round-trip flight ticket Hanoi - Quy Nhon - Hanoi (Non-refundable, non-cancellation, change) of Vietnamairlines: including 10kg hand luggage and 1 piece of 23kg checked baggage</p><p>Private transportation service according to the program</p><p>3-star standard hotel according to the program (Flora, Rustic, Yen Vy 4 hotels or equivalent): 02 people/room, if odd, triple room. Children under 12 years old sleep with parents, no standard room.</p><p>Meals according to the program: Breakfast at the hotel. Standard meal 130,000 VND/person/meal x 06 meals.</p><p>Tickets to visit 1 time at the attractions according to the program.</p><p>Experienced tour guide, enthusiastic service according to the program in Quy Nhon &amp; Tuy Hoa</p><p>Guide to pick up &amp; drop off the airport in Hanoi</p><p>Drinking water: 01 bottle of mineral water 500ml/person/day in the car</p><p>Travel hat gift</p><p>Travel insurance pays up to 120,000,000 VND/person/case (depending on each incident)</p><p>VAT invoice as prescribed</p><p>Price does not include:</p><p>Drinks and personal expenses are not included in the program</p><p>Cost of single room (if any)</p><p>Ky Co tour cost (including 1 seafood lunch): 420,000vnd/adult</p><p>Tipping for guides and drivers.</p><p>Cancellation policy:</p><p>Conditions of tour cancellation:</p><p>If you cancel the tour after registration and 30 days before departure: tour deposit fee will be forfeited</p><p>If you cancel the tour from 15-30 days before departure date: 50% cancellation fee of tour value.</p><p>If you cancel the tour from 07-15 days before departure date: 70% cancellation fee of tour value.</p><p>If you cancel the tour within 07 days before departure date: 100% cancellation fee of tour value.</p><p>(Note: Whichever comes first we will apply.)</p><p><br></p><p>Conditions for air tickets:</p><p>Flight time is subject to change according to the airline&apos;s flight time.</p><p>When traveling by plane, you should bring one of the following documents: (valid ID card, ID card, or passport with more than 6 months validity,... birth certificate (for children under 6 months old) 14 years old).</p><p>If you cancel the tour due to being refused to check in at the airport due to identity / identification The travel agency is not responsible for the above incident. Program costs will not be refunded in this case.</p><p>Conditions of safe reception:</p><p>Comply with the &ldquo;5K Message&rdquo;</p><p>Medical declaration according to regulations</p><p>Comply with Hanoitourist&apos;s epidemic prevention and control instructions.</p><p>General regulations:</p><p>Due to the nature of the group, if the group has 10 adults or more, the group will depart on the same day. If the group does not have enough 10 guests, Party B will arrange a new departure date and notify Party A 15 days in advance.</p><p>If Party B does not organize for the delegation to go at the scheduled time due to force majeure causes such as natural disasters, storms, floods, war.... Party B will arrange a new departure date, all costs incurred shall be agreed upon by both parties.</p><p>Price from</p><p><br></p><p>VND 6,290,000</p><p><br></p><p>KEEP ONLY</p><p><br></p><p>REGISTER FOR CONSULTATIONS</p><p><br></p><p>Hotline: 19004518</p><p><br></p><p>Tags: Quy Nhon travel experience, Quy Nhon tourism, Discover Quy Nhon</p><p>ALL QUESTIONS PLEASE CONTACT US</p><p>Phone</p><p>Hotline:</p><p>19004518</p><p>Mail</p><p>Email:</p><p>sales@hanoitourist.vn</p><p>OR LEARN INFORMATION</p><p>First and last name</p><p>Enter your first and last name</p><p>Email or Phone Number</p><p>Enter your email or phone number</p>", SummarySchedule = "HANOI - QUY NHON - TUY HOA - HANOI", Status = 1, CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
+                new Tour() { Id = "TOUR_6", 
+                    DepartureId = "LOCAL_1",
+                    DestinationId = "LOCAL_8",
+                    Name = "TOUR TURKEY",
+                    Description = "Heritage journey 8 days 7 nights to discover Turkey - the country is known as 'Crossroads of civilizations'.",
+                    Detail = "Stay 2 nights in a 4-star hotel in Cappadocia and 2 nights in Istanbul full of the most unique attractions.Experience the sunrise on a hot air balloon in the rock city of Cappadocia.Admire countless mysterious ancient monuments in Istanbul, Kudasadi, Pamukale with typical examples being the world wonder of the ancient citadel of Ephesus, the ancient wonder of the Temple of Atemis, etc. Natural wonder 'Cotton Castle' Pamukale.Cruise on the Bosphorus Strait connecting the 2 continents of Eurasia.Experience mud bath, fish massage.Free 1 belly dance dinner + free flow drink in Cappadocia", 
+                    Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1656339364/e2w/67714_mdlxf7.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1656339370/e2w/67772_zo3ptf.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1656339376/e2w/67775_lj0s9y.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1656339395/e2w/67790_odx5r0.png ", 
+                    Duration = 8    , 
+                    Rating = 4.5, 
+                    Policy = "Stay 2 nights in a 4-star hotel in Cappadocia and 2 nights in Istanbul full of the most unique attractions.Experience the sunrise on a hot air balloon in the rock city of Cappadocia.Admire countless mysterious ancient monuments in Istanbul, Kudasadi, Pamukale with typical examples being the world wonder of the ancient citadel of Ephesus, the ancient wonder of the Temple of Atemis, etc. Natural wonder 'Cotton Castle' Pamukale.Cruise on the Bosphorus Strait connecting the 2 continents of Eurasia.Experience mud bath, fish massage.Free 1 belly dance dinner + free flow drink in Cappadocia", 
+                    SummarySchedule = "HA NOI - ISTABUL - IZMIR - KUSADASI - PAMUKALE - KONYA - CAPPADOCIA - ISTANBUL - HA NOI", 
+                    Status = 1, 
+                    CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"), 
+                    UpdatedAt = DateTime.Now, 
+                    DeletedAt = DateTime.Now },
+                new Tour()
+                {
+                    Id = "TOUR_7",
+                    DepartureId = "LOCAL_1",
+                    DestinationId = "LOCAL_9",
+                    Name = "DISCOVER THE INDIAN PEARL SRI LANKA",
+                    Description = "Of the eight sites of Sri Lanka recognized by UNESCO as a world heritage site, there are five sites with temples built more than 2,000 years ago that still retain their ancient architectural and appearance. .",
+                    Detail = "Welcome to Sri Lanka and make the most of this opportunity to visit the best places of interest in this magnificent Island. As you step into an Island with enchanting atmosphere and a breathtaking nature we offer you tour choices covering a great variety of remarkable and outstanding places that gets your tour interesting by the minute. Beach lovers can finally explore the finest tropical sandy beaches, experience jungle trekking and wild life safaris, visit ancient places with historical values and learn more about how Sri Lankan ancestors lived back then and the unmatched beauty in hill country.",
+                    Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1656417081/e2w/184991_brd2gm.jpg , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1656417049/e2w/184974_vrgfmk.jpg , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1656417061/e2w/184978_fpbmqh.jpg , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1656417074/e2w/184987_y8w5uw.jpg , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1656417088/e2w/184995_melcmd.jpg",
+                    Duration = 6,
+                    Rating = 4,
+                    Policy = "<p>Price includes:</p><p>Car pick up and drop off Noi Bai airport.</p><p>Round-trip airfare Hanoi // TP. HCM - Colombo - Hanoi // City. Ho Chi Minh City of Singapore Airlines, natural goods and domestic air tax (7 kg hand baggage, 25 kg checked baggage)</p><p>Car transportation to visit according to the program.</p><p>Visa to enter Sri Lanka.</p><p>04 4 * hotels, 2 guests / room, odd guests sharing rooms of the same sex (odd male pairing male / odd female pairing female)</p><p>Meals and dinners at local restaurants.</p><p>01 dimensional PCR check for each customer</p><p>Entrance key to the entrance (1st time) according to the program</p><p>Local support guides during the tour in Sri Lanka and professional and enthusiastic online Vietnamese guides Travel insurance with maximum value (Medical or unexpected incident: 1 Billion VND. 400 million accidents)</p><p>Confidential Covid-19 - 30 days in hospital according to Sri Lankan regulations</p><p>Hanoitourist Hat + 01 bottle of mineral water / person / day</p><p>Price does not include:</p><p>&nbsp; &nbsp; &nbsp;Tip for driver and guide: 30 USD/pax.</p><p>The cost of PCR testing in Vietnam on the exit server.</p><p>Personal expenses not included in the program</p><p>Admission tickets at attractions outside the program</p><p>Separate room costs (if any)</p><p>For overseas Vietnamese who have a one-time visa to Vietnam, they must apply for a border gate visa to re-enter Vietnam (please contact for advice).</p><p>Roleprouctures:</p><p>Note:</p><p>1. The above prices apply to large customers, not during holidays, Tet or peak seasons.</p><p><br></p><p>2. If you are a vegetarian, please bring more vegetarian food to secure your place.</p><p><br></p><p>3. Visa key is not completed whether visa has been issued or not.</p><p><br></p><p>4. The program schedule can be changed to match the flight schedule and the local restaurant naturally ensures that enough reference points are updated in the program.</p><p><br></p><p>5. Visa application file:</p><p><br></p><p>02 new photos of 3.5 x 4.5 cm, clear, white background.</p><p>Original projection is limited to more than 6 months, submitted 15-20 days before launch.</p><p>Proving work and finance (if any)</p><p>Officially the program has been confirmed 1-2 days before the launch date. The schedule can change properties to weather, information interface but still ensure the full range of attractions.</p>",
+                    SummarySchedule = "HA NOI - SRI LANKA - HA NOI",
+                    Status = 1,
+                    CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"),
+                    UpdatedAt = DateTime.Now,
+                    DeletedAt = DateTime.Now
+                }
+               // new Tour()
+               // {
+               //     Id = "TOUR_8",
+               //     DepartureId = "",
+               //     DestinationId = "",
+               //     Name = "",
+               //     Description = "",
+               //     Detail = "",
+               //     Thumbnail = "",
+               //     Duration = 4,
+               //     Rating = 4.5,
+               //     Policy = "",
+               //     SummarySchedule = "",
+               //     Status = 1,
+               //     CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"),
+               //     UpdatedAt = DateTime.Now,
+               //     DeletedAt = DateTime.Now
+               // },
+               //new Tour()
+               //{
+               //    Id = "TOUR_9",
+               //    DepartureId = "",
+               //    DestinationId = "",
+               //    Name = "",
+               //    Description = "",
+               //    Detail = "",
+               //    Thumbnail = "",
+               //    Duration = 4,
+               //    Rating = 4.5,
+               //    Policy = "",
+               //    SummarySchedule = "",
+               //    Status = 1,
+               //    CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"),
+               //    UpdatedAt = DateTime.Now,
+               //    DeletedAt = DateTime.Now
+               //},
+               //new Tour()
+               //{
+               //    Id = "TOUR_10",
+               //    DepartureId = "",
+               //    DestinationId = "",
+               //    Name = "",
+               //    Description = "",
+               //    Detail = "",
+               //    Thumbnail = "",
+               //    Duration = 4,
+               //    Rating = 4.5,
+               //    Policy = "",
+               //    SummarySchedule = "",
+               //    Status = 1,
+               //    CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"),
+               //    UpdatedAt = DateTime.Now,
+               //    DeletedAt = DateTime.Now
+               //},
+               //new Tour()
+               //{
+               //    Id = "TOUR_11",
+               //    DepartureId = "",
+               //    DestinationId = "",
+               //    Name = "",
+               //    Description = "",
+               //    Detail = "",
+               //    Thumbnail = "",
+               //    Duration = 4,
+               //    Rating = 4.5,
+               //    Policy = "",
+               //    SummarySchedule = "",
+               //    Status = 1,
+               //    CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"),
+               //    UpdatedAt = DateTime.Now,
+               //    DeletedAt = DateTime.Now
+               //},
+               //new Tour()
+               //{
+               //    Id = "TOUR_12",
+               //    DepartureId = "",
+               //    DestinationId = "",
+               //    Name = "",
+               //    Description = "",
+               //    Detail = "",
+               //    Thumbnail = "",
+               //    Duration = 4,
+               //    Rating = 4.5,
+               //    Policy = "",
+               //    SummarySchedule = "",
+               //    Status = 1,
+               //    CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"),
+               //    UpdatedAt = DateTime.Now,
+               //    DeletedAt = DateTime.Now
+               //},
+               //new Tour()
+               //{
+               //    Id = "TOUR_13",
+               //    DepartureId = "",
+               //    DestinationId = "",
+               //    Name = "",
+               //    Description = "",
+               //    Detail = "",
+               //    Thumbnail = "",
+               //    Duration = 4,
+               //    Rating = 4.5,
+               //    Policy = "",
+               //    SummarySchedule = "",
+               //    Status = 1,
+               //    CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"),
+               //    UpdatedAt = DateTime.Now,
+               //    DeletedAt = DateTime.Now
+               //},
+               //new Tour()
+               //{
+               //    Id = "TOUR_14",
+               //    DepartureId = "",
+               //    DestinationId = "",
+               //    Name = "",
+               //    Description = "",
+               //    Detail = "",
+               //    Thumbnail = "",
+               //    Duration = 4,
+               //    Rating = 4.5,
+               //    Policy = "",
+               //    SummarySchedule = "",
+               //    Status = 1,
+               //    CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"),
+               //    UpdatedAt = DateTime.Now,
+               //    DeletedAt = DateTime.Now
+               //},
+               //new Tour()
+               //{
+               //    Id = "TOUR_15",
+               //    DepartureId = "",
+               //    DestinationId = "",
+               //    Name = "",
+               //    Description = "",
+               //    Detail = "",
+               //    Thumbnail = "",
+               //    Duration = 4,
+               //    Rating = 4.5,
+               //    Policy = "",
+               //    SummarySchedule = "",
+               //    Status = 1,
+               //    CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"),
+               //    UpdatedAt = DateTime.Now,
+               //    DeletedAt = DateTime.Now
+               //}
+               );
+               
             //Chi tiết của tour
             context.TourDetails.AddOrUpdate(x => x.Id,
-               new TourDetail() { Id = "TOURDT_1", TourId = "TOUR_1", DepartureDay = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), AvailableSeat = 2, Price = 42.5, Discount = 15, CreatedAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
-               new TourDetail() { Id = "TOURDT_2", TourId = "TOUR_2", DepartureDay = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), AvailableSeat = 20, Price = 193.72, Discount = 10, CreatedAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
-               new TourDetail() { Id = "TOURDT_3", TourId = "TOUR_3", DepartureDay = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), AvailableSeat = 25, Price = 266.48, Discount = 10, CreatedAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
-               new TourDetail() { Id = "TOURDT_4", TourId = "TOUR_4", DepartureDay = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), AvailableSeat = 25, Price = 3525.77, Discount = 10, CreatedAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
-               new TourDetail() { Id = "TOURDT_5", TourId = "TOUR_5", DepartureDay = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), AvailableSeat = 25, Price = 270.76, Discount = 10, CreatedAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now }
+               new TourDetail() { 
+                   Id = "TOURDT_1", 
+                   TourId = "TOUR_1", 
+                   DepartureDay = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), 
+                   AvailableSeat = 2, 
+                   Price = 42.5, 
+                   Discount = 15, 
+                   CreatedAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), 
+                   UpdatedAt = DateTime.Now, 
+                   DeletedAt = DateTime.Now 
+               },
+               new TourDetail() { Id = "TOURDT_2", TourId = "TOUR_2", DepartureDay = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), AvailableSeat = 20, Price = 193, Discount = 10, CreatedAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
+               new TourDetail() { Id = "TOURDT_3", TourId = "TOUR_3", DepartureDay = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), AvailableSeat = 25, Price = 266, Discount = 10, CreatedAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
+               new TourDetail() { Id = "TOURDT_4", TourId = "TOUR_4", DepartureDay = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), AvailableSeat = 25, Price = 3525, Discount = 10, CreatedAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
+               new TourDetail() { Id = "TOURDT_5", TourId = "TOUR_5", DepartureDay = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), AvailableSeat = 25, Price = 270, Discount = 10, CreatedAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
+               new TourDetail() { Id = "TOURDT_6", TourId = "TOUR_6", DepartureDay = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), AvailableSeat = 25, Price = 1543, Discount = 10, CreatedAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
+               new TourDetail()
+               {
+                   Id = "TOURDT_7",
+                   TourId = "TOUR_7",
+                   DepartureDay = Convert.ToDateTime("2022-08-09T23:49:58+02:00"),
+                   AvailableSeat = 30,
+                   Price = 1200,
+                   Discount = 15,
+                   CreatedAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"),
+                   UpdatedAt = DateTime.Now,
+                   DeletedAt = DateTime.Now
+               }
                );
             //Lịch trình của tour
             context.TourSchedules.AddOrUpdate(x => x.Id,
@@ -78,7 +281,86 @@
                  new TourSchedule() { Id = "TOURSD_23", TourId = "TOUR_5", ScheduleOrder = 1, Name = "Day 1", Detail = "<p>Morning: Car and tour guide pick you up at the meeting point and transfer you to Noi Bai airport to check in for your flight to Quy Nhon:</p><p><br></p><p>Vietnam Airlines: flight VN1623 at 10:30am</p><p><br></p><p>Arriving at Phu Cat airport - Quy Nhon, the car and guide will pick you up and take you to the city. Quy Nhon, have lunch at a restaurant in the city.</p><p><br></p><p>Afternoon: Visit: Thien Hung Pagoda - the most beautiful and brilliant temple in Binh Dinh today. Ghenh Rang Tien Sa tourist area - Mong Cam slope, Thi Nhan hill, visit Han Mac Tu&apos;s grave, Hoang Hau beach, Tien Sa beach. You listen to explanations about the life and talented career of poet Han Mac Tu. Twin Towers - a cluster of towers with 02 ancient towers with Angkorian architecture, located right in the heart of Quy Nhon city. You are free to swim and relax.</p><p><br></p><p>Evening: Dinner at a restaurant in Quy Nhon city.</p><p><br></p><p>Overnight in Quy Nhon.</p>" },
                  new TourSchedule() { Id = "TOURSD_24", TourId = "TOUR_5", ScheduleOrder = 2, Name = "Day 2", Detail = "<p>Morning: Have breakfast at the hotel. Car and guide take the group to visit:</p><p><br></p><p>Ghenh Da Dia - a famous landscape that was ranked as a national historical site and landscape in 1998.</p><p><br></p><p>Mang Lang Church - an Ancient French architecture. Here you can admire the first book of Quoc Ngu script in Vietnam.</p><p><br></p><p>11h00: Continue to depart to O Loan Lagoon - have lunch with seafood specialties at a poetic place with gentle and romantic beauty.</p><p><br></p><p>Afternoon: Get on the bus to depart for Quy Nhon, relax and swim.</p><p><br></p><p>Evening: Have dinner at the restaurant. You are free to explore Quy Nhon - the hometown of many cultural celebrities - such as Quach Tan, Yen Lan, Han Mac Tu, Che Lan Vien, Trinh Cong Son...</p><p><br></p><p>Overnight in Quy Nhon.</p>" },
                  new TourSchedule() { Id = "TOURSD_25", TourId = "TOUR_5", ScheduleOrder = 3, Name = "Day 3", Detail = "<p>Morning: Have breakfast at the hotel.</p><p><br></p><p>08h00: Depart for Nhon Hai, cross Thi Nai Bridge - The bridge across the sea with a length of nearly 2.5km. You can stop, watch the golden rays sprinkled on Thi Nai Lagoon, hear about the heroic and tragic naval battles between Champa and Dai Viet, between the Tay Son and Nguyen Dynasty (Nguyen Anh) for more than 5 years. century.</p><p><br></p><p>08h30: You stop to visit and take souvenir photos of Phuong Mai Sand Dunes.</p><p><br></p><p>09h00: Arrive at the pier, you get on a canoe to explore Ky Co Island KDL (Tour price does not include the cost of going to Ky Co, you have to pay for it), with clear water, white sand, experience the feeling Diving. Have lunch on the island with attractive local seafood.</p><p><br></p><p>14h00: Cano bring the delegation back to the port, the car picks you up to visit:</p><p><br></p><p>Danh Thang Eo Gio - A windy rock year-round. Standing on Eo Gio, looking out into the distance, you can admire the vast vast sea, captivated people&apos;s hearts. Eo Gio, known as the most beautiful place to watch the sunset in Vietnam.</p><p>Tinh Xa Ngoc Hoa - Admiring the statue of Quan The Am about 30m high and the place to send the trust of the island people before going to sea and pray for their husband and children to always be safe, have smooth sailing, bring home The ship is full of fish and shrimp.</p><p>16h00: Car and guide take the group to the hotel, free to rest, swim in the sea.</p><p><br></p><p>Evening: Have dinner, discover local cuisine: seafood dishes, fish noodles, banh chung, pancakes, chicken specialties...</p><p><br></p><p>Overnight in Quy Nhon.</p>" },
-                 new TourSchedule() { Id = "TOURSD_26", TourId = "TOUR_5", ScheduleOrder = 4, Name = "Day 4", Detail = "<p>Morning: Breakfast at the hotel. You wake up to watch the sunrise on the sea, walk and breathe the fresh air of the beautiful Quy Nhon beach. We check out the hotel. Car and guide take you to have lunch at the restaurant and buy local specialties for the family.</p><p><br></p><p>Afternoon: After lunch, the car will take you to Phu Cat airport for a flight to Hanoi Vietnam Airlines</p><p><br></p><p>Arriving at Noi Bai airport, the car picks you up at the original rendezvous point and bids you farewell. At the end of the program, the tour guide bids goodbye and hopes to see you again in the next journey.</p>" }
+                 new TourSchedule() { Id = "TOURSD_26", TourId = "TOUR_5", ScheduleOrder = 4, Name = "Day 4", Detail = "<p>Morning: Breakfast at the hotel. You wake up to watch the sunrise on the sea, walk and breathe the fresh air of the beautiful Quy Nhon beach. We check out the hotel. Car and guide take you to have lunch at the restaurant and buy local specialties for the family.</p><p><br></p><p>Afternoon: After lunch, the car will take you to Phu Cat airport for a flight to Hanoi Vietnam Airlines</p><p><br></p><p>Arriving at Noi Bai airport, the car picks you up at the original rendezvous point and bids you farewell. At the end of the program, the tour guide bids goodbye and hopes to see you again in the next journey.</p>" },
+                 new TourSchedule() { 
+                     Id = "TOURSD_27", 
+                     TourId = "TOUR_6", 
+                     ScheduleOrder = 1, 
+                     Name = "Day 1", 
+                     Detail = "<p>18h00: Car pick you up at the meeting point to Noi Bai international airport, exit procedures.</p><p><br></p><p>The delegation took a flight of Turkish national airline (Turkish Airlines) to Istanbul at 22:30. You stay overnight on the plane.</p>"
+                 },
+                 new TourSchedule()
+                 {
+                     Id = "TOURSD_28",
+                     TourId = "TOUR_6",
+                     ScheduleOrder = 2,
+                     Name = "Day 2",
+                     Detail = "<p>5:00: Arrive at Istanbul airport, do immigration procedures for Turkey. Car and local guide take you to breakfast, then visit Istanbul:</p><p><br></p><p>The Blue Mosque - The Blue Temple of the Osman Empire.</p><p>Basilica of Hagia Sophia - a cathedral built in the 6th century, a masterpiece of the Byzantine period, a precious monument of the world. Lunch at local restaurant.</p><p>Next, the group will visit the Basilica Cistern, an underground water tank system under the city of Istanbul. The ceiling of the Basilica Cistern is supported by 336 large marble columns, creating beautiful domes like in European synagogues.</p><p>Hippodrome Square - which used to be a horse racing arena with a capacity of more than 40,000 seats, where the blood of many gladiators fought through horse races.</p><p>Group lunch at the restaurant. After lunch, the group continues to visit</p><p><br></p><p>In the afternoon, you visit Topkapi Palace - the residence and working place of the Ottoman emperor, which can accommodate up to 4000 people serving the Royal Family. The palace is part of a historic complex in Istanbul that has been recognized by Unesco as a World Heritage Site since 1985.</p><p><br></p><p>Enjoy shopping at the Grand Bazaar - a 500-year-old market, with more than 4000 stalls selling everything from clothes, jewelry, food, handicrafts...</p><p><br></p><p>Dinner at the restaurant. Delegation to the hotel to rest.</p>"
+                 },
+                 new TourSchedule()
+                 {
+                     Id = "TOURSD_29",
+                     TourId = "TOUR_6",
+                     ScheduleOrder = 3,
+                     Name = "Day 3",
+                     Detail = "<p>5:00: Check out from the hotel, bring breakfast and move to the airport, take a flight to Izmir (07h00 - 8h00).</p><p><br></p><p>Upon arrival, the convoy departs for Kusadasi to visit the ancient city of Ephesus, known as the place where Mary and St. John lived and died here. Discovery team:</p><p><br></p><p>Selcuk and Ephesus - one of the ancient wonders of mankind. The delegation admires unique architectural works such as Celsius library, Hadrian temple, Marble and Agora street paved with stone and one of the ancient wonders of mankind, the largest theater in the ancient world Great Theater .</p><p>Temple of Artemis, which worships the goddess of hunting, daughter of Zeus - One of the 7 wonders of the ancient world.</p><p>Lunch at the restaurant.</p><p><br></p><p>After lunch, the group moves to Pamukale (190 km) to admire the remnants of the ancient city of Hierapolis and explore the &quot;Cotton Castle&quot;. The Holy City of Hierapolis is located in the southwest - south of Turkey and is recognized by Unesco as a World Cultural Heritage Site (unesco recognized in 1988). With the ravishing beauty of open-cast mineral springs thousands of years ago creating blue lakes on white rocks, these are unique natural wonders in the world. Visit and take pictures of Cotton Castle.</p><p><br></p><p>Overnight in Pamukkale.</p>"
+                 },
+                 new TourSchedule()
+                 {
+                     Id = "TOURSD_30",
+                     TourId = "TOUR_6",
+                     ScheduleOrder = 4,
+                     Name = "Day 4",
+                     Detail = "<p>Đo&agrave;n ăn s&aacute;ng, sau đ&oacute; trả ph&ograve;ng. Qu&yacute; kh&aacute;ch sẽ tiếp tục chuyến du ngoạn của m&igrave;nh đến với v&ugrave;ng đất linh thi&ecirc;ng Konya, một điểm dừng ch&acirc;n kh&ocirc;ng thể bỏ lỡ trước khi đến với Cappadocia. Tr&ecirc;n đường đi, Đo&agrave;n gh&eacute; thăm Caravanserai một dạng &ldquo;kh&aacute;ch sạn&rdquo; hay đ&uacute;ng hơn l&agrave; điểm dừng ch&acirc;n nằm tr&ecirc;n con đường tơ lụa huyền thoại, nơi m&agrave; c&aacute;c thương nh&acirc;n cổ xưa nghỉ ngơi v&agrave; lấy lại sức để tiếp tục h&agrave;nh tr&igrave;nh đến ch&acirc;u &Acirc;u bu&ocirc;n b&aacute;n.&nbsp;</p><p><br></p><p>Tu viện Mevlana hay c&ograve;n gọi lăng mộ của nh&agrave; hiền triết vĩ đại nhất của Thổ Nhĩ Kỳ, được người d&acirc;n t&ocirc;n thờ v&agrave; s&ugrave;ng b&aacute;i. Tiếp tục h&agrave;nh tr&igrave;nh đi Cappadocia.&nbsp;</p><p>Ăn trưa tại nh&agrave; h&agrave;ng.</p><p><br></p><p>Đến Cappadocia qu&yacute; kh&aacute;ch nhận ph&ograve;ng kh&aacute;ch sạn. Đo&agrave;n ăn tối. Nghỉ đ&ecirc;m tại Cappadocia.</p>"
+                 },
+                 new TourSchedule()
+                 {
+                     Id = "TOURSD_31",
+                     TourId = "TOUR_6",
+                     ScheduleOrder = 5,
+                     Name = "Day 5",
+                     Detail = "<p>Have breakfast at Hotel. In the early morning, you can register to watch the sunrise on a hot air balloon at Cappadocia - known as one of the best hot air balloon tourist destinations in the world (expenses excluded).</p><p><br></p><p>The team continues to explore:</p><p><br></p><p>Underground City - home to 15,000 Christians. The city will be a place to bring interesting experiences of bedrooms, churches, meeting rooms or food storage rooms located under the earth hum.</p><p>Visit Pigeon house - where there are a lot of pigeons and local people have made houses carved into the cliffs hum him pigeons shelter and breed.</p><p>Avanos ancient village - where two famous traditional trades are still kept: carpet weaving and ceramics.</p><p>After enjoying lunch, you continue to visit:</p><p><br></p><p>Goreme Uchisar residential area was built on a hill, with houses, restaurants, hotels, shops... carved deep into the cliff forming a unique residential area in the world.</p><p><br></p><p>Finally, you have the opportunity to admire the emerald exhibition of the Turks by designer Marco Polo.</p><p><br></p><p>Have dinner and enjoy a unique traditional Turkish dance show (free drinks). Overnight at the hotel</p>"
+                 },
+                 new TourSchedule()
+                 {
+                     Id = "TOURSD_32",
+                     TourId = "TOUR_6",
+                     ScheduleOrder = 6,
+                     Name = "Day 6",
+                     Detail = "<p>After breakfast, check out to visit:</p><p><br></p><p>Devrent Valley, Pasabag</p><p>Relaxing mud bath, fish massage</p><p>Lunch at the restaurant. After lunch, transfer to the airport for a domestic flight back to Istanbul (15:20 - 16:40). Arrive in Istanbul, visit the central area of the City of Istanbul Sultan Ahmet Area, which is considered an important relic where cultural and historical values from the Byzantine and Ottoman times are kept. The relic area includes many outstanding works. Group dinner and back to the hotel to rest.</p>"
+                 },
+                 new TourSchedule()
+                 {
+                     Id = "TOURSD_33",
+                     TourId = "TOUR_6",
+                     ScheduleOrder = 7,
+                     Name = "Day 7",
+                     Detail = "<p>Group breakfast and hotel check out</p><p><br></p><p>Then enjoy the wonderful scenery of the Bosphorus Strait on the Bosphorus Cruise (about 2 hours) - enjoy the scenery on both sides of the strait, the magnificent palaces along the river.</p><p><br></p><p>The group took pictures with the beautiful Rumelia and Anatolia palaces. The group continued to visit:</p><p><br></p><p>Dolmabahce Palace - used to be the residence of many Presidents. The palace is brightly decorated with more than 4.5 tons of lanterns. The palace is large with more than 285 rooms and 46 large and small halls. Today, Dolmabahce welcomes thousands of international visitors every day and is still used as a meeting place for important national meetings.</p><p>Visit and shop at the famous spice market</p><p>After dinner, the car will take you to the airport to check in for a flight back to Vietnam. You return to Vietnam with unforgettable memories of a dynamic, modern but equally mysterious Turkey.</p>"
+                 },
+                 new TourSchedule()
+                 {
+                     Id = "TOURSD_34",
+                     TourId = "TOUR_6",
+                     ScheduleOrder = 8,
+                     Name = "Day 8",
+                     Detail = "<p>Delegation to Hanoi at 15:20 HDV helps you to do immigration procedures, receive luggage. End the tour, say goodbye and see you in the next trips.</p><p><br></p><p>Depending on actual conditions, the order of sightseeing may change but still ensure all attractions mentioned in the program.</p>"
+                 },
+                 new TourSchedule()
+                 {
+                     Id = "TOURSD_35",
+                     TourId = "TOUR_7",
+                     ScheduleOrder = 1,
+                     Name = "Day 1",
+                     Detail = "<p>07h15: The company&apos;s car and tour guide pick you up at the Opera House - Hanoi, take you to Noi Bai airport, take flight TG561 at 10:35 to Bangkok - Thailand</p><p><br></p><p>12:25: plane landed at Suvarnabhumi International Airport - Bangkok</p><p><br></p><p>16h20: You continue to depart for Dubai on flight TG517</p><p><br></p><p>19h45: Landing at Dubai International Airport, car and tour guide take the delegation to the hotel, check in, rest.</p>"
+                 },
+                 new TourSchedule()
+                 {
+                     Id = "TOURSD_36",
+                     TourId = "TOUR_7",
+                     ScheduleOrder = 2,
+                     Name = "Day 2",
+                     Detail = "<p>Morning: Have breakfast at the hotel.</p><p><br></p><p>You depart to ANURADHAPURA - The ancient capital of Anuradhapura, the city was built in the 5th century BC with many ancient monuments, especially the World cultural heritages. You visit and pay respects to the Buddhist relics here:</p><p><br></p><p>The Bodhi tree (Sri Maha Bodhiya) was brought by Bhikkhuni Sanghamitta to be planted in the island nation of Sri Lanka. The Bodhi tree is extracted from the Bodhi tree in Bodh Gaya, where the Buddha attained enlightenment. Bhikkhuni Sanghamitta is the sister of Bhikkhu Mahinda, who was the leader of a missionary group who brought Buddhism to the island in the 2nd century BC. The Ceylon people worship this ancient tree very much. They do not cut branches or prune branches, let the tree grow naturally, and use iron poles for support. When the tree branch was blown off by the wind, they picked it up and brought it back to worship. You enjoy the quiet space, the wind blows gently, cool, extremely happy in the main hall near the Bodhi tree, worshiping Buddha.</p><p>Lovamahapaya Palace (Brazen Palace) was built in the 3rd century BC to serve as the resting place of monks. Currently, only 1,600 stone columns remain, which are the foundation of a nine-story architecture with 9,000 rooms, the roof of the palace is covered with copper, hence the name Bronze Palace.</p><p>The Isurumuniya Stone Temple is famous for its many paintings and carvings of Buddha on the rock built by King Devanampiya Tissa.</p><p>Have lunch.</p><p><br></p><p>You continue to visit Mihintale Hill (Hill of Mahinda), the cradle of Buddhism in Sri Lanka. According to legend, the son of Emperor Ashoka of India went to Sri Lanka on the full moon day of the month of Poson (June), met King Devanampiyatissa and preached teachings to the king and his people. Mihinatale Hill has since become a sacred spot for Sri Lankan Buddhists. Visiting, Mihintale, visitors will go through 1,840 steps to reach the top, where visitors can enjoy the majestic natural landscape.</p><p><br></p><p>Have dinner at the restaurant.</p><p><br></p><p>Overnight at hotel Rajarata 4**** or equivalent in Anuradhapura.</p><p><br></p><p>Overnight in Anuradhapura.</p>"
+                 }
                  );
             //Hãng xe
             context.CarBrands.AddOrUpdate(x => x.Id,
@@ -112,7 +394,7 @@
                 );
             //Xe
             context.Cars.AddOrUpdate(x => x.Id,
-                new Car() { Id = "CAR_1", CarModelId = "CARMD_1", CarTypeId = "CARTP_1", LocationId = "LOCAL_1", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655619897/e2w/2020-Honda-City-Honda-T%C3%A2y-H%E1%BB%93-48_kljd5z.jpg", LisencePlate = "22-A-02757", HasAirConditioner = true, SeatCapacity = 5, PricePerDay = 43.05, Status = 1, CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now }
+                new Car() { Id = "CAR_1", CarModelId = "CARMD_1", CarTypeId = "CARTP_1", LocationId = "LOCAL_1", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655619897/e2w/2020-Honda-City-Honda-T%C3%A2y-H%E1%BB%93-48_kljd5z.jpg", LisencePlate = "22-A-02757", HasAirConditioner = true, SeatCapacity = 5, PricePerDay = 43, Status = 1, CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now }
                 );
             //Khách sạn
             context.Hotels.AddOrUpdate(x => x.Id,
@@ -138,7 +420,7 @@
                 );
             //Chuyến bay
             context.Flights.AddOrUpdate(x => x.Id,
-                new Flight() { Id = "FL_1", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655743162/e2w/download_aalx9i.png", IsRoundTicket = true, DepartureId = "LOCAL_1", DestinationId = "LOCAL_3", DepartureAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), Duration = "3", Price = 43.05, ReturnAt = Convert.ToDateTime("2022-09-09T23:49:58+02:00"), Detail = "Brand : Vietnam Airlines - Flight : VN 600 - Boarding Time : 14:00", Status = 1, CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now }
+                new Flight() { Id = "FL_1", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655743162/e2w/download_aalx9i.png", IsRoundTicket = true, DepartureId = "LOCAL_1", DestinationId = "LOCAL_3", DepartureAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), Duration = "3", Price = 43, ReturnAt = Convert.ToDateTime("2022-09-09T23:49:58+02:00"), Detail = "Brand : Vietnam Airlines - Flight : VN 600 - Boarding Time : 14:00", Status = 1, CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now }
                 );
         }
     }
