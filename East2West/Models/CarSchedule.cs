@@ -32,8 +32,8 @@ namespace East2West.Models
         //-1 Canceled, 0 Pending, 1 Paid
         public int Status { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime DeletedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
         public Car Car { get; set; }
     }
 }
