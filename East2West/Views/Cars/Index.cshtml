@@ -313,6 +313,7 @@
                 cnfrmMsg = "Disable " + id
             }
             if (confirm(cnfrmMsg)) {
+                $("#preloader2").show();
                 $.ajax({
                     type: "GET",
                     url: "/Cars/ChangeStatus",
@@ -321,8 +322,12 @@
                         status: status
                     },
                     success: function (msg) {
+                        $("#preloader2").hide();
                         toastr.info(msg, 'Update successfully');
-                    }
+                    },
+                    error: function () {
+                        $("#preloader2").hide();
+                    },
                 });
             } else {
                 alert(oke)

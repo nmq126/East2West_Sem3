@@ -47,6 +47,7 @@
 
 <div class="row">
 
+    
     <div class="col-xl-12">
         <div class="widget has-shadow">
             <div class="widget-body">
@@ -261,6 +262,7 @@
                 cnfrmMsg = "Disable " + id
             }
             if (confirm(cnfrmMsg)) {
+                $("#preloader2").show();
                 $.ajax({
                     type: "GET",
                     url: "/Tours/ChangeStatus",
@@ -269,8 +271,12 @@
                         status: status
                     },
                     success: function (msg) {
+                        $("#preloader2").hide();
                         toastr.info(msg, 'Update successfully');
-                    }
+                    },
+                    error: function () {
+                        $("#preloader2").hide();
+                    },
                 });
             } else {
                 alert(oke)
