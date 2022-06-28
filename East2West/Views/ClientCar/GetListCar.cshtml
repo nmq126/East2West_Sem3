@@ -1,16 +1,16 @@
-﻿@model IEnumerable<East2West.Models.Tour>
+﻿@model IEnumerable<East2West.Models.Car>
 
 @{
-    ViewBag.Title = "East2West - List Tour";
+    ViewBag.Title = "East2West - List Car";
     Layout = "~/Views/Shared/_LayoutPageClient.cshtml";
 }
 
 @section Section
 {
-    <section class="parallax-window" data-parallax="scroll" data-image-src="https://res.cloudinary.com/tanvnth2012002/image/upload/v1655794518/hinh-nen-vinh-ha-long-quang-ninh-dep_wu3zp9.jpg" data-natural-width="1400" data-natural-height="470">
+    <section class="parallax-window" data-parallax="scroll" data-image-src="https://res.cloudinary.com/tanvnth2012002/image/upload/v1656410721/081845-anh-1_zdcsds.jpg" data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-1 opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
             <div class="animated fadeInDown">
-                <h1>Book tours</h1>
+                <h1>Rent Cars</h1>
                 <p>Cursus neque cursus curae ante scelerisque vehicula</p>
             </div>
         </div>
@@ -18,7 +18,6 @@
 }
 
 <main>
-
     <div id="position">
         <div class="container">
             <ul>
@@ -26,56 +25,18 @@
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="/ClientTour/GetListTour">Tour</a>
+                    <a href="ClientCar/GetListCar">Car</a>
                 </li>
-                <li>List Tour</li>
+                <li>List Car</li>
             </ul>
         </div>
     </div>
     <!-- Position -->
 
-    <div class="collapse" id="collapseMap">
-        <div id="map" class="map"></div>
-    </div>
-    <!-- End Map -->
-
     <div class="container margin_60">
 
         <div class="row">
             <aside class="col-lg-3">
-                <p>
-                    <a class="btn_map" data-bs-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
-                </p>
-
-                <div class="box_style_cat">
-                    <ul id="cat_nav">
-                        <li>
-                            <a href="#" id="active"><i class="icon_set_1_icon-51"></i>All tours <span>(141)</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="icon_set_1_icon-3"></i>City sightseeing <span>(20)</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="icon_set_1_icon-4"></i>Museum tours <span>(16)</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="icon_set_1_icon-44"></i>Historic Buildings <span>(12)</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="icon_set_1_icon-37"></i>Walking tours <span>(11)</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="icon_set_1_icon-14"></i>Eat & Drink <span>(20)</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="icon_set_1_icon-43"></i>Churces <span>(08)</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="icon_set_1_icon-28"></i>Skyline tours <span>(11)</span></a>
-                        </li>
-                    </ul>
-                </div>
-
                 <div id="filters_col">
                     <a data-bs-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>Filters</a>
                     <div class="collapse show" id="collapseFilters">
@@ -178,6 +139,7 @@
                 </div>
             </aside>
             <!--End aside -->
+
             <div class="col-lg-9">
 
                 <div id="tools">
@@ -192,18 +154,17 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-4 d-none d-sm-block text-end">
-                            <a href="all_tours_grid.html" class="bt_filters"><i class="icon-th"></i></a> <a href="#" class="bt_filters"><i class=" icon-list"></i></a>
+                            <a href="all_transfer_grid.html" class="bt_filters"><i class="icon-th"></i></a> <a href="#" class="bt_filters"><i class=" icon-list"></i></a>
                         </div>
                     </div>
                 </div>
                 <!--/tools -->
-
-                @foreach (var tour in Model)
+                @foreach (var car in Model)
                 {
                     var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
-                    if (tour.Thumbnail != null)
+                    if (car.Thumbnail != null)
                     {
-                        img = tour.Thumbnail.Split(',').ToList<String>().First();
+                        img = car.Thumbnail.Split(',').ToList<String>().First();
                     }
                     <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
                         <div class="row">
@@ -215,48 +176,54 @@
                                     <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
                                 </div>
                                 <div class="img_list">
-                                    <a href="/ClientTour/Details?id=@tour.Id">
+                                    <a href="single_transfer.html">
                                         <img src="@img" alt="Image">
-                                        <div class="short_info"><i class="icon_set_1_icon-4"></i>Museums </div>
+                                        <div class="short_info"></div>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="tour_list_desc">
-                                    <div class="rating">
-                                        @for (int j = 0; j < tour.Rating; j++)
-                                        {
-                                            <i class="icon-smile voted"></i>
-
-                                        }
-                                    </div>
-                                    <h3><strong>@tour.Name</strong></h3>
-                                    <p>@tour.Description</p>
+                                    <h3><strong>@car.CarModel.Name</strong></h3>
+                                    <p></p>
                                     <ul class="add_info">
                                         <li>
                                             <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
+                                                <span class="tooltip-item"><i class="icon_set_1_icon-70"></i></span>
                                                 <div class="tooltip-content">
-                                                    <h4>Schedule</h4>
-                                                    <strong>@tour.SummarySchedule</strong>
-                                                    <br>
+                                                    <h4>Passengers</h4> Up to 6 passengers.
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
+                                                <span class="tooltip-item"><i class="icon_set_1_icon-6"></i></span>
                                                 <div class="tooltip-content">
-                                                    <h4>Address</h4> @tour.LocationDestination.Name
-                                                    <br>
+                                                    <h4>Pick up</h4> Hotel pick up or different place with an extra cost.
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_1_icon-97"></i></span>
+                                                <span class="tooltip-item"><i class="icon_set_1_icon-13"></i></span>
                                                 <div class="tooltip-content">
-                                                    <h4>Languages</h4> English - French - Chinese - Russian - Italian
+                                                    <h4>Accessibility</h4> On request accessibility available.
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="tooltip_styled tooltip-effect-4">
+                                                <span class="tooltip-item"><i class="icon_set_1_icon-22"></i></span>
+                                                <div class="tooltip-content">
+                                                    <h4>Pet allowed</h4> On request pet allowed.
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="tooltip_styled tooltip-effect-4">
+                                                <span class="tooltip-item"><i class="icon_set_1_icon-33"></i></span>
+                                                <div class="tooltip-content">
+                                                    <h4>Baggage</h4> Large baggage drop available.
                                                 </div>
                                             </div>
                                         </li>
@@ -266,19 +233,9 @@
                             <div class="col-lg-2 col-md-2">
                                 <div class="price_list">
                                     <div>
-
-                                        <sup>
-                                            @{
-                                                float percentDiscount = ((float)tour.TourDetails.First().Discount) / 100;
-                                                var priceDiscount = Math.Round(tour.TourDetails.First().Price * (1 - percentDiscount), 2);
-                                            }
-                                            $@priceDiscount
-                                        </sup>
-                                        <span class="normal_price_list">@tour.TourDetails.First().Price</span>
-                                        <small>*Per person</small>
-
+                                        <sup>$@car.PricePerDay</sup><small>*From/Per day</small>
                                         <p>
-                                            <a href="single_tour.html" class="btn_1">Details</a>
+                                            <a href="single_transfer.html" class="btn_1">Details</a>
                                         </p>
                                     </div>
                                 </div>
@@ -286,7 +243,9 @@
                         </div>
                     </div>
                 }
+
                 <!--End strip -->
+
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
                         <li class="page-item">
