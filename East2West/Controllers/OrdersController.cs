@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using East2West.Data;
 using East2West.Models;
+using PagedList;
 
 namespace East2West.Controllers
 {
@@ -16,10 +17,26 @@ namespace East2West.Controllers
         private DBContext db = new DBContext();
 
         // GET: Orders
-        public ActionResult Index()
+        public ActionResult GetTour()
         {
-            var orders = db.Orders.Include(o => o.Refund).Include(o => o.User);
-            return View(orders.ToList());
+            ViewBag.BreadCrumb = "Tour analysis";
+
+            var orders = db.Orders.Where(o => o.Type == 1)
+                .Include(o => o.OrderTours)
+                .Include(o => o.Refund)
+                .Include(o => o.User)
+                .OrderBy(o => o.CreatedAt);
+
+            ViewBag.LocationList = from l in db.Locations select l;
+
+
+            double revenue = 0;
+            foreach (var item in orders)
+            {
+                revenue += Double.Parse(item.TotalPrice);
+            }
+            ViewBag.TotalRevenue = revenue;
+            return View(orders.ToPagedList(1, 10));
         }
 
         // GET: Orders/Details/5
