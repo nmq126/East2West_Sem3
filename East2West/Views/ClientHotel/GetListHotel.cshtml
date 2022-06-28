@@ -9,7 +9,7 @@
     <section class="parallax-window" data-parallax="scroll" data-image-src="https://res.cloudinary.com/tanvnth2012002/image/upload/v1655794518/hinh-nen-vinh-ha-long-quang-ninh-dep_wu3zp9.jpg" data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-1 opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
             <div class="animated fadeInDown">
-                <h1>Vietnam tours</h1>
+                <h1>Hotels</h1>
                 <p>Cursus neque cursus curae ante scelerisque vehicula</p>
             </div>
         </div>
@@ -260,12 +260,10 @@
 
                                         <sup>
                                             @{
-                                                double percentDiscount = ((double)hotel.Price) / 150;
-                                                var priceDiscount = Math.Round(hotel.Price * (1 - percentDiscount), 2);
+                                                var priceDiscount = hotel.Price;
                                             }
                                             $@priceDiscount
                                         </sup>
-                                        <span class="normal_price_list">@hotel.Price</span>
                                         <small>*From/Per night</small>
 
                                         <p>

@@ -1,0 +1,246 @@
+﻿@model East2West.Models.Hotel
+
+@{
+    ViewBag.Title = "East2West - " + @Model.Name;
+    Layout = "~/Views/Shared/_LayoutPageClient.cshtml";
+}
+@section Section
+{
+    @{
+        var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
+        if (Model.Thumbnail != null)
+        {
+            img = Model.Thumbnail.Split(',').ToList<String>().First();
+        }
+    }
+    <section class="parallax-window" data-parallax="scroll" data-image-src="@img" data-natural-width="1400" data-natural-height="470">
+        <div class="parallax-content-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1>@Model.Name</h1>
+                        <span>@Model.Location.Name</span>
+                        <span class="rating">
+                            @for (int j = 0; j < Model.Rating; j++)
+                            {
+                                <i class="icon-smile voted"></i>
+
+                            }
+                        </span>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="price_single_main">
+                            From/Per night <span><sup>$</sup>@Model.Price</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<main>
+    <div id="position">
+        <div class="container">
+            <ul>
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">Category</a>
+                </li>
+                <li>Page active</li>
+            </ul>
+        </div>
+    </div>
+    <!-- End Position -->
+
+    <div class="collapse" id="collapseMap">
+        <div id="map" class="map"></div>
+    </div>
+    <!-- End Map -->
+
+    <div class="container margin_60">
+        <div class="row">
+            <div class="col-lg-8" id="single_tour_desc">
+                <div id="single_tour_feat">
+                    <ul>
+                        <li><i class="icon_set_2_icon-116"></i>Plasma TV</li>
+                        <li><i class="icon_set_1_icon-86"></i>Free Wifi</li>
+                        <li><i class="icon_set_2_icon-110"></i>Poll</li>
+                        <li><i class="icon_set_1_icon-59"></i>Breakfast</li>
+                        <li><i class="icon_set_1_icon-22"></i>Pet allowed</li>
+                        <li><i class="icon_set_1_icon-13"></i>Accessibiliy</li>
+                        <li><i class="icon_set_1_icon-27"></i>Parking</li>
+                    </ul>
+                </div>
+
+                <!-- Map button for tablets/mobiles -->
+
+                @{
+                    if (Model.Thumbnail == null)
+                    {
+                        <div id="Img_carousel" class="slider-pro">
+                            <div class="sp-slides">
+                                <img alt="Image" class="sp-image" src="https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg" data-src="https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg" data-small="https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg" data-medium="https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg" data-large="https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg" data-retina="https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg">
+                            </div>
+                            <div class="sp-thumbnails">
+                                <img alt="Image" class="sp-thumbnail" src="https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg">
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        List<String> imgList = Model.Thumbnail.Split(',').ToList<String>();
+                        <div id="Img_carousel" class="slider-pro">
+                            <div class="sp-slides">
+                                @foreach (var item in imgList)
+                                {
+                                    if (item == "")
+                                    {
+                                        break;
+                                    }
+                                    <div class="sp-slide">
+                                        <img alt="Image" class="sp-image" src="@item" data-src="@item" data-small="@item" data-medium="@item" data-large="@item" data-retina="@item">
+                                    </div>
+                                }
+                            </div>
+                            <div class="sp-thumbnails">
+                                @foreach (var item in imgList)
+                                {
+                                    if (item == "")
+                                    {
+                                        break;
+                                    }
+                                    <img alt="Image" class="sp-thumbnail" src="@item">
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h3>Description</h3>
+                    </div>
+                    <div class="col-lg-9">
+                        @Html.Raw(HttpUtility.HtmlDecode(Model.Detail))
+                    </div>
+                </div>
+                <hr>
+                @*<div class="row">
+                    <div class="col-lg-3">
+                        <h3>Schedule</h3>
+                    </div>
+                    <div class="col-lg-9">
+                        @foreach (var schedule in Model.TourSchedules)
+                        {
+                            <div class="table-responsive">
+                             
+                                @Html.Raw(HttpUtility.HtmlDecode(@schedule.Detail))
+                            </div>
+                        }
+                    </div>
+                </div>*@
+                <hr>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h3>Reviews </h3>
+                        <a href="#" class="btn_1 add_bottom_30" data-bs-toggle="modal" data-bs-target="#myReview">Leave a review</a>
+                    </div>
+                    <div class="col-lg-9">
+                        <div id="general_rating">
+                            11 Reviews
+                            <div class="rating">
+                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
+                            </div>
+                        </div>
+                        <!-- End general_rating -->
+                        <div class="row" id="rating_summary">
+                            <div class="col-md-6">
+                                <ul>
+                                    <li>
+                                        Position
+                                        <div class="rating">
+                                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        Tourist guide
+                                        <div class="rating">
+                                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul>
+                                    <li>
+                                        Price
+                                        <div class="rating">
+                                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        Quality
+                                        <div class="rating">
+                                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End row -->
+                        <hr>
+                        <div class="review_strip_single">
+                            <img src="img/avatar1.jpg" alt="Image" class="rounded-circle">
+                            <small> - 10 March 2015 -</small>
+                            <h4>Jhon Doe</h4>
+                            <p>
+                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+                            </p>
+                            <div class="rating">
+                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
+                            </div>
+                        </div>
+                        <!-- End review strip -->
+
+                        <div class="review_strip_single">
+                            <img src="img/avatar3.jpg" alt="Image" class="rounded-circle">
+                            <small> - 10 March 2015 -</small>
+                            <h4>Jhon Doe</h4>
+                            <p>
+                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+                            </p>
+                            <div class="rating">
+                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
+                            </div>
+                        </div>
+                        <!-- End review strip -->
+
+                        <div class="review_strip_single last">
+                            <img src="img/avatar2.jpg" alt="Image" class="rounded-circle">
+                            <small> - 10 March 2015 -</small>
+                            <h4>Jhon Doe</h4>
+                            <p>
+                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+                            </p>
+                            <div class="rating">
+                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
+                            </div>
+                        </div>
+                        <!-- End review strip -->
+                    </div>
+                </div>
+            </div>
+            <!--End  single_tour_desc-->
+        </div>
+        <!--End row -->
+    </div>
+    <!--End container -->
+
+    <div id="overlay"></div>
+    <!-- Mask on input focus -->
+</main>
