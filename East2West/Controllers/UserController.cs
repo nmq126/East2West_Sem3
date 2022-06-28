@@ -5,8 +5,10 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -56,7 +58,6 @@ namespace East2West.Controllers
                 {
                     return View("ViewError");
                 }
-
             }
             catch (DbEntityValidationException e)
             {
@@ -72,8 +73,8 @@ namespace East2West.Controllers
                 }
                 throw;
             }
-
         }
+
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> AddRole(string RoleName)
         {
@@ -91,6 +92,7 @@ namespace East2West.Controllers
                 return View("ViewError");
             }
         }
+
         public async Task<ActionResult> AddUserToRole(string UserId, string RoleId)
         {
             var user = myIdentityDbContext.Users.Find(UserId);
@@ -109,6 +111,7 @@ namespace East2West.Controllers
                 return View("ViewError");
             }
         }
+
         public ActionResult Login()
         {
             return View();
@@ -142,6 +145,21 @@ namespace East2West.Controllers
         {
             HttpContext.GetOwinContext().Authentication.SignOut();
             return Redirect("/Home");
+        }
+
+        public ActionResult ShowInformation(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = myIdentityDbContext.Users.Include(u => u.Orders).Include("Orders.OrderTours").FirstOrDefault(u => u.Id == id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
         }
     }
 }

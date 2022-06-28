@@ -5,111 +5,223 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Details</h2>
+<style>
+    body, table {
+        color: black;
+    }
+</style>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="widget has-shadow">
+            <div class="widget-header bordered no-actions d-flex align-items-center">
+                <h4> #@Html.DisplayFor(model => model.Id)</h4>
+            </div>
+            <div class="widget-body">
+                <div class="col-10">
+                    <div class="section-title mt-3 mb-5">
+                        <h2>01. General Informations</h2>
+                    </div>
+                </div>
+                <form class="form-horizontal">
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Id:</div>
+                        <div class="col-lg-6">
+                            @Model.Id
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Thumbnail</div>
+                        @{
+                            if (Model.Thumbnail == null)
+                            {
+                                <div class="col-lg-6">
+                                    <img height="250" src="https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg" alt="default thumbnail" />
+                                </div>
+                            }
+                            else
+                            {
+                                List<String> imgList = Model.Thumbnail.Split(',').ToList<String>();
+                                <div class="col-lg-9">
+                                    @foreach (var item in imgList)
+                                    {
+                                        if (item == "")
+                                        {
+                                            break;
+                                        }
+                                        <img class="mt-1" height="150" src=@item alt="thumbnail" />
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Brand:</div>
+                        <div class="col-lg-9">
+                            @Model.CarModel.CarBrand.Name
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Model:</div>
+                        <div class="col-lg-9">
+                            @Model.CarModel.Name
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Type: </div>
+                        <div class="col-lg-6">
+                            @Model.CarType.Name
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Location:</div>
+                        <div class="col-lg-6">
+                            @Model.Location.Name
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">License Plate:</div>
+                        <div class="col-lg-9">
+                            @Model.LisencePlate
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Seat Capacity:</div>
+                        <div class="col-lg-9">
+                            @Model.SeatCapacity
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Price per day:</div>
+                        <div class="col-lg-9">
+                            $@Model.PricePerDay
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Has AC:</div>
+                        <div class="col-lg-6">
+                            @(Model.HasAirConditioner == true ? "Yes" : "No")
+                        </div>
+                    </div>
 
-<div>
-    <h4>Car</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CarModel.CarBrandId)
-        </dt>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Status:</div>
+                        <div class="col-lg-6">
+                            @{
+                                string status = null;
+                                switch (Model.Status)
+                                {
+                                    case 1:
+                                        status = "Active";
+                                        break;
+                                    case 0:
+                                        status = "Disable";
+                                        break;
+                                }
+                                @status
+                            }
 
-        <dd>
-            @Html.DisplayFor(model => model.CarModel.CarBrandId)
-        </dd>
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Created At:</div>
+                        <div class="col-lg-6">
+                            @Model.CreatedAt
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Update At:</div>
+                        <div class="col-lg-6">
+                            @Model.UpdatedAt
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Deleted At:</div>
+                        <div class="col-lg-6">
+                            @Model.DeletedAt
+                        </div>
+                    </div>
+                </form>
+                <div class="em-separator separator-dashed"></div>
+                <div class="text-right">
+                    <button class="btn btn-outline-dark" type="button">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</button>
+                    <button class="btn btn-light" type="button">@Html.ActionLink("Back to List", "Index")</button>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CarType.Name)
-        </dt>
+        </div>
+    </div>
+    <div class="col-xl-12">
+        <div class="widget has-shadow">
+            <div class="widget-body">
+                <div class="col-10">
+                    <div class="section-title mt-3 mb-5">
+                        <h2>02. List Car schedule</h2>
+                    </div>
+                </div>
+                @if (Model.CarSchedules == null || Model.CarSchedules.Count() == 0)
+                {
+                    <p class="col-10 ml-auto">No schedule for this yet</p>
+                }
+                else
+                {
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th width="5%">#</th>
+                                <th width="15%">Id</th>
+                                <th width="15%">Start Date</th>
+                                <th width="15%">End Date</th>
+                                <th width="15%">Status</th>
+                                <th width="15%">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var i = 1;
 
-        <dd>
-            @Html.DisplayFor(model => model.CarType.Name)
-        </dd>
+                                foreach (var schedule in Model.CarSchedules.OrderBy(c => c.CreatedAt).OrderBy(c => c.StartDay).ToList())
+                                {
+                                    <tr>
+                                        <td class="text-primary">@i</td>
+                                        <td><span>@Html.Raw(schedule.Id)</span></td>
+                                        <td>@Html.Raw(schedule.StartDay.ToShortDateString())</td>
+                                        <td>@Html.Raw(schedule.EndDay.ToShortDateString())</td>
+                                        <td>
+                                            @switch (schedule.Status)
+                                            {
+                                                case -1:
+                                                    <p>Canceled</p>
+                                                    break;
+                                                case 0:
+                                                    <p>Pending</p>
+                                                    break;
+                                                case 1:
+                                                    <p>Paid</p>
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                        </td>
+                                        <td class="td-actions">
+                                            <a href="@Url.Action("Details", "CarSchedules", new { id = schedule.Id })">
+                                                <i class="la la-info-circle" data-toggle="tooltip" title="Information"></i>
+                                            </a>
+                                            <a href="@Url.Action("Edit", "CarSchedules", new { id = schedule.Id })">
+                                                <i class="la la-edit" data-toggle="tooltip" title="Edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Location.Name)
-        </dt>
+                        </tbody>
+                    </table>
 
-        <dd>
-            @Html.DisplayFor(model => model.Location.Name)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Thumbnail)
-        </dt>
+                }
+            </div>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Thumbnail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LisencePlate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LisencePlate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HasAirConditioner)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HasAirConditioner)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SeatCapacity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SeatCapacity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PricePerDay)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PricePerDay)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeletedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeletedAt)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

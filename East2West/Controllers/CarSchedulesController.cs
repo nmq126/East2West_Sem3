@@ -40,7 +40,7 @@ namespace East2West.Controllers
         // GET: CarSchedules/Create
         public ActionResult Create()
         {
-            ViewBag.CarId = new SelectList(db.Cars, "Id", "Id");
+            ViewBag.CarId = new SelectList(db.Cars.Where(c => c.Status == 1), "Id", "Id");
             return View();
         }
 
@@ -53,7 +53,7 @@ namespace East2West.Controllers
         {
             if (ModelState.IsValid)
             {
-                carSchedule.CreatedAt = carSchedule.UpdatedAt = carSchedule.DeletedAt = DateTime.Now;
+                carSchedule.CreatedAt = DateTime.Now;
                 carSchedule.Status = 0;
                 do
                 {

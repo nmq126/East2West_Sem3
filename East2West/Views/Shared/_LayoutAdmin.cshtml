@@ -27,12 +27,28 @@
     <link rel="stylesheet" href="@Url.Content("~/Content/admin_vendor/css/base/elisyam-1.5.css")" media="screen" type="text/css" />
 
     <link rel="stylesheet" href="@Url.Content("~/Content/toastr.css")" media="screen" type="text/css" />
-
+    <style>
+        #preloader2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color:rgba(0,0,0,0.5);
+            z-index: 999999;
+        }
+    </style>
 </head>
+
 <body id="page-top">
     <div id="preloader">
         <div class="canvas">
             <img src="@Url.Content("~/Content/admin_img/logo.png")" alt="logo" class="loader-logo">
+            <div class="spinner"></div>
+        </div>
+    </div>
+    <div id="preloader2" style="display:none">
+        <div class="canvas">
             <div class="spinner"></div>
         </div>
     </div>
@@ -125,25 +141,29 @@
                             <a class="@(Request.Url.ToString().Contains("/Dashboard") ? "active" : "" )" href="@Url.Action("Index", "Dashboard")"><i class="la la la-columns"></i><span>Dashboard</span></a>
 
                         </li>
-                        <li class="@(Request.Url.ToString().Contains("/Tours") ? "active" : "" )">
+                        <li class="@(Request.Url.ToString().Contains("/Orders") ? "active" : "" )">
+                            <a href="#dropdown-db0" aria-expanded="false" data-toggle="collapse"><i class="la la-rocket"></i><span>Orders</span></a>
+                            <ul id="dropdown-db0" class="collapse list-unstyled @(Request.Url.ToString().Contains("/Orders") ? "show" : "" ) pt-0">
+                                <li><a class="@(Request.RawUrl.Equals("/Orders/GetTour") ? "active" : "" )" href="@Url.Action("GetTour", "Orders")">Tour Orders</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li class="@(Request.Url.ToString().Contains("/Tour") ? "active" : "" )">
                             <a href="#dropdown-db1" aria-expanded="false" data-toggle="collapse"><i class="la la-rocket"></i><span>Tour</span></a>
                             <ul id="dropdown-db1" class="collapse list-unstyled @(Request.Url.ToString().Contains("/Tours") ? "show" : "" ) pt-0">
                                 <li><a class="@(Request.RawUrl.Equals("/Tours") || Request.RawUrl.Equals("/Tours/Index") ? "active" : "" )" href="@Url.Action("Index", "Tours")">Tours List</a></li>
                                 <li><a class="@(Request.RawUrl.Equals("/Tours/Create") ? "active" : "" )" href="@Url.Action("Create", "Tours")">Create Tour</a></li>
-                            </ul>
-                        </li>
-                        <li class="@(Request.Url.ToString().Contains("/TourDetails") ? "active" : "" )">
-                            <a href="#dropdown-db2" aria-expanded="false" data-toggle="collapse"><i class="la la-desktop"></i><span>Tour detail</span></a>
-                            <ul id="dropdown-db2" class="collapse list-unstyled @(Request.Url.ToString().Contains("/TourDetails") ? "show" : "" ) pt-0">
                                 <li><a class="@(Request.RawUrl.Equals("/TourDetails") || Request.RawUrl.Equals("/TourDetails/Index") ? "active" : "" )" href="@Url.Action("Index", "TourDetails")">Tour detail List</a></li>
                                 <li><a class="@(Request.RawUrl.Equals("/TourDetails/Create") ? "active" : "" )" href="@Url.Action("Create", "TourDetails")">Create Tour detail</a></li>
                             </ul>
                         </li>
-                        <li class="@(Request.Url.ToString().Contains("/Cars") ? "active" : "" )">
-                            <a href="#dropdown-db3" aria-expanded="false" data-toggle="collapse"><i class="la la-car"></i><span>Car</span></a>
-                            <ul id="dropdown-db3" class="collapse list-unstyled @(Request.Url.ToString().Contains("/Cars") ? "show" : "" ) pt-0">
+                        <li class="@(Request.Url.ToString().Contains("/Car") ? "active" : "" )">
+                            <a href="#dropdown-db2" aria-expanded="false" data-toggle="collapse"><i class="la la-car"></i><span>Car</span></a>
+                            <ul id="dropdown-db2" class="collapse list-unstyled @(Request.Url.ToString().Contains("/Car") ? "show" : "" ) pt-0">
                                 <li><a class="@(Request.RawUrl.Equals("/Cars") || Request.RawUrl.Equals("/Cars/Index") ? "active" : "" )" href="@Url.Action("Index", "Cars")">Cars List</a></li>
                                 <li><a class="@(Request.RawUrl.Equals("/Cars/Create") ? "active" : "" )" href="@Url.Action("Create", "Cars")">Create Car</a></li>
+                                <li><a class="@(Request.RawUrl.Equals("/CarSchedules") || Request.RawUrl.Equals("/CarSchedules/Index") ? "active" : "" )" href="@Url.Action("Index", "CarSchedules")">List Car Schedule</a></li>
+                                <li><a class="@(Request.RawUrl.Equals("/CarSchedules/Create") ? "active" : "" )" href="@Url.Action("Create", "CarSchedules")">Create Car Schedule</a></li>
                             </ul>
                         </li>
 
@@ -155,8 +175,8 @@
                             </ul>
                         </li>
                         <li class="@(Request.Url.ToString().Contains("/Hotels") ? "active" : "" )">
-                            <a href="#dropdown-db3" aria-expanded="false" data-toggle="collapse"><i class="la la-hotel"></i><span>Hotels</span></a>
-                            <ul id="dropdown-db3" class="collapse list-unstyled @(Request.Url.ToString().Contains("/Hotels") ? "show" : "" ) pt-0">
+                            <a href="#dropdown-db4" aria-expanded="false" data-toggle="collapse"><i class="la la-hotel"></i><span>Hotels</span></a>
+                            <ul id="dropdown-db4" class="collapse list-unstyled @(Request.Url.ToString().Contains("/Hotels") ? "show" : "" ) pt-0">
                                 <li><a class="@(Request.RawUrl.Equals("/Hotels") || Request.RawUrl.Equals("/Hotels/Index") ? "active" : "" )" href="@Url.Action("Index", "Hotels")">Hotels List</a></li>
                                 <li><a class="@(Request.RawUrl.Equals("/Hotels/Create") ? "active" : "" )" href="@Url.Action("Create", "Hotels")">Create Hotel</a></li>
                             </ul>
@@ -184,9 +204,9 @@
                         </div>
                     </div>
                     <!-- End Page Header -->
-                    
+
                     @RenderBody()
-                    
+
                 </div>
                 <!-- End Container -->
                 <!-- Begin Page Footer-->
