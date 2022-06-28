@@ -51,5 +51,6 @@ namespace East2West.Models
         public DateTime UpdatedAt { get; set; }
         public DateTime DeletedAt { get; set; }
         public Location Location { get; set; }
+        public object Hotels { get; internal set; }
     }
 }

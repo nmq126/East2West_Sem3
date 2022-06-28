@@ -1,7 +1,6 @@
-﻿@model IEnumerable<East2West.Models.Tour>
-
+﻿@model IEnumerable<East2West.Models.Hotel>
 @{
-    ViewBag.Title = "East2West - List Tour";
+    ViewBag.Title = "East2West - List Hotel";
     Layout = "~/Views/Shared/_LayoutPageClient.cshtml";
 }
 
@@ -10,7 +9,7 @@
     <section class="parallax-window" data-parallax="scroll" data-image-src="https://res.cloudinary.com/tanvnth2012002/image/upload/v1655794518/hinh-nen-vinh-ha-long-quang-ninh-dep_wu3zp9.jpg" data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-1 opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
             <div class="animated fadeInDown">
-                <h1>Book tours</h1>
+                <h1>Vietnam tours</h1>
                 <p>Cursus neque cursus curae ante scelerisque vehicula</p>
             </div>
         </div>
@@ -23,12 +22,12 @@
         <div class="container">
             <ul>
                 <li>
-                    <a href="/">Home</a>
+                    <a href="#">Home</a>
                 </li>
                 <li>
-                    <a href="/ClientTour/GetListTour">Tour</a>
+                    <a href="#">Category</a>
                 </li>
-                <li>List Tour</li>
+                <li>Page active</li>
             </ul>
         </div>
     </div>
@@ -46,36 +45,6 @@
                 <p>
                     <a class="btn_map" data-bs-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
                 </p>
-
-                <div class="box_style_cat">
-                    <ul id="cat_nav">
-                        <li>
-                            <a href="#" id="active"><i class="icon_set_1_icon-51"></i>All tours <span>(141)</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="icon_set_1_icon-3"></i>City sightseeing <span>(20)</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="icon_set_1_icon-4"></i>Museum tours <span>(16)</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="icon_set_1_icon-44"></i>Historic Buildings <span>(12)</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="icon_set_1_icon-37"></i>Walking tours <span>(11)</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="icon_set_1_icon-14"></i>Eat & Drink <span>(20)</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="icon_set_1_icon-43"></i>Churces <span>(08)</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="icon_set_1_icon-28"></i>Skyline tours <span>(11)</span></a>
-                        </li>
-                    </ul>
-                </div>
-
                 <div id="filters_col">
                     <a data-bs-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>Filters</a>
                     <div class="collapse show" id="collapseFilters">
@@ -152,13 +121,6 @@
                                 </li>
                                 <li>
                                     <label class="container_check">
-                                        Tour guides
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="container_check">
                                         Access for disabled
                                         <input type="checkbox">
                                         <span class="checkmark"></span>
@@ -198,12 +160,12 @@
                 </div>
                 <!--/tools -->
 
-                @foreach (var tour in Model)
+                @foreach (var hotel in Model)
                 {
                     var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
-                    if (tour.Thumbnail != null)
+                    if (hotel.Thumbnail != null)
                     {
-                        img = tour.Thumbnail.Split(',').ToList<String>().First();
+                        img = hotel.Thumbnail.Split(',').ToList<String>().First();
                     }
                     <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
                         <div class="row">
@@ -215,39 +177,28 @@
                                     <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
                                 </div>
                                 <div class="img_list">
-                                    <a href="/ClientTour/Details?id=@tour.Id">
+                                    <a href="/ClientHotel/Details?id=@hotel.Id">
                                         <img src="@img" alt="Image">
-                                        <div class="short_info"><i class="icon_set_1_icon-4"></i>Museums </div>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="tour_list_desc">
                                     <div class="rating">
-                                        @for (int j = 0; j < tour.Rating; j++)
+                                        @for (int j = 0; j < hotel.Rating; j++)
                                         {
                                             <i class="icon-smile voted"></i>
 
                                         }
                                     </div>
-                                    <h3><strong>@tour.Name</strong></h3>
-                                    <p>@tour.Description</p>
+                                    <h3><strong>@hotel.Name</strong></h3>
+                                    <p>@hotel.Description</p>
                                     <ul class="add_info">
-                                        <li>
-                                            <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
-                                                <div class="tooltip-content">
-                                                    <h4>Schedule</h4>
-                                                    <strong>@tour.SummarySchedule</strong>
-                                                    <br>
-                                                </div>
-                                            </div>
-                                        </li>
                                         <li>
                                             <div class="tooltip_styled tooltip-effect-4">
                                                 <span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
                                                 <div class="tooltip-content">
-                                                    <h4>Address</h4> @tour.LocationDestination.Name
+                                                    <h4>Address</h4> @hotel.Location.Name
                                                     <br>
                                                 </div>
                                             </div>
@@ -260,6 +211,46 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        <li>
+                                            <div class="tooltip_styled tooltip-effect-4">
+                                                <span class="tooltip-item"><i class="icon_set_1_icon-86"></i></span>
+                                                <div class="tooltip-content">
+                                                    Free Wifi
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="tooltip_styled tooltip-effect-4">
+                                                <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
+                                                <div class="tooltip-content">
+                                                    Plasma TV with cable channels
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="tooltip_styled tooltip-effect-4">
+                                                <span class="tooltip-item"><i class="icon_set_2_icon-110"></i></span>
+                                                <div class="tooltip-content">
+                                                    Swimming pool
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="tooltip_styled tooltip-effect-4">
+                                                <span class="tooltip-item"><i class="icon_set_2_icon-117"></i></span>
+                                                <div class="tooltip-content">
+                                                    Fitness Center
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="tooltip_styled tooltip-effect-4">
+                                                <span class="tooltip-item"><i class="icon_set_1_icon-58"></i></span>
+                                                <div class="tooltip-content">
+                                                    Restaurant
+                                                </div>
+                                            </div>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -269,13 +260,13 @@
 
                                         <sup>
                                             @{
-                                                float percentDiscount = ((float)tour.TourDetails.First().Discount) / 100;
-                                                var priceDiscount = Math.Round(tour.TourDetails.First().Price * (1 - percentDiscount), 2);
+                                                double percentDiscount = ((double)hotel.Price) / 150;
+                                                var priceDiscount = Math.Round(hotel.Price * (1 - percentDiscount), 2);
                                             }
                                             $@priceDiscount
                                         </sup>
-                                        <span class="normal_price_list">@tour.TourDetails.First().Price</span>
-                                        <small>*Per person</small>
+                                        <span class="normal_price_list">@hotel.Price</span>
+                                        <small>*From/Per night</small>
 
                                         <p>
                                             <a href="single_tour.html" class="btn_1">Details</a>

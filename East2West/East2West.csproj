@@ -168,6 +168,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CarSchedulesController.cs" />
     <Compile Include="Controllers\CarsController.cs" />
+    <Compile Include="Controllers\ClientCarController.cs" />
+    <Compile Include="Controllers\ClientHotelController.cs" />
     <Compile Include="Controllers\FlightsController.cs" />
     <Compile Include="Controllers\ClientTourController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1008,6 +1010,7 @@
     <Content Include="Views\TourDetails\Index.cshtml" />
     <Content Include="Views\TourDetails\Create.cshtml" />
     <Content Include="Views\Cars\Create.cshtml" />
+    <Content Include="Views\Cars\Delete.cshtml" />
     <Content Include="Views\Cars\Details.cshtml" />
     <Content Include="Views\Cars\Edit.cshtml" />
     <Content Include="Views\Cars\Index.cshtml" />
@@ -1032,6 +1035,8 @@
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Shared\_LayoutSidePage.cshtml" />
     <Content Include="Views\User\ShowInformation.cshtml" />
+    <Content Include="Views\ClientCar\GetListCar.cshtml" />
+    <Content Include="Views\ClientHotel\GetListHotel.cshtml" />
     <Content Include="Views\Orders\GetTour.cshtml" />
     <Content Include="Views\TourDetails\Details.cshtml" />
     <Content Include="Views\TourDetails\Edit.cshtml" />
