@@ -16,11 +16,7 @@ namespace East2West.Models
 
         [StringLength(50)]
         [Required]
-        public String TourId { get; set; }
-
-        [StringLength(50)]
-        [Required]
-        public String CarId { get; set; }
+        public String OrderId { get; set; }
 
         [Required]
         public Double Rating { get; set; }
@@ -34,13 +30,9 @@ namespace East2West.Models
         public String Content { get; set; }
 
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime DeletedAt { get; set; }
-
-        [ForeignKey("TourId")]
-        public virtual Tour Tour { get; set; }
-
-        [ForeignKey("CarId")]
-        public virtual Car Car { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
+        public int Status { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

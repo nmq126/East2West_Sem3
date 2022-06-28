@@ -39,7 +39,7 @@ namespace East2West.Controllers
         {
             if (ModelState.IsValid)
             {
-                tourDetail.CreatedAt = tourDetail.UpdatedAt = tourDetail.DeletedAt = DateTime.Now;
+                tourDetail.CreatedAt = DateTime.Now;
                 do
                 {
                     tourDetail.Id = String.Concat("TOURDT_", Guid.NewGuid().ToString("N").Substring(0, 5));

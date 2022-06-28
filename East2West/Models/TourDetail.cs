@@ -34,8 +34,8 @@ namespace East2West.Models
         public int Discount { get; set; }
 
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime DeletedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
         public virtual Tour Tour { get; set; }
     }
 }

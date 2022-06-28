@@ -102,7 +102,7 @@ namespace East2West.Controllers
             if (ModelState.IsValid)
             {
                 hotel.Status = 1;
-                hotel.CreatedAt = hotel.UpdatedAt = hotel.DeletedAt = DateTime.Now;
+                hotel.CreatedAt = DateTime.Now;
                 do
                 {
                     hotel.Id = String.Concat("HT_", Guid.NewGuid().ToString("N").Substring(0, 5));

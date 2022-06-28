@@ -163,7 +163,7 @@ namespace East2West.Controllers
             double revenue = 0;
             foreach (var item in orders.Where(o => o.Status == 1))
             {
-                revenue += Double.Parse(item.TotalPrice);
+                revenue += item.TotalPrice;
             }
             ViewBag.TotalRevenue = revenue;
             return View(orders.ToPagedList(pageNumber, pageSize));

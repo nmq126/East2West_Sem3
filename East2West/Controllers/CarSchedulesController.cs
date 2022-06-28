@@ -53,7 +53,7 @@ namespace East2West.Controllers
         {
             if (ModelState.IsValid)
             {
-                carSchedule.CreatedAt = carSchedule.UpdatedAt = carSchedule.DeletedAt = DateTime.Now;
+                carSchedule.CreatedAt = DateTime.Now;
                 carSchedule.Status = 0;
                 do
                 {

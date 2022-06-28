@@ -156,7 +156,7 @@ namespace East2West.Controllers
         {
             if (ModelState.IsValid)
             {
-                car.CreatedAt = car.UpdatedAt = car.DeletedAt = DateTime.Now;
+                car.CreatedAt = DateTime.Now;
                 car.Status = 1;
                 do
                 {

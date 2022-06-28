@@ -148,7 +148,7 @@ namespace East2West.Controllers
             {
                 tour.Rating = 5;
                 tour.Status = 1;
-                tour.CreatedAt = tour.UpdatedAt = tour.DeletedAt = DateTime.Now;
+                tour.CreatedAt = DateTime.Now;
                 do
                 {
                     tour.Id = String.Concat("TOUR_", Guid.NewGuid().ToString("N").Substring(0, 5));
