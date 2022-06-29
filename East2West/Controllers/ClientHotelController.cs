@@ -34,7 +34,7 @@ namespace East2West.Controllers
                 return HttpNotFound();
             }
             ViewBag.Location = hotel.Location;
-            return View();
+            return View(hotel);
         }
     }
 }
