@@ -904,7 +904,12 @@
     <Content Include="Content\client_rev-slider-files\js\extensions\revolution.extension.video.min.js" />
     <Content Include="Content\client_rev-slider-files\js\jquery.themepunch.revolution.min.js" />
     <Content Include="Content\client_rev-slider-files\js\jquery.themepunch.tools.min.js" />
+    <Content Include="Content\img\avatar1.jpg" />
+    <Content Include="Content\img\avatar2.jpg" />
+    <Content Include="Content\img\avatar3.jpg" />
     <Content Include="Content\img\bg_login.jpg" />
+    <Content Include="Content\img\laptop.png" />
+    <Content Include="Content\img\post-thumb-2.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
