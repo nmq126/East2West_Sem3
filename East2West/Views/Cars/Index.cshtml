@@ -203,82 +203,103 @@
         <!-- Default -->
         <div class="widget has-shadow">
             <div class="widget-body">
-                <div class="table-responsive">
-                    <table class="table mb-0">
-                        <thead>
-                            <tr>
-                                <th width="5%">#</th>
-                                <th width="5%">Id</th>
-                                <th width="15%">Thumbnail</th>
-                                <th width="10%">Brand</th>
-                                <th width="10%">Model</th>
-                                <th width="10%">Type</th>
-                                <th width="10%">Location</th>
-                                <th width="5%">License Plate</th>
-                                <th width="5%">Price</th>
-                                <th width="5%">AC</th>
-                                <th width="10%">Status</th>
-                                <th width="10%">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @{var i = 1;
-                                foreach (var item in Model)
-                                {
-
-                                    var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
-                                    if (item.Thumbnail != null)
+                @if (Model == null || Model.Count() == 0)
+                {
+                    <div class="text-center">
+                        <i class="la la-search"></i>
+                        Nothing found
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-bordered mb-0">
+                            <thead>
+                                <tr>
+                                    <th width="5%">#</th>
+                                    <th width="5%">Id</th>
+                                    <th width="15%">Thumbnail</th>
+                                    <th width="10%">Brand</th>
+                                    <th width="10%">Model</th>
+                                    <th width="10%">Type</th>
+                                    <th width="10%">Location</th>
+                                    <th width="5%">License Plate</th>
+                                    <th width="5%">Price</th>
+                                    <th width="5%">AC</th>
+                                    <th width="10%">Status</th>
+                                    <th width="10%">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{var i = 1;
+                                    foreach (var item in Model)
                                     {
-                                        img = item.Thumbnail.Split(',').ToList<String>().First();
+
+                                        var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
+                                        if (item.Thumbnail != null)
+                                        {
+                                            img = item.Thumbnail.Split(',').ToList<String>().First();
+                                        }
+                                        <tr>
+                                            <td><span class="text-primary">@i</span></td>
+                                            <td><span>@Html.DisplayFor(modelItem => item.Id)</span></td>
+                                            <td><img width="150" src=@img alt="thumbnail" /></td>
+                                            <td>@item.CarModel.CarBrand.Name</td>
+                                            <td>@item.CarModel.Name</td>
+                                            <td>@item.CarType.Name</td>
+                                            <td>@item.Location.Name</td>
+                                            <td>@item.LisencePlate</td>
+                                            <td>$@item.PricePerDay</td>
+                                            <td><p>@(item.HasAirConditioner == true ? "✅" : "")</p></td>
+                                            <td>
+                                                <select id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
+                                                    <option value="1" @(item.Status == 1 ? "selected" : "")>Active</option>
+                                                    <option value="0" @(item.Status == 0 ? "selected" : "")>Disable</option>
+                                                </select>
+                                            </td>
+                                            <td class="td-actions">
+                                                <a href="@Url.Action("Details", "Cars", new { id = item.Id })">
+                                                    <i class="la la-info-circle" data-toggle="tooltip" title="Information"></i>
+                                                </a>
+                                                <a href="@Url.Action("Edit", "Cars", new { id = item.Id })">
+                                                    <i class="la la-edit" data-toggle="tooltip" title="Edit"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        i++;
                                     }
-                                    <tr>
-                                        <td><span class="text-primary">@i</span></td>
-                                        <td><span>@Html.DisplayFor(modelItem => item.Id)</span></td>
-                                        <td><img width="150" src=@img alt="thumbnail" /></td>
-                                        <td>@item.CarModel.CarBrand.Name</td>
-                                        <td>@item.CarModel.Name</td>
-                                        <td>@item.CarType.Name</td>
-                                        <td>@item.Location.Name</td>
-                                        <td>@item.LisencePlate</td>
-                                        <td>$@item.PricePerDay</td>
-                                        <td><p>@(item.HasAirConditioner == true ? "✅" : "")</p></td>
-                                        <td>
-                                            <select id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
-                                                <option value="1" @(item.Status == 1 ? "selected" : "")>Active</option>
-                                                <option value="0" @(item.Status == 0 ? "selected" : "")>Disable</option>
-                                            </select>
-                                        </td>
-                                        <td class="td-actions">
-                                            <a href="@Url.Action("Details", "Cars", new { id = item.Id })">
-                                                <i class="la la-info-circle" data-toggle="tooltip" title="Information"></i>
-                                            </a>
-                                            <a href="@Url.Action("Edit", "Cars", new { id = item.Id })">
-                                                <i class="la la-edit" data-toggle="tooltip" title="Edit"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    i++;
                                 }
-                            }
-                        </tbody>
-                    </table>
-                    @Html.PagedListPager(Model, page => Url.Action("Index",
-                                new { id = ViewBag.Id, sortType = ViewBag.SortType, keyword = ViewBag.Keyword, categoryId = ViewBag.CategoryId, levelId = ViewBag.LevelId, page }),
-                                new PagedListRenderOptions
-                                {
-                                    DisplayLinkToIndividualPages = true,
-                                    DisplayPageCountAndCurrentLocation = false,
-                                    MaximumPageNumbersToDisplay = 10,
-                                    LinkToFirstPageFormat = "««",
-                                    LinkToPreviousPageFormat = "«",
-                                    LinkToIndividualPageFormat = "{0}",
-                                    LinkToNextPageFormat = "»",
-                                    LinkToLastPageFormat = "»»",
-                                    ContainerDivClasses = new string[] { "pagination-container mt-3" },
-                                    UlElementClasses = new string[] { "pagination" },
-                                    LiElementClasses = new string[] { "page-item" }
-                                })
-                </div>
+                            </tbody>
+                        </table>
+                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                    new { id = ViewBag.Id,
+                                        sortType = ViewBag.SortType,
+                                        licensePlate = ViewBag.LicensePlate,
+                                        modelId = ViewBag.ModelId,
+                                        brandId = ViewBag.BrandId,
+                                        typeId = ViewBag.TypeId,
+                                        hasAC = ViewBag.HasAC,
+                                        status = ViewBag.Status,
+                                        page }),
+                                    new PagedListRenderOptions
+                                    {
+                                        DisplayItemSliceAndTotal = true,
+                                        ItemSliceAndTotalFormat = "Showing {0} to {1} of {2} total item(s).",
+                                        DisplayLinkToIndividualPages = true,
+                                        DisplayPageCountAndCurrentLocation = false,
+                                        MaximumPageNumbersToDisplay = 10,
+                                        LinkToFirstPageFormat = "««",
+                                        LinkToPreviousPageFormat = "«",
+                                        LinkToIndividualPageFormat = "{0}",
+                                        LinkToNextPageFormat = "»",
+                                        LinkToLastPageFormat = "»»",
+                                        ContainerDivClasses = new string[] { "pagination-container mt-3" },
+                                        UlElementClasses = new string[] { "pagination" },
+                                        LiElementClasses = new string[] { "page-item" }
+                                    })
+                    </div>
+                }
+
             </div>
         </div>
         <!-- End Default -->

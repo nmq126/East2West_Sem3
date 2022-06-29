@@ -18,6 +18,7 @@ namespace East2West.Controllers
         private DBContext db = new DBContext();
 
         // GET: Orders
+        [Route("admin/order/tour")]
         public ActionResult GetTour(int? page, string departureId, string destinationId, string sortType, int? status, string unit_price_range,
             string ticket_number, string duration_range, string orderId, string username, string startDepartureDay, string endDepartureDay
             , string startCreatedDay, string endCreatedDay)

@@ -58,7 +58,7 @@
                             <label class="form-control-label">Select Depature location</label>
                             <div class="select mb-3">
                                 <select name="departureId" id="departureId" class="custom-select form-control">
-                                    <option value="">Select Departure</option>
+                                    <option value="">All</option>
                                     @foreach (var departure in ViewBag.LocationList)
                                     {
                                         if (departure.Id == ViewBag.DepartureId)
@@ -77,7 +77,7 @@
                             <label class="form-control-label">Select Destination location</label>
                             <div class="select mb-3">
                                 <select name="destinationId" id="destinationId" class="custom-select form-control">
-                                    <option value="">Select Destination</option>
+                                    <option value="">All</option>
                                     @foreach (var destination in ViewBag.LocationList)
                                     {
                                         if (destination.Id == ViewBag.DestinationId)
@@ -282,7 +282,7 @@
                                                     <option value="2" @(item.Status == 0 ? "selected" : "")>Refunded</option>
                                                 </select>
                                             </td>
-                                            <td>@item.CreatedAt</td>
+                                            <td>@item.CreatedAt.ToString("HH:mm:ss dd/M/yyyy")</td>
                                             <td class="td-actions">
                                                 <a href="@Url.Action("Details", "Orders", new { id = item.Id })">
                                                     <i class="la la-info-circle" data-toggle="tooltip" title="Information"></i>
