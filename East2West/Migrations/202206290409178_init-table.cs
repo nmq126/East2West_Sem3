@@ -3,7 +3,7 @@ namespace East2West.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class bigupdatedb : DbMigration
+    public partial class inittable : DbMigration
     {
         public override void Up()
         {
@@ -369,9 +369,11 @@ namespace East2West.Migrations
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
         }
+        
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Feedbacks", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Orders", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
@@ -381,10 +383,9 @@ namespace East2West.Migrations
             DropForeignKey("dbo.OrderTours", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.OrderCars", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.OrderCars", "CarScheduleId", "dbo.CarSchedules");
-            DropForeignKey("dbo.Feedbacks", "TourId", "dbo.Tours");
-            DropForeignKey("dbo.Feedbacks", "CarId", "dbo.Cars");
             DropForeignKey("dbo.TourSchedules", "TourId", "dbo.Tours");
             DropForeignKey("dbo.TourDetails", "TourId", "dbo.Tours");
+            DropForeignKey("dbo.Tours", "TourCategoryId", "dbo.TourCategories");
             DropForeignKey("dbo.Tours", "DestinationId", "dbo.Locations");
             DropForeignKey("dbo.Tours", "DepartureId", "dbo.Locations");
             DropForeignKey("dbo.Hotels", "LocationId", "dbo.Locations");
@@ -404,15 +405,15 @@ namespace East2West.Migrations
             DropIndex("dbo.Refunds", new[] { "Id" });
             DropIndex("dbo.OrderTours", new[] { "TourDetailId" });
             DropIndex("dbo.OrderTours", new[] { "OrderId" });
-            DropIndex("dbo.Orders", new[] { "UserId" });
             DropIndex("dbo.OrderCars", new[] { "CarScheduleId" });
             DropIndex("dbo.OrderCars", new[] { "OrderId" });
-            DropIndex("dbo.Feedbacks", new[] { "CarId" });
-            DropIndex("dbo.Feedbacks", new[] { "TourId" });
+            DropIndex("dbo.Orders", new[] { "UserId" });
+            DropIndex("dbo.Feedbacks", new[] { "OrderId" });
             DropIndex("dbo.TourSchedules", new[] { "TourId" });
             DropIndex("dbo.TourDetails", new[] { "TourId" });
             DropIndex("dbo.Tours", new[] { "DestinationId" });
             DropIndex("dbo.Tours", new[] { "DepartureId" });
+            DropIndex("dbo.Tours", new[] { "TourCategoryId" });
             DropIndex("dbo.Hotels", new[] { "LocationId" });
             DropIndex("dbo.Flights", new[] { "DestinationId" });
             DropIndex("dbo.Flights", new[] { "DepartureId" });
@@ -428,11 +429,12 @@ namespace East2West.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.Refunds");
             DropTable("dbo.OrderTours");
-            DropTable("dbo.Orders");
             DropTable("dbo.OrderCars");
+            DropTable("dbo.Orders");
             DropTable("dbo.Feedbacks");
             DropTable("dbo.TourSchedules");
             DropTable("dbo.TourDetails");
+            DropTable("dbo.TourCategories");
             DropTable("dbo.Tours");
             DropTable("dbo.Hotels");
             DropTable("dbo.Flights");
