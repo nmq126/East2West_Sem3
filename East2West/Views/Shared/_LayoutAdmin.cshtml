@@ -142,9 +142,9 @@
 
                         </li>
                         <li class="@(Request.Url.ToString().Contains("/Orders") ? "active" : "" )">
-                            <a href="#dropdown-db0" aria-expanded="false" data-toggle="collapse"><i class="la la-rocket"></i><span>Orders</span></a>
+                            <a href="#dropdown-db0" aria-expanded="false" data-toggle="collapse"><i class="la la-shopping-cart"></i><span>Orders</span></a>
                             <ul id="dropdown-db0" class="collapse list-unstyled @(Request.Url.ToString().Contains("/Orders") ? "show" : "" ) pt-0">
-                                <li><a class="@(Request.RawUrl.Equals("/Orders/GetTour") ? "active" : "" )" href="@Url.Action("GetTour", "Orders")">Tour Orders</a></li>
+                                <li><a class="@(Request.RawUrl.Equals("/Orders/GetTour") ? "active" : "" )" href="@Url.Action("GetTour", "Orders")">Tour Analysis</a></li>
                                 
                             </ul>
                         </li>

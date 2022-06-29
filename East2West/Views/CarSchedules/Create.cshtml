@@ -4,12 +4,16 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <div class="row">
+    
     <div class="col-xl-12">
         <div class="widget has-shadow">
             <div class="widget-header bordered no-actions d-flex align-items-center">
                 <h4>Create new car schedule</h4>
+
             </div>
+
             <div class="widget-body">
                 @using (Html.BeginForm("Create", "CarSchedules", FormMethod.Post, new { id = "car-schedule-create" }))
                 {
@@ -38,6 +42,9 @@
                             <div class="col-md-9">
                                 @Html.ValidationMessageFor(model => model.StartDay, "", new { @class = "text-danger" })
                                 @Html.ValidationMessageFor(model => model.EndDay, "", new { @class = "text-danger" })
+                                <div class="text-danger mb-4">
+                                    @TempData["data"]
+                                </div>
                             </div>
                         </div>
 
@@ -71,11 +78,11 @@
                 format: 'DD/MM/YYYY'
             },
             minDate: new Date(),
-            isInvalidDate: function (date) {
-                if (date.format('DD/MM/YYYY') == '02/07/2022')
-                    return true;
-                return false;
-            }
+            //isInvalidDate: function (date) {
+            //    if (date.format('DD/MM/YYYY') == '02/07/2022')
+            //        return true;
+            //    return false;
+            //}
         });
         $('#daterange').on('apply.daterangepicker', function (ev, picker) {
             $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
