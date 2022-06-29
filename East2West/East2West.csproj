@@ -1040,6 +1040,9 @@
     <Content Include="Views\User\ShowInformation.cshtml" />
     <Content Include="Views\ClientCar\GetListCar.cshtml" />
     <Content Include="Views\ClientHotel\GetListHotel.cshtml" />
+    <Content Include="Views\TourDetails\Details.cshtml" />
+    <Content Include="Views\TourDetails\Edit.cshtml" />
+    <Content Include="Views\Orders\GetTour.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
