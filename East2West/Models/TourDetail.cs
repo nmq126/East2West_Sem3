@@ -32,6 +32,8 @@ namespace East2West.Models
 
         [Required]
         public int Discount { get; set; }
+        
+        public int Status { get; set; }
 
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

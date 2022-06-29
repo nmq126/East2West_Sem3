@@ -7,13 +7,13 @@ namespace East2West.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class bigupdatedb : IMigrationMetadata
+    public sealed partial class inittable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(bigupdatedb));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(inittable));
         
         string IMigrationMetadata.Id
         {
-            get { return "202206281201560_big-update-db"; }
+            get { return "202206290409178_init-table"; }
         }
         
         string IMigrationMetadata.Source

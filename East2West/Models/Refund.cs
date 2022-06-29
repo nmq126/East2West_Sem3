@@ -12,6 +12,7 @@ namespace East2West.Models
     {
         [Key]
         [StringLength(50)]
+        [ForeignKey("Order")]
         public String Id { get; set; }
 
         [Required]
@@ -24,7 +25,7 @@ namespace East2West.Models
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
-        [Required]
+ 
         public virtual Order Order { get; set; }
     }
 }
