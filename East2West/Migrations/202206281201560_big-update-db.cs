@@ -3,7 +3,7 @@ namespace East2West.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initdatabase : DbMigration
+    public partial class bigupdatedb : DbMigration
     {
         public override void Up()
         {
@@ -22,7 +22,7 @@ namespace East2West.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 50),
                         CarBrandId = c.String(nullable: false, maxLength: 50),
-                        Name = c.String(nullable: false, maxLength: 50),
+                        Name = c.String(nullable: false, storeType: "ntext"),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.CarBrands", t => t.CarBrandId, cascadeDelete: true)
@@ -43,8 +43,8 @@ namespace East2West.Migrations
                         PricePerDay = c.Double(nullable: false),
                         Status = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(),
+                        DeletedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.CarModels", t => t.CarModelId, cascadeDelete: true)
@@ -64,8 +64,8 @@ namespace East2West.Migrations
                         EndDay = c.DateTime(nullable: false, storeType: "date"),
                         Status = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(),
+                        DeletedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Cars", t => t.CarId, cascadeDelete: true)
@@ -106,8 +106,8 @@ namespace East2West.Migrations
                         Detail = c.String(nullable: false, storeType: "ntext"),
                         Status = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(),
+                        DeletedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Locations", t => t.DepartureId)
@@ -130,8 +130,8 @@ namespace East2West.Migrations
                         Detail = c.String(nullable: false, storeType: "ntext"),
                         Status = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(),
+                        DeletedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Locations", t => t.LocationId, cascadeDelete: true)
@@ -142,6 +142,7 @@ namespace East2West.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 50),
+                        TourCategoryId = c.String(nullable: false, maxLength: 50),
                         DepartureId = c.String(nullable: false, maxLength: 50),
                         DestinationId = c.String(nullable: false, maxLength: 50),
                         Name = c.String(nullable: false, maxLength: 50),
@@ -154,14 +155,25 @@ namespace East2West.Migrations
                         SummarySchedule = c.String(nullable: false, storeType: "ntext"),
                         Status = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(),
+                        DeletedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Locations", t => t.DepartureId)
                 .ForeignKey("dbo.Locations", t => t.DestinationId)
+                .ForeignKey("dbo.TourCategories", t => t.TourCategoryId, cascadeDelete: true)
+                .Index(t => t.TourCategoryId)
                 .Index(t => t.DepartureId)
                 .Index(t => t.DestinationId);
+            
+            CreateTable(
+                "dbo.TourCategories",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 50),
+                        Name = c.String(nullable: false, maxLength: 50),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.TourDetails",
@@ -174,8 +186,8 @@ namespace East2West.Migrations
                         Price = c.Double(nullable: false),
                         Discount = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(),
+                        DeletedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Tours", t => t.TourId, cascadeDelete: true)
@@ -200,20 +212,36 @@ namespace East2West.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 50),
-                        TourId = c.String(nullable: false, maxLength: 50),
-                        CarId = c.String(nullable: false, maxLength: 50),
+                        OrderId = c.String(nullable: false, maxLength: 50),
                         Rating = c.Double(nullable: false),
                         Title = c.String(nullable: false, storeType: "ntext"),
                         Content = c.String(nullable: false, storeType: "ntext"),
                         CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(),
+                        DeletedAt = c.DateTime(),
+                        Status = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Cars", t => t.CarId, cascadeDelete: true)
-                .ForeignKey("dbo.Tours", t => t.TourId, cascadeDelete: true)
-                .Index(t => t.TourId)
-                .Index(t => t.CarId);
+                .ForeignKey("dbo.Orders", t => t.OrderId, cascadeDelete: true)
+                .Index(t => t.OrderId);
+            
+            CreateTable(
+                "dbo.Orders",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 50),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RefundId = c.String(maxLength: 50),
+                        TotalPrice = c.Double(nullable: false),
+                        Type = c.Int(nullable: false),
+                        Status = c.Int(nullable: false),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(),
+                        DeletedAt = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.OrderCars",
@@ -228,24 +256,6 @@ namespace East2West.Migrations
                 .ForeignKey("dbo.Orders", t => t.OrderId, cascadeDelete: true)
                 .Index(t => t.OrderId)
                 .Index(t => t.CarScheduleId);
-            
-            CreateTable(
-                "dbo.Orders",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 50),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RefundId = c.String(maxLength: 50),
-                        TotalPrice = c.String(nullable: false),
-                        Type = c.Int(nullable: false),
-                        Status = c.Int(nullable: false),
-                        CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.OrderTours",
@@ -271,8 +281,8 @@ namespace East2West.Migrations
                         TotalPrice = c.Double(nullable: false),
                         Status = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(),
+                        DeletedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Orders", t => t.Id)
@@ -291,8 +301,8 @@ namespace East2West.Migrations
                         Description = c.String(nullable: false, storeType: "ntext"),
                         Status = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(),
+                        DeletedAt = c.DateTime(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -359,7 +369,6 @@ namespace East2West.Migrations
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
         }
-        
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");

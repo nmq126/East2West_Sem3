@@ -49,8 +49,8 @@ namespace East2West.Models
         public int Status { get; set; }
 
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime DeletedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
         public Location LocationDeparture { get; set; }
         public Location LocationDestination { get; set; }
     }

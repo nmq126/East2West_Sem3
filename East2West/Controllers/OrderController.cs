@@ -24,7 +24,7 @@ namespace East2West.Controllers
                 {
                     Id = String.Concat("ORD_", Guid.NewGuid().ToString("N").Substring(0, 5)),
                     UserId = userId,
-                    TotalPrice = Convert.ToString(unitPrice * quantity),
+                    TotalPrice = unitPrice * quantity,
                     Type = 1,
                     Status = -1,
                     CreatedAt = DateTime.Now,

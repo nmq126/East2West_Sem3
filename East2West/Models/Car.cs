@@ -46,8 +46,8 @@ namespace East2West.Models
         public int Status { get; set; }
 
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime DeletedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
         public ICollection<CarSchedule> CarSchedules { get; set; }
         public CarType CarType { get; set; }
         public CarModel CarModel { get; set; }

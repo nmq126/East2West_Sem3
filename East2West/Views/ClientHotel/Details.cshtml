@@ -1,4 +1,4 @@
-﻿@model East2West.Models.Tour
+﻿@model East2West.Models.Hotel
 
 @{
     ViewBag.Title = "East2West - " + @Model.Name;
@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <h1>@Model.Name</h1>
-                        <span>@Model.LocationDestination.Name</span>
+                        <span>@Model.Location.Name</span>
                         <span class="rating">
                             @for (int j = 0; j < Model.Rating; j++)
                             {
@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-md-4">
                         <div id="price_single_main">
-                            from/per person <span><sup>$</sup>@Model.TourDetails.First().Price</span>
+                            From/Per night <span><sup>$</sup>@Model.Price</span>
                         </div>
                     </div>
                 </div>
@@ -65,10 +65,13 @@
             <div class="col-lg-8" id="single_tour_desc">
                 <div id="single_tour_feat">
                     <ul>
-                        <li><i class="icon_set_1_icon-13"></i>Accessibility</li>
+                        <li><i class="icon_set_2_icon-116"></i>Plasma TV</li>
+                        <li><i class="icon_set_1_icon-86"></i>Free Wifi</li>
+                        <li><i class="icon_set_2_icon-110"></i>Poll</li>
+                        <li><i class="icon_set_1_icon-59"></i>Breakfast</li>
                         <li><i class="icon_set_1_icon-22"></i>Pet allowed</li>
-                        <li><i class="icon_set_1_icon-97"></i>Audio guide</li>
-                        <li><i class="icon_set_1_icon-29"></i>Tour guide</li>
+                        <li><i class="icon_set_1_icon-13"></i>Accessibiliy</li>
+                        <li><i class="icon_set_1_icon-27"></i>Parking</li>
                     </ul>
                 </div>
 
@@ -127,7 +130,7 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row">
+                @*<div class="row">
                     <div class="col-lg-3">
                         <h3>Schedule</h3>
                     </div>
@@ -135,12 +138,12 @@
                         @foreach (var schedule in Model.TourSchedules)
                         {
                             <div class="table-responsive">
-                                @schedule.Name
+                             
                                 @Html.Raw(HttpUtility.HtmlDecode(@schedule.Detail))
                             </div>
                         }
                     </div>
-                </div>
+                </div>*@
                 <hr>
                 <div class="row">
                     <div class="col-lg-3">
@@ -233,83 +236,6 @@
                 </div>
             </div>
             <!--End  single_tour_desc-->
-
-            <aside class="col-lg-4" id="sidebar">
-
-                <div class="theiaStickySidebar">
-                    <div class="box_style_1 expose" id="booking_box">
-                        <h3 class="inner">- Booking -</h3>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group scroll-fix">
-                                    <label><i class="icon-calendar-7"></i> Choose tour</label>
-                                    <select class="form-select" aria-label="Default select example" id="selected_id" data-id="@Model.Id">
-                                        @foreach (var tourDetail in Model.TourDetails)
-                                        {
-                                            <option value="@tourDetail.Id">@tourDetail.Id</option>
-                                        }
-                                    </select>
-                                    <input id="detailPrice" class="form-control mt-2" value="Price: @ViewBag.TourDetailPrice$" readonly />
-                                    <input id="detailSeat" class="form-control mt-2" value="Available seat: @ViewBag.TourDetailSeat" readonly />
-                                    <input id="startDay" class="form-control mt-2" value="Departure Day: @ViewBag.TourDetailDate" readonly />
-                                    <input id="detailPriceHidden" value="@ViewBag.TourDetailPrice" hidden />
-                                    <input id="userId" value="@ViewBag.UserId" hidden />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Person</label>
-                                    <div class="numbers-row">
-                                        <input type="text" value="1" id="person" class="qty2 form-control" name="quantity" data-target="#target_person">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <table class="table table_summary">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        Tour Id
-                                    </td>
-                                    <td class="text-end" id="selected_tour">
-                                        @ViewBag.TourDetailId
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Person
-                                    </td>
-                                    <td class="text-end" id="target_person">
-                                        1
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Total amount
-                                    </td>
-                                    <td class="text-end" id="total_amount">
-                                        1x $@ViewBag.TourDetailPrice
-                                    </td>
-                                </tr>
-                                <tr class="total">
-                                    <td>
-                                        Total cost
-                                    </td>
-                                    <td class="text-end" id="total_cost">
-                                       @ViewBag.TourDetailPrice
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <a id="submit_button" class="btn_full" href="#">Book now</a>
-                    </div>
-                    <!--/box_style_1 -->
-                </div>
-                <!--/sticky -->
-            </aside>
         </div>
         <!--End row -->
     </div>

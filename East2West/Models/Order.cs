@@ -22,15 +22,15 @@ namespace East2West.Models
         public String RefundId { get; set; }
 
         [Required]
-        public String TotalPrice { get; set; }
+        public Double TotalPrice { get; set; }
 
         [Required]
         public int Type { get; set; }
 
         public int Status { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime DeletedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
 
         [ForeignKey("Id")]
         public virtual Refund Refund { get; set; }

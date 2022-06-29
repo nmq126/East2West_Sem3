@@ -22,6 +22,7 @@ namespace East2West.Data
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Flight> Flights { get; set; }
+        public DbSet<TourCategory> TourCategories { get; set; }
         public DbSet<Tour> Tours { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<TourSchedule> TourSchedules { get; set; }
