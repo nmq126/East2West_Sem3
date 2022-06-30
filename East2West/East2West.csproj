@@ -184,6 +184,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206290409178_init-table.cs" />
+    <Compile Include="Migrations\202206290409178_init-table.Designer.cs">
+      <DependentUpon>202206290409178_init-table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206290819019_update_database.cs" />
+    <Compile Include="Migrations\202206290819019_update_database.Designer.cs">
+      <DependentUpon>202206290819019_update_database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206291359102_update_database1.cs" />
+    <Compile Include="Migrations\202206291359102_update_database1.Designer.cs">
+      <DependentUpon>202206291359102_update_database1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206291417517_update_database2.cs" />
+    <Compile Include="Migrations\202206291417517_update_database2.Designer.cs">
+      <DependentUpon>202206291417517_update_database2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppRole.cs" />
     <Compile Include="Models\Car.cs" />
@@ -900,7 +916,12 @@
     <Content Include="Content\client_rev-slider-files\js\extensions\revolution.extension.video.min.js" />
     <Content Include="Content\client_rev-slider-files\js\jquery.themepunch.revolution.min.js" />
     <Content Include="Content\client_rev-slider-files\js\jquery.themepunch.tools.min.js" />
+    <Content Include="Content\img\avatar1.jpg" />
+    <Content Include="Content\img\avatar2.jpg" />
+    <Content Include="Content\img\avatar3.jpg" />
     <Content Include="Content\img\bg_login.jpg" />
+    <Content Include="Content\img\laptop.png" />
+    <Content Include="Content\img\post-thumb-2.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
@@ -1055,6 +1076,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202206290409178_init-table.resx">
+      <DependentUpon>202206290409178_init-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206290819019_update_database.resx">
+      <DependentUpon>202206290819019_update_database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206291359102_update_database1.resx">
+      <DependentUpon>202206291359102_update_database1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206291417517_update_database2.resx">
+      <DependentUpon>202206291417517_update_database2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
