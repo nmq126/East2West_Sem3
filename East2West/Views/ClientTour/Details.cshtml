@@ -44,12 +44,12 @@
         <div class="container">
             <ul>
                 <li>
-                    <a href="#">Home</a>
+                    <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="#">Category</a>
+                    <a href="@Url.Action("GetListTour", "ClientTour")">Tours</a>
                 </li>
-                <li>Page active</li>
+                <li>Tour Details</li>
             </ul>
         </div>
     </div>
@@ -254,6 +254,7 @@
                                     <input id="startDay" class="form-control mt-2" value="Departure Day: @ViewBag.TourDetailDate" readonly />
                                     <input id="detailPriceHidden" value="@ViewBag.TourDetailPrice" hidden />
                                     <input id="userId" value="@ViewBag.UserId" hidden />
+                                    <input id="maxSeat" value="@ViewBag.TourDetailSeat" hidden />
                                 </div>
                             </div>
                         </div>
@@ -262,7 +263,7 @@
                                 <div class="form-group">
                                     <label>Person</label>
                                     <div class="numbers-row">
-                                        <input type="text" value="1" id="person" class="qty2 form-control" name="quantity" data-target="#target_person">
+                                        <input type="text" onkeypress="return /[0-9]/i.test(event.key)" value="1" id="person" class="qty2 form-control" name="quantity" data-target="#target_person" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -299,7 +300,7 @@
                                         Total cost
                                     </td>
                                     <td class="text-end" id="total_cost">
-                                       @ViewBag.TourDetailPrice
+                                        @ViewBag.TourDetailPrice
                                     </td>
                                 </tr>
                             </tbody>
