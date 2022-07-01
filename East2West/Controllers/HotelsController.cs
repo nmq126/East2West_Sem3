@@ -33,7 +33,7 @@ namespace East2West.Controllers
             ViewBag.LocationId = locationId;
             ViewBag.Page = page;
             int pageNumber = (page ?? 1);
-            int pageSize = 10;
+            int pageSize = 5;
             if (!String.IsNullOrEmpty(id))
             {
                 hotels = hotels.Where(h => h.Id == id);
