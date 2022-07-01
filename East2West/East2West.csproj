@@ -94,6 +94,12 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -170,6 +176,7 @@
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\ClientCarController.cs" />
     <Compile Include="Controllers\ClientHotelController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\FlightsController.cs" />
     <Compile Include="Controllers\ClientTourController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -207,6 +214,7 @@
     <Compile Include="Models\CarModel.cs" />
     <Compile Include="Models\CarSchedule.cs" />
     <Compile Include="Models\CarType.cs" />
+    <Compile Include="Models\ChartModel\DataPoint.cs" />
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\Flight.cs" />
     <Compile Include="Models\Hotel.cs" />
@@ -1057,6 +1065,7 @@
     <Content Include="Views\TourDetails\Edit.cshtml" />
     <Content Include="Views\Shared\_LayoutPageAuthen.cshtml" />
     <Content Include="Views\ClientHotel\Details.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

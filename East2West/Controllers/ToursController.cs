@@ -136,6 +136,7 @@ namespace East2West.Controllers
         {
             ViewBag.BreadCrumb = "Create Tour";
 
+            ViewBag.TourCategoryId = new SelectList(db.TourCategories, "Id", "Name");
             ViewBag.DepartureId = new SelectList(db.Locations, "Id", "Name");
             ViewBag.DestinationId = new SelectList(db.Locations, "Id", "Name");
             return View();
@@ -182,6 +183,7 @@ namespace East2West.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.TourCategoryId = new SelectList(db.TourCategories, "Id", "Name", tour.TourCategoryId);
             ViewBag.DepartureId = new SelectList(db.Locations, "Id", "Name", tour.DepartureId);
             ViewBag.DestinationId = new SelectList(db.Locations, "Id", "Name", tour.DestinationId);
             return View(tour);
@@ -207,6 +209,7 @@ namespace East2West.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.TourCategoryId = new SelectList(db.TourCategories, "Id", "Name", tour.TourCategoryId);
             ViewBag.DepartureId = new SelectList(db.Locations, "Id", "Name", tour.DepartureId);
             ViewBag.DestinationId = new SelectList(db.Locations, "Id", "Name", tour.DestinationId);
             return View(tour);
@@ -217,7 +220,7 @@ namespace East2West.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DepartureId,DestinationId,Name,Description,Detail,Thumbnail,Duration,Rating,Policy,SummarySchedule,Status,CreatedAt,UpdatedAt,DeletedAt")] Tour tour)
+        public ActionResult Edit(Tour tour)
         {
             if (ModelState.IsValid)
             {

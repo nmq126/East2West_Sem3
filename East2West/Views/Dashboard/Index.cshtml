@@ -1,0 +1,245 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row flex-row">
+    <!-- Begin Facebook -->
+    <div class="col-xl-4 col-md-6 col-sm-6">
+        <div class="widget widget-12 has-shadow">
+            <div class="widget-body">
+                <div class="media">
+                    <div class="align-self-center ml-5 mr-5">
+                        <i class="ion-bag text-facebook"></i>
+                    </div>
+                    <div class="media-body align-self-center">
+                        <div class="title text-facebook">Total orders</div>
+                        <div class="number">@ViewBag.TotalOrder </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Facebook -->
+    <!-- Begin Twitter -->
+    <div class="col-xl-4 col-md-6 col-sm-6">
+        <div class="widget widget-12 has-shadow">
+            <div class="widget-body">
+                <div class="media">
+                    <div class="align-self-center ml-5 mr-5">
+                        <i class="ion-person text-twitter"></i>
+                    </div>
+                    <div class="media-body align-self-center">
+                        <div class="title text-twitter">Total users</div>
+                        <div class="number">@ViewBag.TotalUser</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Twitter -->
+    <!-- Begin Linkedin -->
+    <div class="col-xl-4 col-md-6 col-sm-6">
+        <div class="widget widget-12 has-shadow">
+            <div class="widget-body">
+                <div class="media">
+                    <div class="align-self-center ml-5 mr-5">
+                        <i class="ion-cash text-linkedin"></i>
+                    </div>
+                    <div class="media-body align-self-center">
+                        <div class="title text-linkedin">All time revenue</div>
+                        <div class="number">$@ViewBag.TotalRevenue</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Linkedin -->
+</div>
+
+<div class="widget-body">
+    <div class="row">
+        <div class="col-xl-10 col-12 no-padding">
+            <div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-12 d-flex flex-column my-auto no-padding text-center">
+            <div class="new-orders">
+                <div class="title">New Orders</div>
+                <div class="circle-orders">
+                    <div class="percent-orders"></div>
+                </div>
+            </div>
+            <div class="some-stats mt-5">
+                <div class="title">Total Delivered</div>
+                <div class="number text-blue">856</div>
+            </div>
+            <div class="some-stats mt-3">
+                <div class="title">Total Estimated</div>
+                <div class="number text-blue">297</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row flex-row">
+    <div class="col-xl-12 col-md-6">
+        <!-- Begin Widget 09 -->
+        <div class="widget widget-09 has-shadow">
+            <!-- Begin Widget Header -->
+            <div class="widget-header">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label class="form-control-label">Analyze by</label>
+                        <div class="select mb-3">
+                            <select name="typeId" id="typeId" class="custom-select form-control">
+                                <option value="2">Tour Duration</option>
+                                <option value="1">Tour Category</option>
+                                <option value="0">Season</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Widget Header -->
+            <!-- Begin Widget Body -->
+            <div class="widget-body">
+                <div class="row">
+                    <div class="col-xl-10 col-12 no-padding">
+                        <div>
+                            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Widget 09 -->
+        <div class="widget widget-09 has-shadow">
+            <!-- Begin Widget Header -->
+            <div class="widget-header">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label class="form-control-label">Analyze by</label>
+                        <div class="select mb-3">
+                            <select name="typeIdCar" id="typeIdCar" class="custom-select form-control">
+                                <option value="2">Car Model</option>
+                                <option value="1">Car Type</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Widget Header -->
+            <!-- Begin Widget Body -->
+            <div class="widget-body">
+                <div class="row">
+                    <div class="col-xl-10 col-12 no-padding">
+                        <div>
+                            <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+@section Scripts{
+    <script src="~/Content/admin_vendor/js/nicescroll/nicescroll.min.js"></script>
+    <script src="~/Content/admin_vendor/js/chart/chart.min.js"></script>
+    <script src="~/Content/admin_vendor/js/progress/circle-progress.min.js"></script>
+    <script src="~/Content/admin_vendor/js/calendar/moment.min.js"></script>
+    <script src="~/Content/admin_vendor/js/calendar/fullcalendar.min.js"></script>
+    <script src="~/Content/admin_vendor/js/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/Content/admin_vendor/js/app/app.js"></script>
+    <script src="~/Content/admin_js/dashboard/db-default.js"></script>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+    <script>
+        $(function () {
+            var options = {
+                theme: "light1", // "light1", "light2", "dark1", "dark2"
+                exportEnabled: true,
+                animationEnabled: true,
+                title: {
+                    text: '@ViewBag.PieChartTitle'
+                },
+                subtitles: [{
+                    text: "Q2, 2016"
+                }],
+                legend: {
+                    horizontalAlign: "right",
+                    verticalAlign: "center"
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 180,
+                    toolTipContent: "<b>{label}</b>: ${y}",
+                    showInLegend: "true",
+                    legendText: "{label} (#percent%)",
+                    indexLabel: "{label} - ${y}",
+                    dataPoints: @Html.Raw(ViewBag.DataPoints)
+	            }]
+            };
+            $("#chartContainer").CanvasJSChart(options);
+
+            var chart = $("#chartContainer").CanvasJSChart();
+
+            const selectElement = document.getElementById("typeId");
+            selectElement.addEventListener('change', (event) => {
+                if (event.target.value == "1") {
+                    chart.options.title.text = "Revenue by tour package category share";
+                }
+                if (event.target.value == "2") {
+                    chart.options.title.text = "Revenue by tour package duration share";
+                }
+                if (event.target.value == "0") {
+                    chart.options.title.text = "Revenue by season share";
+                }
+                $("#preloader2").show();
+                $.ajax({
+                    type: "GET",
+                    url: "/Dashboard/ChangeType",
+                    data: {
+                        typeId: event.target.value
+                    },
+                    success: function (msg) {
+                        chart.options.data[0].dataPoints = JSON.parse(msg)
+                        chart.render()
+                        $("#preloader2").hide()
+                    },
+                    error: function () {
+                        $("#preloader2").hide()
+                    },
+                });
+            });
+        });
+
+    </script>
+    <script>
+        $('.circle-orders').circleProgress({
+            value: 0.43,
+            size: 120,
+            startAngle: -Math.PI / 2,
+            thickness: 6,
+            lineCap: 'round',
+            emptyFill: '#e4e8f0',
+            fill: {
+                gradient: ['#0087a4', '#08a6c3']
+            }
+        }).on('circle-animation-progress', function (event, progress) {
+            $(this).find('.percent-orders').html(Math.round(43 * progress) + '<i>%</i>');
+        });
+    </script>
+}
