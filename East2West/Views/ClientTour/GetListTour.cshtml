@@ -66,9 +66,9 @@
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="/ClientTour/GetListTour">Tour</a>
+                    <a href="@Url.Action("GetListTour", "ClientTour")">Tours</a>
                 </li>
-                <li>List Tour</li>
+                <li>List Tours</li>
             </ul>
         </div>
     </div>
@@ -203,7 +203,7 @@
                                 </div>
                             </div>
                             <div class="col-md-8 col-sm-8" style="padding: 0">
-                                @Html.TextBox("keyword", ViewBag.Keyword as string, new { @class = "form-control", placeholder = "Search", style= "outline: 0px solid transparent;" })
+                                @Html.TextBox("keyword", ViewBag.Keyword as string, new { @class = "form-control", placeholder = "Search", style = "outline: 0px solid transparent;" })
                             </div>
                         </div>
                     </div>
@@ -231,7 +231,7 @@
                                         </div>
 
                                         <div class="img_list">
-                                            <a href="/ClientTour/Details?id=@tour.Id">
+                                            <a href="@Url.Action("Details", "ClientTour", new { id = tour.Id })">
                                                 <img src="@img" alt="Image">
                                             </a>
                                         </div>
@@ -292,7 +292,7 @@
                                                 <small>*Per person</small>
 
                                                 <p>
-                                                    <a href="/ClientTour/Details?id=@tour.Id" class="btn_1">Details</a>
+                                                    <a href="@Url.Action("Details", "ClientTour", new { id = tour.Id })" class="btn_1">Details</a>
                                                 </p>
                                             </div>
                                         </div>

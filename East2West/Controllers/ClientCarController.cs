@@ -23,5 +23,24 @@ namespace East2West.Controllers
                 .Include(c => c.Location);
             return View(cars.ToList());
         }
+
+        public ActionResult Details(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Car car = db.Cars.Include(c => c.Location)
+                .Include(c => c.CarModel)
+                .Include("CarModel.CarBrand")
+                .Include(c => c.CarType)
+                .Include(c => c.CarSchedules)
+                .FirstOrDefault(c => c.Id == id);
+            if (car == null)
+            {
+                return HttpNotFound();
+            }
+            return View(car);
+        }
     }
 }
