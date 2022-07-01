@@ -172,9 +172,7 @@
                                 <div class="ribbon_3 popular">
                                     <span>Popular</span>
                                 </div>
-                                <div class="wishlist">
-                                    <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                                </div>
+                                
                                 <div class="img_list">
                                     <a href="single_transfer.html">
                                         <img src="@img" alt="Image">
@@ -185,16 +183,18 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="tour_list_desc">
                                     <h3><strong>@car.CarModel.Name</strong></h3>
-                                    <p></p>
+                                    <h8><strong>@car.LisencePlate</strong></h8><br /><br />
+                                    <p class="m-2"><i class="icon_set_1_icon-29"></i> Seat Capacity: @car.SeatCapacity</p>
+                                    @if (car.HasAirConditioner == true)
+                                    {
+                                        <p class="m-2"><i class="icon-air"></i> Has Air Conditioner</p>
+                                    }
+                                    else {<p class="m-2"><i class="icon-air"></i> No Air Conditioner</p> 
+                                    }
+                                <p class="m-2"><i class="icon_set_1_icon-21"></i> Type: @car.CarType.Name</p>
+
                                     <ul class="add_info">
-                                        <li>
-                                            <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_1_icon-70"></i></span>
-                                                <div class="tooltip-content">
-                                                    <h4>Passengers</h4> Up to 6 passengers.
-                                                </div>
-                                            </div>
-                                        </li>
+
                                         <li>
                                             <div class="tooltip_styled tooltip-effect-4">
                                                 <span class="tooltip-item"><i class="icon_set_1_icon-6"></i></span>

@@ -128,6 +128,7 @@ namespace East2West.Controllers
         public ActionResult PaymentWithPaypal(string id, string name, double? price, int? quantity)
         {
             APIContext apiContext = PaypalConfiguration.GetAPIContext();
+
             try
             {
                 string payerId = Request.Params["PayerID"];
@@ -138,13 +139,7 @@ namespace East2West.Controllers
                     var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid, name, price, quantity);
                     var links = createdPayment.links.GetEnumerator();
                     string paypalRedirectUrl = string.Empty;
-                    var order = db.Orders.SingleOrDefault(o => o.Id == id);
-                    if (order != null)
-                    {
-                        order.Status = 1;
-                        db.SaveChanges();
-                    }
-
+                    Session["idOrder"] = id;
                     while (links.MoveNext())
                     {
                         Links link = links.Current;
@@ -155,7 +150,6 @@ namespace East2West.Controllers
                     }
 
                     Session.Add(guid, createdPayment.id);
-
                     return Redirect(paypalRedirectUrl);
                 }
                 else
@@ -173,7 +167,14 @@ namespace East2West.Controllers
                 PaypalLogger.Log("Error: " + e.Message);
                 return View("~/Views/Home/Page_404.cshtml");
             }
-
+            var idOrder = Session["idOrder"].ToString();
+            var order = db.Orders.Where(o => o.Id.Equals(idOrder)).FirstOrDefault();
+            if (order != null)
+            {
+                order.Status = 1;
+                db.SaveChanges();
+            }
+            Session.Remove("idOrder");
             return RedirectToAction("ThankYou", "Home");
         }
     }

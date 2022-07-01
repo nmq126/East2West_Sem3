@@ -1036,6 +1036,7 @@
     <Content Include="Views\TourDetails\Edit.cshtml" />
     <Content Include="Views\Shared\_LayoutPageAuthen.cshtml" />
     <Content Include="Views\ClientHotel\Details.cshtml" />
+    <Content Include="Views\ClientCar\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
