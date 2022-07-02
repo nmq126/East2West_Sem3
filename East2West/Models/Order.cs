@@ -18,21 +18,18 @@ namespace East2West.Models
         [Required]
         public String UserId { get; set; }
 
-        [StringLength(50)]
-        public String RefundId { get; set; }
-
         [Required]
-        public String TotalPrice { get; set; }
+        public Double TotalPrice { get; set; }
 
         [Required]
         public int Type { get; set; }
 
         public int Status { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime DeletedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
 
-        [ForeignKey("Id")]
+        
         public virtual Refund Refund { get; set; }
 
         public virtual User User { get; set; }

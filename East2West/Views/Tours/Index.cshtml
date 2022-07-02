@@ -2,7 +2,7 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "List tour";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <style>
@@ -47,65 +47,88 @@
 
 <div class="row">
 
+    
     <div class="col-xl-12">
         <div class="widget has-shadow">
             <div class="widget-body">
                 @using (Html.BeginForm("Index", "Tours", FormMethod.Get))
                 {
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <label class="form-control-label">Select Depature location</label>
-                            <div class="select mb-3">
-                                <select name="departureId" id="departureId" class="custom-select form-control">
-                                    <option value="">Select Departure</option>
-                                    @foreach (var departure in ViewBag.LocationList)
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label class="form-control-label">Select Depature location</label>
+                        <div class="select mb-3">
+                            <select name="departureId" id="departureId" class="custom-select form-control">
+                                <option value="">All</option>
+                                @foreach (var departure in ViewBag.LocationList)
+                                {
+                                    if (departure.Id == ViewBag.DepartureId)
                                     {
-                                        if (departure.Id == ViewBag.DepartureId)
-                                        {
-                                            <option value=@departure.Id selected>@departure.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value=@departure.Id>@departure.Name</option>
-                                        }
+                                        <option value=@departure.Id selected>@departure.Name</option>
                                     }
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <label class="form-control-label">Select Destination location</label>
-                            <div class="select mb-3">
-                                <select name="destinationId" id="destinationId" class="custom-select form-control">
-                                    <option value="">Select Destination</option>
-                                    @foreach (var destination in ViewBag.LocationList)
+                                    else
                                     {
-                                        if (destination.Id == ViewBag.DestinationId)
-                                        {
-                                            <option value=@destination.Id selected>@destination.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value=@destination.Id>@destination.Name</option>
-                                        }
+                                        <option value=@departure.Id>@departure.Name</option>
                                     }
-                                </select>
-                            </div>
+                                }
+                            </select>
                         </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-control-label">All</label>
+                        <div class="select mb-3">
+                            <select name="destinationId" id="destinationId" class="custom-select form-control">
+                                <option value="">Select Destination</option>
+                                @foreach (var destination in ViewBag.LocationList)
+                                {
+                                    if (destination.Id == ViewBag.DestinationId)
+                                    {
+                                        <option value=@destination.Id selected>@destination.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@destination.Id>@destination.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-control-label">Select Category</label>
+                        <div class="select mb-3">
+                            <select name="categoryId" id="categoryId" class="custom-select form-control">
+                                <option value="">All</option>
+                                @foreach (var category in ViewBag.CategoryList)
+                                {
+                                    if (category.Id == ViewBag.CategoryId)
+                                    {
+                                        <option value=@category.Id selected>@category.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@category.Id>@category.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
 
-                        <div class="col-lg-3">
-                            <label class="form-control-label">Sort by</label>
-                            <div class="select mb-3">
-                                <select name="sortType" id="sortType" class="custom-select form-control">
-                                    <option value="">Sort by (Lastest default)</option>
-                                    <option value="createdAt_asc" @(ViewBag.SortType == "createdAt_asc" ? "selected" : "")>Latest</option>
-                                    <option value="createdAt_desc" @(ViewBag.SortType == "createdAt_desc" ? "selected" : "")>Oldest</option>
-                                    <option value="duration_asc" @(ViewBag.SortType == "duration_asc" ? "selected" : "")>Duration (Increase)</option>
-                                    <option value="duration_desc" @(ViewBag.SortType == "duration_desc" ? "selected" : "")>Duration (Decrease)</option>
-                                    <option value="rating_asc" @(ViewBag.SortType == "rating_asc" ? "selected" : "")>Rating (Increase)</option>
-                                    <option value="rating_desc" @(ViewBag.SortType == "rating_desc" ? "selected" : "")>Rating (Decrease)</option>
-                                </select>
-                            </div>
+                    <div class="col-lg-3">
+                        <label class="form-control-label">Sort by</label>
+                        <div class="select mb-3">
+                            <select name="sortType" id="sortType" class="custom-select form-control">
+                                <option value="">Sort by (Lastest default)</option>
+                                <option value="createdAt_asc" @(ViewBag.SortType == "createdAt_asc" ? "selected" : "")>Latest</option>
+                                <option value="createdAt_desc" @(ViewBag.SortType == "createdAt_desc" ? "selected" : "")>Oldest</option>
+                                <option value="duration_asc" @(ViewBag.SortType == "duration_asc" ? "selected" : "")>Duration (Increase)</option>
+                                <option value="duration_desc" @(ViewBag.SortType == "duration_desc" ? "selected" : "")>Duration (Decrease)</option>
+                                <option value="rating_asc" @(ViewBag.SortType == "rating_asc" ? "selected" : "")>Rating (Increase)</option>
+                                <option value="rating_desc" @(ViewBag.SortType == "rating_desc" ? "selected" : "")>Rating (Decrease)</option>
+                            </select>
                         </div>
+                    </div>
+
+                </div>
+                    <div class="row">
                         <div class="col-lg-3">
                             <label class="form-control-label">Status</label>
                             <div class="select mb-3">
@@ -116,8 +139,6 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-lg-3">
                             <label class="form-control-label">Duration</label>
                             <div class="select mb-3">
@@ -141,6 +162,10 @@
                                 @Html.TextBox("keyword", ViewBag.Keyword as string, new { @class = "form-control", placeholder = "Name/Description/Detail/Schedule" })
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-9">
+                        </div>
                         <div class="col-lg-3 text-right">
                             <div style="height:28px"></div>
                             <div>
@@ -149,84 +174,111 @@
                             </div>
                         </div>
                     </div>
+
                 }
             </div>
         </div>
         <!-- Default -->
         <div class="widget has-shadow">
             <div class="widget-body">
-                <div class="table-responsive">
-                    <table class="table mb-0">
-                        <thead>
-                            <tr>
-                                <th width="5%">#</th>
-                                <th width="5%">Id</th>
-                                <th width="20%">Name</th>
-                                <th width="15%">Thumbnail</th>
-                                <th width="10%">Departure</th>
-                                <th width="10%">Destination</th>
-                                <th width="15%">Status</th>
-                                <th width="5%">Rating</th>
-                                <th width="5%">Duration</th>
-                                <th width="10%">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @{var i = 1;
-                                foreach (var item in Model)
-                                {
-
-                                    var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
-                                    if (item.Thumbnail != null)
+                @if (Model == null || Model.Count() == 0)
+                {
+                    <div class="text-center">
+                        <i class="la la-search"></i>
+                        Nothing found
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-bordered mb-0">
+                            <thead>
+                                <tr>
+                                    <th width="5%">#</th>
+                                    <th width="5%">Id</th>
+                                    <th width="15%">Name</th>
+                                    <th width="15%">Thumbnail</th>
+                                    <th width="7%">Departure</th>
+                                    <th width="7%">Destination</th>
+                                    <th width="8%">Category</th>
+                                    <th width="15%">Status</th>
+                                    <th width="5%">Rating</th>
+                                    <th width="5%">Duration</th>
+                                    <th width="10%">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{var i = 1;
+                                    foreach (var item in Model)
                                     {
-                                        img = item.Thumbnail.Split(',').ToList<String>().First();
+
+                                        var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
+                                        if (item.Thumbnail != null)
+                                        {
+                                            img = item.Thumbnail.Split(',').ToList<String>().First();
+                                        }
+                                        <tr>
+                                            <td><span class="text-primary">@i</span></td>
+                                            <td><span>@Html.DisplayFor(modelItem => item.Id)</span></td>
+                                            <td>@item.Name</td>
+                                            <td><img width="150" src=@img alt="thumbnail" /></td>
+                                            <td>@item.LocationDeparture.Name</td>
+                                            <td>@item.LocationDestination.Name</td>
+                                            <td>@item.TourCategory.Name</td>
+                                            <td>
+                                                <select id="Status" name="Status" data-name="@(item.Name)" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
+                                                    <option value="1" @(item.Status == 1 ? "selected" : "")>Active</option>
+                                                    <option value="0" @(item.Status == 0 ? "selected" : "")>Disable</option>
+                                                </select>
+                                            </td>
+                                            <td>@item.Rating</td>
+                                            <td>@item.Duration</td>
+                                            <td class="td-actions">
+                                                <a href="@Url.Action("Details", "Tours", new { id = item.Id })">
+                                                    <i class="la la-info-circle" data-toggle="tooltip" title="Information"></i>
+                                                </a>
+                                                <a href="@Url.Action("Edit", "Tours", new { id = item.Id })">
+                                                    <i class="la la-edit" data-toggle="tooltip" title="Edit"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        i++;
                                     }
-                                    <tr>
-                                        <td><span class="text-primary">@i</span></td>
-                                        <td><span>@Html.DisplayFor(modelItem => item.Id)</span></td>
-                                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                        <td><img width="150" src=@img alt="thumbnail" /></td>
-                                        <td>@item.LocationDeparture.Name</td>
-                                        <td>@Html.DisplayFor(modelItem => item.LocationDestination.Name)</td>
-                                        <td>
-                                            <select id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control">
-                                                <option value="1" @(item.Status == 1 ? "selected" : "")>Active</option>
-                                                <option value="0" @(item.Status == 0 ? "selected" : "")>Disable</option>
-                                            </select>
-                                        </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Rating)</td>
-                                        <td>@item.Duration days</td>
-                                        <td class="td-actions">
-                                            <a href="@Url.Action("Details", "Tours", new { id = item.Id })">
-                                                <i class="la la-info-circle" data-toggle="tooltip" title="Information"></i>
-                                            </a>
-                                            <a href="@Url.Action("Edit", "Tours", new { id = item.Id })">
-                                                <i class="la la-edit" data-toggle="tooltip" title="Edit"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    i++;
                                 }
-                            }
-                        </tbody>
-                    </table>
-                    @Html.PagedListPager(Model, page => Url.Action("Index",
-                                new { id = ViewBag.Id, sortType = ViewBag.SortType, keyword = ViewBag.Keyword, categoryId = ViewBag.CategoryId, levelId = ViewBag.LevelId, page }),
-                                new PagedListRenderOptions
-                                {
-                                    DisplayLinkToIndividualPages = true,
-                                    DisplayPageCountAndCurrentLocation = false,
-                                    MaximumPageNumbersToDisplay = 10,
-                                    LinkToFirstPageFormat = "««",
-                                    LinkToPreviousPageFormat = "«",
-                                    LinkToIndividualPageFormat = "{0}",
-                                    LinkToNextPageFormat = "»",
-                                    LinkToLastPageFormat = "»»",
-                                    ContainerDivClasses = new string[] { "pagination-container mt-3" },
-                                    UlElementClasses = new string[] { "pagination" },
-                                    LiElementClasses = new string[] { "page-item" }
-                                })
-                </div>
+                            </tbody>
+                        </table>
+                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                    new
+                                         {
+                                        id = ViewBag.Id,
+                                        sortType = ViewBag.SortType,
+                                        keyword = ViewBag.Keyword,
+                                        departureId = ViewBag.DepartureId,
+                                        destinationId = ViewBag.DestinationId,
+                                        categoryId = ViewBag.CategoryId,
+                                        duration_range = ViewBag.DurationRange,
+                                        status = ViewBag.Status,
+                                        page
+                                         }),
+                                    new PagedListRenderOptions
+                                    {
+                                        DisplayItemSliceAndTotal = true,
+                                        ItemSliceAndTotalFormat = "Showing {0} to {1} of {2} total item(s).",
+                                        DisplayLinkToIndividualPages = true,
+                                        DisplayPageCountAndCurrentLocation = false,
+                                        MaximumPageNumbersToDisplay = 10,
+                                        LinkToFirstPageFormat = "««",
+                                        LinkToPreviousPageFormat = "«",
+                                        LinkToIndividualPageFormat = "{0}",
+                                        LinkToNextPageFormat = "»",
+                                        LinkToLastPageFormat = "»»",
+                                        ContainerDivClasses = new string[] { "pagination-container mt-3" },
+                                        UlElementClasses = new string[] { "pagination" },
+                                        LiElementClasses = new string[] { "page-item" }
+                                    })
+                    </div>
+                }
+
             </div>
         </div>
         <!-- End Default -->
@@ -253,20 +305,33 @@
         }
     </script>
     <script>
-        $('#Status').on('change', function () {
-            if (confirm("Change Status")) {
+        function changeStatus(obj) {
+            var id = obj.getAttribute('data-id')
+            var status = obj.value
+            var cnfrmMsg = "Activate " + id
+            if (status == 0) {
+                cnfrmMsg = "Disable " + id
+            }
+            if (confirm(cnfrmMsg)) {
+                $("#preloader2").show();
                 $.ajax({
                     type: "GET",
                     url: "/Tours/ChangeStatus",
                     data: {
-                        id: this.getAttribute('data-id'),
-                        status: this.value
+                        id: id,
+                        status: status
                     },
                     success: function (msg) {
+                        $("#preloader2").hide();
                         toastr.info(msg, 'Update successfully');
-                    }
+                    },
+                    error: function () {
+                        $("#preloader2").hide();
+                    },
                 });
+            } else {
+                alert(oke)
             }
-        });
+        }
     </script>
 }

@@ -18,11 +18,13 @@ namespace East2West.Controllers
         private DBContext db = new DBContext();
 
         // GET: Tours
-        public ActionResult Index(int? status, string id, string sortType, string keyword, string duration_range, string departureId, string destinationId, int? page)
+        public ActionResult Index(int? status, string id, string sortType, string keyword, string duration_range,
+            string departureId, string destinationId, string categoryId, int? page)
         {
             ViewBag.BreadCrumb = "Tour List";
             var tours = from t in db.Tours select t;
 
+            ViewBag.CategoryList = from c in db.TourCategories select c;
             ViewBag.LocationList = from l in db.Locations select l;
             ViewBag.Status = status;
             ViewBag.Keyword = keyword;
@@ -31,6 +33,7 @@ namespace East2West.Controllers
             ViewBag.DurationRange = duration_range;
             ViewBag.DepartureId = departureId;
             ViewBag.DestinationId = destinationId;
+            ViewBag.CategoryId = categoryId;
             int pageNumber = (page ?? 1);
             int pageSize = 10;
 
@@ -107,6 +110,7 @@ namespace East2West.Controllers
                     tours = tours.OrderBy(s => s.CreatedAt);
                     break;
             }
+            tours = tours.Include(t => t.TourCategory);
             return View(tours.ToPagedList(pageNumber, pageSize));
         }
 
@@ -148,7 +152,7 @@ namespace East2West.Controllers
             {
                 tour.Rating = 5;
                 tour.Status = 1;
-                tour.CreatedAt = tour.UpdatedAt = tour.DeletedAt = DateTime.Now;
+                tour.CreatedAt = DateTime.Now;
                 do
                 {
                     tour.Id = String.Concat("TOUR_", Guid.NewGuid().ToString("N").Substring(0, 5));

@@ -124,7 +124,12 @@ namespace East2West.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Car car = db.Cars.Find(id);
+            Car car = db.Cars.Include(c => c.Location)
+                .Include(c => c.CarModel)
+                .Include("CarModel.CarBrand")
+                .Include(c => c.CarType)
+                .Include(c => c.CarSchedules)
+                .FirstOrDefault(c => c.Id == id);
             if (car == null)
             {
                 return HttpNotFound();
@@ -151,7 +156,7 @@ namespace East2West.Controllers
         {
             if (ModelState.IsValid)
             {
-                car.CreatedAt = car.UpdatedAt = car.DeletedAt = DateTime.Now;
+                car.CreatedAt = DateTime.Now;
                 car.Status = 1;
                 do
                 {
@@ -181,9 +186,9 @@ namespace East2West.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CarModelId = new SelectList(db.CarModels, "Id", "CarBrandId", car.CarModelId);
-            ViewBag.CarTypeId = new SelectList(db.CarTypes, "Id", "Name", car.CarTypeId);
-            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", car.LocationId);
+            ViewBag.CarModelId = new SelectList(db.CarModels, "Id", "Name");
+            ViewBag.CarTypeId = new SelectList(db.CarTypes, "Id", "Name");
+            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name");
             return View(car);
         }
 
@@ -192,44 +197,44 @@ namespace East2West.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CarModelId,CarTypeId,LocationId,Thumbnail,LisencePlate,HasAirConditioner,SeatCapacity,PricePerDay,Status,CreatedAt,UpdatedAt,DeletedAt")] Car car)
+        public ActionResult Edit(Car car)
         {
             if (ModelState.IsValid)
             {
+                car.UpdatedAt = DateTime.Now;
+                if (car.Status == 0)
+                {
+                    car.DeletedAt = DateTime.Now;
+                }
                 db.Entry(car).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CarModelId = new SelectList(db.CarModels, "Id", "CarBrandId", car.CarModelId);
-            ViewBag.CarTypeId = new SelectList(db.CarTypes, "Id", "Name", car.CarTypeId);
-            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", car.LocationId);
+            ViewBag.CarModelId = new SelectList(db.CarModels, "Id", "Name");
+            ViewBag.CarTypeId = new SelectList(db.CarTypes, "Id", "Name");
+            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name");
             return View(car);
         }
 
-        // GET: Cars/Delete/5
-        public ActionResult Delete(string id)
+        public String ChangeStatus(string id, int status)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return "Bad Request";
             }
             Car car = db.Cars.Find(id);
             if (car == null)
             {
-                return HttpNotFound();
+                return "Car not found";
             }
-            return View(car);
-        }
-
-        // POST: Cars/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Car car = db.Cars.Find(id);
-            db.Cars.Remove(car);
+            car.Status = status;
+            string newStatus = "ACTIVE";
+            if (status == 0)
+            {
+                newStatus = "DISABLE"; 
+            }
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return "Car #" + id + " status change to " + newStatus;
         }
 
         protected override void Dispose(bool disposing)

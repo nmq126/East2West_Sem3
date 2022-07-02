@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using East2West.Data;
 using East2West.Models;
+using PagedList;
 
 namespace East2West.Controllers
 {
@@ -16,10 +17,17 @@ namespace East2West.Controllers
         private DBContext db = new DBContext();
 
         // GET: CarSchedules
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var carSchedules = db.CarSchedules.Include(c => c.Car);
-            return View(carSchedules.ToList());
+            int pageNumber = (page ?? 1);
+            int pageSize = 10;
+            var carSchedules = db.CarSchedules
+                .Include(c => c.Car)
+                .Include("Car.CarModel")
+                .Include("Car.CarType")
+                .Include("Car.CarModel.CarBrand")
+                .OrderBy(c => c.CreatedAt);
+            return View(carSchedules.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: CarSchedules/Details/5
@@ -40,7 +48,7 @@ namespace East2West.Controllers
         // GET: CarSchedules/Create
         public ActionResult Create()
         {
-            ViewBag.CarId = new SelectList(db.Cars, "Id", "Id");
+            ViewBag.CarId = new SelectList(db.Cars.Where(c => c.Status == 1), "Id", "Id");
             return View();
         }
 
@@ -53,7 +61,23 @@ namespace East2West.Controllers
         {
             if (ModelState.IsValid)
             {
-                carSchedule.CreatedAt = carSchedule.UpdatedAt = carSchedule.DeletedAt = DateTime.Now;
+                var car = db.Cars.Include(c => c.CarSchedules).Where(c => c.Id == carSchedule.CarId).FirstOrDefault();
+                if(car == null)
+                {
+                    return HttpNotFound();
+                }
+                //validate date range overlap
+                var thisCarSchedule = car.CarSchedules;
+                foreach (var item in thisCarSchedule)
+                {
+                    if (carSchedule.StartDay <= item.EndDay && carSchedule.EndDay >= item.StartDay)
+                    {
+                        TempData["data"] = "Cannot create schedule because your date range overlap with this schedule: " + item.StartDay.ToShortDateString() + " - " + item.EndDay.ToShortDateString();
+                        ViewBag.CarId = new SelectList(db.Cars, "Id", "CarModelId", carSchedule.CarId);
+                        return View(carSchedule);
+                    }
+                }
+                carSchedule.CreatedAt = DateTime.Now;
                 carSchedule.Status = 0;
                 do
                 {
@@ -67,6 +91,11 @@ namespace East2West.Controllers
 
             ViewBag.CarId = new SelectList(db.Cars, "Id", "CarModelId", carSchedule.CarId);
             return View(carSchedule);
+        }
+
+        private bool ValidateDateRange()
+        {
+            return true;
         }
 
         // GET: CarSchedules/Edit/5
