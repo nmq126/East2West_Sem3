@@ -14,6 +14,9 @@ namespace East2West.Models
         [Key]
         [StringLength(50)]
         public String Id { get; set; }
+        [StringLength(50)]
+        [Required]
+        public String TourCategoryId { get; set; }
 
         [StringLength(50)]
         [Required]
@@ -58,10 +61,11 @@ namespace East2West.Models
         public int Status { get; set; }
 
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime DeletedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
         public virtual Location LocationDeparture { get; set; }
         public virtual Location LocationDestination { get; set; }
+        public TourCategory TourCategory { get; set; }
         public ICollection<TourDetail> TourDetails { get; set; }
         public ICollection<TourSchedule> TourSchedules { get; set; }
     }
