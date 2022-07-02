@@ -5,162 +5,118 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Create</h2>
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Flight</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.Thumbnail, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Thumbnail, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Thumbnail, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Thumbnail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <button id="upload_widget" class="cloudinary-button">Upload images</button>
-                <div id="upload_button_holder" style="display:flex;flex-wrap:wrap;">
-                </div>
-                <input type="hidden" class="form-control"
-                       placeholder="Upload thumbnail!"
-                       name="Thumbnail" , id="Thumbnail">
+<div class="row">
+    <div class="col-xl-12">
+        <!-- Form -->
+        <div class="widget has-shadow">
+            <div class="widget-header bordered no-actions d-flex align-items-center">
+                <h4>Create new Flight</h4>
             </div>
-        </div>
+            <div class="widget-body">
+                <div class="row flex-row justify-content-center">
+                    <div class="col-xl-10">
+                        @using (Html.BeginForm("Create", "Flights", FormMethod.Post, new { id = "flight-create" }))
+                        {
+                            @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsRoundTicket, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsRoundTicket)
-                    @Html.ValidationMessageFor(model => model.IsRoundTicket, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+                            <div class="form-horizontal">
+                                <h4>Flight General Information</h4>
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Thumbnail, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <button id="upload_widget" class="cloudinary-button">Upload images</button>
+                                        <div id="upload_button_holder" style="display:flex;flex-wrap:wrap;">
+                                        </div>
+                                        <input type="hidden" class="form-control"
+                                               placeholder="Upload thumbnail!"
+                                               name="Thumbnail" , id="Thumbnail">
+                                    </div>
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DepartureId, "DepartureId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("DepartureId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DepartureId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.IsRoundTicket, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.IsRoundTicket)
+                                            @Html.ValidationMessageFor(model => model.IsRoundTicket, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DestinationId, "DestinationId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("DestinationId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DestinationId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DepartureId, "DepartureId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.DropDownList("DepartureId", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.DepartureId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.DepartureAt, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input type="date" value="@string.Format("{0:yyyy-MM-dd}", Model.DepartureAt)" />
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DestinationId, "DestinationId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.DropDownList("DestinationId", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.DestinationId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DepartureAt, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.DepartureAt, new { @type = "date", @class = "form-control datepicker" })
+                                        @Html.ValidationMessageFor(model => model.DepartureAt, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-                    @Html.TextBoxFor(model => model.DepartureAt, new { type = "date" })
-                    @Html.EditorFor(model => model.DepartureAt, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.DepartureAt, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.DepartureAt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.DepartureAt, new { @type = "date", @class = "form-control datepicker" })
-                @Html.ValidationMessageFor(model => model.DepartureAt, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ReturnAt, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.ReturnAt, new { @type = "date", @class = "form-control datepicker" })
+                                        @Html.ValidationMessageFor(model => model.ReturnAt, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ReturnAt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ReturnAt, new { @type = "date", @class = "form-control datepicker" })
-                @*@Html.EditorFor(model => model.ReturnAt, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.ValidationMessageFor(model => model.ReturnAt, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div ass="col-md-10">
+                                        @Html.TextAreaFor(model => model.Detail, new { @id = "Detail", @class = "form-control", @rows = "200" })
+                                        @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Create" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div ass="col-md-10">
-                @Html.TextAreaFor(model => model.Detail, new { @id = "Detail", @class = "form-control", @rows = "200" })
-                @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.UpdatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.UpdatedAt, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.DeletedAt, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.DeletedAt, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.DeletedAt, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
         </div>
+        <!-- End Form -->
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 </div>
 
 @section Scripts {
@@ -175,26 +131,26 @@
             uploadPreset: 'jkyvknsj'
         }, function (error, result) {
             if (!error && result && result.event === "success") {
-                document.forms['tour-create']['Thumbnail'].value += result.info.secure_url + ',';
+                document.forms['flight-create']['Thumbnail'].value += result.info.secure_url + ',';
                 console.log('Done! Here is the image info: ', result.info);
                 var imgTag = document.getElementById('upload_button_holder');
                 imgTag.innerHTML +=
                     `<div class="p-2" style="position: relative">
-                                                                            <button id="button_${i}" class="cls_btn" data-token="${result.info.delete_token}" data-url="${result.info.secure_url}" type="button" style="position: absolute; right: 0px"><span>x</span></button>
-                                                                            <img style="height: 150px" src="${result.info.secure_url}" alt="" class="img-thumbnail mr-2">
-                                                                        </div>`;
+                                        <button id="button_${i}" class="cls_btn" data-token="${result.info.delete_token}" data-url="${result.info.secure_url}" type="button" style="position: absolute; right: 0px"><span>x</span></button>
+                                        <img style="height: 150px" src="${result.info.secure_url}" alt="" class="img-thumbnail mr-2">
+                                    </div>`;
 
                 var doButtonPress = function (id, delete_token, secure_url) {
                     deleteByToken('nmq126', delete_token);//xoa anh tren cloudinary
                     $("#" + id).parent().remove();//xoa div
                     //sua lai value thumbnail
-                    var array_thumbnail = document.forms['tour-create']['Thumbnail'].value.split(',');
+                    var array_thumbnail = document.forms['flight-create']['Thumbnail'].value.split(',');
                     array_thumbnail.pop();
                     var new_array_thumbnail = array_thumbnail.filter(item => item != secure_url);
                     if (new_array_thumbnail.length > 0) {
-                        document.forms['tour-create']['Thumbnail'].value = new_array_thumbnail.join(',') + ',';
+                        document.forms['flight-create']['Thumbnail'].value = new_array_thumbnail.join(',') + ',';
                     } else {
-                        document.forms['tour-create']['Thumbnail'].value = "";
+                        document.forms['flight-create']['Thumbnail'].value = "";
                     }
                 }
 
