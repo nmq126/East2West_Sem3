@@ -88,7 +88,8 @@
                                     <div class="booking_buttons">
                                         @if (order.Status == -1)
                                         {
-                                            <a href="/Order/PaymentWithPaypal?id=@order.Id&name=@name&price=@price&quantity=@quantity" class="btn_2 white">Payment</a>
+                                            var tourDetailId = @order.OrderTours.Where(o => o.OrderId == order.Id).FirstOrDefault().TourDetailId;
+                                            <a href="/Order/PaymentWithPaypal?id=@order.Id&name=@name&price=@price&quantity=@quantity&idTourDetail=@tourDetailId" class="btn_2 white">Payment</a>
                                             <a href="#0" class="btn_3">Cancel</a>
                                         }
                                         else if (order.Status == 1)
