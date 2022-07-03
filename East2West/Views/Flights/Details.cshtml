@@ -5,9 +5,194 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Details</h2>
+<style>
+    body, table {
+        color: black;
+    }
+</style>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="widget has-shadow">
+            <div class="widget-header bordered no-actions d-flex align-items-center">
+                <h4> #@Html.DisplayFor(model => model.Id)</h4>
+            </div>
+            <div class="widget-body">
+                <div class="col-10">
+                    <div class="section-title mt-3 mb-5">
+                        <h2>01. General Informations</h2>
+                    </div>
+                </div>
+                <form class="form-horizontal">
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Id:</div>
+                        <div class="col-lg-6">
+                            @Model.Id
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Thumbnail</div>
+                        @{
+                            if (Model.Thumbnail == null)
+                            {
+                                <div class="col-lg-6">
+                                    <img height="250" src="https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg" alt="default thumbnail" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-lg-6">
+                                    <img height="250" src="@Model.Thumbnail" alt="default thumbnail" />
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">
+                            Location Departure Name:
+                        </div>
+                        <div class="col-lg-9">
+                            @ViewBag.LocationName
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">
+                            Location Destination Name:
+                        </div>
+                        <div class="col-lg-9">
+                            @ViewBag.LocationName
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Detail:</div>
+                        <div class="col-lg-9">
+                            @Html.Raw(HttpUtility.HtmlDecode(Model.Detail))
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">
+                            Is Round Ticket:
+                        </div>
+                        <div class="col-lg-9">
+                            @{ 
+                                string ticketRound = Model.IsRoundTicket ? "X" : "Blank";
+                            }
+                            @ticketRound
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Status:</div>
+                        <div class="col-lg-6">
+                            @{
+                                string status = null;
+                                switch (Model.Status)
+                                {
+                                    case 1:
+                                        status = "Acitve";
+                                        break;
+                                    case 0:
+                                        status = "Disable";
+                                        break;
+                                }
+                                @status
+                            }
 
-<div>
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Created At:</div>
+                        <div class="col-lg-6">
+                            @Model.CreatedAt
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Update At:</div>
+                        <div class="col-lg-6">
+                            @Model.UpdatedAt
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Deleted At:</div>
+                        <div class="col-lg-6">
+                            @Model.DeletedAt
+                        </div>
+                    </div>
+                </form>
+                <div class="em-separator separator-dashed"></div>
+                <div class="text-right">
+                    <button class="btn btn-outline-dark" type="button">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</button>
+                    <button class="btn btn-light" type="button">@Html.ActionLink("Back to List", "Index")</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+   
+    @*<div class="col-xl-12">
+        <div class="widget has-shadow">
+            <div class="widget-body">
+                <div class="col-10">
+                    <div class="section-title mt-3 mb-5">
+                        <h2>03. List tour detail</h2>
+                    </div>
+                </div>
+                @if (Model.TourDetails == null || Model.TourDetails.Count() == 0)
+                {
+                    <p class="col-10 ml-auto">No tour detail for this tour added yet</p>
+                }
+                else
+                {
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th width="5%">#</th>
+                                <th width="10%">Id</th>
+                                <th width="15%">Departure Date</th>
+                                <th width="15%">Available Seat</th>
+                                <th width="15%">Sold ticket</th>
+                                <th width="15%">Price</th>
+                                <th width="10%">Discount</th>
+                                <th width="15%">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var i = 1;
+
+                                foreach (var tourDetail in Model.TourDetails.OrderBy(s => s.CreatedAt).ToList())
+                                {
+                                    <tr>
+                                        <td class="text-primary">@i</td>
+                                        <td><span>@Html.Raw(tourDetail.Id)</span></td>
+                                        <td>@Html.Raw(tourDetail.DepartureDay.ToShortDateString())</td>
+                                        <td>@Html.Raw(tourDetail.AvailableSeat)</td>
+                                        <td>5</td>
+                                        <td>$@Html.Raw(tourDetail.Price)</td>
+                                        <td>@Html.Raw(tourDetail.Discount)%</td>
+                                        <td class="td-actions">
+                                            <a href="@Url.Action("Details", "TourDetails", new { id = tourDetail.Id })">
+                                                <i class="la la-info-circle" data-toggle="tooltip" title="Information"></i>
+                                            </a>
+                                            <a href="@Url.Action("Edit", "TourDetails", new { id = tourDetail.Id })">
+                                                <i class="la la-edit" data-toggle="tooltip" title="Edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+
+
+                }
+            </div>
+        </div>
+    </div>*@
+
+</div>
+
+@*<div>
     <h4>Flight</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -116,7 +301,7 @@
         </dd>
 
     </dl>
-</div>
+</div>*@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

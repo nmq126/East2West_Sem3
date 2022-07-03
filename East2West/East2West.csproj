@@ -200,9 +200,9 @@
     <Compile Include="Migrations\202206291417517_update_database2.Designer.cs">
       <DependentUpon>202206291417517_update_database2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207011014482_fix_car.cs" />
-    <Compile Include="Migrations\202207011014482_fix_car.Designer.cs">
-      <DependentUpon>202207011014482_fix_car.cs</DependentUpon>
+    <Compile Include="Migrations\202206301338533_update-model1.cs" />
+    <Compile Include="Migrations\202206301338533_update-model1.Designer.cs">
+      <DependentUpon>202206301338533_update-model1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppRole.cs" />
@@ -1094,6 +1094,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206291417517_update_database2.resx">
       <DependentUpon>202206291417517_update_database2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206301338533_update-model1.resx">
+      <DependentUpon>202206301338533_update-model1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207011014482_fix_car.resx">
       <DependentUpon>202207011014482_fix_car.cs</DependentUpon>
