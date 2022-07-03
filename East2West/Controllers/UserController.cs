@@ -45,7 +45,11 @@ namespace East2West.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(User user)
         {
-            user.DeletedAt = user.UpdatedAt = user.CreatedAt = DateTime.Now;
+            do
+            {
+                user.Id = String.Concat("USER_", Guid.NewGuid().ToString("N").Substring(0, 5));
+            } while (myIdentityDbContext.Users.FirstOrDefault(c => c.Id == user.Id) != null);
+            user.CreatedAt = DateTime.Now;
             user.Status = 1;
             try
             {

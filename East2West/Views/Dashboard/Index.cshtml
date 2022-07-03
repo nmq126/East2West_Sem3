@@ -58,28 +58,46 @@
     <!-- End Linkedin -->
 </div>
 
-<div class="widget-body">
-    <div class="row">
-        <div class="col-xl-10 col-12 no-padding">
-            <div>
-            </div>
-        </div>
-        <div class="col-xl-2 col-12 d-flex flex-column my-auto no-padding text-center">
-            <div class="new-orders">
-                <div class="title">New Orders</div>
-                <div class="circle-orders">
-                    <div class="percent-orders"></div>
+<div class="row flex-row">
+    <div class="col-xl-12 col-md-6">
+        <!-- Begin Widget 09 -->
+        <div class="widget widget-09 has-shadow">
+            <!-- Begin Widget Header -->
+            <div class="widget-header d-flex align-items-center">
+                <h2>Delivered Orders</h2>
+                <div class="widget-options">
+                    <button type="button" class="btn btn-shadow">View all</button>
                 </div>
             </div>
-            <div class="some-stats mt-5">
-                <div class="title">Total Delivered</div>
-                <div class="number text-blue">856</div>
-            </div>
-            <div class="some-stats mt-3">
-                <div class="title">Total Estimated</div>
-                <div class="number text-blue">297</div>
+            <!-- End Widget Header -->
+            <!-- Begin Widget Body -->
+            <div class="widget-body">
+                <div class="row">
+                    <div class="col-xl-10 col-12 no-padding">
+                        <div>
+                            <canvas id="orders"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-12 d-flex flex-column my-auto no-padding text-center">
+                        <div class="new-orders">
+                            <div class="title">New Orders</div>
+                            <div class="circle-orders">
+                                <div class="percent-orders"></div>
+                            </div>
+                        </div>
+                        <div class="some-stats mt-5">
+                            <div class="title">Total Delivered</div>
+                            <div class="number text-blue">856</div>
+                        </div>
+                        <div class="some-stats mt-3">
+                            <div class="title">Total Estimated</div>
+                            <div class="number text-blue">297</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- End Widget 09 -->
     </div>
 </div>
 
@@ -160,6 +178,7 @@
     <script src="~/Content/admin_vendor/js/calendar/fullcalendar.min.js"></script>
     <script src="~/Content/admin_vendor/js/owl-carousel/owl.carousel.min.js"></script>
     <script src="~/Content/admin_vendor/js/app/app.js"></script>
+
     <script src="~/Content/admin_js/dashboard/db-default.js"></script>
 
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -227,19 +246,19 @@
         });
 
     </script>
-    <script>
+    @*<script>
         $('.circle-orders').circleProgress({
-            value: 0.43,
+            value: 0.55,
             size: 120,
             startAngle: -Math.PI / 2,
-            thickness: 6,
+            thickness: 10,
             lineCap: 'round',
             emptyFill: '#e4e8f0',
             fill: {
                 gradient: ['#0087a4', '#08a6c3']
             }
         }).on('circle-animation-progress', function (event, progress) {
-            $(this).find('.percent-orders').html(Math.round(43 * progress) + '<i>%</i>');
+            $(this).find('.percent-orders').html(Math.round(55 * progress) + '<i>%%</i>');
         });
-    </script>
+    </script>*@
 }

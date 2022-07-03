@@ -176,9 +176,9 @@
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\ClientCarController.cs" />
     <Compile Include="Controllers\ClientHotelController.cs" />
+    <Compile Include="Controllers\ClientTourController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\FlightsController.cs" />
-    <Compile Include="Controllers\ClientTourController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -187,6 +187,7 @@
     <Compile Include="Controllers\TourSchedulesController.cs" />
     <Compile Include="Controllers\ToursController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\DBContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1067,6 +1068,10 @@
     <Content Include="Views\ClientHotel\Details.cshtml" />
     <Content Include="Views\ClientCar\Details.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

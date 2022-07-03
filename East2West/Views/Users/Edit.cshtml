@@ -1,0 +1,115 @@
+﻿@model East2West.Models.User
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-12">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="widget has-shadow">
+                <div class="widget-header bordered no-actions d-flex align-items-center">
+                    <h4>Edit User #@Model.Id</h4>
+                </div>
+                <div class="widget-body">
+                    <div class="col-10 ml-auto">
+                        <div class="section-title mt-3 mb-5">
+                            <h4>01. General Informations</h4>
+                        </div>
+                    </div>
+                    <form class="form-horizontal">
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Id</label>
+                            <div class="col-lg-6">
+                                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Thumbnail</label>
+                            @{
+                                if (Model.Thumbnail == null)
+                                {
+                                    <div class="col-lg-6">
+                                        <img height="250" src="https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg" alt="default thumbnail" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <img class="mt-1" height="150" src=@Model.Thumbnail alt="thumbnail" />
+                                }
+                            }
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">First Name</label>
+                            <div class="col-lg-6">
+                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Last Name</label>
+                            <div class="col-lg-6 select">
+                                @Html.DropDownListFor(model => model.LastName, ViewBag.TourCategoryId as SelectList, new { @class = "custom-select form-control" })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Status</label>
+                            <div class="col-lg-6 select">
+                                <select id="Status" name="Status" class="custom-select form-control">
+                                    <option value="1" @(Model.Status == 1 ? "selected" : "")>Active</option>
+                                    <option value="0" @(Model.Status == 0 ? "selected" : "")>Disable</option>
+                                </select>
+                                @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
+                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Address</label>
+                            <div class="col-lg-9">
+                                @Html.TextAreaFor(model => model.Address, new { @class = "form-control", @rows = 3 })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Description</label>
+                            <div class="col-lg-9">
+                                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = 5 })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+                        @Html.EditorFor(model => model.Thumbnail, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
+                        @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
+                        @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
+                        @Html.EditorFor(model => model.DeletedAt, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
+
+                    </form>
+
+                    <div class="em-separator separator-dashed"></div>
+                    <div class="text-left">
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>
