@@ -24,6 +24,8 @@ namespace East2West.Controllers
             ViewBag.ModelList = from m in db.CarModels select m;
             ViewBag.TypeList = from t in db.CarTypes select t;
             ViewBag.LocationList = from l in db.Locations select l;
+
+            ViewBag.LocationId = locationId;
             ViewBag.Status = status;
             ViewBag.HasAC = hasAC;
             ViewBag.ModelId = modelId;

@@ -94,7 +94,7 @@
                     <div class="col-lg-3">
                         <label class="form-control-label">Select Type</label>
                         <div class="select mb-3">
-                            <select name="brandId" id="brandId" class="custom-select form-control">
+                            <select name="typeId" id="typeId" class="custom-select form-control">
                                 <option value="">Select Type</option>
                                 @foreach (var type in ViewBag.TypeList)
                                 {
@@ -118,7 +118,7 @@
                                 <option value="">Select Location</option>
                                 @foreach (var location in ViewBag.LocationList)
                                 {
-                                    if (location.Id == ViewBag.DepartureId)
+                                    if (location.Id == ViewBag.LocationId)
                                     {
                                         <option value=@location.Id selected>@location.Name</option>
                                     }

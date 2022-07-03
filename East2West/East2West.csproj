@@ -204,6 +204,10 @@
     <Compile Include="Migrations\202206301338533_update-model1.Designer.cs">
       <DependentUpon>202206301338533_update-model1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207011014482_fix_car.cs" />
+    <Compile Include="Migrations\202207011014482_fix_car.Designer.cs">
+      <DependentUpon>202207011014482_fix_car.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\202207030951279_update_driver.cs" />
     <Compile Include="Migrations\202207030951279_update_driver.Designer.cs">
       <DependentUpon>202207030951279_update_driver.cs</DependentUpon>

@@ -29,6 +29,7 @@ namespace East2West.Controllers
             var tours = from t in db.Tours select t;
             ViewBag.CategoryList = from c in db.TourCategories select c;
             ViewBag.LocationList = from l in db.Locations select l;
+
             ViewBag.Keyword = keyword;
             ViewBag.SortType = sortType;
             ViewBag.PriceRange = price_range;
