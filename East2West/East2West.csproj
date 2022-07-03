@@ -204,6 +204,10 @@
     <Compile Include="Migrations\202206301338533_update-model1.Designer.cs">
       <DependentUpon>202206301338533_update-model1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207030951279_update_driver.cs" />
+    <Compile Include="Migrations\202207030951279_update_driver.Designer.cs">
+      <DependentUpon>202207030951279_update_driver.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppRole.cs" />
     <Compile Include="Models\Car.cs" />
@@ -1100,6 +1104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207011014482_fix_car.resx">
       <DependentUpon>202207011014482_fix_car.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207030951279_update_driver.resx">
+      <DependentUpon>202207030951279_update_driver.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
