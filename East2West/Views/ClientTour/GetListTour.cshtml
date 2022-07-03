@@ -166,11 +166,11 @@
                                 <h6><i class="icon-smile"></i> Rating</h6>
                                 <select name="rating" id="rating" class="custom-select form-control">
                                     <option value="">All</option>
-                                    <option value="1" @(ViewBag.DurationRange == "1" ? "selected" : "")>1 Star</option>
-                                    <option value="2" @(ViewBag.DurationRange == "2" ? "selected" : "")>2 Star</option>
-                                    <option value="3" @(ViewBag.DurationRange == "3" ? "selected" : "")>3 Star</option>
-                                    <option value="4" @(ViewBag.DurationRange == "4" ? "selected" : "")>4 Star</option>
-                                    <option value="5" @(ViewBag.DurationRange == "5" ? "selected" : "")>5 Star</option>
+                                    <option value="1" @(ViewBag.Rating == "1" ? "selected" : "")>1 Star</option>
+                                    <option value="2" @(ViewBag.Rating == "2" ? "selected" : "")>2 Star</option>
+                                    <option value="3" @(ViewBag.Rating == "3" ? "selected" : "")>3 Star</option>
+                                    <option value="4" @(ViewBag.Rating == "4" ? "selected" : "")>4 Star</option>
+                                    <option value="5" @(ViewBag.Rating == "5" ? "selected" : "")>5 Star</option>
                                 </select>
                             </div>
                         </div>
@@ -306,20 +306,20 @@
                             @Html.PagedListPager(Model, page => Url.Action("GetListTour",
                                                                           new
                                                                           {
-                                                                              id = ViewBag.Id,
+                                                                              priceRange = ViewBag.PriceRange,
+                                                                              rating = ViewBag.Rating,
                                                                               sortType = ViewBag.SortType,
                                                                               keyword = ViewBag.Keyword,
                                                                               departureId = ViewBag.DepartureId,
                                                                               destinationId = ViewBag.DestinationId,
                                                                               categoryId = ViewBag.CategoryId,
                                                                               duration_range = ViewBag.DurationRange,
-                                                                              status = ViewBag.Status,
                                                                               page
                                                                           }),
                                                                           new PagedListRenderOptions
                                                                           {
                                                                               DisplayItemSliceAndTotal = true,
-                                                                              ItemSliceAndTotalFormat = "Showing {0} to {1} of {2} total item(s).",
+                                                                              ItemSliceAndTotalFormat = "Showing {0} to {1} of {2} total tour(s).",
                                                                               DisplayLinkToIndividualPages = true,
                                                                               DisplayPageCountAndCurrentLocation = false,
                                                                               MaximumPageNumbersToDisplay = 10,

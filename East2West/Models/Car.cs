@@ -38,6 +38,9 @@ namespace East2West.Models
         public Boolean HasAirConditioner { get; set; }
 
         [Required]
+        public Boolean HasDriver { get; set; }
+
+        [Required]
         public int SeatCapacity { get; set; }
 
         [Required]

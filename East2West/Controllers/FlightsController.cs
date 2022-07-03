@@ -34,6 +34,7 @@ namespace East2West.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.LocationName = db.Locations.Where(M => M.Id == flight.Id).FirstOrDefault().Name; 
             return View(flight);
         }
 
@@ -50,8 +51,18 @@ namespace East2West.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Id,Thumbnail,IsRoundTicket,DepartureId,DestinationId,DepartureAt,Duration,Price,ReturnAt,Detail,Status,CreatedAt,UpdatedAt,DeletedAt")] Flight flight)
         {
+            flight.CreatedAt = DateTime.Now;
+            flight.Status = 1;
+            flight.UpdatedAt = null;
+            flight.DeletedAt = null;
+            do
+            {
+                flight.Id = String.Concat("FLIGHT_", Guid.NewGuid().ToString("N").Substring(0, 7));
+            } while (db.Flights.FirstOrDefault(c => c.Id == flight.Id) != null);
+
             if (ModelState.IsValid)
             {
                 db.Flights.Add(flight);
@@ -86,8 +97,10 @@ namespace East2West.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit([Bind(Include = "Id,Thumbnail,IsRoundTicket,DepartureId,DestinationId,DepartureAt,Duration,Price,ReturnAt,Detail,Status,CreatedAt,UpdatedAt,DeletedAt")] Flight flight)
         {
+            flight.UpdatedAt = DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.Entry(flight).State = EntityState.Modified;
@@ -120,7 +133,9 @@ namespace East2West.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             Flight flight = db.Flights.Find(id);
-            db.Flights.Remove(flight);
+            flight.DeletedAt = DateTime.Now;
+            db.Entry(flight).State = EntityState.Modified;
+            //db.Flights.Remove(flight);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
