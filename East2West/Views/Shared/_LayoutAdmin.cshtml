@@ -152,6 +152,13 @@
 
                             </ul>
                         </li>
+                        <li class="@(url.Contains("/Users") || url.Contains("/admin/users") ? "active" : "" )">
+                            <a href="#dropdown-db5" aria-expanded="false" data-toggle="collapse"><i class="la la-user"></i><span>Users</span></a>
+                            <ul id="dropdown-db5" class="collapse list-unstyled @(url.Contains("/Users") || url.Contains("/admin/users") ? "show" : "" ) pt-0">
+                                <li><a class="@(rawUrl.Equals("/Users/Index") || rawUrl.Equals("/admin/users") ? "active" : "" )" href="@Url.Action("Index", "Users")">Users List</a></li>
+
+                            </ul>
+                        </li>
                         <li class="@(url.Contains("/Tour") || url.Contains("/admin/tour") ? "active" : "" )">
                             <a href="#dropdown-db1" aria-expanded="false" data-toggle="collapse"><i class="la la-rocket"></i><span>Tour</span></a>
                             <ul id="dropdown-db1" class="collapse list-unstyled @(url.Contains("/Tour") || url.Contains("/admin/tour") ? "show" : "" ) pt-0">

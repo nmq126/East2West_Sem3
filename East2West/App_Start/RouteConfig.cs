@@ -11,6 +11,7 @@ namespace East2West
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            string adminUserUrl = "admin/users";
             string adminTourUrl = "admin/tours";
             string adminTourDetailUrl = "admin/tour-details";
             string adminCarUrl = "admin/cars";
@@ -31,6 +32,23 @@ namespace East2West
                 name: "Tour Analysis",
                 url: "admin/orders/tours",
                 defaults: new { controller = "Orders", action = "GetTour", id = UrlParameter.Optional }
+            );
+
+            //USER admin
+            routes.MapRoute(
+                name: "User List",
+                url: adminUserUrl,
+                defaults: new { controller = "Users", action = "Index", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "User Edit",
+                url: adminUserUrl + "/edit/{id}",
+                defaults: new { controller = "Users", action = "Edit", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "User Detail",
+                url: adminUserUrl + "/{id}",
+                defaults: new { controller = "Users", action = "Details", id = UrlParameter.Optional }
             );
 
             //TOUR
