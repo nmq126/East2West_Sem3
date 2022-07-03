@@ -1,0 +1,342 @@
+﻿@model PagedList.IPagedList<East2West.Models.Flight>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "GetListFlight";
+    Layout = "~/Views/Shared/_LayoutPageClient.cshtml";
+}
+
+<style>
+    .pagination-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .pagination-container ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /*background-color: #333;*/
+        }
+
+        .pagination-container li {
+            float: left;
+            border-right: 1px solid #bbb;
+        }
+
+            .pagination-container li:last-child {
+                border-right: none;
+            }
+
+            .pagination-container li a {
+                display: block;
+                color: Black;
+                text-align: center;
+                padding: 8px 10px;
+                text-decoration: none;
+            }
+
+                .pagination-container li a:hover:not(.active) {
+                    background-color: white;
+                }
+
+        .pagination-container .active {
+            background-color: white;
+        }
+</style>
+@section Section
+{
+    <section class="parallax-window" data-parallax="scroll" data-image-src="https://res.cloudinary.com/tanvnth2012002/image/upload/v1655794518/hinh-nen-vinh-ha-long-quang-ninh-dep_wu3zp9.jpg" data-natural-width="1400" data-natural-height="470">
+        <div class="parallax-content-1 opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
+            <div class="animated fadeInDown">
+                <h1>Flights</h1>
+                <p>Cursus neque cursus curae ante scelerisque vehicula</p>
+            </div>
+        </div>
+    </section>
+}
+
+<main>
+
+    <div id="position">
+        <div class="container">
+            <ul>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/ClientFlight/GetListFlight">Flight</a>
+                </li>
+                <li>List Flight</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Position -->
+
+    <div class="collapse" id="collapseMap">
+        <div id="map" class="map"></div>
+    </div>
+    <!-- End Map -->
+    @using (Html.BeginForm("GetListFlight", "ClientFlight", FormMethod.Get))
+    {
+        <div class="container margin_60">
+            <div class="row">
+                <aside class="col-lg-3">
+                    <p>
+                        <button type="submit" class="btn_full">Search</button>
+                    </p>
+                    <div id="filters_col">
+
+                        <a data-bs-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>Filters</a>
+                        <div class="collapse show" id="collapseFilters">
+                            <div class="filter_type">
+                                <h6><i class="icon_set_1_icon-39"></i> Departure</h6>
+                                <select name="departureId" id="departureId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var departure in ViewBag.LocationList)
+                                    {
+                                        if (departure.Id == ViewBag.DepartureId)
+                                        {
+                                            <option value=@departure.Id selected>@departure.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@departure.Id>@departure.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="filter_type">
+                                <h6><i class="icon_set_1_icon-39"></i> Destination</h6>
+                                <select name="destinationId" id="destinationId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var destination in ViewBag.LocationList)
+                                    {
+                                        if (destination.Id == ViewBag.DepartureId)
+                                        {
+                                            <option value=@destination.Id selected>@destination.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@destination.Id>@destination.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="filter_type">
+                                <h6><i class="icon-money-2"></i> From Price</h6>
+                                @Html.TextBox("from_price", ViewBag.From_price as string, new { @class = "form-control", placeholder = "Input price" })
+                            </div>
+                            <div class="filter_type">
+                                <h6><i class="icon-money-2"></i> To Price</h6>
+                                @Html.TextBox("to_price", ViewBag.To_price as string, new { @class = "form-control", placeholder = "Input price" })
+                            </div>
+                            <div class="filter_type">
+                                <h6><i class="icon-smile"></i> Status</h6>
+                                <select name="rating" id="rating" class="custom-select form-control">
+                                    <option value="0">All</option>
+                                    <option value="1" @(ViewBag.Rating == "1" ? "selected" : "")>Active</option>
+                                    <option value="2" @(ViewBag.Rating == "2" ? "selected" : "")>Disabled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--End collapse -->
+                    </div>
+                    <!--End filters col-->
+
+                    <div class="box_style_2 d-none d-sm-block">
+                        <i class="icon_set_1_icon-57"></i>
+                        <h4>Need <span>Help?</span></h4>
+                        <a href="tel://004542344599" class="phone">+45 423 445 99</a>
+                        <small>Monday to Friday 9.00am - 7.30pm</small>
+                    </div>
+                </aside>
+                <!--End aside -->
+                <div class="col-lg-9">
+                    <div id="tools">
+                        <div class="row" style="margin: 0">
+                            <div class="col-md-4 col-sm-4" style="padding: 0">
+                                <div class="styled-select-filters">
+                                    <select name="sortType" id="sortType" class="custom-select form-control">
+                                        <option value="">Sort by (Latest default)</option>
+                                        <option value="createdAt_asc" @(ViewBag.SortType == "createdAt_asc" ? "selected" : "")>Latest</option>
+                                        <option value="createdAt_desc" @(ViewBag.SortType == "createdAt_desc" ? "selected" : "")>Oldest</option>
+                                        <option value="rating_asc" @(ViewBag.SortType == "rating_asc" ? "selected" : "")>Rating (Increase)</option>
+                                        <option value="rating_desc" @(ViewBag.SortType == "rating_desc" ? "selected" : "")>Rating (Decrease)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-8" style="padding: 0">
+                                @Html.TextBox("keyword", ViewBag.Keyword as string, new { @class = "form-control", placeholder = "Search", style = "outline: 0px solid transparent;" })
+                            </div>
+                        </div>
+                    </div>
+                    @if (Model == null || Model.Count() == 0)
+                    {
+                        <div class="text-center">
+                            <i class="icon-search"></i>
+                            Nothing found
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var flight in Model)
+                        {
+                            var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
+                            if (flight.Thumbnail != null)
+                            {
+                                img = flight.Thumbnail.Split(',').ToList<String>().First();
+                            }
+                            <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 position-relative">
+                                        <div class="ribbon_3 popular">
+                                            <span>Popular</span>
+                                        </div>
+
+                                        <div class="img_list">
+                                            <a href="/ClientFlight/Details?id=@flight.Id">
+                                                <img src="@img" alt="Image">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="tour_list_desc">
+                                            <h3><strong>Flight: #@flight.Id</strong></h3>
+                                            <div class="rating">
+                                                @if (@flight.Status == 1)
+                                                {
+                                                    <i class="icon-smile voted"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="icon-smile voted" style="color: gray;"></i>
+                                                }
+                                            </div>
+                                            <h3><strong>@flight.LocationDeparture.Name - @flight.LocationDestination.Name</strong></h3>
+                                            @Html.Raw(HttpUtility.HtmlDecode(@flight.Detail))
+                                            <ul class="add_info">
+                                                <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
+                                                        <div class="tooltip-content">
+                                                            <h4>DepartureAt</h4> @flight.DepartureAt
+                                                            <br>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_1_icon-97"></i></span>
+                                                        <div class="tooltip-content">
+                                                            <h4>Duration</h4> @flight.Duration
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_1_icon-86"></i></span>
+                                                        <div class="tooltip-content">
+                                                            Free Wifi
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
+                                                        <div class="tooltip-content">
+                                                            Plasma TV with cable channels
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_2_icon-110"></i></span>
+                                                        <div class="tooltip-content">
+                                                            Swimming pool
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_2_icon-117"></i></span>
+                                                        <div class="tooltip-content">
+                                                            Fitness Center
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_1_icon-58"></i></span>
+                                                        <div class="tooltip-content">
+                                                            Restaurant
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2">
+                                        <div class="price_list">
+                                            <div>
+                                                <sup>
+                                                    @{
+
+                                                        var priceDiscount = flight.Price;
+                                                    }
+                                                    $@priceDiscount
+                                                </sup>
+                                                <small>*From/Per flight</small>
+
+                                                <p>
+                                                    <a href="/ClientFlight/Details?id=@flight.Id" class="btn_1">Details</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                        <!--End strip -->
+                        <nav aria-label="Page navigation">
+                            @Html.PagedListPager(Model, page => Url.Action("GetListFlight",
+                                                                          new
+                                                                          {
+                                                                              sortType = ViewBag.SortType,
+                                                                              page,
+                                                                              destinationId = ViewBag.DestinationId,
+                                                                              departureId = ViewBag.DepartureId,
+                                                                              status = ViewBag.Status,
+                                                                              from_price = ViewBag.From_price,
+                                                                              to_price = ViewBag.To_price,
+                                                                              keyword = ViewBag.Keyword,
+                                                                          }),
+                                                                          new PagedListRenderOptions
+                                                                          {
+                                                                              DisplayItemSliceAndTotal = true,
+                                                                              ItemSliceAndTotalFormat = "Showing {0} to {1} of {2} total item(s).",
+                                                                              DisplayLinkToIndividualPages = true,
+                                                                              DisplayPageCountAndCurrentLocation = false,
+                                                                              MaximumPageNumbersToDisplay = 10,
+                                                                              LinkToFirstPageFormat = "««",
+                                                                              LinkToPreviousPageFormat = "«",
+                                                                              LinkToIndividualPageFormat = "{0}",
+                                                                              LinkToNextPageFormat = "»",
+                                                                              LinkToLastPageFormat = "»»",
+                                                                              ContainerDivClasses = new string[] { "pagination-container mt-3 justify-content-center" },
+                                                                              UlElementClasses = new string[] { "pagination" },
+                                                                              LiElementClasses = new string[] { "page-item" }
+                                                                          })
+                        </nav>
+                    }
+
+                    <!-- end pagination-->
+                </div>
+                <!-- End col lg-9 -->
+            </div>
+            <!-- End row -->
+        </div>
+    }
+    <!-- End container -->
+</main>

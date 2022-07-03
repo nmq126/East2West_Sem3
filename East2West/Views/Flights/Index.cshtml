@@ -124,9 +124,9 @@
                                 <th>Price</th>
                                 <th>ReturnAt</th>
                                 <th>Status</th>
-                                <th>CreatedAt</th>
+                                @*<th>CreatedAt</th>
                                 <th>UpdatedAt</th>
-                                <th>DeletedAt</th>
+                                <th>DeletedAt</th>*@
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -169,7 +169,7 @@
                                             }
                                             @statusName
                                         </td>
-                                        <td>
+                                        @*<td>
                                             @Html.DisplayFor(modelItem => item.CreatedAt)
                                         </td>
                                         <td>
@@ -177,7 +177,7 @@
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.DeletedAt)
-                                        </td>
+                                        </td>*@
                                         <td class="td-actions" style="display: flex;overflow-x:auto">
                                             <a href="@Url.Action("Details", "Flights", new { id = item.Id })">
                                                 <i class="la la-info-circle" data-toggle="tooltip" title="Information"></i>
