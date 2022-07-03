@@ -1,0 +1,252 @@
+﻿@model East2West.Models.User
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    body, table {
+        color: black;
+    }
+</style>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="widget has-shadow">
+            <div class="widget-header bordered no-actions d-flex align-items-center">
+                <h4> #@Model.Id</h4>
+            </div>
+            <div class="widget-body">
+                <div class="col-10">
+                    <div class="section-title mt-3 mb-5">
+                        <h2>01. General Informations</h2>
+                    </div>
+                </div>
+                <form class="form-horizontal">
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Id:</div>
+                        <div class="col-lg-6">
+                            @Model.Id
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Thumbnail</div>
+                        @{
+                            if (Model.Thumbnail == null)
+                            {
+                                <div class="col-lg-6">
+                                    <img height="250" src="https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg" alt="default thumbnail" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-lg-9">
+                                    <img class="mt-1" height="150" src=@Model.Thumbnail alt="thumbnail" />
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Username:</div>
+                        <div class="col-lg-9">
+                            @Model.UserName
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Role:</div>
+                        <div class="col-lg-6">
+                            <span class="badge-text badge-text-small info">User</span>
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">First Name:</div>
+                        <div class="col-lg-9">
+                            @Model.FirstName
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Last Name:</div>
+                        <div class="col-lg-6">
+                            @Model.LastName
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Address:</div>
+                        <div class="col-lg-6">
+                            @Model.Address
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Desciption:</div>
+                        <div class="col-lg-9">
+                            @Model.Description
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Status:</div>
+                        <div class="col-lg-6">
+                            @{
+                                string status = null;
+                                switch (Model.Status)
+                                {
+                                    case 1:
+                                        status = "Active";
+                                        break;
+                                    case 0:
+                                        status = "Disable";
+                                        break;
+                                }
+                                @status
+                            }
+
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Created At:</div>
+                        <div class="col-lg-6">
+                            @Model.CreatedAt
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Update At:</div>
+                        <div class="col-lg-6">
+                            @Model.UpdatedAt
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Deleted At:</div>
+                        <div class="col-lg-6">
+                            @Model.DeletedAt
+                        </div>
+                    </div>
+                </form>
+                <div class="em-separator separator-dashed"></div>
+                <div class="text-right">
+                    <button class="btn btn-outline-dark" type="button">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</button>
+                    <button class="btn btn-light" type="button">@Html.ActionLink("Back to List", "Index")</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-xl-12">
+        <div class="widget has-shadow">
+            <div class="widget-body">
+                <div class="col-10">
+                    <div class="section-title mt-3 mb-5">
+                        <h2>02. Orders Placed</h2>
+                    </div>
+                </div>
+                @if (Model.Orders == null || Model.Orders.Count() == 0)
+                {
+                    <p class="col-10 ml-auto">This account has no order placed yet</p>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-bordered mb-0">
+                            <thead>
+                                <tr>
+                                    <th width="10%">#</th>
+                                    <th width="15%">Id</th>
+                                    <th width="15%">Type</th>
+                                    <th width="15%">Total Price</th>
+                                    <th width="15%">Status</th>
+                                    <th width="15%">Created At</th>
+                                    <th width="15%">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{var i = 1;
+                                    foreach (var item in Model.Orders)
+                                    {
+
+
+                                        <tr>
+                                            <td><span class="text-primary">@i</span></td>
+                                            <td><span>@item.Id</span></td>
+                                            <td>
+                                                @if (item.Type == 1)
+                                                {
+                                                    <span class="badge-text badge-text-small info">Tour</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge-text badge-text-small success">Car</span>
+
+                                                }
+                                            </td>
+                                            <td>$@item.TotalPrice</td>
+                                            <td>
+                                                @switch (item.Status)
+                                                {
+                                                    case -1:
+                                                        <span>Unpaid</span>
+                                                        break;
+                                                    case 1:
+                                                        <span>Paid</span>
+                                                        break;
+                                                    case 0:
+                                                        <span>Cancel</span>
+                                                        break;
+                                                    case -2:
+                                                        <span>Pending</span>
+                                                        break;
+                                                    case 2:
+                                                        <span>Refunded</span>
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+                                            </td>
+                                            <td>@item.CreatedAt</td>
+                                            <td class="td-actions">
+                                                <a href="@Url.Action("Details", "Orders", new { id = item.Id })">
+                                                    <i class="la la-info-circle" data-toggle="tooltip" title="Information"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        @Html.PagedListPager( (PagedList.IPagedList) ViewBag.OrderPlaced, page => Url.Action("Details",
+                                    new
+                                    {
+                                        id = ViewBag.Id,
+                                        status = ViewBag.Status,
+                                        sortType = ViewBag.SortType,
+                                        username = ViewBag.Username,
+                                        firstName = ViewBag.FirstName,
+                                        lastName = ViewBag.LastName,
+                                        address = ViewBag.Address,
+                                        roleId = ViewBag.RoleId,
+                                        order = ViewBag.Order,
+                                        page
+                                    }),
+                                    new PagedListRenderOptions
+                                    {
+                                        DisplayItemSliceAndTotal = true,
+                                        ItemSliceAndTotalFormat = "Showing {0} to {1} of {2} total item(s).",
+                                        DisplayLinkToIndividualPages = true,
+                                        DisplayPageCountAndCurrentLocation = false,
+                                        MaximumPageNumbersToDisplay = 10,
+                                        LinkToFirstPageFormat = "««",
+                                        LinkToPreviousPageFormat = "«",
+                                        LinkToIndividualPageFormat = "{0}",
+                                        LinkToNextPageFormat = "»",
+                                        LinkToLastPageFormat = "»»",
+                                        ContainerDivClasses = new string[] { "pagination-container mt-3" },
+                                        UlElementClasses = new string[] { "pagination" },
+                                        LiElementClasses = new string[] { "page-item" }
+                                    })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

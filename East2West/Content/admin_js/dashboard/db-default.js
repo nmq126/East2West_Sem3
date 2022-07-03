@@ -166,19 +166,19 @@
 	// ------------------------------------------------------- //
 	// Circle Orders
 	// ------------------------------------------------------ //
-	$('.circle-orders').circleProgress({
-		value: 0.43,
-		size: 120,
-		startAngle: -Math.PI / 2,
-		thickness: 6,
-		lineCap: 'round',
-		emptyFill: '#e4e8f0',
-		fill: {
-			gradient: ['#0087a4', '#08a6c3']
-		}
-	}).on('circle-animation-progress', function (event, progress) {
-		$(this).find('.percent-orders').html(Math.round(43 * progress) + '<i>%</i>');
-	});
+	//$('.circle-orders').circleProgress({
+	//	value: 0.43,
+	//	size: 120,
+	//	startAngle: -Math.PI / 2,
+	//	thickness: 6,
+	//	lineCap: 'round',
+	//	emptyFill: '#e4e8f0',
+	//	fill: {
+	//		gradient: ['#0087a4', '#08a6c3']
+	//	}
+	//}).on('circle-animation-progress', function (event, progress) {
+	//	$(this).find('.percent-orders').html(Math.round(43 * progress) + '<i>%</i>');
+	//});
 
 	// ------------------------------------------------------- //
 	// Top Author

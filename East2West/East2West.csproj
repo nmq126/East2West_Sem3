@@ -124,6 +124,12 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -185,8 +191,9 @@
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\ClientCarController.cs" />
     <Compile Include="Controllers\ClientHotelController.cs" />
-    <Compile Include="Controllers\FlightsController.cs" />
     <Compile Include="Controllers\ClientTourController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\FlightsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -195,6 +202,7 @@
     <Compile Include="Controllers\TourSchedulesController.cs" />
     <Compile Include="Controllers\ToursController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\DBContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,6 +227,14 @@
     <Compile Include="Migrations\202206301338533_update-model1.Designer.cs">
       <DependentUpon>202206301338533_update-model1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207011014482_fix_car.cs" />
+    <Compile Include="Migrations\202207011014482_fix_car.Designer.cs">
+      <DependentUpon>202207011014482_fix_car.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207030951279_update_driver.cs" />
+    <Compile Include="Migrations\202207030951279_update_driver.Designer.cs">
+      <DependentUpon>202207030951279_update_driver.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppRole.cs" />
     <Compile Include="Models\Car.cs" />
@@ -226,6 +242,7 @@
     <Compile Include="Models\CarModel.cs" />
     <Compile Include="Models\CarSchedule.cs" />
     <Compile Include="Models\CarType.cs" />
+    <Compile Include="Models\ChartModel\DataPoint.cs" />
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\Flight.cs" />
     <Compile Include="Models\Hotel.cs" />
@@ -1084,6 +1101,11 @@
     <Content Include="Views\Shared\_LayoutPageAuthen.cshtml" />
     <Content Include="Views\ClientHotel\Details.cshtml" />
     <Content Include="Views\ClientCar\Details.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1106,6 +1128,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206301338533_update-model1.resx">
       <DependentUpon>202206301338533_update-model1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207011014482_fix_car.resx">
+      <DependentUpon>202207011014482_fix_car.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207030951279_update_driver.resx">
+      <DependentUpon>202207030951279_update_driver.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

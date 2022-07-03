@@ -1,10 +1,50 @@
-﻿@model IEnumerable<East2West.Models.Car>
+﻿@model PagedList.IPagedList<East2West.Models.Car>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "East2West - List Car";
     Layout = "~/Views/Shared/_LayoutPageClient.cshtml";
 }
 
+<style>
+    .pagination-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .pagination-container ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /*background-color: #333;*/
+        }
+
+        .pagination-container li {
+            float: left;
+            border-right: 1px solid #bbb;
+        }
+
+            .pagination-container li:last-child {
+                border-right: none;
+            }
+
+            .pagination-container li a {
+                display: block;
+                color: Black;
+                text-align: center;
+                padding: 8px 10px;
+                text-decoration: none;
+            }
+
+                .pagination-container li a:hover:not(.active) {
+                    background-color: white;
+                }
+
+        .pagination-container .active {
+            background-color: white;
+        }
+</style>
 @section Section
 {
     <section class="parallax-window" data-parallax="scroll" data-image-src="https://res.cloudinary.com/tanvnth2012002/image/upload/v1656410721/081845-anh-1_zdcsds.jpg" data-natural-width="1400" data-natural-height="470">
@@ -25,253 +65,293 @@
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="ClientCar/GetListCar">Car</a>
+                    <a href="ClientCar/GetListCar">Cars</a>
                 </li>
                 <li>List Car</li>
             </ul>
         </div>
     </div>
     <!-- Position -->
+    @using (Html.BeginForm("GetListCar", "ClientCar", FormMethod.Get))
+    {
+        <div class="container margin_60">
+            <div class="row">
+                <aside class="col-lg-3">
+                    <p>
+                        <button type="submit" class="btn_full">Search</button>
+                    </p>
 
-    <div class="container margin_60">
-
-        <div class="row">
-            <aside class="col-lg-3">
-                <div id="filters_col">
-                    <a data-bs-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>Filters</a>
-                    <div class="collapse show" id="collapseFilters">
-                        <div class="filter_type">
-                            <h6>Price</h6>
-                            <input type="text" id="range" name="range" value="">
-                        </div>
-                        <div class="filter_type">
-                            <h6>Rating</h6>
-                            <ul>
-                                <li>
-                                    <label class="container_check">
-                                        <span class="rating">
-                                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i>
-                                        </span>
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="container_check">
-                                        <span class="rating">
-                                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i>
-                                        </span>
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="container_check">
-                                        <span class="rating">
-                                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-                                        </span>
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="container_check">
-                                        <span class="rating">
-                                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-                                        </span>
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="container_check">
-                                        <span class="rating">
-                                            <i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-                                        </span>
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="filter_type">
-                            <h6>Facility</h6>
-                            <ul class="mb-0">
-                                <li>
-                                    <label class="container_check">
-                                        Pet allowed
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="container_check">
-                                        Groups allowed
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="container_check">
-                                        Tour guides
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="container_check">
-                                        Access for disabled
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--End collapse -->
-                </div>
-                <!--End filters col-->
-                <div class="box_style_2 d-none d-sm-block">
-                    <i class="icon_set_1_icon-57"></i>
-                    <h4>Need <span>Help?</span></h4>
-                    <a href="tel://004542344599" class="phone">+45 423 445 99</a>
-                    <small>Monday to Friday 9.00am - 7.30pm</small>
-                </div>
-            </aside>
-            <!--End aside -->
-
-            <div class="col-lg-9">
-
-                <div id="tools">
-                    <div class="row justify-content-between">
-                        <div class="col-md-3 col-sm-4">
-                            <div class="styled-select-filters">
-                                <select name="sort_price" id="sort_price">
-                                    <option value="" selected>Sort by price</option>
-                                    <option value="lower">Lowest price</option>
-                                    <option value="higher">Highest price</option>
+                    <div id="filters_col">
+                        <a data-bs-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>Filters</a>
+                        <div class="collapse show" id="collapseFilters">
+                            <div class="filter_type">
+                                <h6><i class="icon-tag"></i> Brand</h6>
+                                <select name="brandId" id="brandId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var brand in ViewBag.BrandList)
+                                    {
+                                        if (brand.Id == ViewBag.BrandId)
+                                        {
+                                            <option value=@brand.Id selected>@brand.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@brand.Id>@brand.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="filter_type">
+                                <h6><i class="icon-archive-2"></i> Model</h6>
+                                <select name="modelId" id="modelId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var cModel in ViewBag.ModelList)
+                                    {
+                                        if (cModel.Id == ViewBag.ModelId)
+                                        {
+                                            <option value=@cModel.Id selected>@cModel.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@cModel.Id>@cModel.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="filter_type">
+                                <h6><i class="icon-align-justify-1"></i> Type</h6>
+                                <select name="typeId" id="typeId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var type in ViewBag.TypeList)
+                                    {
+                                        if (type.Id == ViewBag.TypeId)
+                                        {
+                                            <option value=@type.Id selected>@type.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@type.Id>@type.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="filter_type">
+                                <h6><i class="icon-flag"></i> Location</h6>
+                                <select name="locationId" id="locationId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var location in ViewBag.LocationList)
+                                    {
+                                        if (location.Id == ViewBag.LocationId)
+                                        {
+                                            <option value=@location.Id selected>@location.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@location.Id>@location.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="filter_type">
+                                <h6><i class="icon-air"></i> Air Conditioner Required</h6>
+                                <select name="hasAC" id="hasAC" class="custom-select form-control">
+                                    <option value="2" @(ViewBag.HasAC == 2 ? "selected" : "")>All</option>
+                                    <option value="1" @(ViewBag.HasAC == 1 ? "selected" : "")>Yes</option>
+                                    <option value="0" @(ViewBag.HasAC == 0 ? "selected" : "")>No</option>
+                                </select>
+                            </div>
+                            <div class="filter_type">
+                                <h6><i class="icon-steering-wheel"></i> Driver Required</h6>
+                                <select name="hasDriver" id="hasDriver" class="custom-select form-control">
+                                    <option value="2" @(ViewBag.HasDriver == 2 ? "selected" : "")>All</option>
+                                    <option value="1" @(ViewBag.HasDriver == 1 ? "selected" : "")>Yes</option>
+                                    <option value="0" @(ViewBag.HasDriver == 0 ? "selected" : "")>No</option>
+                                </select>
+                            </div>
+                            <div class="filter_type">
+                                <h6><i class="icon-smile"></i> Rating</h6>
+                                <select name="rating" id="rating" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    <option value="1" @(ViewBag.Rating == "1" ? "selected" : "")>1 Star</option>
+                                    <option value="2" @(ViewBag.Rating == "2" ? "selected" : "")>2 Star</option>
+                                    <option value="3" @(ViewBag.Rating == "3" ? "selected" : "")>3 Star</option>
+                                    <option value="4" @(ViewBag.Rating == "4" ? "selected" : "")>4 Star</option>
+                                    <option value="5" @(ViewBag.Rating == "5" ? "selected" : "")>5 Star</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-4 d-none d-sm-block text-end">
-                            <a href="all_transfer_grid.html" class="bt_filters"><i class="icon-th"></i></a> <a href="#" class="bt_filters"><i class=" icon-list"></i></a>
+                        <!--End collapse -->
+                    </div>
+                    <!--End filters col-->
+                    <div class="box_style_2 d-none d-sm-block">
+                        <i class="icon_set_1_icon-57"></i>
+                        <h4>Need <span>Help?</span></h4>
+                        <a href="tel://004542344599" class="phone">+45 423 445 99</a>
+                        <small>Monday to Friday 9.00am - 7.30pm</small>
+                    </div>
+                </aside>
+                <!--End aside -->
+
+                <div class="col-lg-9">
+
+                    <div id="tools">
+                        <div class="row" style="margin: 0">
+                            <div class="col-md-4 col-sm-4" style="padding: 0">
+                                <div class="styled-select-filters">
+                                    <select name="sortType" id="sortType" class="custom-select form-control">
+                                        <option value="">Sort by (Lastest default)</option>
+                                        <option value="createdAt_asc" @(ViewBag.SortType == "createdAt_asc" ? "selected" : "")>Latest</option>
+                                        <option value="createdAt_desc" @(ViewBag.SortType == "createdAt_desc" ? "selected" : "")>Oldest</option>
+                                        <option value="price_asc" @(ViewBag.SortType == "price_asc" ? "selected" : "")>Price (Increase)</option>
+                                        <option value="price_desc" @(ViewBag.SortType == "price_desc" ? "selected" : "")>Price (Decrease)</option>
+                                        <option value="rating_asc" @(ViewBag.SortType == "rating_asc" ? "selected" : "")>Rating (Increase)</option>
+                                        <option value="rating_desc" @(ViewBag.SortType == "rating_desc" ? "selected" : "")>Rating (Decrease)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-8" style="padding: 0">
+                                @Html.TextBox("keyword", ViewBag.Keyword as string, new { @class = "form-control", placeholder = "Search", style = "outline: 0px solid transparent;" })
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!--/tools -->
-                @foreach (var car in Model)
-                {
-                    var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
-                    if (car.Thumbnail != null)
+                    @if (Model == null || Model.Count() == 0)
                     {
-                        img = car.Thumbnail.Split(',').ToList<String>().First();
+                        <div class="text-center">
+                            <i class="icon-search"></i>
+                            Nothing found
+                        </div>
                     }
-                    <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 position-relative">
-                                <div class="ribbon_3 popular">
-                                    <span>Popular</span>
-                                </div>
-                                
-                                <div class="img_list">
-                                    <a href="single_transfer.html">
-                                        <img src="@img" alt="Image">
-                                        <div class="short_info"></div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="tour_list_desc">
-                                    <h3><strong>@car.CarModel.Name</strong></h3>
-                                    <h8><strong>@car.LisencePlate</strong></h8><br /><br />
-                                    <p class="m-2"><i class="icon_set_1_icon-29"></i> Seat Capacity: @car.SeatCapacity</p>
-                                    @if (car.HasAirConditioner == true)
-                                    {
-                                        <p class="m-2"><i class="icon-air"></i> Has Air Conditioner</p>
-                                    }
-                                    else {<p class="m-2"><i class="icon-air"></i> No Air Conditioner</p> 
-                                    }
-                                <p class="m-2"><i class="icon_set_1_icon-21"></i> Type: @car.CarType.Name</p>
+                    else
+                    {
+                        foreach (var car in Model)
+                        {
+                            var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
+                            if (car.Thumbnail != null)
+                            {
+                                img = car.Thumbnail.Split(',').ToList<String>().First();
+                            }
+                            <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 position-relative">
+                                        <div class="ribbon_3 popular">
+                                            <span>Popular</span>
+                                        </div>
 
-                                    <ul class="add_info">
+                                        <div class="img_list">
+                                            <a href="single_transfer.html">
+                                                <img src="@img" alt="Image">
+                                                <div class="short_info"></div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="tour_list_desc">
+                                            <div class="rating">
+                                                @for (int j = 0; j < @car.Rating; j++)
+                                                {
+                                                    <i class="icon-smile voted"></i>
+                                                }
+                                            </div>
+                                            <h3><strong>@car.CarModel.Name</strong></h3>
+                                            <h8><strong>@car.LisencePlate</strong></h8><br /><br />
+                                            <p class="m-2"><i class="icon_set_1_icon-29"></i> Seat Capacity: @car.SeatCapacity</p>
 
-                                        <li>
-                                            <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_1_icon-6"></i></span>
-                                                <div class="tooltip-content">
-                                                    <h4>Pick up</h4> Hotel pick up or different place with an extra cost.
-                                                </div>
+                                            <p class="m-2"><i class="icon_set_1_icon-21"></i> Type: @car.CarType.Name</p>
+
+                                            <ul class="add_info">
+
+                                                <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_1_icon-6"></i></span>
+                                                        <div class="tooltip-content">
+                                                            <h4>Pick up</h4> Hotel pick up or different place with an extra cost.
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_1_icon-13"></i></span>
+                                                        <div class="tooltip-content">
+                                                            <h4>Accessibility</h4> On request accessibility available.
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_1_icon-22"></i></span>
+                                                        <div class="tooltip-content">
+                                                            <h4>Pet allowed</h4> On request pet allowed.
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_1_icon-33"></i></span>
+                                                        <div class="tooltip-content">
+                                                            <h4>Baggage</h4> Large baggage drop available.
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2">
+                                        <div class="price_list">
+                                            <div>
+                                                <sup>$@car.PricePerDay</sup><small>*From/Per day</small>
+                                                <p>
+                                                    <a href="single_transfer.html" class="btn_1">Details</a>
+                                                </p>
                                             </div>
-                                        </li>
-                                        <li>
-                                            <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_1_icon-13"></i></span>
-                                                <div class="tooltip-content">
-                                                    <h4>Accessibility</h4> On request accessibility available.
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_1_icon-22"></i></span>
-                                                <div class="tooltip-content">
-                                                    <h4>Pet allowed</h4> On request pet allowed.
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="tooltip_styled tooltip-effect-4">
-                                                <span class="tooltip-item"><i class="icon_set_1_icon-33"></i></span>
-                                                <div class="tooltip-content">
-                                                    <h4>Baggage</h4> Large baggage drop available.
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-2">
-                                <div class="price_list">
-                                    <div>
-                                        <sup>$@car.PricePerDay</sup><small>*From/Per day</small>
-                                        <p>
-                                            <a href="single_transfer.html" class="btn_1">Details</a>
-                                        </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                }
+                        }
 
-                <!--End strip -->
+
+                    <!--End strip -->
 
                 <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                        <li class="page-item active">
-                            <span class="page-link">1</span>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul>
+                    @Html.PagedListPager(Model, page => Url.Action("Index",
+                                         new
+                                         {
+
+                                             sortType = ViewBag.SortType,
+                                             keyword = ViewBag.Keyword,
+                                             modelId = ViewBag.ModelId,
+                                             brandId = ViewBag.BrandId,
+                                             typeId = ViewBag.TypeId,
+                                             hasAC = ViewBag.HasAC,
+                                             hasDriver = ViewBag.HasDriver,
+                                             rating = ViewBag.Rating,
+                                             location = ViewBag.LocationId,
+                                             page
+                                         }),
+                                         new PagedListRenderOptions
+                                         {
+                                             DisplayItemSliceAndTotal = true,
+                                             ItemSliceAndTotalFormat = "Showing {0} to {1} of {2} total car(s).",
+                                             DisplayLinkToIndividualPages = true,
+                                             DisplayPageCountAndCurrentLocation = false,
+                                             MaximumPageNumbersToDisplay = 10,
+                                             LinkToFirstPageFormat = "««",
+                                             LinkToPreviousPageFormat = "«",
+                                             LinkToIndividualPageFormat = "{0}",
+                                             LinkToNextPageFormat = "»",
+                                             LinkToLastPageFormat = "»»",
+                                             ContainerDivClasses = new string[] { "pagination-container mt-3" },
+                                             UlElementClasses = new string[] { "pagination" },
+                                             LiElementClasses = new string[] { "page-item" }
+                                         })
                 </nav>
-                <!-- end pagination-->
+                    }
+                    <!-- end pagination-->
+                </div>
+                <!-- End col lg-9 -->
             </div>
-            <!-- End col lg-9 -->
+            <!-- End row -->
         </div>
-        <!-- End row -->
-    </div>
+    }
     <!-- End container -->
 </main>
