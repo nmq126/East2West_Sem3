@@ -15,8 +15,19 @@ namespace East2West.Controllers
     {
         private DBContext db = new DBContext();
 
-        public ActionResult GetListCar()
+        public ActionResult GetListCar(int? hasAC, string id, string sortType, string licensePlate, string locationId, string brandId, string modelId, string typeId, int? page)
         {
+            ViewBag.BrandList = from b in db.CarBrands select b;
+            ViewBag.ModelList = from m in db.CarModels select m;
+            ViewBag.TypeList = from t in db.CarTypes select t;
+            ViewBag.LocationList = from l in db.Locations select l;
+            ViewBag.HasAC = hasAC;
+            ViewBag.ModelId = modelId;
+            ViewBag.BrandId = brandId;
+            ViewBag.TypeId = typeId;
+            ViewBag.SortType = sortType;
+            ViewBag.LicensePlate = licensePlate;
+
             var cars = db.Cars.Include(c => c.CarModel)
                 .Include("CarModel.CarBrand")
                 .Include(c => c.CarType)

@@ -125,7 +125,7 @@ namespace East2West.Controllers
             return this.payment.Execute(apiContext, paymentExecution);
         }
 
-        public ActionResult PaymentWithPaypal(string id, string name, double? price, int? quantity)
+        public ActionResult PaymentWithPaypal(string id, string name, double? price, int? quantity, string idTourDetail)
         {
             APIContext apiContext = PaypalConfiguration.GetAPIContext();
 
@@ -140,6 +140,8 @@ namespace East2West.Controllers
                     var links = createdPayment.links.GetEnumerator();
                     string paypalRedirectUrl = string.Empty;
                     Session["idOrder"] = id;
+                    Session["tourDetailId"] = idTourDetail;
+                    Session["seat"] = quantity;
                     while (links.MoveNext())
                     {
                         Links link = links.Current;
@@ -168,13 +170,23 @@ namespace East2West.Controllers
                 return View("~/Views/Home/Page_404.cshtml");
             }
             var idOrder = Session["idOrder"].ToString();
+            var idTourDetailToChange = Session["tourDetailId"].ToString();
+            var seat = Convert.ToInt32(Session["seat"]);
             var order = db.Orders.Where(o => o.Id.Equals(idOrder)).FirstOrDefault();
+            var tourDetail = db.TourDetails.Where(t => t.Id.Equals(idTourDetailToChange)).FirstOrDefault();
             if (order != null)
             {
                 order.Status = 1;
                 db.SaveChanges();
             }
+            if (tourDetail != null)
+            {
+                tourDetail.AvailableSeat -= seat;
+                db.SaveChanges();
+            }
             Session.Remove("idOrder");
+            Session.Remove("tourDetailId");
+            Session.Remove("seat");
             return RedirectToAction("ThankYou", "Home");
         }
     }

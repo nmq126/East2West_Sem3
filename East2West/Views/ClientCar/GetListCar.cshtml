@@ -25,7 +25,7 @@
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="ClientCar/GetListCar">Car</a>
+                    <a href="ClientCar/GetListCar">Cars</a>
                 </li>
                 <li>List Car</li>
             </ul>
@@ -182,16 +182,17 @@
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="tour_list_desc">
+                                    <div class="rating">
+                                        @for (int j = 0; j < @car.Rating; j++)
+                                        {
+                                            <i class="icon-smile voted"></i>
+                                        }
+                                    </div>
                                     <h3><strong>@car.CarModel.Name</strong></h3>
                                     <h8><strong>@car.LisencePlate</strong></h8><br /><br />
                                     <p class="m-2"><i class="icon_set_1_icon-29"></i> Seat Capacity: @car.SeatCapacity</p>
-                                    @if (car.HasAirConditioner == true)
-                                    {
-                                        <p class="m-2"><i class="icon-air"></i> Has Air Conditioner</p>
-                                    }
-                                    else {<p class="m-2"><i class="icon-air"></i> No Air Conditioner</p> 
-                                    }
-                                <p class="m-2"><i class="icon_set_1_icon-21"></i> Type: @car.CarType.Name</p>
+                                    
+                                    <p class="m-2"><i class="icon_set_1_icon-21"></i> Type: @car.CarType.Name</p>
 
                                     <ul class="add_info">
 

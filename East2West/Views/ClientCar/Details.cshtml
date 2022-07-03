@@ -1,7 +1,7 @@
 ﻿@model East2West.Models.Car
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "East2West - " + Model.CarModel.Name;
     Layout = "~/Views/Shared/_LayoutPageClient.cshtml";
 }
 
@@ -20,14 +20,14 @@
                 <div class="row">
                     <div class="col-md-8">
                         <h1>@Model.CarModel.Name</h1>
-                        <span>@Model.</span>
-                        @*<span class="rating">
-                                @for (int j = 0; j < Model.; j++)
+                        <span>@Model.LisencePlate</span>
+                        <span class="rating">
+                                @for (int j = 0; j < Model.Rating; j++)
                                 {
                                     <i class="icon-smile voted"></i>
 
                                 }
-                            </span>*@
+                            </span>
                     </div>
                     <div class="col-md-4">
                         <div id="price_single_main">
@@ -48,9 +48,9 @@
                     <a href="#">Home</a>
                 </li>
                 <li>
-                    <a href="#">Category</a>
+                    <a href="#">Cars</a>
                 </li>
-                <li>Page active</li>
+                <li>Car Details</li>
             </ul>
         </div>
     </div>
