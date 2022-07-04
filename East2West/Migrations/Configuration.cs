@@ -563,10 +563,20 @@
                 );
             //Xe
             context.Cars.AddOrUpdate(x => x.Id,
-                new Car() {
+                new Car()
+                {
                     Id = "CAR_1",
                     CarModelId = "CARMD_1",
-                    CarTypeId = "CARTP_1", LocationId = "LOCAL_1", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655619897/e2w/2020-Honda-City-Honda-T%C3%A2y-H%E1%BB%93-48_kljd5z.jpg", LisencePlate = "22-A-02757", HasAirConditioner = true, SeatCapacity = 5, PricePerDay = 43, Status = 1, CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00") }
+                    CarTypeId = "CARTP_1",
+                    LocationId = "LOCAL_1",
+                    Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655619897/e2w/2020-Honda-City-Honda-T%C3%A2y-H%E1%BB%93-48_kljd5z.jpg",
+                    LisencePlate = "22-A-02757",
+                    HasAirConditioner = true,
+                    SeatCapacity = 5,
+                    PricePerDay = 43,
+                    Status = 1,
+                    CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00")
+                }
                 );
             context.CarSchedules.AddOrUpdate(x => x.Id,
             new CarSchedule()
@@ -576,7 +586,8 @@
                 StartDay = Convert.ToDateTime("2017-08-09T23:49:58+02:00"),
                 EndDay = Convert.ToDateTime("2017-08-10T23:49:58+02:00"),
                 Status = 1,
-                CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00")}
+                CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00")
+            }
                 );
 
             //Khách sạn
@@ -612,7 +623,96 @@
                 );
             //Chuyến bay
             context.Flights.AddOrUpdate(x => x.Id,
-                new Flight() { Id = "FL_1", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655743162/e2w/download_aalx9i.png", IsRoundTicket = true, DepartureId = "LOCAL_1", DestinationId = "LOCAL_3", DepartureAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"), Duration = "3", Price = 43, ReturnAt = Convert.ToDateTime("2022-09-09T23:49:58+02:00"), Detail = "Brand : Vietnam Airlines - Flight : VN 600 - Boarding Time : 14:00", Status = 1, CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00") }
+                    new Flight()
+                    {
+                        Id = "FL_1",
+                        Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655743162/e2w/download_aalx9i.png",
+                        IsRoundTicket = true,
+                        DepartureId = "LOCAL_1",
+                        DestinationId = "LOCAL_3",
+                        DepartureAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"),
+                        Duration = "3",
+                        Price = 43,
+                        ReturnAt = Convert.ToDateTime("2022-09-09T23:49:58+02:00"),
+                        Detail = "Brand : Vietnam Airlines - Flight : VN 600 - Boarding Time : 14:00",
+                        Status = 1,
+                        CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00")
+                    },
+                    new Flight()
+                    {
+                        Id = "FL_2",
+                        Thumbnail = "https://www.airdatanews.com/wp-content/uploads/2022/04/747youtube.jpg",
+                        IsRoundTicket = true,
+                        DepartureId = "LOCAL_3",
+                        DestinationId = "LOCAL_4",
+                        DepartureAt = Convert.ToDateTime(new DateTime()),
+                        Duration = "3",
+                        Price = 23,
+                        ReturnAt = Convert.ToDateTime(new DateTime().AddHours(+3)),
+                        Detail = "The enhancement with Release 21.2.2 improves the accuracy of the Transportation Security Administration (TSA) informational message by replacing the specific United States based text",
+                        Status = 1,
+                        CreatedAt = Convert.ToDateTime(new DateTime()),
+                    },
+                    new Flight()
+                    {
+                        Id = "FL_3",
+                        Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655743162/e2w/download_aalx9i.png",
+                        IsRoundTicket = true,
+                        DepartureId = "LOCAL_1",
+                        DestinationId = "LOCAL_3",
+                        DepartureAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"),
+                        Duration = "3",
+                        Price = 10,
+                        ReturnAt = Convert.ToDateTime("2022-09-09T23:49:58+02:00"),
+                        Detail = "The availability and types of Flight Details returned vary by carrier and segment. The availability of real-time data versus scheduled data may also vary by carrier and segment",
+                        Status = 2,
+                        CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00")
+                    },
+                    new Flight()
+                    {
+                        Id = "FL_4",
+                        Thumbnail = "https://media.cntraveler.com/photos/581250f2997d59497dccf8bc/16:9/w_2560%2Cc_limit/GettyImages-185298837.jpg",
+                        IsRoundTicket = true,
+                        DepartureId = "LOCAL_6",
+                        DestinationId = "LOCAL_8",
+                        DepartureAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"),
+                        Duration = "3",
+                        Price = 100,
+                        ReturnAt = Convert.ToDateTime("2022-09-09T23:49:58+02:00"),
+                        Detail = "Prior to Air v48.0, the CodeshareInfo attribute contained within the FlightDetails element had a Max Occurrence of 0",
+                        Status = 1,
+                        CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00")
+                    },
+                    new Flight()
+                    {
+                        Id = "FL_5",
+                        Thumbnail = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVx1sJ-TDZwJkT291_L5y-wEa6S_DJE-O6bvS928SWUUYee_Pg8xtiCMOupA04s5w_8cQ&usqp=CAU",
+                        IsRoundTicket = true,
+                        DepartureId = "LOCAL_11",
+                        DestinationId = "LOCAL_12",
+                        DepartureAt = Convert.ToDateTime(new DateTime()),
+                        Duration = "3",
+                        Price = 20,
+                        ReturnAt = Convert.ToDateTime(new DateTime()).AddHours(+3),
+                        Detail = "By allowing the codeshare carrier and flight number in the flight service response, users can respond to questions and problems both pre- and post-departure without having to call Travelport to obtain the data",
+                        Status = 2,
+                        CreatedAt = Convert.ToDateTime(new DateTime()),
+                    },
+                    new Flight()
+                    {
+                        Id = "FL_6",
+                        Thumbnail = "https://www.india.com/wp-content/uploads/2022/03/International-Flights-Latest-Update.jpg",
+                        IsRoundTicket = true,
+                        DepartureId = "LOCAL_1",
+                        DestinationId = "LOCAL_10",
+                        DepartureAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"),
+                        Duration = "1",
+                        Price = 20,
+                        ReturnAt = Convert.ToDateTime("2022-09-09T23:49:58+02:00"),
+                        Detail = "Prior to Universal API release 21.2.2, the InFlightService list returns a value of TSA SECURED FLIGHT if a flight was a TSA-secured flight",
+                        Status = 2,
+                        CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00")
+                    }
                 );
 
             context.Orders.AddOrUpdate(x => x.Id,
@@ -671,7 +771,7 @@
             //    );
 
             db.SaveChanges();
-            
+
         }
 
     }
