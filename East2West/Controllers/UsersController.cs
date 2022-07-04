@@ -96,6 +96,12 @@ namespace East2West.Controllers
                 case "createdAt_desc":
                     users = users.OrderByDescending(s => s.CreatedAt);
                     break;
+                case "orderPaid_asc":
+                    users = users.OrderBy(s => s.Orders.Where(o => o.Status == 1).Count());
+                    break;
+                case "orderPaid_desc":
+                    users = users.OrderByDescending(s => s.Orders.Where(o => o.Status == 1).Count());
+                    break;
                 default:
                     users = users.OrderByDescending(s => s.CreatedAt);
                     break;
@@ -198,6 +204,26 @@ namespace East2West.Controllers
             return View(user);
         }
 
+        public String ChangeStatus(string id, int status)
+        {
+            if (id == null)
+            {
+                return "Bad Request";
+            }
+            User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return "User not found";
+            }
+            user.Status = status;
+            string newStatus = "ACTIVE";
+            if (status == 0)
+            {
+                newStatus = "DISABLE";
+            }
+            db.SaveChanges();
+            return "User #" + id + " status change to " + newStatus;
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

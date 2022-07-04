@@ -102,7 +102,12 @@
                             @(Model.HasAirConditioner == true ? "Yes" : "No")
                         </div>
                     </div>
-
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Has Driver:</div>
+                        <div class="col-lg-6">
+                            @(Model.HasDriver == true ? "Yes" : "No")
+                        </div>
+                    </div>
                     <div class="form-group row d-flex align-items-center mb-5">
                         <div class="col-lg-2 text-right">Status:</div>
                         <div class="col-lg-6">
@@ -190,13 +195,19 @@
                                             @switch (schedule.Status)
                                             {
                                                 case -1:
-                                                    <p>Canceled</p>
+                                                    <p>Refunded</p>
                                                     break;
                                                 case 0:
-                                                    <p>Pending</p>
+                                                    <p>Pending Refund</p>
                                                     break;
                                                 case 1:
                                                     <p>Paid</p>
+                                                    break;
+                                                case 2:
+                                                    <p>Picked up</p>
+                                                    break;
+                                                case 3:
+                                                    <p>Dropped off</p>
                                                     break;
                                                 default:
                                                     break;
