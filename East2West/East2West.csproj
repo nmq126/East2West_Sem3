@@ -174,7 +174,8 @@
     <Compile Include="Controllers\ClientTourController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
-    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OrderCarController.cs" />
+    <Compile Include="Controllers\OrderTourController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\TourDetailsController.cs" />
     <Compile Include="Controllers\TourSchedulesController.cs" />
@@ -1074,6 +1075,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\OrderCar\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\TourSchedules\" />
   </ItemGroup>
