@@ -18,6 +18,7 @@ namespace East2West.Controllers
 
         public ActionResult GetListCar(string rating, string keyword, int? hasDriver, int? hasAC, string sortType, string licensePlate, string locationId, string brandId, string modelId, string typeId, int? page)
         {
+            ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
             ViewBag.BrandList = from b in db.CarBrands select b;
             ViewBag.ModelList = from m in db.CarModels select m;
             ViewBag.TypeList = from t in db.CarTypes select t;
@@ -153,6 +154,7 @@ namespace East2West.Controllers
 
         public ActionResult Details(string id)
         {
+            ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -163,6 +165,8 @@ namespace East2West.Controllers
                 .Include(c => c.CarType)
                 .Include(c => c.CarSchedules)
                 .FirstOrDefault(c => c.Id == id);
+            ViewBag.Price = db.Cars.FirstOrDefault(c => c.Id == id).PricePerDay;
+            ViewBag.Location = db.Cars.FirstOrDefault(c => c.Id == id).Location.Name;
             if (car == null)
             {
                 return HttpNotFound();

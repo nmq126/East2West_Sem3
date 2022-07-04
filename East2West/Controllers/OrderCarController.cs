@@ -4,42 +4,70 @@ using Microsoft.AspNet.Identity;
 using PayPal.Api;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace East2West.Controllers
 {
-    public class OrderController : Controller
+    public class OrderCarController : Controller
     {
         private DBContext db = new DBContext();
 
         [HttpPost]
-        public JsonResult CreateTourOrder(string tourDetailId, double unitPrice, int quantity)
+        public JsonResult CreateCarOrder(string carId, string startDay, string endDay, double pricePerDay)
         {
             if (User.Identity.IsAuthenticated)
             {
+                var car = db.Cars.Include(c => c.CarSchedules).Where(c => c.Id == carId).FirstOrDefault();
+
+                TimeSpan span = Convert.ToDateTime(endDay).Subtract(Convert.ToDateTime(startDay));
+                //Create car schedule
+                var carSchedule = new CarSchedule()
+                {
+                    Id = String.Concat("CARSCH_", Guid.NewGuid().ToString("N").Substring(0, 5)),
+                    CarId = carId,
+                    StartDay = Convert.ToDateTime(startDay),
+                    EndDay = Convert.ToDateTime(endDay),
+                    Status = 0,
+                    CreatedAt = DateTime.Now
+                };
+                var thisCarSchedule = car.CarSchedules;
+                foreach (var item in thisCarSchedule)
+                {
+                    if (carSchedule.StartDay <= item.EndDay && carSchedule.EndDay >= item.StartDay)
+                    {
+                        return Json(new
+                        {
+                            message = "This car is busy from " + item.StartDay.ToShortDateString() + " to " + item.EndDay.ToShortDateString(),
+                            status = 0
+                        });
+                    }
+                }
+                db.CarSchedules.Add(carSchedule);
+                db.SaveChanges();
+                //Create order
                 string userId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
                 var order = new Models.Order()
                 {
                     Id = String.Concat("ORD_", Guid.NewGuid().ToString("N").Substring(0, 5)),
                     UserId = userId,
-                    TotalPrice = unitPrice * quantity,
-                    Type = 1,
+                    TotalPrice = span.Days * pricePerDay,
+                    Type = 2,
                     Status = -1,
                     CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now,
-                    DeletedAt = DateTime.Now
                 };
                 db.Orders.Add(order);
-                var OrderTours = new OrderTour()
+                db.SaveChanges();
+                //Create order car
+                var orderCar = new OrderCar()
                 {
                     OrderId = order.Id,
-                    TourDetailId = tourDetailId,
-                    UnitPrice = unitPrice,
-                    Quantity = quantity
+                    CarScheduleId = carSchedule.Id,
+                    UnitPrice = order.TotalPrice
                 };
-                db.OrderTours.Add(OrderTours);
+                db.OrderCars.Add(orderCar);
                 db.SaveChanges();
                 return Json(new
                 {
@@ -51,7 +79,7 @@ namespace East2West.Controllers
             {
                 return Json(new
                 {
-                    message = "Login to order.",
+                    message = "You must login to order.",
                     status = -1
                 });
             }
@@ -60,15 +88,15 @@ namespace East2West.Controllers
         private Payment payment;
 
         //Create Payment
-        private Payment CreatePayment(APIContext apiContext, string redirectUrl, string name, double? price, int? quantity)
+        private Payment CreatePayment(APIContext apiContext, string redirectUrl, string name, double? pricePerDay, int? rentDay)
         {
             var listItems = new ItemList() { items = new List<Item>() };
             listItems.items.Add(new Item()
             {
                 name = name,
                 currency = "USD",
-                price = Convert.ToString(price),
-                quantity = Convert.ToString(quantity),
+                price = Convert.ToString(pricePerDay),
+                quantity = Convert.ToString(rentDay),
                 sku = "sku"
             });
 
@@ -84,7 +112,7 @@ namespace East2West.Controllers
             {
                 tax = "0",
                 shipping = "0",
-                subtotal = Convert.ToString(price * quantity)
+                subtotal = Convert.ToString(pricePerDay * rentDay)
             };
 
             var amount = new Amount()
@@ -125,7 +153,7 @@ namespace East2West.Controllers
             return this.payment.Execute(apiContext, paymentExecution);
         }
 
-        public ActionResult PaymentWithPaypal(string id, string name, double? price, int? quantity, string idTourDetail)
+        public ActionResult PaymentWithPaypal(string id, string name, double? pricePerDay, int? rentDay, string idCarSchedule)
         {
             APIContext apiContext = PaypalConfiguration.GetAPIContext();
 
@@ -134,14 +162,14 @@ namespace East2West.Controllers
                 string payerId = Request.Params["PayerID"];
                 if (string.IsNullOrEmpty(payerId))
                 {
-                    string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Order/PaymentWithPaypal?";
+                    string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/OrderCar/PaymentWithPaypal?";
                     var guid = Convert.ToString((new Random()).Next(100000));
-                    var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid, name, price, quantity);
+                    var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid, name, pricePerDay, rentDay);
                     var links = createdPayment.links.GetEnumerator();
                     string paypalRedirectUrl = string.Empty;
                     Session["idOrder"] = id;
-                    Session["tourDetailId"] = idTourDetail;
-                    Session["seat"] = quantity;
+                    Session["idCarSchedule"] = idCarSchedule;
+
                     while (links.MoveNext())
                     {
                         Links link = links.Current;
@@ -170,23 +198,23 @@ namespace East2West.Controllers
                 return View("~/Views/Home/Page_404.cshtml");
             }
             var idOrder = Session["idOrder"].ToString();
-            var idTourDetailToChange = Session["tourDetailId"].ToString();
-            var seat = Convert.ToInt32(Session["seat"]);
+            var idCarScheduleToChange = Session["idCarSchedule"].ToString();
             var order = db.Orders.Where(o => o.Id.Equals(idOrder)).FirstOrDefault();
-            var tourDetail = db.TourDetails.Where(t => t.Id.Equals(idTourDetailToChange)).FirstOrDefault();
+            var carSchedule = db.CarSchedules.Where(t => t.Id.Equals(idCarScheduleToChange)).FirstOrDefault();
             if (order != null)
             {
                 order.Status = 1;
+                order.UpdatedAt = DateTime.Now;
                 db.SaveChanges();
             }
-            if (tourDetail != null)
+            if (carSchedule != null)
             {
-                tourDetail.AvailableSeat -= seat;
+                carSchedule.Status = 1;
                 db.SaveChanges();
             }
             Session.Remove("idOrder");
-            Session.Remove("tourDetailId");
-            Session.Remove("seat");
+            Session.Remove("idCarSchedule");
+
             return RedirectToAction("ThankYou", "Home");
         }
     }

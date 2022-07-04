@@ -153,11 +153,12 @@ namespace East2West.Controllers
 
         public ActionResult ShowInformation(string id)
         {
+            ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var user = myIdentityDbContext.Users.Include(u => u.Orders).Include("Orders.OrderTours").FirstOrDefault(u => u.Id == id);
+            var user = myIdentityDbContext.Users.Include(u => u.Orders).Include("Orders.OrderTours").Include("Orders.OrderCars").Include("Orders.OrderCars.CarSchedule.Car.CarModel").FirstOrDefault(u => u.Id == id);
 
             if (user == null)
             {
