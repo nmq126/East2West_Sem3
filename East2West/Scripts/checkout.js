@@ -150,7 +150,7 @@
 
     $('.cancelButton').on('click', function (e) {
         Swal.fire({
-            title: 'Are you sure?',
+            title: 'Are you sure want to cancel this service?',
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
@@ -184,13 +184,13 @@
     $('.refundButton').on('click', function (e) {
         e.preventDefault;
         Swal.fire({
-            title: 'Are you sure?',
+            title: 'Are you sure want to refund this service?',
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Yes, refund it!'
         }).then((result) => {
             if (result.isConfirmed) {
                 var orderId = $(this).data("id");
