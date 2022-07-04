@@ -22,12 +22,12 @@
         <div class="container">
             <ul>
                 <li>
-                    <a href="#">Home</a>
+                    <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="#">Category</a>
+                    <a href="#">User</a>
                 </li>
-                <li>Page active</li>
+                <li>Profile</li>
             </ul>
         </div>
     </div>
@@ -157,17 +157,18 @@
                                         var endDay = carSchedule.EndDay;
                                         TimeSpan span = endDay.Subtract(startDay);
                                         var carName = carSchedule.Car.CarModel.Name;
+                                        var carLPlate = carSchedule.Car.LisencePlate;
                                         var carScheduleId = carSchedule.Id;
                                         var pricePerDay = carSchedule.Car.PricePerDay;
                                     }
                                     <div class="col-lg-5 col-md-4">
                                         @if (span.Days > 1)
                                         {
-                                            <h3 class="transfers_booking">@carName<span>@span.Days Days</span><span>End date: @endDay.ToShortDateString()</span></h3>
+                                            <h3 class="transfers_booking">@carName (@carLPlate)<span>@span.Days Days</span><span>End date: @endDay.ToShortDateString()</span></h3>
                                         }
                                         else
                                         {
-                                            <h3 class="transfers_booking">@carName<span>@span.Days Day</span><span>End date: @endDay.ToShortDateString()</span></h3>
+                                            <h3 class="transfers_booking">@carName (@carLPlate)<span>@span.Days Day</span><span>End date: @endDay.ToShortDateString()</span></h3>
                                         }
                                     </div>
                                     <div class="col-lg-2 col-md-3">

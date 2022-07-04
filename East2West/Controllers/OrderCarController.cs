@@ -36,13 +36,16 @@ namespace East2West.Controllers
                 var thisCarSchedule = car.CarSchedules;
                 foreach (var item in thisCarSchedule)
                 {
-                    if (carSchedule.StartDay <= item.EndDay && carSchedule.EndDay >= item.StartDay)
+                    if (item.Status != -1)
                     {
-                        return Json(new
+                        if (carSchedule.StartDay <= item.EndDay && carSchedule.EndDay >= item.StartDay)
                         {
-                            message = "This car is busy from " + item.StartDay.ToShortDateString() + " to " + item.EndDay.ToShortDateString(),
-                            status = 0
-                        });
+                            return Json(new
+                            {
+                                message = "This car is busy from " + item.StartDay.ToShortDateString() + " to " + item.EndDay.ToShortDateString(),
+                                status = 0
+                            });
+                        }
                     }
                 }
                 db.CarSchedules.Add(carSchedule);

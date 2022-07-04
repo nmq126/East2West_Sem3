@@ -17,7 +17,8 @@ namespace East2West.Controllers
         public ActionResult Index()
         {
             ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            return View();
+            var tours = db.Tours.Include(t => t.TourCategory).Include(t => t.TourDetails).Where(t => t.Rating == 5).ToList();
+            return View(tours.ToList());
         }
 
         public ActionResult About()
