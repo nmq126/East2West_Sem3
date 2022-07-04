@@ -119,6 +119,25 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-lg-3">
+                        <label class="form-control-label">Date Range</label>
+                        <div class="input-group">
+                            <span class="input-group-addon addon-secondary">
+                                <i class="la la-calendar"></i>
+                            </span>
+                            @*@{
+                                    var departureString = "";
+                                    if (!String.IsNullOrEmpty(ViewBag.StartDepartureDay) && !String.IsNullOrEmpty(ViewBag.EndDepartureDay))
+                                    {
+                                        departureString = @ViewBag.StartDepartureDay + " - " + @ViewBag.EndDepartureDay;
+                                    }
+                                }*@
+                            <input type="text" class="form-control" id="daterange" value="">
+                            <input type="hidden" class="form-control" name="startDay" , id="startDay" value="">
+                            <input type="hidden" class="form-control" name="endDay" , id="endDay" value="">
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- End Widget Header -->
@@ -178,6 +197,7 @@
     <script src="~/Content/admin_vendor/js/calendar/fullcalendar.min.js"></script>
     <script src="~/Content/admin_vendor/js/owl-carousel/owl.carousel.min.js"></script>
     <script src="~/Content/admin_vendor/js/app/app.js"></script>
+
 
     <script src="~/Content/admin_js/dashboard/db-default.js"></script>
 
@@ -246,19 +266,40 @@
         });
 
     </script>
-    @*<script>
-        $('.circle-orders').circleProgress({
-            value: 0.55,
-            size: 120,
-            startAngle: -Math.PI / 2,
-            thickness: 10,
-            lineCap: 'round',
-            emptyFill: '#e4e8f0',
-            fill: {
-                gradient: ['#0087a4', '#08a6c3']
-            }
-        }).on('circle-animation-progress', function (event, progress) {
-            $(this).find('.percent-orders').html(Math.round(55 * progress) + '<i>%%</i>');
+
+    <script src="~/Content/admin_vendor/js/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="~/Content/admin_vendor/js/datepicker/moment.min.js"></script>
+    <script src="~/Content/admin_vendor/js/datepicker/daterangepicker.js"></script>
+    <script src="~/Content/admin_js/components/datepicker/datepicker.js"></script>
+
+    <script>
+        $('#daterange').daterangepicker({
+            showDropdowns: true,
+            autoUpdateInput: false,
+            autoApply: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            },
         });
-    </script>*@
+        $('#daterange').on('apply.daterangepicker', function (ev, picker) {
+            $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            $('#startDay').val(picker.startDate.format('DD/MM/YYYY'))
+            $('#endDay').val(picker.endDate.format('DD/MM/YYYY'))
+        });
+    </script>
+    @*<script>
+            $('.circle-orders').circleProgress({
+                value: 0.55,
+                size: 120,
+                startAngle: -Math.PI / 2,
+                thickness: 10,
+                lineCap: 'round',
+                emptyFill: '#e4e8f0',
+                fill: {
+                    gradient: ['#0087a4', '#08a6c3']
+                }
+            }).on('circle-animation-progress', function (event, progress) {
+                $(this).find('.percent-orders').html(Math.round(55 * progress) + '<i>%%</i>');
+            });
+        </script>*@
 }

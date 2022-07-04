@@ -74,10 +74,10 @@
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <label class="form-control-label">All</label>
+                        <label class="form-control-label">Select Destination</label>
                         <div class="select mb-3">
                             <select name="destinationId" id="destinationId" class="custom-select form-control">
-                                <option value="">Select Destination</option>
+                                <option value="">All</option>
                                 @foreach (var destination in ViewBag.LocationList)
                                 {
                                     if (destination.Id == ViewBag.DestinationId)
@@ -247,7 +247,7 @@
                                 }
                             </tbody>
                         </table>
-                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                        @Html.PagedListPager(Model, page => Url.Action("Index", "Tours",
                                     new
                                          {
                                         id = ViewBag.Id,

@@ -148,7 +148,8 @@
                         <li class="@(url.Contains("/Orders") || url.Contains("/admin/orders") ? "active" : "" )">
                             <a href="#dropdown-db0" aria-expanded="false" data-toggle="collapse"><i class="la la-shopping-cart"></i><span>Orders</span></a>
                             <ul id="dropdown-db0" class="collapse list-unstyled @(url.Contains("/Orders") || url.Contains("/admin/orders") ? "show" : "" ) pt-0">
-                                <li><a class="@(rawUrl.Equals("/Orders/GetTour") || rawUrl.Equals("/admin/orders/tours") ? "active" : "" )" href="@Url.Action("GetTour", "Orders")">Tour Analysis</a></li>
+                                <li><a class="@(rawUrl.Contains("/Orders/GetTour") || rawUrl.Contains("/admin/orders/tours") ? "active" : "" )" href="@Url.Action("GetTour", "Orders")">Tour Analysis</a></li>
+                                <li><a class="@(rawUrl.Contains("/Orders/GetCar") || rawUrl.Contains("/admin/orders/cars") ? "active" : "" )" href="@Url.Action("GetCar", "Orders")">Car Analysis</a></li>
 
                             </ul>
                         </li>
@@ -162,8 +163,8 @@
                         <li class="@(url.Contains("/Tour") || url.Contains("/admin/tour") ? "active" : "" )">
                             <a href="#dropdown-db1" aria-expanded="false" data-toggle="collapse"><i class="la la-rocket"></i><span>Tour</span></a>
                             <ul id="dropdown-db1" class="collapse list-unstyled @(url.Contains("/Tour") || url.Contains("/admin/tour") ? "show" : "" ) pt-0">
-                                <li><a class="@(rawUrl.Equals("/Tours") || rawUrl.Equals("/Tours/Index") || rawUrl.Equals("/admin/tours") ? "active" : "" )" href="@Url.Action("Index", "Tours")">Tours List</a></li>
-                                <li><a class="@(rawUrl.Equals("/Tours/Create") || rawUrl.Equals("/admin/tours/create") ? "active" : "" )" href="@Url.Action("Create", "Tours")">Create Tour</a></li>
+                                <li><a class="@(rawUrl.Contains("/Tours") || rawUrl.Contains("/Tours/Index") || rawUrl.Contains("/admin/tours") && !rawUrl.Equals("/admin/tours/create") ? "active" : "" )" href="@Url.Action("Index", "Tours")">Tours List</a></li>
+                                <li><a class="@(rawUrl.Equals("/Tours/Create") || rawUrl.Equals("/admin/tours/create")  ? "active" : "" )" href="@Url.Action("Create", "Tours")">Create Tour</a></li>
                                 <li><a class="@(rawUrl.Equals("/TourDetails") || rawUrl.Equals("/TourDetails/Index") || rawUrl.Equals("/admin/tour-details") ? "active" : "" )" href="@Url.Action("Index", "TourDetails")">Tour detail List</a></li>
                                 <li><a class="@(rawUrl.Equals("/TourDetails/Create") || rawUrl.Equals("/admin/tour-details/create") ? "active" : "" )" href="@Url.Action("Create", "TourDetails")">Create Tour detail</a></li>
                             </ul>
@@ -171,10 +172,10 @@
                         <li class="@(Request.Url.ToString().Contains("/Car") ? "active" : "" )">
                             <a href="#dropdown-db2" aria-expanded="false" data-toggle="collapse"><i class="la la-car"></i><span>Car</span></a>
                             <ul id="dropdown-db2" class="collapse list-unstyled @(Request.Url.ToString().Contains("/Car") ? "show" : "" ) pt-0">
-                                <li><a class="@(Request.RawUrl.Equals("/Cars") || Request.RawUrl.Equals("/Cars/Index") ? "active" : "" )" href="@Url.Action("Index", "Cars")">Cars List</a></li>
-                                <li><a class="@(Request.RawUrl.Equals("/Cars/Create") ? "active" : "" )" href="@Url.Action("Create", "Cars")">Create Car</a></li>
-                                <li><a class="@(Request.RawUrl.Equals("/CarSchedules") || Request.RawUrl.Equals("/CarSchedules/Index") ? "active" : "" )" href="@Url.Action("Index", "CarSchedules")">List Car Schedule</a></li>
-                                <li><a class="@(Request.RawUrl.Equals("/CarSchedules/Create") ? "active" : "" )" href="@Url.Action("Create", "CarSchedules")">Create Car Schedule</a></li>
+                                <li><a class="@(rawUrl.Contains("/Cars") || rawUrl.Contains("/Cars/Index") ||rawUrl.Contains("/admin/cars") ? "active" : "" )" href="@Url.Action("Index", "Cars")">Cars List</a></li>
+                                <li><a class="@(rawUrl.Equals("/Cars/Create") ? "active" : "" )" href="@Url.Action("Create", "Cars")">Create Car</a></li>
+                                <li><a class="@(rawUrl.Contains("/CarSchedules") || rawUrl.Equals("/CarSchedules/Index") ? "active" : "" )" href="@Url.Action("Index", "CarSchedules")">List Car Schedule</a></li>
+                                <li><a class="@(rawUrl.Equals("/CarSchedules/Create") ? "active" : "" )" href="@Url.Action("Create", "CarSchedules")">Create Car Schedule</a></li>
                             </ul>
                         </li>
 

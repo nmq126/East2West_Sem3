@@ -1091,7 +1091,6 @@
     <Content Include="Views\Home\Page_404.cshtml" />
     <Content Include="Views\Home\ThankYou.cshtml" />
     <Content Include="Views\Orders\Details.cshtml" />
-    <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Shared\_LayoutSidePage.cshtml" />
     <Content Include="Views\User\ShowInformation.cshtml" />
     <Content Include="Views\ClientCar\GetListCar.cshtml" />
@@ -1107,6 +1106,7 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Orders\GetCar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

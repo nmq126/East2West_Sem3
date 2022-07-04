@@ -2,7 +2,7 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "List Orders";
+    ViewBag.Title = "List Orders Car";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -51,57 +51,94 @@
     <div class="col-xl-12">
         <div class="widget has-shadow">
             <div class="widget-body">
-                @using (Html.BeginForm("GetTour", "Orders", FormMethod.Get))
+                @using (Html.BeginForm("GetCar", "Orders", FormMethod.Get))
                 {
                     <div class="row">
                         <div class="col-lg-3">
-                            <label class="form-control-label">Select Depature location</label>
+                            <label class="form-control-label">Select Location</label>
                             <div class="select mb-3">
-                                <select name="departureId" id="departureId" class="custom-select form-control">
+                                <select name="locationId" id="locationId" class="custom-select form-control">
                                     <option value="">All</option>
-                                    @foreach (var departure in ViewBag.LocationList)
+                                    @foreach (var item in ViewBag.LocationList)
                                     {
-                                        if (departure.Id == ViewBag.DepartureId)
+                                        if (item.Id == ViewBag.DepartureId)
                                         {
-                                            <option value=@departure.Id selected>@departure.Name</option>
+                                            <option value=@item.Id selected>@item.Name</option>
                                         }
                                         else
                                         {
-                                            <option value=@departure.Id>@departure.Name</option>
+                                            <option value=@item.Id>@item.Name</option>
                                         }
                                     }
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            <label class="form-control-label">Select Destination location</label>
+                            <label class="form-control-label">Select Brand</label>
                             <div class="select mb-3">
-                                <select name="destinationId" id="destinationId" class="custom-select form-control">
+                                <select name="brandId" id="brandId" class="custom-select form-control">
                                     <option value="">All</option>
-                                    @foreach (var destination in ViewBag.LocationList)
+                                    @foreach (var item in ViewBag.BrandList)
                                     {
-                                        if (destination.Id == ViewBag.DestinationId)
+                                        if (item.Id == ViewBag.BrandId)
                                         {
-                                            <option value=@destination.Id selected>@destination.Name</option>
+                                            <option value=@item.Id selected>@item.Name</option>
                                         }
                                         else
                                         {
-                                            <option value=@destination.Id>@destination.Name</option>
+                                            <option value=@item.Id>@item.Name</option>
                                         }
                                     }
                                 </select>
                             </div>
                         </div>
-
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Select Model</label>
+                            <div class="select mb-3">
+                                <select name="modelId" id="modelId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var item in ViewBag.ModelList)
+                                    {
+                                        if (item.Id == ViewBag.ModelId)
+                                        {
+                                            <option value=@item.Id selected>@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@item.Id>@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Select Type</label>
+                            <div class="select mb-3">
+                                <select name="typeId" id="typeId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var item in ViewBag.TypeList)
+                                    {
+                                        if (item.Id == ViewBag.TypeId)
+                                        {
+                                            <option value=@item.Id selected>@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@item.Id>@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-lg-3">
                             <label class="form-control-label">Sort by</label>
                             <div class="select mb-3">
                                 <select name="sortType" id="sortType" class="custom-select form-control">
                                     <option value="">Sort by (Lastest default)</option>
-                                    <option value="createdAt_asc" @(ViewBag.SortType == "createdAt_asc" ? "selected" : "")>Oldest</option>
-                                    <option value="createdAt_desc" @(ViewBag.SortType == "createdAt_desc" ? "selected" : "")>Latest</option>
-                                    <option value="departureAt_asc" @(ViewBag.SortType == "departureAt_asc" ? "selected" : "")>Departure Date (Increase)</option>
-                                    <option value="departureAt_desc" @(ViewBag.SortType == "departureAt_desc" ? "selected" : "")>Departure Date (Decrease)</option>
+                                    <option value="createdAt_asc" @(ViewBag.SortType == "createdAt_asc" ? "selected" : "")>Latest</option>
+                                    <option value="createdAt_desc" @(ViewBag.SortType == "createdAt_desc" ? "selected" : "")>Oldest</option>
                                     <option value="totalPrice_asc" @(ViewBag.SortType == "totalPrice_asc" ? "selected" : "")>Total price (Increase)</option>
                                     <option value="totalPrice_desc" @(ViewBag.SortType == "totalPrice_desc" ? "selected" : "")>Total price (Decrease)</option>
                                 </select>
@@ -121,37 +158,65 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-lg-3">
-                            <label class="form-control-label">Unit price range</label>
+                            <label class="form-control-label">Has AC</label>
                             <div class="select mb-3">
-                                <select name="unit_price_range" id="unit_price_range" class="custom-select form-control">
-                                    <option value="all" @(ViewBag.UnitPriceRange == "all" ? "selected" : "")>All</option>
-                                    <option value="lte200" @(ViewBag.UnitPriceRange == "lte200" ? "selected" : "")>Ticket<= $200</option>
-                                    <option value="200to500" @(ViewBag.UnitPriceRange == "200to500" ? "selected" : "")>$200 < Ticket < $500</option>
-                                    <option value="gt500" @(ViewBag.UnitPriceRange == "gt500" ? "selected" : "")>Ticket > $500</option>
+                                <select name="hasAC" id="hasAC" class="custom-select form-control">
+                                    <option value="2" @(ViewBag.HasAC == 2 ? "selected" : "")>All</option>
+                                    <option value="1" @(ViewBag.HasAC == 1 ? "selected" : "")>Yes</option>
+                                    <option value="0" @(ViewBag.HasAC == 0 ? "selected" : "")>No</option>
 
                                 </select>
                             </div>
                         </div>
-
                         <div class="col-lg-3">
-                            <label class="form-control-label">Departure Date Range</label>
+                            <label class="form-control-label">Has Driver</label>
+                            <div class="select mb-3">
+                                <select name="hasDriver" id="hasDriver" class="custom-select form-control">
+                                    <option value="2" @(ViewBag.HasDriver == 2 ? "selected" : "")>All</option>
+                                    <option value="1" @(ViewBag.HasDriver == 1 ? "selected" : "")>Yes</option>
+                                    <option value="0" @(ViewBag.HasDriver == 0 ? "selected" : "")>No</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Pick Up Date Range</label>
                             <div class="input-group">
                                 <span class="input-group-addon addon-secondary">
                                     <i class="la la-calendar"></i>
                                 </span>
-                                @{ 
-                                    var departureString = "";
-                                    if (!String.IsNullOrEmpty(ViewBag.StartDepartureDay) && !String.IsNullOrEmpty(ViewBag.EndDepartureDay))
+                                @{
+                                    var pickUpString = "";
+                                    if (!String.IsNullOrEmpty(ViewBag.StartPickupDay) && !String.IsNullOrEmpty(ViewBag.EndPickupDay))
                                     {
-                                        departureString = @ViewBag.StartDepartureDay + " - " + @ViewBag.EndDepartureDay;
+                                        pickUpString = @ViewBag.StartPickupDay + " - " + @ViewBag.EndPickupDay;
                                     }
                                 }
-                                <input type="text" class="form-control" id="daterange" value="@departureString">
-                                <input type="hidden" class="form-control" name="startDepartureDay" , id="startDepartureDay" value="@ViewBag.StartDepartureDay">
-                                <input type="hidden" class="form-control" name="endDepartureDay" , id="endDepartureDay" value="@ViewBag.EndDepartureDay">
+                                <input type="text" class="form-control" id="daterange1" value="@pickUpString">
+                                <input type="hidden" class="form-control" name="startPickUpDay" , id="startPickUpDay" value="@ViewBag.StartPickupDay">
+                                <input type="hidden" class="form-control" name="endPickUpDay" , id="endPickUpDay" value="@ViewBag.EndPickupDay">
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Drop Off Date Range</label>
+                            <div class="input-group">
+                                <span class="input-group-addon addon-secondary">
+                                    <i class="la la-calendar"></i>
+                                </span>
+                                @{
+                                    var dropOffString = "";
+                                    if (!String.IsNullOrEmpty(ViewBag.StartDropOffDay) && !String.IsNullOrEmpty(ViewBag.EndDropOffDay))
+                                    {
+                                        dropOffString = @ViewBag.StartDropOffDay + " - " + @ViewBag.EndDropOffDay;
+                                    }
+                                }
+                                <input type="text" class="form-control" id="daterange2" value="@dropOffString">
+                                <input type="hidden" class="form-control" name="startDropOffDay" , id="startDropOffDay" value="@ViewBag.StartDropOffDay">
+                                <input type="hidden" class="form-control" name="endDropOffDay" , id="endDropOffDay" value="@ViewBag.EndDropOffDay">
 
                             </div>
                         </div>
@@ -175,38 +240,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-
-                        <div class="col-lg-3">
-                            <label class="form-control-label">Numbers of ticket</label>
-                            <div class="select mb-3">
-                                <select name="ticket_number" id="ticket_number" class="custom-select form-control">
-                                    <option value="all" @(ViewBag.TicketNumber == "all" ? "selected" : "")>All</option>
-                                    <option value="lte2" @(ViewBag.TicketNumber == "lte2" ? "selected" : "")><= 2 tickets</option>
-                                    <option value="2to5" @(ViewBag.TicketNumber == "2to5" ? "selected" : "")>2 < ticket <= 5</option>
-                                    <option value="gt5" @(ViewBag.TicketNumber == "gt5" ? "selected" : "")> >5 tickets</option>
-
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <label class="form-control-label">Duration</label>
-                            <div class="select mb-3">
-                                <select name="duration_range" id="duration_range" class="custom-select form-control">
-                                    <option value="all" @(ViewBag.DurationRange == "all" ? "selected" : "")>All</option>
-                                    <option value="lte3" @(ViewBag.DurationRange == "lte3" ? "selected" : "")><= 3 days</option>
-                                    <option value="4to7" @(ViewBag.DurationRange == "4to7" ? "selected" : "")>4 - 7 days</option>
-                                    <option value="gt7" @(ViewBag.DurationRange == "gt7" ? "selected" : "")>> 7 days</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
+                    <div class="row mt-3">
+                        <div class="col-lg-4">
                             <label class="form-control-label">Search by Order Id</label>
                             <div class="">
                                 @Html.TextBox("orderId", ViewBag.OrderId as string, new { @class = "form-control", placeholder = "Enter order id" })
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
+                            <label class="form-control-label">Search by car license plate</label>
+                            <div class="">
+                                @Html.TextBox("licensePlate", ViewBag.LicensePlate as string, new { @class = "form-control", placeholder = "Enter license plate" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
                             <label class="form-control-label">Search by username</label>
                             <div class="">
                                 @Html.TextBox("username", ViewBag.Username as string, new { @class = "form-control", placeholder = "Enter username" })
@@ -221,7 +268,7 @@
                             <div>
                                 <button type="submit" class="btn btn-primary mr-1 mb-2">Search</button>
                                 <button type="reset" class="btn btn btn-outline-secondary mr-1 mb-2">
-                                    @Html.ActionLink("Clear", "GetTour", "Orders", null, null)
+                                    @Html.ActionLink("Clear", "GetCar", "Orders", null, null)
                                 </button>
                             </div>
 
@@ -251,12 +298,12 @@
                                 <tr>
                                     <th width="5%">#</th>
                                     <th width="5%">Id</th>
-                                    <th width="15%">Tour</th>
-                                    <th width="10%">Departure At</th>
-                                    <th width="10%">Username</th>
-                                    <th width="10%">Unit Price</th>
-                                    <th width="5%">Quantity</th>
-                                    <th width="10%">Total Price</th>
+                                    <th width="10%">Car Model</th>
+                                    <th width="10%">Car Id</th>
+                                    <th width="5%">Username</th>
+                                    <th width="10%">Pick up date</th>
+                                    <th width="10%">Drop off date</th>
+                                    <th width="5%">Total Price</th>
                                     <th width="15%">Status</th>
                                     <th width="10%">Created At</th>
                                     <th width="5%">Action</th>
@@ -266,14 +313,18 @@
                                 @{var i = 1;
                                     foreach (var item in Model)
                                     {
+                                        var carId = item.OrderCars.First().CarSchedule.Car.Id;
                                         <tr>
                                             <td><span class="text-primary">@i</span></td>
-                                            <td><span>@Html.DisplayFor(modelItem => item.Id)</span></td>
-                                            <td>@Html.ActionLink(@item.OrderTours.First().TourDetail.Tour.Name, "Details", "Tours", new { id = @item.OrderTours.First().TourDetail.Tour.Id }, null)</td>
-                                            <td>@Html.ActionLink(@item.OrderTours.First().TourDetail.DepartureDay.ToShortDateString(), "Details", "TourDetails", new { id = @item.OrderTours.First().TourDetail.Id }, null)</td>
-                                            <td>@item.User.UserName</td>
-                                            <td>$@item.OrderTours.First().UnitPrice</td>
-                                            <td>@item.OrderTours.First().Quantity</td>
+                                            <td><span>@item.Id</span></td>
+                                            <td>@item.OrderCars.First().CarSchedule.Car.CarModel.Name</td>
+                                            <td>
+                                                @item.OrderCars.First().CarSchedule.Car.Id
+                                                <i data-id="@(carId)" onclick="getCarDetailModal(this)" class="la la-info-circle"></i>
+                                            </td>
+                                            <td>@Html.ActionLink(@item.User.UserName, "Details", "Users", new { id = @item.User.Id }, null)</td>
+                                            <td>@item.OrderCars.First().CarSchedule.StartDay.ToShortDateString()</td>
+                                            <td>@item.OrderCars.First().CarSchedule.EndDay.ToShortDateString()</td>
                                             <td>$@item.TotalPrice</td>
                                             <td>
                                                 <select id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
@@ -293,24 +344,28 @@
                                         </tr>
                                         i++;
                                     }
-                                }
+                            }
                             </tbody>
                         </table>
-                        @Html.PagedListPager(Model, page => Url.Action("GetTour",
+                        @Html.PagedListPager(Model, page => Url.Action("GetCar",
                                     new
                                     {
                                         orderId = ViewBag.OrderId,
                                         sortType = ViewBag.SortType,
                                         username = ViewBag.Username,
-                                        departureId = ViewBag.DepartureId,
-                                        destinationId = ViewBag.DestinationId,
-                                        unit_price_range = ViewBag.UnitPriceRange,
-                                        ticket_number = ViewBag.TicketNumber,
-                                        startDepartureDay = ViewBag.StartDepartureDay,
-                                        endDepartureDay = ViewBag.EndDepartureDay,
+                                        locationId = ViewBag.LocationId,
+                                        licensePlate = ViewBag.LicensePlate,
+                                        modelId = ViewBag.ModelId,
+                                        brandId = ViewBag.BrandId,
+                                        typeId = ViewBag.TypeId,
+                                        hasAC = ViewBag.HasAC,
+                                        hasDriver = ViewBag.HasDriver,
+                                        startPickUpDay = ViewBag.StartPickupDay,
+                                        endPickUpDay = ViewBag.EndPickupDay,
+                                        startDropOffDay = ViewBag.StartDropOffDay,
+                                        endDropOffDay = ViewBag.EndDropOffDay,
                                         startCreatedDay = ViewBag.StartCreatedDay,
                                         endCreatedDay = ViewBag.EndCreatedDay,
-                                        duration_range = ViewBag.DurationRange,
                                         status = ViewBag.Status,
                                         page
                                     }),
@@ -331,7 +386,7 @@
                                         LiElementClasses = new string[] { "page-item" }
                                     })
                     </div>
-                }
+                                    }
 
             </div>
         </div>
@@ -356,7 +411,7 @@
                 format: 'HH:mm:ss DD/MM/YYYY'
             },
         });
-        $('#daterange').daterangepicker({
+        $('#daterange1').daterangepicker({
             showDropdowns: true,
             autoUpdateInput: false,
             autoApply: true,
@@ -364,10 +419,23 @@
                 format: 'DD/MM/YYYY'
             },
         });
-        $('#daterange').on('apply.daterangepicker', function (ev, picker) {
+        $('#daterange2').daterangepicker({
+            showDropdowns: true,
+            autoUpdateInput: false,
+            autoApply: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            },
+        });
+        $('#daterange1').on('apply.daterangepicker', function (ev, picker) {
             $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-            $('#startDepartureDay').val(picker.startDate.format('DD/MM/YYYY'))
-            $('#endDepartureDay').val(picker.endDate.format('DD/MM/YYYY'))
+            $('#startPickUpDay').val(picker.startDate.format('DD/MM/YYYY'))
+            $('#endPickUpDay').val(picker.endDate.format('DD/MM/YYYY'))
+        });
+        $('#daterange2').on('apply.daterangepicker', function (ev, picker) {
+            $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            $('#startDropOffDay').val(picker.startDate.format('DD/MM/YYYY'))
+            $('#endDropOffDay').val(picker.endDate.format('DD/MM/YYYY'))
         });
         $('#datetimerange').on('apply.daterangepicker', function (ev, picker) {
             $(this).val(picker.startDate.format('HH:mm:ss DD/MM/YYYY') + ' - ' + picker.endDate.format('HH:mm:ss DD/MM/YYYY'));
@@ -384,16 +452,16 @@
                 case "-1":
                     statusString = "UNPAID"
                     break;
-                case 1:
+                case "1":
                     statusString = "PAID"
                     break;
-                case 0:
+                case "0":
                     statusString = "CANCEL"
                     break;
-                case -2:
+                case "-2":
                     statusString = "PENDING REFUND"
                     break;
-                case 2:
+                case "2":
                     statusString = "REFUNDED"
                     break;
                 default:
@@ -412,7 +480,7 @@
                     $("#preloader2").show();
                     $.ajax({
                         type: "GET",
-                        url: "/Orders/ChangeStatusTour",
+                        url: "/Orders/ChangeStatusCar",
                         data: {
                             id: id,
                             status: status
@@ -436,6 +504,39 @@
                 }
             })
         }
-        
+        function getCarDetailModal(obj) {
+            var id = obj.getAttribute('data-id')
+            $("#preloader2").show();
+            $.ajax({
+                type: "GET",
+                url: "/Orders/GetCarDetails/" + id,
+                success: function (msg) {
+                    var car = JSON.parse(msg)
+                    var ac = car.hasAc == true ? "Yes" : "No"
+                    var driver = car.hasDriver == true ? "Yes" : "No"
+                    var link = "/admin/cars/" + car.id
+                    $("#preloader2").hide();
+                    Swal.fire({
+                        title: car.brand + "-" + car.model,
+                        html:
+                            '<p>Id: ' + car.id + '</p>' +
+                            '<p>Brand: ' + car.brand + '</p>' +
+                            '<p>Model: ' + car.model + '</p>' +
+                            '<p>License Plate: ' + car.licensePlate + '</p>' +
+                            '<p>Location: ' + car.location + '</p>' +
+                            '<p>Air conditioner: ' + ac + '</p>' +
+                            '<p>Driver: ' + driver + '</p>' +
+                            '<a href=' + link + '>Go to Detail</a> ',
+                        text: car.licensePlate,
+                        imageUrl: car.thumbnail,
+                        imageHeight: 300,
+                        imageAlt: 'thumbnail',
+                    })
+                },
+                error: function () {
+                    $("#preloader2").hide();
+                },
+            });
+        }
     </script>
 }

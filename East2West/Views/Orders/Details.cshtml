@@ -1,91 +1,150 @@
 ﻿@model East2West.Models.Order
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Admin | Order details";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<style>
+    body{
+        color: black;
+    }
+</style>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="widget has-shadow">
+            <div class="widget-header bordered no-actions d-flex align-items-center">
+                <h4>Order #@Html.DisplayFor(model => model.Id)</h4>
+            </div>
+            <div class="widget-body">
+                <div class="col-10">
+                    <div class="section-title mt-3 mb-5">
+                        <h2>01. General Informations</h2>
+                    </div>
+                </div>
+                <form class="form-horizontal">
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Id:</div>
+                        <div class="col-lg-6">
+                            @Model.Id
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">User Id:</div>
+                        <div class="col-lg-9">
+                            @Html.ActionLink(@Model.UserId, "Details", "Users", new { id = @Model.UserId }, null)
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Total Price:</div>
+                        <div class="col-lg-9">
+                            $@Model.TotalPrice
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Status:</div>
+                        <div class="select">
+                            <select name="status" id="status" class="custom-select form-control">
+                                <option value="-1" @(Model.Status == -1 ? "selected" : "")>Unpaid</option>
+                                <option value="1" @(Model.Status == 1 ? "selected" : "")>Paid</option>
+                                <option value="0" @(Model.Status == 0 ? "selected" : "")>Cancel</option>
+                                <option value="-2" @(Model.Status == -2 ? "selected" : "")>Pending refund</option>
+                                <option value="2" @(Model.Status == 0 ? "selected" : "")>Refunded</option>
 
-<h2>Details</h2>
+                            </select>
+                        </div>
+                    </div>
+                    @if (Model.Type == 1)
+                    {
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Type:</div>
+                            <div class="col-lg-6">
+                                <span class="badge-text badge-text-small info">Tour</span>
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Tour:</div>
+                            <div class="col-lg-6">
+                                @Html.ActionLink(@Model.OrderTours.First().TourDetail.Tour.Name, "Details", "Tours", new { id = @Model.OrderTours.First().TourDetail.TourId }, null)
 
-<div>
-    <h4>Order</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Refund.Id)
-        </dt>
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Tour detail:</div>
+                            <div class="col-lg-6">
+                                @Html.ActionLink(@Model.OrderTours.First().TourDetailId, "Details", "TourDetails", new { id = @Model.OrderTours.First().TourDetailId }, null)
 
-        <dd>
-            @Html.DisplayFor(model => model.Refund.Id)
-        </dd>
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Departure At:</div>
+                            <div class="col-lg-6">
+                                @Model.OrderTours.First().TourDetail.DepartureDay.ToShortDateString()
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Type:</div>
+                            <div class="col-lg-6">
+                                <span class="badge-text badge-text-small success">Car</span>
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Car:</div>
+                            <div class="col-lg-6">
+                                @Html.ActionLink(@Model.OrderCars.First().CarSchedule.CarId, "Details", "Cars", new { id = @Model.OrderCars.First().CarSchedule.CarId }, null)
 
-        <dt>
-            @Html.DisplayNameFor(model => model.User.FirstName)
-        </dt>
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Car Schedule:</div>
+                            <div class="col-lg-6">
+                                @Html.ActionLink(@Model.OrderCars.First().CarScheduleId, "Details", "CarSchedules", new { id = @Model.OrderCars.First().CarScheduleId }, null)
 
-        <dd>
-            @Html.DisplayFor(model => model.User.FirstName)
-        </dd>
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Pick up date:</div>
+                            <div class="col-lg-6">
+                                @Model.OrderCars.First().CarSchedule.StartDay.ToShortDateString()
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <div class="col-lg-2 text-right">Drop off date:</div>
+                            <div class="col-lg-6">
+                                @Model.OrderCars.First().CarSchedule.EndDay.ToShortDateString()
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RefundId)
-        </dt>
+                            </div>
+                        </div>
+                    }
 
-        <dd>
-            @Html.DisplayFor(model => model.RefundId)
-        </dd>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Created At:</div>
+                        <div class="col-lg-6">
+                            @Model.CreatedAt
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Update At:</div>
+                        <div class="col-lg-6">
+                            @Model.UpdatedAt
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <div class="col-lg-2 text-right">Deleted At:</div>
+                        <div class="col-lg-6">
+                            @Model.DeletedAt
+                        </div>
+                    </div>
+                </form>
+                <div class="em-separator separator-dashed"></div>
+                <div class="text-right">
+                    <button class="btn btn-outline-dark" type="button">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</button>
+                    <button class="btn btn-light" type="button">@Html.ActionLink("Back to List", "Index")</button>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TotalPrice)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeletedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeletedAt)
-        </dd>
-
-    </dl>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
