@@ -26,7 +26,6 @@ namespace East2West.Controllers
             ViewBag.PriceRange = price_range;
             ViewBag.Rating = rating;
             ViewBag.LocationId = locationId;
-            ViewBag.Page = page;
             int pageNumber = (page ?? 1);
             int pageSize = 5;
             if (!String.IsNullOrEmpty(keyword))
