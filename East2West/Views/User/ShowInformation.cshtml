@@ -71,7 +71,7 @@
                                         var price = Math.Round(order.OrderTours.First().TourDetail.Price * (1 - percentDiscount), 2);
                                         var name = order.OrderTours.First().TourDetail.Tour.Name;
                                         var quantity = order.OrderTours.First().Quantity;
-
+                                        var tourId = order.OrderTours.First().TourDetail.Tour.Id;
                                     }
                                     <div class="col-lg-5 col-md-4">
                                         @if (order.OrderTours.First().Quantity > 1)
@@ -104,7 +104,7 @@
                                             }
                                             else
                                             {
-                                                <a href="#" class="btn_2 white">Order again</a>
+                                                <a href="@Url.Action("Details", "ClientTour", new { id = tourId})" class="btn_2 white">Order again</a>
                                             }
                                         </div>
                                     </div>
@@ -156,6 +156,7 @@
                                         var startDay = carSchedule.StartDay;
                                         var endDay = carSchedule.EndDay;
                                         TimeSpan span = endDay.Subtract(startDay);
+                                        var carId = carSchedule.Car.Id;
                                         var carName = carSchedule.Car.CarModel.Name;
                                         var carLPlate = carSchedule.Car.LisencePlate;
                                         var carScheduleId = carSchedule.Id;
@@ -191,7 +192,8 @@
                                             }
                                             else
                                             {
-                                                <a href="#" class="btn_2 white">Order again</a>
+
+                                                <a href="@Url.Action("Details", "ClientCar", new { id = carId })" class="btn_2 white">Order again</a>
                                             }
                                         </div>
                                     </div>
