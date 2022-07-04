@@ -230,7 +230,7 @@ namespace East2West.Controllers
                     status = -1
                 });
             }
-            var order = db.Orders.FirstOrDefault(c => c.Id == id);
+            var order = db.Orders.Include(o => o.OrderCars).Include(o => o.OrderTours).FirstOrDefault(c => c.Id == id);
             if (order == null)
             {
                 return Json(new
@@ -279,6 +279,14 @@ namespace East2West.Controllers
             order.Refund = refund;
             order.Status = -2;
             order.UpdatedAt = DateTime.Now;
+            if (order.Type == 1)
+            {
+                order.OrderTours.First().TourDetail.AvailableSeat += order.OrderTours.First().Quantity;
+            }
+            else
+            {
+                order.OrderCars.First().CarSchedule.Status = -1;
+            }
             db.Refunds.Add(refund);
             db.SaveChanges();
             return Json(new
