@@ -1,6 +1,26 @@
 ﻿$(document).ready(function () {
+    // Book tour
     function parseJsonDate(jsonDateString) {
         return moment(jsonDateString).format("DD-MM-YYYY").toUpperCase();
+    }
+
+    function checkDate() {
+        var startDate = new Date($('#startDate').val());
+        var endDate = new Date($('#endDate').val());
+        var pricePerDay = $('#pricePerDay').text();
+        if (startDate < endDate) {
+            var range = (endDate - startDate) / (24 * 60 * 60 * 1000);
+            $('#bookDays').text(range);
+            $('#totalAmount').text(range + 'x ' + pricePerDay);
+            $('#totalCost').text($('#bookDays').text() * pricePerDay);
+            var errorMessage = document.getElementById('error_message');
+            errorMessage.style.display = "none";
+        } else {
+            var errorMessage = document.getElementById('error_message');
+            errorMessage.style.display = "";
+            $('#totalAmount').text('1x ' + pricePerDay)
+            $('#totalCost').text(pricePerDay)
+        }
     }
 
     $('#selected_id').on('change', function (e) {
@@ -39,7 +59,7 @@
         var unitPrice = $('#detailPriceHidden').val();
         var quantity = $("#person").val();
         $.ajax({
-            url: "/Order/CreateTourOrder?tourDetailId=" + idTourDetail + "&unitPrice=" + unitPrice + "&quantity=" + quantity,
+            url: "/OrderTour/CreateTourOrder?tourDetailId=" + idTourDetail + "&unitPrice=" + unitPrice + "&quantity=" + quantity,
             type: "POST",
             dataType: "json",
             contentType: "application/json;charset=utf-8",
@@ -47,7 +67,7 @@
                 if (response.status == 1) {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Order success',
+                        title: response.message,
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -55,9 +75,143 @@
                 }
 
                 else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 4000
+                    })
                     window.location.href = "/User/Login";
                 }
             }
         });
     });
+
+    // Book Car
+    $('#endDate').on('change', function (e) {
+        checkDate();
+    });
+    $('#startDate').on('change', function (e) {
+        checkDate();
+    });
+
+    $('#book_car').on('click', function (e) {
+        e.preventDefault();
+        var startDateString = $('#startDate').val();
+        var endDateString = $('#endDate').val();
+        var pricePerDay = $('#pricePerDay').text();
+        var startDate = new Date($('#startDate').val());
+        var endDate = new Date($('#endDate').val());
+        if (startDate >= endDate) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please select the date again !',
+            })
+        } else {
+            var carId = $('#carId').val();
+            $.ajax({
+                url: "/OrderCar/CreateCarOrder?carId=" + carId + "&startDay=" + startDateString + "&endDay=" + endDateString + "&pricePerDay=" + pricePerDay,
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function (response) {
+                    if (response.status == 1) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        window.location.href = "/User/ShowInformation?id=" + $('#userId').val();
+                    }
+
+                    else if (response.status == -1) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: response.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                        window.location.href = "/User/Login";
+                    }
+                    else if (response.status == 0) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: response.message,
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                    }
+                }
+            });
+        }
+    });
+
+    $('.cancelButton').on('click', function (e) {
+        Swal.fire({
+            title: 'Are you sure want to cancel this service?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, cancel it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var orderId = $(this).data("id");
+                $.ajax({
+                    url: "/OrderTour/CancelPayment?id=" + orderId,
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function (response) {
+                        if (response.status == 1) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: response.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            window.location.href = "/User/ShowInformation?id=" + $('#userId').val();
+                        }
+                    }
+                });
+            }
+        })
+    })
+
+    $('.refundButton').on('click', function (e) {
+        e.preventDefault;
+        Swal.fire({
+            title: 'Are you sure want to refund this service?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, refund it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var orderId = $(this).data("id");
+                $.ajax({
+                    url: "/OrderTour/RefundPayment?id=" + orderId,
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function (response) {
+                        if (response.status == 1) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: response.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            window.location.href = "/User/ShowInformation?id=" + $('#userId').val();
+                        }
+                    }
+                });
+            }
+        })
+    })
 });

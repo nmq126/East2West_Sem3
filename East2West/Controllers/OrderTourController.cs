@@ -4,13 +4,15 @@ using Microsoft.AspNet.Identity;
 using PayPal.Api;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
 namespace East2West.Controllers
 {
-    public class OrderController : Controller
+    public class OrderTourController : Controller
     {
         private DBContext db = new DBContext();
 
@@ -27,9 +29,7 @@ namespace East2West.Controllers
                     TotalPrice = unitPrice * quantity,
                     Type = 1,
                     Status = -1,
-                    CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now,
-                    DeletedAt = DateTime.Now
+                    CreatedAt = DateTime.Now
                 };
                 db.Orders.Add(order);
                 var OrderTours = new OrderTour()
@@ -51,7 +51,7 @@ namespace East2West.Controllers
             {
                 return Json(new
                 {
-                    message = "Login to order.",
+                    message = "You must login to order.",
                     status = -1
                 });
             }
@@ -134,7 +134,7 @@ namespace East2West.Controllers
                 string payerId = Request.Params["PayerID"];
                 if (string.IsNullOrEmpty(payerId))
                 {
-                    string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Order/PaymentWithPaypal?";
+                    string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/OrderTour/PaymentWithPaypal?";
                     var guid = Convert.ToString((new Random()).Next(100000));
                     var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid, name, price, quantity);
                     var links = createdPayment.links.GetEnumerator();
@@ -177,6 +177,7 @@ namespace East2West.Controllers
             if (order != null)
             {
                 order.Status = 1;
+                order.UpdatedAt = DateTime.Now;
                 db.SaveChanges();
             }
             if (tourDetail != null)
@@ -188,6 +189,111 @@ namespace East2West.Controllers
             Session.Remove("tourDetailId");
             Session.Remove("seat");
             return RedirectToAction("ThankYou", "Home");
+        }
+
+        public JsonResult CancelPayment(string id)
+        {
+            if (id == null)
+            {
+                return Json(new
+                {
+                    message = "Something went wrong. Please try again.",
+                    status = -1
+                });
+            }
+            var order = db.Orders.FirstOrDefault(c => c.Id == id);
+            if (order == null)
+            {
+                return Json(new
+                {
+                    message = "Cant find your order. Please try again.",
+                    status = -2
+                });
+            }
+            order.Status = 0;
+            order.UpdatedAt = DateTime.Now;
+            db.SaveChanges();
+            return Json(new
+            {
+                message = "Cancel Success.",
+                status = 1
+            });
+        }
+
+        public JsonResult RefundPayment(string id)
+        {
+            if (id == null)
+            {
+                return Json(new
+                {
+                    message = "Something went wrong. Please try again.",
+                    status = -1
+                });
+            }
+            var order = db.Orders.Include(o => o.OrderCars).Include(o => o.OrderTours).FirstOrDefault(c => c.Id == id);
+            if (order == null)
+            {
+                return Json(new
+                {
+                    message = "Cant find your order. Please try again.",
+                    status = -2
+                });
+            }
+            var presentTime = DateTime.Now;
+            TimeSpan span = presentTime.Subtract((DateTime)order.UpdatedAt);
+            int percent;
+            switch (span.Days)
+            {
+                case 1:
+                    percent = 75;
+                    break;
+
+                case 2:
+                    percent = 80;
+                    break;
+
+                case 3:
+                    percent = 85;
+                    break;
+
+                case 4:
+                    percent = 90;
+                    break;
+
+                case 5:
+                    percent = 95;
+                    break;
+
+                default:
+                    percent = 95;
+                    break;
+            }
+            var refund = new Models.Refund()
+            {
+                Id = String.Concat("REF_", Guid.NewGuid().ToString("N").Substring(0, 5)),
+                Percent = percent,
+                Status = 0,
+                TotalPrice = order.TotalPrice * (Convert.ToDouble(percent) / 100),
+                CreatedAt = DateTime.Now
+            };
+            order.Refund = refund;
+            order.Status = -2;
+            order.UpdatedAt = DateTime.Now;
+            if (order.Type == 1)
+            {
+                order.OrderTours.First().TourDetail.AvailableSeat += order.OrderTours.First().Quantity;
+            }
+            else
+            {
+                order.OrderCars.First().CarSchedule.Status = -1;
+            }
+            db.Refunds.Add(refund);
+            db.SaveChanges();
+            return Json(new
+            {
+                message = "Your refund is now pending.",
+                status = 1
+            });
         }
     }
 }

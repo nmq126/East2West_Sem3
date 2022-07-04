@@ -16,11 +16,14 @@ namespace East2West.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            var tours = db.Tours.Include(t => t.TourCategory).Include(t => t.TourDetails).Where(t => t.Rating == 5).ToList();
+            return View(tours.ToList());
         }
 
         public ActionResult About()
         {
+            ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -28,6 +31,7 @@ namespace East2West.Controllers
 
         public ActionResult Contact()
         {
+            ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
             ViewBag.Message = "Your contact page.";
 
             return View();
