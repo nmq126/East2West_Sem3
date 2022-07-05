@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_LayoutPageClient.cshtml";
 }
 
+<style>
+    .modal-backdrop {
+        z-index: -1;
+    }
+</style>
 @section Section
 {
 
@@ -18,6 +23,7 @@
     </section>
 }
 <main>
+
     <div id="position">
         <div class="container">
             <ul>
@@ -51,6 +57,7 @@
                     </li>
                 </ul>
             </nav>
+
             <div class="content">
                 <input id="userId" value="@ViewBag.UserId" hidden />
                 <section id="section-1">
@@ -73,7 +80,7 @@
                                         var quantity = order.OrderTours.First().Quantity;
                                         var tourId = order.OrderTours.First().TourDetail.Tour.Id;
                                     }
-                                    <div class="col-lg-5 col-md-4">
+                                    <div class="col-lg-5 col-md-3">
                                         @if (order.OrderTours.First().Quantity > 1)
                                         {
                                             <h3 class="tours_booking">@name<span>@quantity Persons    </span></h3>
@@ -100,7 +107,6 @@
                                             else if (order.Status == 1)
                                             {
                                                 <a href="#0" data-id="@order.Id" class="btn_3 refundButton" style="background-color: #f44336; color: white;">Refund</a>
-                                                <a href="#0" class="btn_3" style="min-width: 100px; background-color: mediumpurple; color: white;">Leave a feedback</a>
                                             }
                                             else
                                             {
@@ -108,27 +114,27 @@
                                             }
                                         </div>
                                     </div>
-                                    <div class="col-lg-1 col-md-1">
+                                    <div class="col-lg-1 col-md-2">
                                         <div class="booking_buttons">
                                             @if (order.Status == -1)
                                             {
-                                                <a href="#0" class="btn btn-warning" style="width: 100px;">Unpaid</a>
+                                                <a href="#0" class="btn btn-warning btn_status" style="min-width:95px">Unpaid</a>
                                             }
                                             else if (order.Status == 1)
                                             {
-                                                <a href="#0" class="btn btn-success" style="width: 100px;">Paid</a>
+                                                <a href="#0" class="btn btn-success btn_status" style="min-width:95px">Paid</a>
                                             }
                                             else if (order.Status == 0)
                                             {
-                                                <a href="#" class="btn btn-secondary" style="width: 100px;">Canceled</a>
+                                                <a href="#" class="btn btn-secondary btn_status" style="min-width:95px">Canceled</a>
                                             }
                                             else if (order.Status == 2)
                                             {
-                                                <a href="#" class="btn btn-danger" style="width: 100px;">Refunded</a>
+                                                <a href="#" class="btn btn-danger btn_status" style="min-width:95px">Refunded</a>
                                             }
                                             else if (order.Status == -2)
                                             {
-                                                <a href="#" class="btn btn-danger" style="width: 100px;">Pending Refund</a>
+                                                <a href="#" class="btn btn-danger btn_status" style="min-width:95px">Pending Refund</a>
                                             }
                                         </div>
                                     </div>
@@ -188,7 +194,6 @@
                                             else if (order.Status == 1)
                                             {
                                                 <a href="#0" data-id="@order.Id" class="btn_3 refundButton" style="background-color: #f44336; color: white;">Refund</a>
-                                                <a href="#" class="btn_3" style="min-width: 100px; background-color: mediumpurple; color: white;">Leave a feedback</a>
                                             }
                                             else
                                             {
@@ -201,23 +206,23 @@
                                         <div class="booking_buttons">
                                             @if (order.Status == -1)
                                             {
-                                                <a href="#" class="btn btn-warning" style="width: 100px;">Unpaid</a>
+                                                <a href="#" class="btn btn-warning btn_status" style="min-width:95px">Unpaid</a>
                                             }
                                             else if (order.Status == 1)
                                             {
-                                                <a href="#" class="btn btn-success" style="width: 100px;">Paid</a>
+                                                <a href="#" class="btn btn-success btn_status" style="min-width:95px">Paid</a>
                                             }
                                             else if (order.Status == 0)
                                             {
-                                                <a href="#" class="btn btn-secondary" style="width: 100px;">Canceled</a>
+                                                <a href="#" class="btn btn-secondary btn_status" style="min-width:95px">Canceled</a>
                                             }
                                             else if (order.Status == 2)
                                             {
-                                                <a href="#" class="btn btn-danger" style="width: 100px;">Refunded</a>
+                                                <a href="#" class="btn btn-danger btn_status" style="min-width:95px">Refunded</a>
                                             }
                                             else if (order.Status == -2)
                                             {
-                                                <a href="#" class="btn btn-danger" style="width: 100px;">Pending Refund</a>
+                                                <a href="#" class="btn btn-danger btn_status" style="min-width:95px">Pending Refund</a>
                                             }
                                         </div>
                                     </div>

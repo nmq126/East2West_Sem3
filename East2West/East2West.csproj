@@ -953,6 +953,7 @@
     <Content Include="Content\client_rev-slider-files\js\extensions\revolution.extension.video.min.js" />
     <Content Include="Content\client_rev-slider-files\js\jquery.themepunch.revolution.min.js" />
     <Content Include="Content\client_rev-slider-files\js\jquery.themepunch.tools.min.js" />
+    <Content Include="Content\delete.gif" />
     <Content Include="Content\img\avatar1.jpg" />
     <Content Include="Content\img\avatar2.jpg" />
     <Content Include="Content\img\avatar3.jpg" />
@@ -960,6 +961,8 @@
     <Content Include="Content\img\laptop.png" />
     <Content Include="Content\img\post-thumb-2.jpg" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\rateit.css" />
+    <Content Include="Content\star.gif" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
@@ -1032,6 +1035,9 @@
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery.rateit.js" />
+    <Content Include="Scripts\jquery.rateit.min.js" />
+    <Content Include="Scripts\jquery.rateit.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -1107,6 +1113,7 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Orders\GetCar.cshtml" />
+    <Content Include="tmp1954.tmp" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
