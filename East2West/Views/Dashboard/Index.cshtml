@@ -125,13 +125,6 @@
                             <span class="input-group-addon addon-secondary">
                                 <i class="la la-calendar"></i>
                             </span>
-                            @*@{
-                                    var departureString = "";
-                                    if (!String.IsNullOrEmpty(ViewBag.StartDepartureDay) && !String.IsNullOrEmpty(ViewBag.EndDepartureDay))
-                                    {
-                                        departureString = @ViewBag.StartDepartureDay + " - " + @ViewBag.EndDepartureDay;
-                                    }
-                                }*@
                             <input type="text" class="form-control" id="daterange" value="">
                             <input type="hidden" class="form-control" name="startDay" , id="startDay" value="">
                             <input type="hidden" class="form-control" name="endDay" , id="endDay" value="">
@@ -164,6 +157,7 @@
                             <select name="typeIdCar" id="typeIdCar" class="custom-select form-control">
                                 <option value="2">Car Model</option>
                                 <option value="1">Car Type</option>
+                                <option value="0">Season</option>
 
                             </select>
                         </div>
@@ -177,7 +171,9 @@
                     <div class="col-xl-10 col-12 no-padding">
                         <div>
                             <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
+                            <div id="notFound1" class="text-center" style="display:none"><i class="la la-search"></i> No orders found in this date range!</div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

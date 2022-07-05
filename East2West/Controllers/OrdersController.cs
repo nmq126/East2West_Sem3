@@ -21,7 +21,7 @@ namespace East2West.Controllers
         // GET: Orders
         public ActionResult GetTour(int? page, string departureId, string destinationId, string sortType, int? status, string unit_price_range,
             string ticket_number, string duration_range, string orderId, string username, string startDepartureDay, string endDepartureDay
-            , string startCreatedDay, string endCreatedDay)
+            , string startCreatedDay, string endCreatedDay, string tourId, string tourDetailId)
         {
             ViewBag.BreadCrumb = "Tour analysis";
 
@@ -33,6 +33,8 @@ namespace East2West.Controllers
             ViewBag.Status = status;
             ViewBag.Username = username;
             ViewBag.OrderId = orderId;
+            ViewBag.TourId = tourId;
+            ViewBag.TourDetail = tourDetailId;
             ViewBag.SortType = sortType;
             ViewBag.DepartureId = departureId;
             ViewBag.DestinationId = destinationId;
@@ -44,10 +46,21 @@ namespace East2West.Controllers
             ViewBag.StartCreatedDay = startCreatedDay;
             ViewBag.EndCreatedDay = endCreatedDay;
             ViewBag.LocationList = from l in db.Locations select l;
+            ViewBag.TourList = from l in db.Tours select l;
 
             if (!String.IsNullOrEmpty(orderId))
             {
                 orders = orders.Where(o => o.Id.Contains(orderId));
+            }
+
+            if (!String.IsNullOrEmpty(tourId))
+            {
+                orders = orders.Where(o => o.OrderTours.FirstOrDefault().TourDetail.TourId == tourId);
+            }
+
+            if (!String.IsNullOrEmpty(tourDetailId))
+            {
+                orders = orders.Where(o => o.OrderTours.FirstOrDefault().TourDetailId.Contains(tourDetailId));
             }
 
             if (!String.IsNullOrEmpty(username))

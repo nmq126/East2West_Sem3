@@ -215,7 +215,32 @@
 
                     </div>
                     <div class="row">
-                        <div class="col-lg-9"></div>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Select Tour</label>
+                            <div class="select mb-3">
+                                <select name="tourId" id="tourId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var tour in ViewBag.TourList)
+                                    {
+                                        if (tour.Id == ViewBag.TourId)
+                                        {
+                                            <option value=@tour.Id selected>@tour.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@tour.Id>@tour.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Search by tour detail id</label>
+                            <div class="">
+                                @Html.TextBox("tourDetailId", ViewBag.TourDetail as string, new { @class = "form-control", placeholder = "Enter tour detail id" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3"></div>
                         <div class="col-lg-3 text-right">
                             <div style="height:28px"></div>
                             <div>
@@ -300,6 +325,8 @@
                                     new
                                     {
                                         orderId = ViewBag.OrderId,
+                                        tourId = ViewBag.TourId,
+                                        tourDetailId = ViewBag.TourDetail,
                                         sortType = ViewBag.SortType,
                                         username = ViewBag.Username,
                                         departureId = ViewBag.DepartureId,
