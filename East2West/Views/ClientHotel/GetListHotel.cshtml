@@ -287,12 +287,11 @@
                             @Html.PagedListPager(Model , page => Url.Action("GetListHotel",
                                                                           new
                                                                           {
-                                                                              id = ViewBag.Id,
                                                                               sortType = ViewBag.SortType,
                                                                               keyword = ViewBag.Keyword,
+                                                                              price_range = ViewBag.PriceRange,
                                                                               locationId = ViewBag.LocationId,
-                                                                              rating = ViewBag.Rating,
-                                                                              status = ViewBag.Status,
+                                                                              rating = ViewBag.Rating,                                                    
                                                                               page
 
                                                                           }),
