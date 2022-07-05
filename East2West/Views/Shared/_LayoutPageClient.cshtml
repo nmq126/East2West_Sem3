@@ -17,7 +17,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&amp;family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="@Url.Content("~/Content/client_css/vertical-responsive-menu.min.css")" media="screen" type="text/css" />
+
     <!-- COMMON CSS -->
+
     <link href="@Url.Content("~/Content/client_css/bootstrap.min.css")" rel="stylesheet" media="screen" type="text/css">
     <link href="@Url.Content("~/Content/client_css/style.css")" rel="stylesheet" media="screen" type="text/css">
     <link href="@Url.Content("~/Content/client_css/vendors.css")" rel="stylesheet" media="screen" type="text/css">
@@ -30,7 +32,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <!-- ALTERNATIVE COLORS CSS -->
     <link href="#" id="colors" rel="stylesheet">
-
+    <link href="~/Content/rateit.css" rel="stylesheet">
     <link href="~/Content/client_css/admin.css" rel="stylesheet">
 </head>
 
@@ -111,7 +113,6 @@
                             </li>
                         </ul>
                     </div><!-- End main-menu -->
-                    
                 </nav>
             </div>
         </div><!-- container -->
@@ -322,7 +323,7 @@
         });
     </script>
     <script src="~/Scripts/checkout.js"></script>
-
+    <script src="~/Scripts/jquery.rateit.min.js"></script>
     <script src="~/Content/client_js/tabs.js"></script>
     <script>
         new CBPFWTabs(document.getElementById('tabs'));
