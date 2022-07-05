@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using East2West.Data;
 using East2West.Models;
+using PagedList;
 
 namespace East2West.Controllers
 {
@@ -16,10 +17,51 @@ namespace East2West.Controllers
         private DBContext db = new DBContext();
 
         // GET: Flights
-        public ActionResult Index()
+        public ActionResult Index(string id, string sortType, int? page, string locationDepartureName, string locationDestinationName, int? status)
         {
-            var flights = db.Flights.Include(f => f.LocationDeparture).Include(f => f.LocationDestination);
-            return View(flights.ToList());
+            int pageNumber = (page ?? 1);
+            int pageSize = 10;
+            ViewBag.Id = id;
+            ViewBag.SortType = sortType;
+            ViewBag.Status = status;
+            ViewBag.LocationDepartureName = locationDepartureName;
+            ViewBag.LocationDestinationName = locationDestinationName;
+
+            var flights = db.Flights.Include(f => f.LocationDeparture).Include(f => f.LocationDestination).ToList();
+
+            flights = (status > 0) ? flights.Where(M => M.Status == status).ToList() : flights.ToList();
+            if (!String.IsNullOrEmpty(id))
+            {
+                flights = flights.Where(t => t.Id.Contains(id)).ToList();
+            }
+            if (!String.IsNullOrEmpty(locationDepartureName))
+            {
+                flights = flights.Where(t => t.LocationDeparture.Name.Contains(locationDepartureName)).ToList();
+            }
+            if (!String.IsNullOrEmpty(locationDestinationName))
+            {
+                flights = flights.Where(t => t.LocationDestination.Name.Contains(locationDestinationName)).ToList();
+            }
+            switch (sortType)
+            {
+                case "createdAt_asc":
+                    flights = flights.OrderBy(s => s.CreatedAt).ToList();
+                    break;
+                case "createdAt_desc":
+                    flights = flights.OrderByDescending(s => s.CreatedAt).ToList();
+                    break;
+                case "duration_asc":
+                    flights = flights.OrderBy(t => t.Duration).ToList();
+                    break;
+                case "duration_desc":
+                    flights = flights.OrderByDescending(t => t.Duration).ToList();
+                    break;
+                default:
+                    flights = flights.OrderBy(s => s.CreatedAt).ToList();
+                    break;
+            }
+
+            return View(flights.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Flights/Details/5
@@ -34,7 +76,8 @@ namespace East2West.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.LocationName = db.Locations.Where(M => M.Id == flight.Id).FirstOrDefault().Name; 
+            var locationName = db.Locations.ToList().Where(M => M.Id == flight.LocationDestination.Id);
+            ViewBag.LocationName = locationName.FirstOrDefault().Name;
             return View(flight);
         }
 
@@ -112,19 +155,25 @@ namespace East2West.Controllers
             return View(flight);
         }
 
-        // GET: Flights/Delete/5
-        public ActionResult Delete(string id)
+        public String ChangeStatus(string id, int status)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return "Bad Request";
             }
-            Flight flight = db.Flights.Find(id);
-            if (flight == null)
+            Hotel hotel = db.Hotels.Find(id);
+            if (hotel == null)
             {
-                return HttpNotFound();
+                return "Hotel not found";
             }
-            return View(flight);
+            hotel.Status = status;
+            string newStatus = "ACTIVE";
+            if (status == 0)
+            {
+                newStatus = "DISABLE";
+            }
+            db.SaveChanges();
+            return "Hotel #" + id + "status change to " + newStatus;
         }
 
         // POST: Flights/Delete/5
