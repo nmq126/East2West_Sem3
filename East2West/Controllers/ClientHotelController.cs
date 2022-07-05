@@ -104,7 +104,8 @@ namespace East2West.Controllers
                     hotels = hotels.OrderBy(s => s.CreatedAt);
                     break;
             }
-            return View(hotels.ToPagedList(pageNumber,pageSize));
+            
+            return View(hotels.ToPagedList(pageNumber , pageSize));
         }
         public ActionResult Details(string id)
         {
