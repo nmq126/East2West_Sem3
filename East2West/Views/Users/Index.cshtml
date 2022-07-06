@@ -82,6 +82,8 @@
                                     <option value="">Sort by (Lastest default)</option>
                                     <option value="createdAt_asc" @(ViewBag.SortType == "createdAt_asc" ? "selected" : "")>Oldest</option>
                                     <option value="createdAt_desc" @(ViewBag.SortType == "createdAt_desc" ? "selected" : "")>Latest</option>
+                                    <option value="orderPaid_asc" @(ViewBag.SortType == "orderPaid_asc" ? "selected" : "")>Order paid (Ascending)</option>
+                                    <option value="orderPaid_desc" @(ViewBag.SortType == "orderPaid_desc" ? "selected" : "")>Order paid (Descending)</option>
                                 </select>
                             </div>
                         </div>
@@ -280,7 +282,7 @@
                     $("#preloader2").show();
                     $.ajax({
                         type: "GET",
-                        url: "/Tours/ChangeStatus",
+                        url: "/Users/ChangeStatus",
                         data: {
                             id: id,
                             status: status

@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using East2West.Data;
 using East2West.Models;
+using Newtonsoft.Json;
 using PagedList;
 
 namespace East2West.Controllers
@@ -18,7 +19,6 @@ namespace East2West.Controllers
         private DBContext db = new DBContext();
 
         // GET: Orders
-        [Route("admin/order/tour")]
         public ActionResult GetTour(int? page, string departureId, string destinationId, string sortType, int? status, string unit_price_range,
             string ticket_number, string duration_range, string orderId, string username, string startDepartureDay, string endDepartureDay
             , string startCreatedDay, string endCreatedDay)
@@ -170,107 +170,221 @@ namespace East2West.Controllers
             return View(orders.ToPagedList(pageNumber, pageSize));
         }
 
+        public ActionResult GetCar(int? page, int? status, int? hasAC, int? hasDriver, string licensePlate, string brandId, string sortType,
+            string modelId, string typeId, string orderId, string username, string startPickUpDay, string endPickUpDay, string locationId,
+            string startDropOffDay, string endDropOffDay, string startCreatedDay, string endCreatedDay)
+        {
+            ViewBag.BreadCrumb = "Car analysis";
+
+            var orders = db.Orders.Where(o => o.Type == 2)
+                .Include(o => o.OrderCars)
+                .Include("OrderCars.CarSchedule.Car.CarModel")
+                .Include(o => o.Refund)
+                .Include(o => o.User);
+
+            ViewBag.LicensePlate = licensePlate;
+            ViewBag.Status = status;
+            ViewBag.HasAC = hasAC;
+            ViewBag.HasDriver = hasDriver;
+            ViewBag.Username = username;
+            ViewBag.OrderId = orderId;
+            ViewBag.SortType = sortType;
+            ViewBag.LocationId = locationId;
+            ViewBag.ModelId = modelId;
+            ViewBag.BrandId = brandId;
+            ViewBag.TypeId = typeId;
+            ViewBag.StartPickupDay = startPickUpDay;
+            ViewBag.EndPickupDay = endPickUpDay;
+            ViewBag.StartDropOffDay = startDropOffDay;
+            ViewBag.EndDropOffDay = endDropOffDay;
+            ViewBag.StartCreatedDay = startCreatedDay;
+            ViewBag.EndCreatedDay = endCreatedDay;
+
+            ViewBag.BrandList = from b in db.CarBrands select b;
+            ViewBag.ModelList = from m in db.CarModels select m;
+            ViewBag.TypeList = from t in db.CarTypes select t;
+            ViewBag.LocationList = from l in db.Locations select l;
+
+            if (!String.IsNullOrEmpty(orderId))
+            {
+                orders = orders.Where(o => o.Id.Contains(orderId));
+            }
+
+            if (!String.IsNullOrEmpty(username))
+            {
+                orders = orders.Where(o => o.User.UserName.Contains(username));
+            }
+
+            if (!String.IsNullOrEmpty(brandId))
+            {
+                orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.Car.CarModel.CarBrandId == brandId);
+            }
+
+            if (!String.IsNullOrEmpty(modelId))
+            {
+                orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.Car.CarModelId == modelId);
+            }
+
+            if (!String.IsNullOrEmpty(typeId))
+            {
+                orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.Car.CarTypeId == typeId);
+            }
+
+            if (!String.IsNullOrEmpty(locationId))
+            {
+                orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.Car.LocationId == locationId);
+            }
+
+            if (!String.IsNullOrEmpty(licensePlate))
+            {
+                orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.Car.LisencePlate.Contains(licensePlate));
+            }
+
+            if (!String.IsNullOrEmpty(startPickUpDay) && !String.IsNullOrEmpty(endPickUpDay))
+            {
+                var start = DateTime.Parse(startPickUpDay);
+                var end = DateTime.Parse(endPickUpDay);
+                orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.StartDay >= start
+                                        && o.OrderCars.FirstOrDefault().CarSchedule.StartDay <= end);
+            }
+            if (!String.IsNullOrEmpty(startDropOffDay) && !String.IsNullOrEmpty(endDropOffDay))
+            {
+                var start = DateTime.Parse(startDropOffDay);
+                var end = DateTime.Parse(endDropOffDay);
+                orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.EndDay >= start
+                                        && o.OrderCars.FirstOrDefault().CarSchedule.EndDay <= end);
+            }
+            if (!String.IsNullOrEmpty(startCreatedDay) && !String.IsNullOrEmpty(endCreatedDay))
+            {
+                var start = DateTime.Parse(startCreatedDay);
+                var end = DateTime.Parse(endCreatedDay);
+                orders = orders.Where(o => o.CreatedAt >= start && o.CreatedAt <= end);
+            }
+
+            switch (status)
+            {
+                case 2:
+                    orders = orders.Where(t => t.Status == 2);
+                    break;
+                case 1:
+                    orders = orders.Where(t => t.Status == 1);
+                    break;
+                case 0:
+                    orders = orders.Where(t => t.Status == 0);
+                    break;
+                case -1:
+                    orders = orders.Where(t => t.Status == -1);
+                    break;
+                case -2:
+                    orders = orders.Where(t => t.Status == -2);
+                    break;
+                case 3:
+                default:
+                    break;
+            }
+            switch (hasAC)
+            {
+                case 1:
+                    orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.Car.HasAirConditioner == true);
+                    break;
+                case 0:
+                    orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.Car.HasAirConditioner == false);
+                    break;
+                case 2:
+                default:
+                    break;
+            }
+            switch (hasDriver)
+            {
+                case 1:
+                    orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.Car.HasDriver == true);
+                    break;
+                case 0:
+                    orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.Car.HasDriver == false);
+                    break;
+                case 2:
+                default:
+                    break;
+            }
+            switch (sortType)
+            {
+                case "createdAt_asc":
+                    orders = orders.OrderBy(s => s.CreatedAt);
+                    break;
+                case "totalPrice_asc":
+                    orders = orders.OrderBy(t => t.TotalPrice);
+                    break;
+                case "totalPrice_desc":
+                    orders = orders.OrderByDescending(t => t.TotalPrice);
+                    break;
+                case "createdAt_desc":
+                default:
+                    orders = orders.OrderByDescending(s => s.CreatedAt);
+                    break;
+            }
+            int pageNumber = (page ?? 1);
+            int pageSize = 10;
+
+            double revenue = 0;
+            foreach (var item in orders.Where(o => o.Status == 1))
+            {
+                revenue += item.TotalPrice;
+            }
+            ViewBag.TotalRevenue = revenue;
+            return View(orders.ToPagedList(pageNumber, pageSize));
+        }
+
+        public String GetCarDetails(string id)
+        {
+            if (id == null)
+            {
+                return "Bad Requets";
+            }
+            Car car = db.Cars.Include(c => c.Location)
+                .Include(c => c.CarModel)
+                .Include("CarModel.CarBrand")
+                .Include(c => c.CarType)
+                .Include(c => c.Location)
+                .FirstOrDefault(c => c.Id == id);
+
+            if (car == null)
+            {
+                return "Car not found";
+            }
+            var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
+            if (car.Thumbnail != null)
+            {
+                img = car.Thumbnail.Split(',').ToList<String>().First();
+            }
+            var obj = new
+            {
+                id = car.Id,
+                model = car.CarModel.Name,
+                brand = car.CarModel.CarBrand.Name,
+                location = car.Location.Name,
+                licensePlate = car.LisencePlate,
+                hasAC = car.HasAirConditioner,
+                hasDriver = car.HasDriver,
+                thumbnail = img
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
+
         // GET: Orders/Details/5
         public ActionResult Details(string id)
         {
+            ViewBag.BreadCrumb = "Order detail";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
+            Order order = db.Orders.Include(o => o.OrderCars).Include(o => o.OrderTours).Where(o => o.Id == id).FirstOrDefault();
             if (order == null)
             {
                 return HttpNotFound();
             }
             return View(order);
-        }
-
-        // GET: Orders/Create
-        public ActionResult Create()
-        {
-            ViewBag.Id = new SelectList(db.Refunds, "Id", "Id");
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName");
-            return View();
-        }
-
-        // POST: Orders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserId,RefundId,TotalPrice,Type,Status,CreatedAt,UpdatedAt,DeletedAt")] Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Orders.Add(order);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.Id = new SelectList(db.Refunds, "Id", "Id", order.Id);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", order.UserId);
-            return View(order);
-        }
-
-        // GET: Orders/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Order order = db.Orders.Find(id);
-            if (order == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Id = new SelectList(db.Refunds, "Id", "Id", order.Id);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", order.UserId);
-            return View(order);
-        }
-
-        // POST: Orders/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,RefundId,TotalPrice,Type,Status,CreatedAt,UpdatedAt,DeletedAt")] Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(order).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Id = new SelectList(db.Refunds, "Id", "Id", order.Id);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", order.UserId);
-            return View(order);
-        }
-
-        // GET: Orders/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Order order = db.Orders.Find(id);
-            if (order == null)
-            {
-                return HttpNotFound();
-            }
-            return View(order);
-        }
-
-        // POST: Orders/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Order order = db.Orders.Find(id);
-            db.Orders.Remove(order);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="form-group row d-flex align-items-center mb-5">
-                        <div class="col-lg-2 text-right">Thumbnail</div>
+                        <div class="col-lg-2 text-right">Thumbnail:</div>
                         @{
                             if (Model.Thumbnail == null)
                             {
@@ -48,7 +48,7 @@
                     </div>
                     <div class="form-group row d-flex align-items-center mb-5">
                         <div class="col-lg-2 text-right">
-                            Location Departure Name:
+                           Departure Name:
                         </div>
                         <div class="col-lg-9">
                             @ViewBag.LocationName
@@ -56,7 +56,7 @@
                     </div>
                     <div class="form-group row d-flex align-items-center mb-5">
                         <div class="col-lg-2 text-right">
-                            Location Destination Name:
+                           Destination Name:
                         </div>
                         <div class="col-lg-9">
                             @ViewBag.LocationName
@@ -70,10 +70,10 @@
                     </div>
                     <div class="form-group row d-flex align-items-center mb-5">
                         <div class="col-lg-2 text-right">
-                            Is Round Ticket:
+                           Round Ticket:
                         </div>
                         <div class="col-lg-9">
-                            @{ 
+                            @{
                                 string ticketRound = Model.IsRoundTicket ? "X" : "Blank";
                             }
                             @ticketRound
@@ -126,183 +126,4 @@
 
         </div>
     </div>
-   
-    @*<div class="col-xl-12">
-        <div class="widget has-shadow">
-            <div class="widget-body">
-                <div class="col-10">
-                    <div class="section-title mt-3 mb-5">
-                        <h2>03. List tour detail</h2>
-                    </div>
-                </div>
-                @if (Model.TourDetails == null || Model.TourDetails.Count() == 0)
-                {
-                    <p class="col-10 ml-auto">No tour detail for this tour added yet</p>
-                }
-                else
-                {
-                    <table class="table mb-0">
-                        <thead>
-                            <tr>
-                                <th width="5%">#</th>
-                                <th width="10%">Id</th>
-                                <th width="15%">Departure Date</th>
-                                <th width="15%">Available Seat</th>
-                                <th width="15%">Sold ticket</th>
-                                <th width="15%">Price</th>
-                                <th width="10%">Discount</th>
-                                <th width="15%">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @{
-                                var i = 1;
-
-                                foreach (var tourDetail in Model.TourDetails.OrderBy(s => s.CreatedAt).ToList())
-                                {
-                                    <tr>
-                                        <td class="text-primary">@i</td>
-                                        <td><span>@Html.Raw(tourDetail.Id)</span></td>
-                                        <td>@Html.Raw(tourDetail.DepartureDay.ToShortDateString())</td>
-                                        <td>@Html.Raw(tourDetail.AvailableSeat)</td>
-                                        <td>5</td>
-                                        <td>$@Html.Raw(tourDetail.Price)</td>
-                                        <td>@Html.Raw(tourDetail.Discount)%</td>
-                                        <td class="td-actions">
-                                            <a href="@Url.Action("Details", "TourDetails", new { id = tourDetail.Id })">
-                                                <i class="la la-info-circle" data-toggle="tooltip" title="Information"></i>
-                                            </a>
-                                            <a href="@Url.Action("Edit", "TourDetails", new { id = tourDetail.Id })">
-                                                <i class="la la-edit" data-toggle="tooltip" title="Edit"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    i++;
-                                }
-                            }
-
-                        </tbody>
-                    </table>
-
-
-                }
-            </div>
-        </div>
-    </div>*@
-
 </div>
-
-@*<div>
-    <h4>Flight</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.LocationDeparture.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocationDeparture.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LocationDestination.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocationDestination.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Thumbnail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Thumbnail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsRoundTicket)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsRoundTicket)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DepartureAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DepartureAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Duration)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Duration)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ReturnAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ReturnAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Detail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Detail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeletedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeletedAt)
-        </dd>
-
-    </dl>
-</div>*@
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

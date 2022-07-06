@@ -28,11 +28,9 @@ namespace East2West.Models
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
-
-        
         public virtual Refund Refund { get; set; }
-
         public virtual User User { get; set; }
+
         public ICollection<OrderCar> OrderCars { get; set; }
         public ICollection<OrderTour> OrderTours { get; set; }
     }

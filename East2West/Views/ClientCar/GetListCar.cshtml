@@ -65,7 +65,7 @@
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="ClientCar/GetListCar">Cars</a>
+                    <a href="@Url.Action("GetListCar", "ClientCar")">Cars</a>
                 </li>
                 <li>List Car</li>
             </ul>
@@ -238,7 +238,7 @@
                                         </div>
 
                                         <div class="img_list">
-                                            <a href="single_transfer.html">
+                                            <a href="@Url.Action("Details", "ClientCar", new { id = car.Id })">
                                                 <img src="@img" alt="Image">
                                                 <div class="short_info"></div>
                                             </a>
@@ -300,7 +300,7 @@
                                             <div>
                                                 <sup>$@car.PricePerDay</sup><small>*From/Per day</small>
                                                 <p>
-                                                    <a href="single_transfer.html" class="btn_1">Details</a>
+                                                    <a href="@Url.Action("Details", "ClientCar", new { id = car.Id })" class="btn_1">Details</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -309,42 +309,40 @@
                             </div>
                         }
 
+                        <!--End strip -->
 
-                    <!--End strip -->
-
-                <nav aria-label="Page navigation">
-                    @Html.PagedListPager(Model, page => Url.Action("Index",
-                                         new
-                                         {
-
-                                             sortType = ViewBag.SortType,
-                                             keyword = ViewBag.Keyword,
-                                             modelId = ViewBag.ModelId,
-                                             brandId = ViewBag.BrandId,
-                                             typeId = ViewBag.TypeId,
-                                             hasAC = ViewBag.HasAC,
-                                             hasDriver = ViewBag.HasDriver,
-                                             rating = ViewBag.Rating,
-                                             location = ViewBag.LocationId,
-                                             page
-                                         }),
-                                         new PagedListRenderOptions
-                                         {
-                                             DisplayItemSliceAndTotal = true,
-                                             ItemSliceAndTotalFormat = "Showing {0} to {1} of {2} total car(s).",
-                                             DisplayLinkToIndividualPages = true,
-                                             DisplayPageCountAndCurrentLocation = false,
-                                             MaximumPageNumbersToDisplay = 10,
-                                             LinkToFirstPageFormat = "««",
-                                             LinkToPreviousPageFormat = "«",
-                                             LinkToIndividualPageFormat = "{0}",
-                                             LinkToNextPageFormat = "»",
-                                             LinkToLastPageFormat = "»»",
-                                             ContainerDivClasses = new string[] { "pagination-container mt-3" },
-                                             UlElementClasses = new string[] { "pagination" },
-                                             LiElementClasses = new string[] { "page-item" }
-                                         })
-                </nav>
+                        <nav aria-label="Page navigation">
+                            @Html.PagedListPager(Model, page => Url.Action("GetListCar",
+                                                 new
+                                                 {
+                                                     sortType = ViewBag.SortType,
+                                                     keyword = ViewBag.Keyword,
+                                                     modelId = ViewBag.ModelId,
+                                                     brandId = ViewBag.BrandId,
+                                                     typeId = ViewBag.TypeId,
+                                                     hasAC = ViewBag.HasAC,
+                                                     hasDriver = ViewBag.HasDriver,
+                                                     rating = ViewBag.Rating,
+                                                     location = ViewBag.LocationId,
+                                                     page
+                                                 }),
+                                                 new PagedListRenderOptions
+                                                 {
+                                                     DisplayItemSliceAndTotal = true,
+                                                     ItemSliceAndTotalFormat = "Showing {0} to {1} of {2} total car(s).",
+                                                     DisplayLinkToIndividualPages = true,
+                                                     DisplayPageCountAndCurrentLocation = false,
+                                                     MaximumPageNumbersToDisplay = 10,
+                                                     LinkToFirstPageFormat = "««",
+                                                     LinkToPreviousPageFormat = "«",
+                                                     LinkToIndividualPageFormat = "{0}",
+                                                     LinkToNextPageFormat = "»",
+                                                     LinkToLastPageFormat = "»»",
+                                                     ContainerDivClasses = new string[] { "pagination-container mt-3" },
+                                                     UlElementClasses = new string[] { "pagination" },
+                                                     LiElementClasses = new string[] { "page-item" }
+                                                 })
+                        </nav>
                     }
                     <!-- end pagination-->
                 </div>

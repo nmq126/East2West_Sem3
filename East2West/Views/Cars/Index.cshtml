@@ -52,85 +52,85 @@
             <div class="widget-body">
                 @using (Html.BeginForm("Index", "Cars", FormMethod.Get))
                 {
-                <div class="row">
-                    <div class="col-lg-3">
-                        <label class="form-control-label">Select Brand</label>
-                        <div class="select mb-3">
-                            <select name="brandId" id="brandId" class="custom-select form-control">
-                                <option value="">Select Brand</option>
-                                @foreach (var brand in ViewBag.BrandList)
-                                {
-                                    if (brand.Id == ViewBag.BrandId)
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Select Brand</label>
+                            <div class="select mb-3">
+                                <select name="brandId" id="brandId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var brand in ViewBag.BrandList)
                                     {
-                                        <option value=@brand.Id selected>@brand.Name</option>
+                                        if (brand.Id == ViewBag.BrandId)
+                                        {
+                                            <option value=@brand.Id selected>@brand.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@brand.Id>@brand.Name</option>
+                                        }
                                     }
-                                    else
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Select Model</label>
+                            <div class="select mb-3">
+                                <select name="modelId" id="modelId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var cModel in ViewBag.ModelList)
                                     {
-                                        <option value=@brand.Id>@brand.Name</option>
+                                        if (cModel.Id == ViewBag.ModelId)
+                                        {
+                                            <option value=@cModel.Id selected>@cModel.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@cModel.Id>@cModel.Name</option>
+                                        }
                                     }
-                                }
-                            </select>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Select Type</label>
+                            <div class="select mb-3">
+                                <select name="typeId" id="typeId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var type in ViewBag.TypeList)
+                                    {
+                                        if (type.Id == ViewBag.TypeId)
+                                        {
+                                            <option value=@type.Id selected>@type.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@type.Id>@type.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Select location</label>
+                            <div class="select mb-3">
+                                <select name="locationId" id="locationId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var location in ViewBag.LocationList)
+                                    {
+                                        if (location.Id == ViewBag.LocationId)
+                                        {
+                                            <option value=@location.Id selected>@location.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@location.Id>@location.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <label class="form-control-label">Select Model</label>
-                        <div class="select mb-3">
-                            <select name="modelId" id="modelId" class="custom-select form-control">
-                                <option value="">Select Model</option>
-                                @foreach (var cModel in ViewBag.ModelList)
-                                {
-                                    if (cModel.Id == ViewBag.ModelId)
-                                    {
-                                        <option value=@cModel.Id selected>@cModel.Name</option>
-                                    }
-                                    else
-                                    {
-                                        <option value=@cModel.Id>@cModel.Name</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <label class="form-control-label">Select Type</label>
-                        <div class="select mb-3">
-                            <select name="typeId" id="typeId" class="custom-select form-control">
-                                <option value="">Select Type</option>
-                                @foreach (var type in ViewBag.TypeList)
-                                {
-                                    if (type.Id == ViewBag.TypeId)
-                                    {
-                                        <option value=@type.Id selected>@type.Name</option>
-                                    }
-                                    else
-                                    {
-                                        <option value=@type.Id>@type.Name</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-3">
-                        <label class="form-control-label">Select location</label>
-                        <div class="select mb-3">
-                            <select name="locationId" id="locationId" class="custom-select form-control">
-                                <option value="">Select Location</option>
-                                @foreach (var location in ViewBag.LocationList)
-                                {
-                                    if (location.Id == ViewBag.LocationId)
-                                    {
-                                        <option value=@location.Id selected>@location.Name</option>
-                                    }
-                                    else
-                                    {
-                                        <option value=@location.Id>@location.Name</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-                    </div>
-                </div>
                     <div class="row">
                         <div class="col-lg-3">
                             <label class="form-control-label">Sort by</label>
@@ -152,6 +152,17 @@
                                     <option value="2" @(ViewBag.HasAC == 2 ? "selected" : "")>All</option>
                                     <option value="1" @(ViewBag.HasAC == 1 ? "selected" : "")>Yes</option>
                                     <option value="0" @(ViewBag.HasAC == 0 ? "selected" : "")>No</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Has Driver</label>
+                            <div class="select mb-3">
+                                <select name="hasDriver" id="hasDriver" class="custom-select form-control">
+                                    <option value="2" @(ViewBag.HasDriver == 2 ? "selected" : "")>All</option>
+                                    <option value="1" @(ViewBag.HasDriver == 1 ? "selected" : "")>Yes</option>
+                                    <option value="0" @(ViewBag.HasDriver == 0 ? "selected" : "")>No</option>
 
                                 </select>
                             </div>
@@ -222,10 +233,11 @@
                                     <th width="10%">Brand</th>
                                     <th width="10%">Model</th>
                                     <th width="10%">Type</th>
-                                    <th width="10%">Location</th>
+                                    <th width="5%">Location</th>
                                     <th width="5%">License Plate</th>
                                     <th width="5%">Price</th>
                                     <th width="5%">AC</th>
+                                    <th width="5%">Driver</th>
                                     <th width="10%">Status</th>
                                     <th width="10%">Action</th>
                                 </tr>
@@ -250,7 +262,8 @@
                                             <td>@item.Location.Name</td>
                                             <td>@item.LisencePlate</td>
                                             <td>$@item.PricePerDay</td>
-                                            <td><p>@(item.HasAirConditioner == true ? "✅" : "")</p></td>
+                                            <td><p>@(item.HasAirConditioner == true ? "✅" : "✖")</p></td>
+                                            <td><p>@(item.HasDriver == true ? "✅" : "✖")</p></td>
                                             <td>
                                                 <select id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
                                                     <option value="1" @(item.Status == 1 ? "selected" : "")>Active</option>
@@ -272,15 +285,19 @@
                             </tbody>
                         </table>
                         @Html.PagedListPager(Model, page => Url.Action("Index",
-                                    new { id = ViewBag.Id,
+                                    new
+                                         {
+                                             id = ViewBag.Id,
                                         sortType = ViewBag.SortType,
                                         licensePlate = ViewBag.LicensePlate,
                                         modelId = ViewBag.ModelId,
                                         brandId = ViewBag.BrandId,
                                         typeId = ViewBag.TypeId,
                                         hasAC = ViewBag.HasAC,
+                                        hasDriver = ViewBag.HasDriver,
                                         status = ViewBag.Status,
-                                        page }),
+                                        page
+                                         }),
                                     new PagedListRenderOptions
                                     {
                                         DisplayItemSliceAndTotal = true,
@@ -308,51 +325,50 @@
 
 @section Scripts{
     <script src="~/Content/admin_vendor/js/bootstrap-select/bootstrap-select.min.js"></script>
-    <script src="~/Scripts/toastr.js"></script>
     <script>
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true,
-            "positionClass": "toast-bottom-right",
-            "preventDuplicates": false,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
-    </script>
-    <script>;
         function changeStatus(obj) {
             var id = obj.getAttribute('data-id')
             var status = obj.value
-            var cnfrmMsg = "Activate " + id
+            var cnfrmMsg = "activate " + id
             if (status == 0) {
-                cnfrmMsg = "Disable " + id
+                cnfrmMsg = "disable " + id
             }
-            if (confirm(cnfrmMsg)) {
-                $("#preloader2").show();
-                $.ajax({
-                    type: "GET",
-                    url: "/Cars/ChangeStatus",
-                    data: {
-                        id: id,
-                        status: status
-                    },
-                    success: function (msg) {
-                        $("#preloader2").hide();
-                        toastr.info(msg, 'Update successfully');
-                    },
-                    error: function () {
-                        $("#preloader2").hide();
-                    },
-                });
-            } else {
-                alert(oke)
-            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "To " + cnfrmMsg,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, do it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#preloader2").show();
+                    $.ajax({
+                        type: "GET",
+                        url: "/Cars/ChangeStatus",
+                        data: {
+                            id: id,
+                            status: status
+                        },
+                        success: function (msg) {
+                            $("#preloader2").hide();
+                            Swal.fire(
+                                'Success!',
+                                msg,
+                                'success'
+                            )
+                        },
+                        error: function () {
+                            $("#preloader2").hide();
+                        },
+                    });
+
+                }
+                else {
+                    alert(oke)
+                }
+            })
         }
     </script>
 }

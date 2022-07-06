@@ -17,7 +17,8 @@ namespace East2West.Controllers
         private DBContext db = new DBContext();
 
         // GET: Cars
-        public ActionResult Index(int? status, int? hasAC, string id, string sortType, string licensePlate, string locationId, string brandId, string modelId, string typeId, int? page)
+        public ActionResult Index(int? status, int? hasAC, int? hasDriver, string id, string sortType, string licensePlate,
+            string locationId, string brandId, string modelId, string typeId, int? page)
         {
             ViewBag.BreadCrumb = "Car List";
             ViewBag.BrandList = from b in db.CarBrands select b;
@@ -28,6 +29,7 @@ namespace East2West.Controllers
             ViewBag.LocationId = locationId;
             ViewBag.Status = status;
             ViewBag.HasAC = hasAC;
+            ViewBag.HasDriver = hasDriver;
             ViewBag.ModelId = modelId;
             ViewBag.BrandId = brandId;
             ViewBag.TypeId = typeId;
@@ -94,6 +96,19 @@ namespace East2West.Controllers
                     break;
                 case 0:
                     cars = cars.Where(t => t.HasAirConditioner == false);
+                    break;
+                default:
+                    break;
+            }
+            switch (hasDriver)
+            {
+                case 2:
+                    break;
+                case 1:
+                    cars = cars.Where(t => t.HasDriver == true);
+                    break;
+                case 0:
+                    cars = cars.Where(t => t.HasDriver == false);
                     break;
                 default:
                     break;

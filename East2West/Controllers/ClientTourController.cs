@@ -26,6 +26,7 @@ namespace East2West.Controllers
 
         public ActionResult GetListTour(string sortType, string keyword, string price_range, string duration_range, string departureId, string destinationId, string categoryId, string rating, int? page)
         {
+            ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
             var tours = from t in db.Tours select t;
             ViewBag.CategoryList = from c in db.TourCategories select c;
             ViewBag.LocationList = from l in db.Locations select l;
@@ -52,6 +53,11 @@ namespace East2West.Controllers
             if (!String.IsNullOrEmpty(destinationId))
             {
                 tours = tours.Where(t => t.DestinationId == destinationId);
+            }
+
+            if (!String.IsNullOrEmpty(categoryId))
+            {
+                tours = tours.Where(t => t.TourCategoryId == categoryId);
             }
 
             switch (duration_range)

@@ -7925,6 +7925,9 @@ a.box_news ul li {
 }
 
 @media (max-width: 767px) {
+    .btn_status {
+        display: none
+    }
     #top_line {
         display: none
     }
@@ -8414,3 +8417,4 @@ a.box_news ul li {
         padding: 5px 8px
     }
 }
+

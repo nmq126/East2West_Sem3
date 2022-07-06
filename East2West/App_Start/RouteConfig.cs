@@ -11,17 +11,23 @@ namespace East2West
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            //admin
             string adminUserUrl = "admin/users";
+            string adminOrderUrl = "admin/orders";
             string adminTourUrl = "admin/tours";
             string adminTourDetailUrl = "admin/tour-details";
             string adminCarUrl = "admin/cars";
             string adminCarScheduleUrl = "admin/car-schedules";
             string adminFlightUrl = "admin/flights";
             string adminHoteltUrl = "admin/hotels";
+            //client
+            string clientUserUrl = "home/users";
+            string clientCarUrl = "home/cars";
+            string clientTourUrl = "home/tours";
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-//ADMIN
+            //ADMIN
 
             routes.MapRoute(
                 name: "Dashboard",
@@ -30,15 +36,25 @@ namespace East2West
             );
             routes.MapRoute(
                 name: "Tour Analysis",
-                url: "admin/orders/tours",
+                url: adminOrderUrl + "/tours",
                 defaults: new { controller = "Orders", action = "GetTour", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "Car Analysis",
+                url: adminOrderUrl + "/cars",
+                defaults: new { controller = "Orders", action = "GetCar", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "Order Detail",
+                url: adminOrderUrl + "/{id}",
+                defaults: new { controller = "Orders", action = "Details", id = UrlParameter.Optional }
             );
 
             //USER admin
             routes.MapRoute(
                 name: "User List",
                 url: adminUserUrl,
-                defaults: new { controller = "Users", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Users", action = "Index", id = UrlParameter.Optional, page = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "User Edit",
@@ -96,8 +112,6 @@ namespace East2West
                 url: adminTourDetailUrl + "/{id}",
                 defaults: new { controller = "TourDetails", action = "Details", id = UrlParameter.Optional }
             );
-           
-           
 
             //CAR
             routes.MapRoute(
@@ -191,7 +205,51 @@ namespace East2West
                 defaults: new { controller = "Hotels", action = "Details", id = UrlParameter.Optional }
             );
 
-//KHONG DUOC XOA
+            //CLIENT
+            //User
+            routes.MapRoute(
+                name: "User Profile",
+                url: clientUserUrl + "/profile/{id}",
+                defaults: new { controller = "User", action = "ShowInformation", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "User Login",
+                url: clientUserUrl + "/login",
+                defaults: new { controller = "User", action = "Login", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "User Register",
+                url: clientUserUrl + "/register",
+                defaults: new { controller = "User", action = "Register", id = UrlParameter.Optional }
+            );
+            //Tour
+            routes.MapRoute(
+                name: "Client Tour List",
+                url: clientTourUrl,
+                defaults: new { controller = "ClientTour", action = "GetListTour", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Client Tour Detail",
+                url: clientTourUrl + "/{id}",
+                defaults: new { controller = "ClientTour", action = "Details", id = UrlParameter.Optional }
+            );
+
+            //Car
+            routes.MapRoute(
+                name: "Client Car List",
+                url: clientCarUrl,
+                defaults: new { controller = "ClientCar", action = "GetListCar", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Client Car Detail",
+                url: clientCarUrl + "/{id}",
+                defaults: new { controller = "ClientCar", action = "Details", id = UrlParameter.Optional }
+            );
+
+            //KHONG DUOC XOA
             routes.MapRoute(
                name: "Default",
                url: "{controller}/{action}/{id}",

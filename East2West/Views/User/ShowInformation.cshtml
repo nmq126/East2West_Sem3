@@ -1,10 +1,15 @@
 ﻿@model East2West.Models.User
 
 @{
-    ViewBag.Title = "Profile";
+    ViewBag.Title = "East2West - Profile";
     Layout = "~/Views/Shared/_LayoutPageClient.cshtml";
 }
 
+<style>
+    .modal-backdrop {
+        z-index: -1;
+    }
+</style>
 @section Section
 {
 
@@ -18,25 +23,25 @@
     </section>
 }
 <main>
+
     <div id="position">
         <div class="container">
             <ul>
                 <li>
-                    <a href="#">Home</a>
+                    <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="#">Category</a>
+                    <a href="#">User</a>
                 </li>
-                <li>Page active</li>
+                <li>Profile</li>
             </ul>
         </div>
     </div>
-    <!-- End Position -->
 
     <div class="collapse" id="collapseMap">
         <div id="map" class="map"></div>
     </div>
-    <!-- End Map -->
+
     <div class="margin_60 container">
         <div id="tabs" class="tabs">
             <nav>
@@ -45,78 +50,188 @@
                         <a href="#section-1" class="icon-booking"><span>Tour Bookings</span></a>
                     </li>
                     <li>
+                        <a href="#section-2" class="icon-steering-wheel"><span>Car Bookings</span></a>
+                    </li>
+                    <li>
                         <a href="#section-4" class="icon-profile"><span>Profile</span></a>
                     </li>
                 </ul>
             </nav>
+
             <div class="content">
+                <input id="userId" value="@ViewBag.UserId" hidden />
                 <section id="section-1">
                     @foreach (var order in Model.Orders.OrderByDescending(u => u.CreatedAt))
                     {
-                        <div class="strip_booking">
-                            <div class="row">
-                                <div class="col-lg-2 col-md-2">
-                                    <div class="date">
-                                        <span class="month">@order.OrderTours.First().TourDetail.DepartureDay.ToString("MMMM")</span>
-                                        <span class="day"><strong>@order.OrderTours.First().TourDetail.DepartureDay.Day</strong>@order.OrderTours.First().TourDetail.DepartureDay.ToString("dddd")</span>
+                        if (order.Type == 1)
+                        {
+                            <div class="strip_booking">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2">
+                                        <div class="date">
+                                            <span class="month">@order.OrderTours.First().TourDetail.DepartureDay.ToString("MMMM")</span>
+                                            <span class="day"><strong>@order.OrderTours.First().TourDetail.DepartureDay.Day</strong>@order.OrderTours.First().TourDetail.DepartureDay.ToString("dddd")</span>
+                                        </div>
                                     </div>
-                                </div>
-                                @{
-                                    float percentDiscount = ((float)order.OrderTours.First().TourDetail.Discount) / 100;
-                                    var price = Math.Round(order.OrderTours.First().TourDetail.Price * (1 - percentDiscount), 2);
-                                    var name = order.OrderTours.First().TourDetail.Tour.Name;
-                                    var quantity = order.OrderTours.First().Quantity;
-
-                                }
-                                <div class="col-lg-5 col-md-4">
-                                    @if (order.OrderTours.First().Quantity > 1)
-                                    {
-                                        <h3 class="tours_booking">@name<span>@quantity Persons    </span></h3>
+                                    @{
+                                        float percentDiscount = ((float)order.OrderTours.First().TourDetail.Discount) / 100;
+                                        var price = Math.Round(order.OrderTours.First().TourDetail.Price * (1 - percentDiscount), 2);
+                                        var name = order.OrderTours.First().TourDetail.Tour.Name;
+                                        var quantity = order.OrderTours.First().Quantity;
+                                        var tourId = order.OrderTours.First().TourDetail.Tour.Id;
                                     }
-                                    else
-                                    {
-                                        <h3 class="tours_booking">@name<span>@quantity Person    </span></h3>
-                                    }
-                                </div>
-                                <div class="col-lg-2 col-md-3">
-                                    <ul class="info_booking">
-                                        <li><strong>Booking id</strong> @order.Id</li>
-                                        <li><strong>Booked on</strong> @order.CreatedAt</li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-2 col-md-2">
-                                    <div class="booking_buttons">
-                                        @if (order.Status == -1)
+                                    <div class="col-lg-5 col-md-3">
+                                        @if (order.OrderTours.First().Quantity > 1)
                                         {
-                                            var tourDetailId = @order.OrderTours.Where(o => o.OrderId == order.Id).FirstOrDefault().TourDetailId;
-                                            <a href="/Order/PaymentWithPaypal?id=@order.Id&name=@name&price=@price&quantity=@quantity&idTourDetail=@tourDetailId" class="btn_2 white">Payment</a>
-                                            <a href="#0" class="btn_3">Cancel</a>
+                                            <h3 class="tours_booking">@name<span>@quantity Persons    </span></h3>
                                         }
-                                        else if (order.Status == 1)
+                                        else
                                         {
-                                            <a href="#0" class="btn_3" style="background-color: #f44336; color: white;">Refund</a>
+                                            <h3 class="tours_booking">@name<span>@quantity Person    </span></h3>
                                         }
                                     </div>
-                                </div>
-                                <div class="col-lg-1 col-md-1">
-                                    <div class="booking_buttons">
-                                        @if (order.Status == -1)
-                                        {
-                                            <a href="#0" class="btn btn-danger">Unpaid</a>
-                                        }
-                                        else if (order.Status == 1)
-                                        {
-                                            <a href="#0" class="btn btn-success">Paid</a>
-                                        }
+                                    <div class="col-lg-2 col-md-3">
+                                        <ul class="info_booking">
+                                            <li><strong>Booking id</strong> @order.Id</li>
+                                            <li><strong>Booked on</strong> @order.CreatedAt</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2">
+                                        <div class="booking_buttons">
+                                            @if (order.Status == -1)
+                                            {
+                                                var tourDetailId = @order.OrderTours.Where(o => o.OrderId == order.Id).FirstOrDefault().TourDetailId;
+                                                <a href="/OrderTour/PaymentWithPaypal?id=@order.Id&name=@name&price=@price&quantity=@quantity&idTourDetail=@tourDetailId" class="btn_2 white">Payment</a>
+                                                <a href="#0" data-id="@order.Id" class="btn_3 cancelButton">Cancel</a>
+                                            }
+                                            else if (order.Status == 1)
+                                            {
+                                                <a href="#0" data-id="@order.Id" class="btn_3 refundButton" style="background-color: #f44336; color: white;">Refund</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("Details", "ClientTour", new { id = tourId})" class="btn_2 white">Order again</a>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1 col-md-2">
+                                        <div class="booking_buttons">
+                                            @if (order.Status == -1)
+                                            {
+                                                <a href="#0" class="btn btn-warning btn_status" style="min-width:95px">Unpaid</a>
+                                            }
+                                            else if (order.Status == 1)
+                                            {
+                                                <a href="#0" class="btn btn-success btn_status" style="min-width:95px">Paid</a>
+                                            }
+                                            else if (order.Status == 0)
+                                            {
+                                                <a href="#" class="btn btn-secondary btn_status" style="min-width:95px">Canceled</a>
+                                            }
+                                            else if (order.Status == 2)
+                                            {
+                                                <a href="#" class="btn btn-danger btn_status" style="min-width:95px">Refunded</a>
+                                            }
+                                            else if (order.Status == -2)
+                                            {
+                                                <a href="#" class="btn btn-danger btn_status" style="min-width:95px">Pending Refund</a>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- End row -->
-                        </div>
+                        }
                     }
                 </section>
-                <!-- End section 1 -->
 
+                <section id="section-2">
+                    @foreach (var order in Model.Orders.OrderByDescending(u => u.CreatedAt))
+                    {
+                        if (order.Type == 2)
+                        {
+                            <div class="strip_booking">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2">
+                                        <div class="date">
+                                            <span class="month">@order.OrderCars.First().CarSchedule.StartDay.ToString("MMMM")</span>
+                                            <span class="day"><strong>@order.OrderCars.First().CarSchedule.StartDay.Day</strong>@order.OrderCars.First().CarSchedule.StartDay.ToString("dddd")</span>
+                                        </div>
+                                    </div>
+                                    @{
+                                        var carSchedule = order.OrderCars.First().CarSchedule;
+                                        var startDay = carSchedule.StartDay;
+                                        var endDay = carSchedule.EndDay;
+                                        TimeSpan span = endDay.Subtract(startDay);
+                                        var carId = carSchedule.Car.Id;
+                                        var carName = carSchedule.Car.CarModel.Name;
+                                        var carLPlate = carSchedule.Car.LisencePlate;
+                                        var carScheduleId = carSchedule.Id;
+                                        var pricePerDay = carSchedule.Car.PricePerDay;
+                                    }
+                                    <div class="col-lg-5 col-md-4">
+                                        @if (span.Days > 1)
+                                        {
+                                            <h3 class="transfers_booking">@carName (@carLPlate)<span>@span.Days Days</span><span>End date: @endDay.ToShortDateString()</span></h3>
+                                        }
+                                        else
+                                        {
+                                            <h3 class="transfers_booking">@carName (@carLPlate)<span>@span.Days Day</span><span>End date: @endDay.ToShortDateString()</span></h3>
+                                        }
+                                    </div>
+                                    <div class="col-lg-2 col-md-3">
+                                        <ul class="info_booking">
+                                            <li><strong>Booking id</strong> @order.Id</li>
+                                            <li><strong>Booked on</strong> @order.CreatedAt</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2">
+                                        <div class="booking_buttons">
+                                            @if (order.Status == -1)
+                                            {
+                                                <a href="/OrderCar/PaymentWithPaypal?id=@order.Id&name=@carName&pricePerDay=@pricePerDay&rentDay=@span.Days&idCarSchedule=@carScheduleId" class="btn_2 white">Payment</a>
+                                                <a href="#0" data-id="@order.Id" class="btn_3 cancelButton">Cancel</a>
+                                            }
+                                            else if (order.Status == 1)
+                                            {
+                                                <a href="#0" data-id="@order.Id" class="btn_3 refundButton" style="background-color: #f44336; color: white;">Refund</a>
+                                            }
+                                            else
+                                            {
+
+                                                <a href="@Url.Action("Details", "ClientCar", new { id = carId })" class="btn_2 white">Order again</a>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1">
+                                        <div class="booking_buttons">
+                                            @if (order.Status == -1)
+                                            {
+                                                <a href="#" class="btn btn-warning btn_status" style="min-width:95px">Unpaid</a>
+                                            }
+                                            else if (order.Status == 1)
+                                            {
+                                                <a href="#" class="btn btn-success btn_status" style="min-width:95px">Paid</a>
+                                            }
+                                            else if (order.Status == 0)
+                                            {
+                                                <a href="#" class="btn btn-secondary btn_status" style="min-width:95px">Canceled</a>
+                                            }
+                                            else if (order.Status == 2)
+                                            {
+                                                <a href="#" class="btn btn-danger btn_status" style="min-width:95px">Refunded</a>
+                                            }
+                                            else if (order.Status == -2)
+                                            {
+                                                <a href="#" class="btn btn-danger btn_status" style="min-width:95px">Pending Refund</a>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    }
+                </section>
                 <section id="section-4">
                     <div class="row">
                         <div class="col-md-6">
@@ -258,10 +373,7 @@
                 </section>
                 <!-- End section 4 -->
             </div>
-            <!-- End content -->
         </div>
-        <!-- End tabs -->
     </div>
     <div id="overlay"></div>
-    <!-- Mask on input focus -->
 </main>
