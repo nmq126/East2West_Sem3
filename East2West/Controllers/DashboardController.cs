@@ -16,6 +16,10 @@ namespace East2West.Controllers
         private readonly string tourCategoryTitle = "Revenue by tour package category share";
         private readonly string tourSeasonTitle = "Revenue by season share";
         private static string tourDateRange;
+        private readonly string carModelTitle = "Revenue by tour package duration share";
+        private readonly string carTypeTitle = "Revenue by tour package category share";
+        private readonly string carSeasonTitle = "Revenue by season share";
+        private static string carDateRange;
         // GET: Dashboard
         public ActionResult Index()
         {
