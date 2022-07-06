@@ -960,6 +960,7 @@
     <Content Include="Content\img\avatar3.jpg" />
     <Content Include="Content\img\bg_login.jpg" />
     <Content Include="Content\img\laptop.png" />
+    <Content Include="Content\img\logo_sticky.png" />
     <Content Include="Content\img\post-thumb-2.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\rateit.css" />
