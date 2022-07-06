@@ -31,7 +31,6 @@ namespace East2West.Models
         public String Thumbnail { get; set; }
 
         [Column(TypeName = "ntext")]
-        [Required]
         public String Description { get; set; }
 
         public int Status { get; set; }
