@@ -838,10 +838,10 @@ new Hotel()
             IsRoundTicket = false,
             DepartureId = "LOCAL_1",
             DestinationId = "LOCAL_2",
-            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+            DepartureAt = Convert.ToDateTime("2023-02-01T23:49:58+02:00"),
             Duration = "2",
             Price = 20,
-            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+            ReturnAt = Convert.ToDateTime("2023-02-09T23:49:58+02:00"),
             Detail = "Brand : Vietnam Airlines - Flight : VN 600 - Boarding Time : 14:00",
             Status = 1,
             CreatedAt = DateTime.Now
@@ -853,10 +853,10 @@ new Hotel()
                     IsRoundTicket = true,
                     DepartureId = "LOCAL_1",
                     DestinationId = "LOCAL_4",
-                    DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                    DepartureAt = Convert.ToDateTime("2022-12-10T23:49:58+02:00"),
                     Duration = "3",
                     Price = 23,
-                    ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                    ReturnAt = Convert.ToDateTime("2022-12-20T23:49:58+02:00"),
                     Detail = "Good news for all you travelers flying from Hanoi - right now, we're offering huge deals on roundtrip flights to Da Nang! So whether you're a frequent business traveler, or if you're just looking to get out of town for a while, you can fly for less. And don't forget, CheapOair also has great deals on hotels and cars waiting for you when you land. So don't delay - grab a cheap ticket to Da Nang today!",
                     Status = 1,
                     CreatedAt = DateTime.Now
@@ -869,10 +869,10 @@ new Hotel()
             IsRoundTicket = true,
             DepartureId = "LOCAL_1",
             DestinationId = "LOCAL_3",
-            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+            DepartureAt = Convert.ToDateTime("2022-12-01T23:49:58+02:00"),
             Duration = "3",
             Price = 30,
-            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+            ReturnAt = Convert.ToDateTime("2022-12-08T23:49:58+02:00"),
             Detail = "Good news for all you travelers flying from Hanoi - right now, we're offering huge deals on roundtrip flights to Bangkok! So whether you're a frequent business traveler, or if you're just looking to get out of town for a while, you can fly for less. And don't forget, CheapOair also has great deals on hotels and cars waiting for you when you land. So don't delay - grab a cheap ticket to Bangkok today!",
             Status = 1,
             CreatedAt = DateTime.Now
@@ -884,10 +884,10 @@ new Hotel()
                             IsRoundTicket = true,
                             DepartureId = "LOCAL_7",
                             DestinationId = "LOCAL_8",
-                            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            DepartureAt = Convert.ToDateTime("2022-12-08T23:49:58+02:00"),
                             Duration = "3",
                             Price = 25,
-                            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            ReturnAt = Convert.ToDateTime("2022-12-15T23:49:58+02:00"),
                             Detail = "Right now is a great time to book your flight to Turkey! We're offering some truly incredible roundtrip deals. So whether you're a frequent business traveler, or if you're just looking to get out of town for a while, you can fly for less. And don't forget",
                             Status = 1,
                             CreatedAt = DateTime.Now
@@ -899,10 +899,10 @@ new Hotel()
                             IsRoundTicket = true,
                             DepartureId = "LOCAL_11",
                             DestinationId = "LOCAL_12",
-                            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            DepartureAt = Convert.ToDateTime("2022-08-30T23:49:58+02:00"),
                             Duration = "5",
                             Price = 20,
-                            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            ReturnAt = Convert.ToDateTime("2022-09-10T23:49:58+02:00"),
                             Detail = "By allowing the codeshare carrier and flight number in the flight service response, users can respond to questions and problems both pre- and post-departure without having to call Travelport to obtain the data",
                             Status = 1,
                             CreatedAt = DateTime.Now
@@ -917,7 +917,7 @@ new Hotel()
                             DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
                             Duration = "2",
                             Price = 20,
-                            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            ReturnAt = Convert.ToDateTime("2022-12-17T23:49:58+02:00"),
                             Detail = "Good news for all you travelers flying from Da Nang - right now, we're offering huge deals on roundtrip flights to Hanoi! So whether you're a frequent business traveler, or if you're just looking to get out of town for a while, you can fly for less. And don't forget, CheapOair also has great deals on hotels and cars waiting for you when you land. So don't delay - grab a cheap ticket to Hanoi today!",
                             Status = 1,
                             CreatedAt = DateTime.Now
@@ -929,10 +929,10 @@ new Hotel()
                             IsRoundTicket = false,
                             DepartureId = "LOCAL_1",
                             DestinationId = "LOCAL_6",
-                            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            DepartureAt = Convert.ToDateTime("2022-11-25T23:49:58+02:00"),
                             Duration = "2",
                             Price = 15,
-                            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            ReturnAt = Convert.ToDateTime("2022-11-30T23:49:58+02:00"),
                             Detail = "Brand : Vietnam Airlines - Flight : VN 600 - Boarding Time : 14:00",
                             Status = 1,
                             CreatedAt = DateTime.Now
@@ -944,10 +944,10 @@ new Hotel()
                             IsRoundTicket = true,
                             DepartureId = "LOCAL_4",
                             DestinationId = "LOCAL_7",
-                            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            DepartureAt = Convert.ToDateTime("2022-08-29T23:49:58+02:00"),
                             Duration = "1",
                             Price = 10,
-                            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            ReturnAt = Convert.ToDateTime("2022-09-05T23:49:58+02:00"),
                             Detail = "The enhancement with Release 21.2.2 improves the accuracy of the Transportation Security Administration (TSA) informational message by replacing the specific United States based text",
                             Status = 1,
                             CreatedAt = DateTime.Now
@@ -959,7 +959,7 @@ new Hotel()
                             IsRoundTicket = true,
                             DepartureId = "LOCAL_1",
                             DestinationId = "LOCAL_3",
-                            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            DepartureAt = Convert.ToDateTime("2022-12-02T23:49:58+02:00"),
                             Duration = "2.5",
                             Price = 20,
                             ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
@@ -974,10 +974,10 @@ new Hotel()
                             IsRoundTicket = true,
                             DepartureId = "LOCAL_10",
                             DestinationId = "LOCAL_11",
-                            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            DepartureAt = Convert.ToDateTime("2022-07-10T23:49:58+02:00"),
                             Duration = "1",
                             Price = 15,
-                            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            ReturnAt = Convert.ToDateTime("2022-07-09T23:49:58+02:00"),
                             Detail = "Prior to Air v48.0, the CodeshareInfo attribute contained within the FlightDetails element had a Max Occurrence of 0",
                             Status = 1,
                             CreatedAt = DateTime.Now
@@ -989,10 +989,10 @@ new Hotel()
                             IsRoundTicket = true,
                             DepartureId = "LOCAL_1",
                             DestinationId = "LOCAL_12",
-                            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            DepartureAt = Convert.ToDateTime("2023-03-05T23:49:58+02:00"),
                             Duration = "4",
                             Price = 20,
-                            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            ReturnAt = Convert.ToDateTime("2023-03-09T23:49:58+02:00"),
                             Detail = "By allowing the codeshare carrier and flight number in the flight service response, users can respond to questions and problems both pre- and post-departure without having to call Travelport to obtain the data",
                             Status = 1,
                             CreatedAt = DateTime.Now
@@ -1004,10 +1004,10 @@ new Hotel()
                             IsRoundTicket = true,
                             DepartureId = "LOCAL_3",
                             DestinationId = "LOCAL_4",
-                            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            DepartureAt = Convert.ToDateTime("2022-12-25T23:49:58+02:00"),
                             Duration = "2",
                             Price = 20,
-                            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            ReturnAt = Convert.ToDateTime("2022-12-31T23:49:58+02:00"),
                             Detail = "Prior to Universal API release 21.2.2, the InFlightService list returns a value of TSA SECURED FLIGHT if a flight was a TSA-secured flight",
                             Status = 1,
                             CreatedAt = DateTime.Now
@@ -1019,9 +1019,9 @@ new Hotel()
                             IsRoundTicket = false,
                             DepartureId = "LOCAL_6",
                             DestinationId = "LOCAL_7",
-                            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            DepartureAt = Convert.ToDateTime("2022-11-20T23:49:58+02:00"),
                             Duration = "2",
-                            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            ReturnAt = Convert.ToDateTime("2022-11-29T23:49:58+02:00"),
                             Price = 20,
                             Detail = "Brand : Vietnam Airlines - Flight : VN 600 - Boarding Time : 14:00",
                             Status = 1,
@@ -1034,10 +1034,10 @@ new Hotel()
                             IsRoundTicket = true,
                             DepartureId = "LOCAL_12",
                             DestinationId = "LOCAL_11",
-                            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            DepartureAt = Convert.ToDateTime("2023-01-09T23:49:58+02:00"),
                             Duration = "3",
                             Price = 23,
-                            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            ReturnAt = Convert.ToDateTime("2023-01-12T23:49:58+02:00"),
                             Detail = "The enhancement with Release 21.2.2 improves the accuracy of the Transportation Security Administration (TSA) informational message by replacing the specific United States based text",
                             Status = 1,
                             CreatedAt = DateTime.Now
@@ -1049,10 +1049,10 @@ new Hotel()
                             IsRoundTicket = true,
                             DepartureId = "LOCAL_10",
                             DestinationId = "LOCAL_9",
-                            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            DepartureAt = Convert.ToDateTime("2022-12-23T23:49:58+02:00"),
                             Duration = "3",
                             Price = 25,
-                            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            ReturnAt = Convert.ToDateTime("2022-12-30T23:49:58+02:00"),
                             Detail = "The availability and types of Flight Details returned vary by carrier and segment. The availability of real-time data versus scheduled data may also vary by carrier and segment",
                             Status = 1,
                             CreatedAt = DateTime.Now
@@ -1064,10 +1064,10 @@ new Hotel()
                             IsRoundTicket = true,
                             DepartureId = "LOCAL_7",
                             DestinationId = "LOCAL_8",
-                            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            DepartureAt = Convert.ToDateTime("2022-07-09T23:49:58+02:00"),
                             Duration = "3",
                             Price = 25,
-                            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            ReturnAt = Convert.ToDateTime("2022-07-18T23:49:58+02:00"),
                             Detail = "Prior to Air v48.0, the CodeshareInfo attribute contained within the FlightDetails element had a Max Occurrence of 0",
                             Status = 1,
                             CreatedAt = DateTime.Now
@@ -1079,10 +1079,10 @@ new Hotel()
                             IsRoundTicket = true,
                             DepartureId = "LOCAL_5",
                             DestinationId = "LOCAL_6",
-                            DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            DepartureAt = Convert.ToDateTime("2022-08-09T23:49:58+02:00"),
                             Duration = "2",
                             Price = 10,
-                            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            ReturnAt = Convert.ToDateTime("2022-08-15T23:49:58+02:00"),
                             Detail = "By allowing the codeshare carrier and flight number in the flight service response, users can respond to questions and problems both pre- and post-departure without having to call Travelport to obtain the data",
                             Status = 1,
                             CreatedAt = DateTime.Now
@@ -1097,124 +1097,13 @@ new Hotel()
                             DepartureAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
                             Duration = "2",
                             Price = 15,
-                            ReturnAt = Convert.ToDateTime("2022-12-09T23:49:58+02:00"),
+                            ReturnAt = Convert.ToDateTime("2022-12-10T23:49:58+02:00"),
                             Detail = "Prior to Universal API release 21.2.2, the InFlightService list returns a value of TSA SECURED FLIGHT if a flight was a TSA-secured flight",
                             Status = 1,
                             CreatedAt = DateTime.Now
                         }
                 );
 
-            //            //context.Orders.AddOrUpdate(x => x.Id,
-            //            //    new Order()
-            //            //    {
-            //            //        Id = "Order_1",
-            //            //        UserId = "USER_1",
-            //            //        TotalPrice = 1500,
-            //            //        Type = 2,
-            //            //        Status = 1,
-            //            //        CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00"),
-            //            //        UpdatedAt = DateTime.Now,
-            //            //        DeletedAt = DateTime.Now
-            //            //    },
-            //            //    new Order()
-            //            //    {
-            //            //        Id = "Order_2",
-            //            //        UserId = "USER_2",
-            //            //        TotalPrice = 240,
-            //            //        Type = 1,
-            //            //        Status = 1,
-            //            //        CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00"),
-            //            //        UpdatedAt = DateTime.Now,
-            //            //        DeletedAt = DateTime.Now
-            //            //    }
-            //            //new Order()
-            //            //{
-            //            //    Id = "Order_3",
-            //            //    UserId = "USER_3",
-            //            //    TotalPrice = 1000,
-            //            //    Type = 2,
-            //            //    Status = 1,
-            //            //    CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00"),
-            //            //    UpdatedAt = DateTime.Now,
-            //            //    DeletedAt = DateTime.Now
-            //            //},
-            //            // new Order()
-            //            // {
-            //            //     Id = "Order_4",
-            //            //     UserId = "USER_5",
-            //            //     TotalPrice = 150,
-            //            //     Type = 1,
-            //            //     Status = 1,
-            //            //     CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00"),
-            //            //     UpdatedAt = DateTime.Now,
-            //            //     DeletedAt = DateTime.Now
-            //            // },
-            //            //  new Order()
-            //            //  {
-            //            //      Id = "Order_5",
-            //            //      UserId = "USER_6",
-            //            //      TotalPrice = 200,
-            //            //      Type = 100,
-            //            //      Status = 1,
-            //            //      CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00"),
-            //            //      UpdatedAt = DateTime.Now,
-            //            //      DeletedAt = DateTime.Now
-            //            //  },
-            //            //   new Order()
-            //            //   {
-            //            //       Id = "Order_6",
-            //            //       UserId = "USER_8",
-            //            //       TotalPrice = 1000,
-            //            //       Type = 2,
-            //            //       Status = 1,
-            //            //       CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00"),
-            //            //       UpdatedAt = DateTime.Now,
-            //            //       DeletedAt = DateTime.Now
-            //            //   },
-            //            //    new Order()
-            //            //    {
-            //            //        Id = "Order_7",
-            //            //        UserId = "USER_8",
-            //            //        TotalPrice = 1500,
-            //            //        Type = 2,
-            //            //        Status = 1,
-            //            //        CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00"),
-            //            //        UpdatedAt = DateTime.Now,
-            //            //        DeletedAt = DateTime.Now
-            //            //    },
-            //            //     new Order()
-            //            //     {
-            //            //         Id = "Order_8",
-            //            //         UserId = "USER_9",
-            //            //         TotalPrice = 1500,
-            //            //         Type = 2,
-            //            //         Status = 1,
-            //            //         CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00"),
-            //            //         UpdatedAt = DateTime.Now,
-            //            //         DeletedAt = DateTime.Now
-            //            //     },
-            //            //      new Order()
-            //            //      {
-            //            //          Id = "Order_9",
-            //            //          UserId = "USER_10",
-            //            //          TotalPrice = 1500,
-            //            //          Type = 2,
-            //            //          Status = 1,
-            //            //          CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00"),
-            //            //          UpdatedAt = DateTime.Now,
-            //            //          DeletedAt = DateTime.Now
-            //            //      }, new Order()
-            //            //      {
-            //            //          Id = "Order_10",
-            //            //          UserId = "USER_11",
-            //            //          TotalPrice = 1500,
-            //            //          Type = 2,
-            //            //          Status = 1,
-            //            //          CreatedAt = Convert.ToDateTime("2017-08-09T23:49:58+02:00"),
-            //            //          UpdatedAt = DateTime.Now,
-            //            //          DeletedAt = DateTime.Now
-            //            //      }
-            //            //);
             var userId = db.Users.Select(u => u.Id).ToList();
 
             var tourDetail = db.TourDetails.ToList();
