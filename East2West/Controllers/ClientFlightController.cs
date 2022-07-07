@@ -31,7 +31,7 @@ namespace East2West.Controllers
 
             var flights = from f in db.Flights select f;
             var locations = db.Locations.ToList();
-            ViewBag.LocationList = from l in db.Locations select l;
+            ViewBag.LocationList = db.Locations.ToList();
 
 
             flights = (status > 0) ? flights.Where(M => M.Status == status) : flights;

@@ -1032,14 +1032,15 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <None Include="packages.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <None Include="Scripts\jquery-3.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\jquery.rateit.js" />
     <Content Include="Scripts\jquery.rateit.min.js" />
-    <Content Include="Scripts\jquery.rateit.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -1118,6 +1119,10 @@
     <Content Include="tmp1954.tmp" />
     <Content Include="Views\ClientFlight\GetListFlight.cshtml" />
     <Content Include="Views\ClientFlight\Details.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\jquery.rateit.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1148,12 +1153,6 @@
     <EmbeddedResource Include="Migrations\202207030951279_update_driver.resx">
       <DependentUpon>202207030951279_update_driver.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
