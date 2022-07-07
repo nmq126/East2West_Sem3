@@ -190,6 +190,7 @@
     <Compile Include="Controllers\CarSchedulesController.cs" />
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\ClientCarController.cs" />
+    <Compile Include="Controllers\ClientFlightController.cs" />
     <Compile Include="Controllers\ClientHotelController.cs" />
     <Compile Include="Controllers\ClientTourController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -1115,6 +1116,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Orders\GetCar.cshtml" />
     <Content Include="tmp1954.tmp" />
+    <Content Include="Views\ClientFlight\GetListFlight.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
