@@ -37,7 +37,7 @@ namespace East2West.Controllers
             }
             if (!String.IsNullOrEmpty(keyword))
             {
-                flights = flights.Where(t => t.LocationDeparture.Name.Contains(keyword) ||  t.LocationDestination.Name.Contains(keyword) || t.Detail.Contains(keyword);
+                flights = flights.Where(t => t.LocationDeparture.Name.Contains(keyword) ||  t.LocationDestination.Name.Contains(keyword) || t.Detail.Contains(keyword));
             }
             if (!String.IsNullOrEmpty(departureId))
             {
