@@ -112,7 +112,7 @@
                                     <option value="">All</option>
                                     @foreach (var destination in ViewBag.LocationList)
                                     {
-                                        if (destination.Id == ViewBag.DepartureId)
+                                        if (destination.Id == ViewBag.DestinationId)
                                         {
                                             <option value=@destination.Id selected>@destination.Name</option>
                                         }
@@ -124,21 +124,43 @@
                                 </select>
                             </div>
                             <div class="filter_type">
-                                <h6><i class="icon-money-2"></i> From Price</h6>
-                                @Html.TextBox("from_price", ViewBag.From_price as string, new { @class = "form-control", placeholder = "Input price" })
-                            </div>
-                            <div class="filter_type">
-                                <h6><i class="icon-money-2"></i> To Price</h6>
-                                @Html.TextBox("to_price", ViewBag.To_price as string, new { @class = "form-control", placeholder = "Input price" })
-                            </div>
-                            <div class="filter_type">
-                                <h6><i class="icon-smile"></i> Status</h6>
-                                <select name="rating" id="rating" class="custom-select form-control">
-                                    <option value="0">All</option>
-                                    <option value="1" @(ViewBag.Rating == "1" ? "selected" : "")>Active</option>
-                                    <option value="2" @(ViewBag.Rating == "2" ? "selected" : "")>Disabled</option>
+                                <h6><i class="icon-money-2"></i> Price</h6>
+                                <select name="price_range" id="price_range" class="custom-select form-control">
+                                    <option value="all" @(ViewBag.PriceRange == "all" ? "selected" : "")>All</option>
+                                    <option value="lt100" @(ViewBag.PriceRange == "lt100" ? "selected" : "")>Less than 100$</option>
+                                    <option value="100to500" @(ViewBag.PriceRange == "100to500" ? "selected" : "")>From 100$ to 500$</option>
+                                    <option value="500t1000" @(ViewBag.PriceRange == "500t1000" ? "selected" : "")>From 500$ to 1000$</option>
+                                    <option value="gt1000" @(ViewBag.PriceRange == "gt1000" ? "selected" : "")>More than 1000$</option>
                                 </select>
                             </div>
+                            @*<div class="filter_type">
+                                        <h6><i class="icon-money-2"></i> From Price</h6>
+                                        @Html.TextBox("from_price", ViewBag.From_price as string, new { @class = "form-control", placeholder = "Input price" })
+                                    </div>
+                                    <div class="filter_type">
+                                        <h6><i class="icon-money-2"></i> To Price</h6>
+                                        @Html.TextBox("to_price", ViewBag.To_price as string, new { @class = "form-control", placeholder = "Input price" })
+                                </div>*@
+                            <div class="filter_type">
+                                <h6><i class="icon_set_1_icon-83"></i> From Date</h6>
+                                @Html.TextBox("from_date", ViewBag.From_date as string, new { @type = "date", @class = "form-control datepicker" })
+                            </div>
+                            <div class="filter_type">
+                                <h6><i class="icon_set_1_icon-83"></i> To Date</h6>
+                                @Html.TextBox("to_date", ViewBag.To_date as string, new { @type = "date", @class = "form-control datepicker" })
+                            </div>
+                            @*<div class="filter_type">
+                                    <h6><i class="icon-money-2"></i> To Date</h6>
+                                    @Html.TextBox("to_price", ViewBag.To_price as string, new { @class = "form-control", placeholder = "Input price" })
+                                </div>*@
+                            @*<div class="filter_type">
+                                    <h6><i class="icon-smile"></i> Status</h6>
+                                    <select name="status" id="status" class="custom-select form-control">
+                                        <option value="0" @(ViewBag.Status == "0" ? "selected" : "")>All</option>
+                                        <option value="1" @(ViewBag.Status == "1" ? "selected" : "")>Active</option>
+                                        <option value="2" @(ViewBag.Status == "2" ? "selected" : "")>Disabled</option>
+                                    </select>
+                                </div>*@
                         </div>
                         <!--End collapse -->
                     </div>
@@ -307,10 +329,12 @@
                                                                               page,
                                                                               destinationId = ViewBag.DestinationId,
                                                                               departureId = ViewBag.DepartureId,
-                                                                              status = ViewBag.Status,
-                                                                              from_price = ViewBag.From_price,
-                                                                              to_price = ViewBag.To_price,
+                                                                              satus = ViewBag.Status,
                                                                               keyword = ViewBag.Keyword,
+                                                                              price_range = ViewBag.PriceRange,
+                                                                              from_date = ViewBag.FromDate,
+                                                                              to_date = ViewBag.ToDate
+
                                                                           }),
                                                                           new PagedListRenderOptions
                                                                           {

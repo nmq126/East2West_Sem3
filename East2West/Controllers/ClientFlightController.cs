@@ -16,7 +16,7 @@ namespace East2West.Controllers
         private DBContext db = new DBContext();
         // GET: ClientHotel
 
-        public ActionResult GetListFlight(string sortType, int? page, string destinationId, string departureId, int? status, double? from_price, double? to_price, string keyword)
+        public ActionResult GetListFlight(string sortType, int? page, string destinationId, string departureId, int? status, string keyword, string price_range, DateTime? from_date, DateTime? to_date)
         {
             int pageNumber = (page ?? 1);
             int pageSize = 10;
@@ -24,9 +24,10 @@ namespace East2West.Controllers
             ViewBag.Status = status;
             ViewBag.DepartureId = departureId;
             ViewBag.DestinationId = destinationId;
-            ViewBag.From_price = from_price;
-            ViewBag.To_price = to_price;
+            ViewBag.PriceRange = price_range;
             ViewBag.Keyword = keyword;
+            ViewBag.FromDate = from_date;
+            ViewBag.ToDate = to_date;
 
             var flights = db.Flights.ToList();
             var locations = db.Locations.ToList();
@@ -39,21 +40,46 @@ namespace East2West.Controllers
             {
                 flights = flights.Where(f => f.DestinationId == destinationId).ToList();
             }
-            if (!String.IsNullOrEmpty(destinationId))
+            if (!String.IsNullOrEmpty(departureId))
             {
                 flights = flights.Where(f => f.DepartureId == departureId).ToList();
-            }
-            if (from_price >=0)
-            {
-                flights = flights.Where(f => f.Price >= from_price).ToList();
-            }
-            if (to_price > 0)
-            {
-                flights = flights.Where(f => f.Price <= to_price).ToList();
             }
             if (!String.IsNullOrEmpty(keyword))
             {
                 flights = flights.Where(f => f.LocationDestination.Name.ToLower().Contains(keyword.ToLower()) || f.LocationDeparture.Name.ToLower().Contains(keyword.ToLower())).ToList();
+            }
+            if (from_date != null)
+            {
+                flights = flights.Where(f => f.DepartureAt >= from_date).ToList();
+            }
+            if (to_date != null)
+            {
+                flights = flights.Where(f => f.ReturnAt <= to_date).ToList();
+            }
+
+            switch (price_range)
+            {
+                case "all":
+                    break;
+
+                case "lt100":
+                    flights = flights.Where(t => t.Price <= 100).ToList();
+                    break;
+
+                case "100to500":
+                    flights = flights.Where(t => t.Price > 100 && t.Price <= 500).ToList();
+                    break;
+
+                case "500t1000":
+                    flights = flights.Where(t => t.Price > 500 && t.Price <= 1000).ToList();
+                    break;
+
+                case "gt1000":
+                    flights = flights.Where(t => t.Price > 1000).ToList();
+                    break;
+
+                default:
+                    break;
             }
 
             switch (sortType)
