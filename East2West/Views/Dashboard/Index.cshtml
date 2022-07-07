@@ -1,9 +1,14 @@
-﻿
+﻿@using East2West.Util
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
+@*<style>
+    .media-right *{
+        float: right;
+        display: block
+    }
+</style>*@
 <div class="row flex-row">
     <!-- Begin Facebook -->
     <div class="col-xl-4 col-md-6 col-sm-6">
@@ -63,35 +68,40 @@
         <!-- Begin Widget 09 -->
         <div class="widget widget-09 has-shadow">
             <!-- Begin Widget Header -->
-            <div class="widget-header d-flex align-items-center">
-                <h2>Delivered Orders</h2>
-                <div class="widget-options">
-                    <button type="button" class="btn btn-shadow">View all</button>
+            <div class="widget-header">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label class="form-control-label">Analyze by</label>
+                        <div class="select mb-3">
+                            <select name="" id="" class="custom-select form-control">
+                                <option value="2">Tour Duration</option>
+                                <option value="1">Tour Category</option>
+                                <option value="0">Season</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-control-label">Date Range</label>
+                        <div class="input-group">
+                            <span class="input-group-addon addon-secondary">
+                                <i class="la la-calendar"></i>
+                            </span>
+                            <input type="text" class="form-control" id="" value="">
+                            <input type="hidden" class="form-control" name="" , id="" value="">
+                            <input type="hidden" class="form-control" name="" , id="" value="">
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- End Widget Header -->
             <!-- Begin Widget Body -->
             <div class="widget-body">
                 <div class="row">
-                    <div class="col-xl-10 col-12 no-padding">
+                    <div class="col-12 no-padding">
                         <div>
-                            <canvas id="orders"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-12 d-flex flex-column my-auto no-padding text-center">
-                        <div class="new-orders">
-                            <div class="title">New Orders</div>
-                            <div class="circle-orders">
-                                <div class="percent-orders"></div>
-                            </div>
-                        </div>
-                        <div class="some-stats mt-5">
-                            <div class="title">Total Delivered</div>
-                            <div class="number text-blue">856</div>
-                        </div>
-                        <div class="some-stats mt-3">
-                            <div class="title">Total Estimated</div>
-                            <div class="number text-blue">297</div>
+                            <div id="chartContainerColumn" style="height: 370px; width: 100%;"></div>
                         </div>
                     </div>
                 </div>
@@ -115,6 +125,7 @@
                                 <option value="2">Tour Duration</option>
                                 <option value="1">Tour Category</option>
                                 <option value="0">Season</option>
+                                <option value="3">Ticket Price Range</option>
 
                             </select>
                         </div>
@@ -125,13 +136,6 @@
                             <span class="input-group-addon addon-secondary">
                                 <i class="la la-calendar"></i>
                             </span>
-                            @*@{
-                                    var departureString = "";
-                                    if (!String.IsNullOrEmpty(ViewBag.StartDepartureDay) && !String.IsNullOrEmpty(ViewBag.EndDepartureDay))
-                                    {
-                                        departureString = @ViewBag.StartDepartureDay + " - " + @ViewBag.EndDepartureDay;
-                                    }
-                                }*@
                             <input type="text" class="form-control" id="daterange" value="">
                             <input type="hidden" class="form-control" name="startDay" , id="startDay" value="">
                             <input type="hidden" class="form-control" name="endDay" , id="endDay" value="">
@@ -144,10 +148,10 @@
             <!-- Begin Widget Body -->
             <div class="widget-body">
                 <div class="row">
-                    <div class="col-xl-10 col-12 no-padding">
+                    <div class="col-10 no-padding">
                         <div>
                             <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-                            <div id="notFound" class="text-center" style="display:none"><i class="la la-search"></i> No orders found in this date range!</div>
+                            <div id="notFound" class="text-center mb-5 mt-3" style="display:none"><i class="la la-search"></i> No order tour found in this date range!</div>
                         </div>
                     </div>
                 </div>
@@ -164,8 +168,23 @@
                             <select name="typeIdCar" id="typeIdCar" class="custom-select form-control">
                                 <option value="2">Car Model</option>
                                 <option value="1">Car Type</option>
+                                <option value="0">Season</option>
+                                <option value="3">Air Conditioner</option>
+                                <option value="4">Driver</option>
 
                             </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-control-label">Date Range</label>
+                        <div class="input-group">
+                            <span class="input-group-addon addon-secondary">
+                                <i class="la la-calendar"></i>
+                            </span>
+                            <input type="text" class="form-control" id="daterangeCar" value="">
+                            <input type="hidden" class="form-control" name="startDayCar" , id="startDayCar" value="">
+                            <input type="hidden" class="form-control" name="endDayCar" , id="endDayCar" value="">
+
                         </div>
                     </div>
                 </div>
@@ -176,13 +195,249 @@
                 <div class="row">
                     <div class="col-xl-10 col-12 no-padding">
                         <div>
-                            <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
+                            <div id="chartContainerCar" style="height: 370px; width: 100%;"></div>
+                            <div id="notFoundCar" class="text-center mb-5 mt-3" style="display:none"><i class="la la-search"></i> No order car found in this date range!</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Begin Row -->
+        <div class="row flex-row">
+            <div class="col-xl-4 col-md-6">
+                <!-- Begin Widget 04 -->
+                <div class="widget widget-04 has-shadow">
+                    <!-- Begin Widget Header -->
+                    <div class="widget-header bordered d-flex align-items-center">
+                        <h2>Post</h2>
+                        <div class="widget-options">
+                            <div class="dropdown">
+                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
+                                    <i class="la la-ellipsis-h"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a href="#" class="dropdown-item">
+                                        <i class="la la-check"></i>Valid Post
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                        <i class="la la-edit"></i>Edit Widget
+                                    </a>
+                                    <a href="faq.html" class="dropdown-item faq">
+                                        <i class="la la-question-circle"></i>FAQ
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Widget Header -->
+                    <!-- Begin Widget Body -->
+                    <div class="widget-body p-0">
+                        <div class="post-container">
+                            <div class="media mb-3">
+                                <div class="media-left align-self-center user">
+                                    <a href="pages-profile.html"><img src="assets/img/avatar/avatar-07.jpg" class="rounded-circle" alt="..."></a>
+                                </div>
+                                <div class="media-body align-self-center ml-3">
+                                    <div class="title">
+                                        <span class="username">Lisa Garett</span> posted an image
+                                    </div>
+                                    <div class="time">42 min ago</div>
+                                </div>
+                            </div>
+                            <img src="assets/img/background/01.jpg" alt="..." class="img-fluid">
+                            <div class="col no-padding d-flex justify-content-end mt-3">
+                                <div class="meta">
+                                    <ul>
+                                        <li><a href="#"><i class="la la-comment"></i><span class="numb">38</span></a></li>
+                                        <li><a href="#"><i class="la la-heart"></i><span class="numb">94</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Begin Write Comment -->
+                        <div class="input-group mt-5">
+                            <input type="text" class="form-control pr-0" placeholder="Write a comment ...">
+                            <span class="input-group-addon">
+                                <button class="btn" type="button">
+                                    <i class="la la-smile-o la-2x"></i>
+                                </button>
+                            </span>
+                            <span class="input-group-addon">
+                                <button class="btn pr-3" type="button">
+                                    <i class="la la-pencil la-2x"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <!-- End Write Comment -->
+                    </div>
+                    <!-- End Widget Body -->
+                </div>
+                <!-- End Widget 04 -->
+            </div>
+            <div class="col-xl-4 col-md-6">
+                <!-- Begin Widget 05 -->
+                <div class="widget widget-05 has-shadow">
+                    <!-- Begin Widget Header -->
+                    <div class="widget-header bordered d-flex align-items-center">
+                        <h2>Top Author</h2>
+                        <div class="widget-options">
+                            <div class="dropdown">
+                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
+                                    <i class="la la-ellipsis-h"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a href="#" class="dropdown-item">
+                                        <i class="la la-edit"></i>Edit Widget
+                                    </a>
+                                    <a href="#" class="dropdown-item faq">
+                                        <i class="la la-question-circle"></i>FAQ
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Widget Header -->
+                    <!-- Begin Widget Body -->
+                    <div class="widget-body no-padding hidden">
+                        <div class="author-avatar">
+                            <span class="badge-pulse-green"></span>
+                            <img src="assets/img/avatar/avatar-03.jpg" alt="..." class="img-fluid rounded-circle">
+                        </div>
+                        <div class="author-name">
+                            Louis Henry
+                            <span>Designer</span>
+                        </div>
+                        <div class="chart">
+                            <div class="row no-margin justify-content-center">
+                                <div class="col-12 col-xl-8 col-md-8 col-sm-8">
+                                    <div class="row no-margin align-items-center">
+                                        <!-- Begin Chart -->
+                                        <div class="col-9 no-padding">
+                                            <div class="chart-graph">
+                                                <div class="chart">
+                                                    <canvas id="sales-stats"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-3 no-padding text-center">
+                                            <div class="chart-text">
+                                                <span class="heading">Sales</span>
+                                                <span class="number">364</span>
+                                                <span class="cxg text-green">+35%</span>
+                                            </div>
+                                        </div>
+                                        <!-- End Chart -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="social-stats">
+                            <div class="row d-flex justify-content-between">
+                                <div class="col-4 text-center">
+                                    <i class="la la-users followers"></i>
+                                    <div class="counter">+124</div>
+                                    <div class="heading">Followers</div>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <i class="la la-dribbble dribbble"></i>
+                                    <div class="counter">+357</div>
+                                    <div class="heading">Likes</div>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <i class="la la-behance behance"></i>
+                                    <div class="counter">+98</div>
+                                    <div class="heading">Followers</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actions text-center">
+                            <a href="pages-profile.html" class="btn btn-gradient-01">View Profile</a>
+                        </div>
+                    </div>
+                    <!-- End Widget Body -->
+                </div>
+                <!-- End Widget 05 -->
+            </div>
+            <div class="col-xl-4">
+                <!-- Begin Widget 06 -->
+                <div class="widget widget-06 has-shadow">
+                    <!-- Begin Widget Header -->
+                    <div class="widget-header bordered d-flex align-items-center">
+                        <h2>Latest Order</h2>
+                        <div style="text-align:right">View all</div>
+                    </div>
+                    <!-- End Widget Header -->
+                    <!-- Begin Widget Body -->
+                    <div class="widget-body p-0">
+                        <div id="list-group" class="widget-scroll" style="max-height:490px;">
+                            <ul class="reviews list-group w-100">
+                                @foreach (var item in ViewBag.LatestOrder)
+                                {
+                                    <li class="list-group-item" style="padding:10px">
+                                        <div class="media">
+                                            <div class="media-left align-self-center ">
+                                                @if (item.Type == 2)
+                                                {
+                                                    <i style="font-size: 2em;" class="ti ti-car"></i>
 
+                                                }
+                                                else
+                                                {
+                                                    <i style="font-size: 2em;" class="ti ti-package"></i>
+                                                }
+                                                
+
+                                            </div>
+                                            <div class="media-body align-self-center">
+                                                <div class="username">
+                                                    <span style="color:black">#@item.Id</span>
+                                                </div>
+
+                                                <div class="meta">
+                                                    <span class="mr-3">@(DateTimeUtil.GetPrettyDate(item.CreatedAt))</span>
+                                                </div>
+                                            </div>
+                                            <div style="margin-left:auto">
+                                                <div class="price">
+                                                    <span>$@item.TotalPrice</span>
+                                                </div>
+                                                <div class="status">
+                                                    @switch (item.Status)
+                                                    {
+                                                        case 1:
+                                                            <span style="color:forestgreen" class="">Paid</span>
+                                                            break;
+                                                        case -1:
+                                                            <span style="color:deepskyblue">Unpaid</span>
+                                                            break;
+                                                        case 0:
+                                                            <span style="color: grey" class="">Cancel</span>
+                                                            break;
+                                                        case -2:
+                                                            <span style="color:yellow" class="">Pending refund</span>
+                                                            break;
+                                                        case 2:
+                                                            <span style="color:red" class="">Refunded</span>
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                }
+                            </ul>
+                        </div>
+                        <!-- End List -->
+                    </div>
+                    <!-- End Widget Body -->
+                </div>
+                <!-- End Widget 06 -->
+            </div>
+        </div>
+        <!-- End Row -->
     </div>
 </div>
 
@@ -219,12 +474,48 @@
                 format: 'DD/MM/YYYY'
             },
         });
+        $('#daterangeCar').daterangepicker({
+            showDropdowns: true,
+            autoUpdateInput: false,
+            autoApply: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            },
+        });
         
     </script>
 
     <script>
         $(function () {
-            var obj = @Html.Raw(ViewBag.DataPoints);
+            var chartColumn = new CanvasJS.Chart("chartContainerColumn", {
+	            animationEnabled: true,
+	            theme: "light2", // "light1", "dark1", "dark2"
+	            exportEnabled: true,
+	            title: {
+                    text: "Revenue by year"
+	            },
+	            data: [{
+                    type: "column",
+		            dataPoints: [
+			{ x: 10, y: 71 },
+			{ x: 20, y: 55 },
+			{ x: 30, y: 50 },
+			{ x: 40, y: 65 },
+			{ x: 50, y: 92, indexLabel: "\u2605 Highest" },
+			{ x: 60, y: 68 },
+			{ x: 70, y: 38 },
+			{ x: 80, y: 71 },
+			{ x: 90, y: 54 },
+			{ x: 100, y: 60 },
+			{ x: 110, y: 36 },
+			{ x: 120, y: 49 },
+			{ x: 130, y: 21, indexLabel: "\u2691 Lowest" }
+		]
+	            }]
+            });
+            chartColumn.render();
+            var obj = @Html.Raw(ViewBag.DataTour);
+            var obj1 = @Html.Raw(ViewBag.DataCar);
             var options = {
                 theme: "light1",
                 exportEnabled: true,
@@ -249,33 +540,82 @@
                     dataPoints: obj.data
 	            }]
             };
+            var optionsCar = {
+                theme: "light1",
+                exportEnabled: true,
+                animationEnabled: true,
+                title: {
+                    text: obj1.title
+                },
+                subtitles: [{
+                    text: obj1.date
+                }],
+                legend: {
+                    horizontalAlign: "right",
+                    verticalAlign: "center"
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 180,
+                    toolTipContent: "<b>{label}</b>: ${y}",
+                    showInLegend: "true",
+                    legendText: "{label} (#percent%)",
+                    indexLabel: "{label} - ${y}",
+                    dataPoints: obj1.data
+                }]
+            };
             $("#chartContainer").CanvasJSChart(options);
+            $("#chartContainerCar").CanvasJSChart(optionsCar);
 
             var chart = $("#chartContainer").CanvasJSChart();
+            var chartCar = $("#chartContainerCar").CanvasJSChart();
 
-            function GetData(type, start, end) {
+            function GetData(type, start, end, typeOrder) {
+                var url ="";
+                if (typeOrder == 1) {
+                    url = "/Dashboard/GetTourChartData"
+                }
+                else {
+                    url = "/Dashboard/GetCarChartData"
+                }
                 $("#preloader2").show();
                 $.ajax({
                     type: "GET",
-                    url: "/Dashboard/GetTourChartData",
+                    url: url,
                     data: {
                         typeId: type,
                         startDay: start,
                         endDay: end
                     },
                     success: function (obj) {
-                        if (obj === "") {
-                            $("#chartContainer").hide()
-                            $("#notFound").show()
-                        } else {
-                            $("#chartContainer").show()
-                            $("#notFound").hide()
-                            var item = JSON.parse(obj);
-                            chart.options.title.text = item.title
-                            chart.options.subtitles[0].text = item.date
-                            chart.options.data[0].dataPoints = item.data
-                            console.log(item.date)
-                            chart.render()
+                        console.log(item)
+                        if (typeOrder == 1) {
+                            if (obj === "") {
+                                $("#chartContainer").hide()
+                                $("#notFound").show()
+                            } else {
+                                var item = JSON.parse(obj);
+                                $("#chartContainer").show()
+                                $("#notFound").hide()
+                                chart.options.title.text = item.title
+                                chart.options.subtitles[0].text = item.date
+                                chart.options.data[0].dataPoints = item.data
+                                chart.render()
+                            }
+                        }
+                        else {
+                            if (obj === "") {
+                                $("#chartContainerCar").hide()
+                                $("#notFoundCar").show()
+                            } else {
+                                var item = JSON.parse(obj);
+                                $("#chartContainerCar").show()
+                                $("#notFoundCar").hide()
+                                chartCar.options.title.text = item.title
+                                chartCar.options.subtitles[0].text = item.date
+                                chartCar.options.data[0].dataPoints = item.data
+                                chartCar.render()
+                            }
                         }
                         $("#preloader2").hide()
 
@@ -290,9 +630,13 @@
             $('#typeId').on('change', (event) => {
                 var start = $('#startDay').val();
                 var end = $('#endDay').val();
-                GetData(event.target.value, start, end)
+                GetData(event.target.value, start, end, 1)
             });
-
+            $('#typeIdCar').on('change', (event) => {
+                var start = $('#startDayCar').val();
+                var end = $('#endDayCar').val();
+                GetData(event.target.value, start, end, 2)
+            });
             $('#daterange').on('apply.daterangepicker', function (ev, picker) {
                 $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
                 $('#startDay').val(picker.startDate.format('DD/MM/YYYY'))
@@ -300,24 +644,19 @@
                 var start = $('#startDay').val();
                 var end = $('#endDay').val();
                 var type = $('#typeId').val();
-                GetData(type, start, end)
+                GetData(type, start, end, 1)
+            });
+            $('#daterangeCar').on('apply.daterangepicker', function (ev, picker) {
+                $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+                $('#startDayCar').val(picker.startDate.format('DD/MM/YYYY'))
+                $('#endDayCar').val(picker.endDate.format('DD/MM/YYYY'))
+                var start = $('#startDayCar').val();
+                var end = $('#endDayCar').val();
+                var type = $('#typeIdCar').val();
+                GetData(type, start, end, 2)
             });
 
-            //const selectElement = document.getElementById("typeId");
-            //selectElement.addEventListener('change', (event) => {
-            //    var start = $('#startDay').val();
-            //    var end = $('#endDay').val();
-            //    //if (event.target.value == "1") {
-            //    //    chart.options.title.text = "Revenue by tour package category share";
-            //    //}
-            //    //if (event.target.value == "2") {
-            //    //    chart.options.title.text = "Revenue by tour package duration share";
-            //    //}
-            //    //if (event.target.value == "0") {
-            //    //    chart.options.title.text = "Revenue by season share";
-            //    //}
-            //    GetData(event.target.value, start, end)
-            //});
+
 
         });
 
@@ -326,19 +665,5 @@
 
 
 
-    @*<script>
-            $('.circle-orders').circleProgress({
-                value: 0.55,
-                size: 120,
-                startAngle: -Math.PI / 2,
-                thickness: 10,
-                lineCap: 'round',
-                emptyFill: '#e4e8f0',
-                fill: {
-                    gradient: ['#0087a4', '#08a6c3']
-                }
-            }).on('circle-animation-progress', function (event, progress) {
-                $(this).find('.percent-orders').html(Math.round(55 * progress) + '<i>%%</i>');
-            });
-        </script>*@
+    
 }

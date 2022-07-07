@@ -194,6 +194,7 @@
     <Compile Include="Controllers\ClientHotelController.cs" />
     <Compile Include="Controllers\ClientTourController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\FlightsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="Models\TourSchedule.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\DateTimeUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
