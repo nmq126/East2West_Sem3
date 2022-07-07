@@ -57,6 +57,11 @@ namespace East2West.Controllers
                 tours = tours.Where(t => t.DestinationId == destinationId);
             }
 
+            if (!String.IsNullOrEmpty(categoryId))
+            {
+                tours = tours.Where(t => t.TourCategoryId == categoryId);
+            }
+
             switch (status)
             {
                 case 2:

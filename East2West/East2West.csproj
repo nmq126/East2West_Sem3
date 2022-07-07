@@ -194,6 +194,7 @@
     <Compile Include="Controllers\ClientHotelController.cs" />
     <Compile Include="Controllers\ClientTourController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\FlightsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
@@ -209,33 +210,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202206290409178_init-table.cs" />
-    <Compile Include="Migrations\202206290409178_init-table.Designer.cs">
-      <DependentUpon>202206290409178_init-table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206290819019_update_database.cs" />
-    <Compile Include="Migrations\202206290819019_update_database.Designer.cs">
-      <DependentUpon>202206290819019_update_database.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206291359102_update_database1.cs" />
-    <Compile Include="Migrations\202206291359102_update_database1.Designer.cs">
-      <DependentUpon>202206291359102_update_database1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206291417517_update_database2.cs" />
-    <Compile Include="Migrations\202206291417517_update_database2.Designer.cs">
-      <DependentUpon>202206291417517_update_database2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206301338533_update-model1.cs" />
-    <Compile Include="Migrations\202206301338533_update-model1.Designer.cs">
-      <DependentUpon>202206301338533_update-model1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207011014482_fix_car.cs" />
-    <Compile Include="Migrations\202207011014482_fix_car.Designer.cs">
-      <DependentUpon>202207011014482_fix_car.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207030951279_update_driver.cs" />
-    <Compile Include="Migrations\202207030951279_update_driver.Designer.cs">
-      <DependentUpon>202207030951279_update_driver.cs</DependentUpon>
+    <Compile Include="Migrations\202207071129418_initDb.cs" />
+    <Compile Include="Migrations\202207071129418_initDb.Designer.cs">
+      <DependentUpon>202207071129418_initDb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppRole.cs" />
@@ -261,6 +238,7 @@
     <Compile Include="Models\TourSchedule.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\DateTimeUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
@@ -960,6 +938,7 @@
     <Content Include="Content\img\avatar3.jpg" />
     <Content Include="Content\img\bg_login.jpg" />
     <Content Include="Content\img\laptop.png" />
+    <Content Include="Content\img\logoMini.png" />
     <Content Include="Content\img\logo_sticky.png" />
     <Content Include="Content\img\post-thumb-2.jpg" />
     <Content Include="Content\PagedList.css" />
@@ -1032,15 +1011,14 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
-    <None Include="packages.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <None Include="Scripts\jquery-3.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\jquery.rateit.js" />
     <Content Include="Scripts\jquery.rateit.min.js" />
+    <Content Include="Scripts\jquery.rateit.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -1118,11 +1096,6 @@
     <Content Include="Views\Orders\GetCar.cshtml" />
     <Content Include="tmp1954.tmp" />
     <Content Include="Views\ClientFlight\GetListFlight.cshtml" />
-    <Content Include="Views\ClientFlight\Details.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
-    <Content Include="Scripts\jquery.rateit.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1132,26 +1105,14 @@
     <Folder Include="Views\TourSchedules\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202206290409178_init-table.resx">
-      <DependentUpon>202206290409178_init-table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206290819019_update_database.resx">
-      <DependentUpon>202206290819019_update_database.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206291359102_update_database1.resx">
-      <DependentUpon>202206291359102_update_database1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206291417517_update_database2.resx">
-      <DependentUpon>202206291417517_update_database2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206301338533_update-model1.resx">
-      <DependentUpon>202206301338533_update-model1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207011014482_fix_car.resx">
-      <DependentUpon>202207011014482_fix_car.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207030951279_update_driver.resx">
-      <DependentUpon>202207030951279_update_driver.cs</DependentUpon>
+    <None Include="packages.config" />
+    <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202207071129418_initDb.resx">
+      <DependentUpon>202207071129418_initDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

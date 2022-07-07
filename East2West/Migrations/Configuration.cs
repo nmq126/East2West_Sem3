@@ -81,7 +81,7 @@
                 new TourCategory() { Id = "TOURC_7", Name = "Skyline tours" }
                 );
 
-            //Tour
+           // Tour
             context.Tours.AddOrUpdate(x => x.Id,
                 new Tour() { Id = "TOUR_1", TourCategoryId = "TOURC_8", DepartureId = "LOCAL_1", DestinationId = "LOCAL_3", Name = "NAGARKOT SUNRISE TOUR", Description = "Coming to Nepal, it is impossible to ignore this ideal place to relax, the village of Nagarkot in Nepal is nestled next to the Himalayan mountainside like a miniature paradise in the majestic scenery of nature.", Detail = "Enjoy the best view of the Kathmandu valley on this hike. Discover rural traditions and exceptional hiking routes and admire the striking mountains and rural landscapes.", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1656760637/e2w/nepal-pokhara-phewa-tal-lake-wallpaper-preview_n8kxny.jpg,https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655638385/e2w/download_dfibfd.jpg , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655741011/e2w/c25c92fc-Nagarkot-Sunrise-Tour_ddhk9b.webp , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655741058/e2w/28c46a14-Nagarkot-Sunrise-Tour_rxpiey.webp , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655741084/e2w/357b7a05-Nagarkot-sunrise-5_slmcls.webp", Duration = 3, Rating = 5, Policy = "BOOKING ON BEHALF OF OTHERS: If you make a booking for anyone other than yourself, you are considered the designated contact person for those other travelers. You represent and warrant that you are legally authorized to act on their behalf; that you have obtained all required consents; and that you will inform them of these Terms and warrant that they accept and agree to them. You are also responsible for making all payments due for your booking; notifying us if any changes or cancellations are required; and keeping the other travelers informed of all information relevant to your trip. REGISTRATION: After you complete your booking, we'll send you an email containing a link to a secure traveler registration form. For most packages, you must complete this form within 5 days of booking. Let us know if you are unable to complete it within this timeframe, or your booking may be subject to cancellation. CONFIRMATION: After we receive your booking and deposit, we will confirm availability of all components and send you a confirmation email within 1–2 business days. If any option or component you selected is not available, we will alert you and give you the option to modify your booking or to cancel and receive a refund of your deposit.", SummarySchedule = "Ha Noi - Nepal - Nagarkot ", Status = 1, CreatedAt = Convert.ToDateTime("2020-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
                 new Tour() { Id = "TOUR_2", TourCategoryId = "TOURC_1", DepartureId = "LOCAL_1", DestinationId = "LOCAL_4", Name = "SERIES | HA NOI - DA NANG", Description = "SERIES | HANOI - DA NANG - BA NA - HOI AN", Detail = "Coming to Da Nang, visitors not only have the opportunity to visit the beautiful scenery of the sea but also have the opportunity to enjoy unforgettable special dishes, visit the charming natural scenery of the river and enjoy many famous specialties here. this. In addition, in the travel itinerary with Hanoitourist's Da Nang - Hoi An tour, you can also feel the peaceful beauty of Hoi An ancient town and the culinary beauty here.", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1656760444/e2w/vietnam-h%E1%BB%99i-an-reflections-asia_hikq00.jpg , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655794879/e2w/63451_mwh9h0.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655794883/e2w/63453_nq69ji.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655794886/e2w/63455_vsf0fm.png", Duration = 4, Rating = 5, Policy = "<p>Price includes:</p><p>Air tickets and airport fees Hanoi - Da Nang - Hanoi (Vietnam Airlines ticket includes 20kg of checked baggage).</p><p>Modern air-conditioned cars exclusively for the group (with hand sanitizer on board)</p><p>Sekong 3 *** hotel on the seafront (early check-in time from 14h00; check-out at 12h00): 02 adults/room - odd group of guests use room 3, children sleep with parents without standard private room )</p><p>Meals according to the program 120,000 VND / person / main meal * 06 main meals. Breakfast buffet at the hotel.</p><p>You can take care of the entrance tickets at the tourist attractions in the program.</p><p>You can buy travel insurance throughout the route with a maximum compensation of 120,000,000 VND/person.</p><p>Guests are served cold towels, mineral water in the car, the norm is 1 bottle / person / day, the limit is 1 mask / day / person.</p><p>Tour guide picks you up at the airport in Hanoi</p><p>Tour guide in Da Nang, enthusiastic experience, explain the route, serve the group according to the program.</p><p>Price does not include:</p><p>Cable car tickets &amp; games at Ba Na + Eating Ba Na resort: 850,000 VND/pax (fares may change at the time of using the service)</p><p>If going to Cu Lao Cham: 600,000 VND/pax</p><p>If going to Vinpearl Nam Hoi An: 700,000 VND/pax.</p><p>Single room sleep, drinks. Personal expenses other than the program.</p><p>Tipping for drivers and guides.</p><p>SUPPLY FOR SINGLE ROOM: 1,100,000 VND</p><p>Cancellation policy:</p><p>Note:</p><p><br></p><p>The order of attractions can be changed to match the actual program of the group, but still ensure the full range of attractions.</p><p>Flight time may change according to flight time of Vietnam Airlines.</p>", SummarySchedule = "HANOI - DA NANG - BA NA - HUE - HOI AN - HANOI", Status = 1, CreatedAt = Convert.ToDateTime("2020-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
@@ -561,7 +561,7 @@
                  new CarBrand() { Id = "CARBR_6", Name = "Bentley" },
                  new CarBrand() { Id = "CARBR_7", Name = "Rolls-Royce" }
                  );
-            //Mẫu xe
+           // Mẫu xe
             context.CarModels.AddOrUpdate(x => x.Id,
                 new CarModel() { Id = "CARMD_1", CarBrandId = "CARBR_1", Name = "Honda City" },
                 new CarModel() { Id = "CARMD_2", CarBrandId = "CARBR_2", Name = "Camry 2.0" },
@@ -579,7 +579,7 @@
                 new CarType() { Id = "CARTP_4", Name = "Minivan" },
                 new CarType() { Id = "CARTP_5", Name = "Sedan" },
                 new CarType() { Id = "CARTP_6", Name = "Hatchback" },
-                new CarType() { Id = "CARTP_7", Name = "roadster" }
+                new CarType() { Id = "CARTP_7", Name = "Roadster" }
                 );
             //Xe
             context.Cars.AddOrUpdate(x => x.Id,
@@ -599,7 +599,8 @@
                     CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"),
                     Description = "The Honda City is a small City hatchback with a slightly unique design, which Honda calls the 'Tall Boy' style.",
                     Rating = 4.5
-                }, new Car()
+                },
+                new Car()
                 {
                     Id = "CAR_2",
                     CarModelId = "CARMD_2",
@@ -644,11 +645,11 @@
                      HasAirConditioner = true,
                      SeatCapacity = 5,
                      PricePerDay = 100,
-                     HasDriver = true,
+                     HasDriver = false,
                      Status = 1,
                      CreatedAt = Convert.ToDateTime("2021-08-09T23:49:58+02:00"),
                      Description = "On the 2016 version, Cerato/K3 has been redesigned quite a lot at the front and rear of the car to feel more solid and impressive. The front end has been completely redesigned with a new grille, new headlights and a new front bumper. The grille on the 2016 Cerato has a more square shape, the headlights are also designed to fit better with the grille. The 17 dual 5 - spoke rims are similar to those on the current K3.",
-                     Rating = 4.5
+                     Rating = 4
                  }
                 );
 
@@ -1229,6 +1230,7 @@ new Hotel()
                 var tourDetailChosen = tourDetail.OrderBy(s => Guid.NewGuid()).First();
                 var unitPrice = tourDetailChosen.Price * (1 - tourDetailChosen.Discount / 100);
                 int randomQuantity = gen.Next(1, 10);
+                int random = gen.Next(1, 11);
                 var totalPrice = unitPrice * randomQuantity;
                 context.Orders.AddOrUpdate(x => x.Id,
                     new Order()
@@ -1245,7 +1247,7 @@ new Hotel()
                     new OrderTour()
                     {
                         OrderId = "ORD_" + i,
-                        TourDetailId = tourDetailChosen.Id,
+                        TourDetailId = "TOURDT_" + random,
                         UnitPrice = unitPrice,
                         Quantity = randomQuantity
                     }
