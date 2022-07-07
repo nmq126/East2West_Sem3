@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\East2West\\Content",
+    "\\East2West\\Content\\img",
+    "\\East2West\\Migrations",
+    "\\East2West\\Views",
+    "\\East2West\\Views\\Shared",
+    "\\East2West\\Views\\User"
   ],
   "SelectedNode": "\\East2West.sln",
   "PreviewInSolutionExplorer": false
