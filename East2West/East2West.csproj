@@ -1117,6 +1117,7 @@
     <Content Include="Views\Orders\GetCar.cshtml" />
     <Content Include="tmp1954.tmp" />
     <Content Include="Views\ClientFlight\GetListFlight.cshtml" />
+    <Content Include="Views\ClientFlight\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
