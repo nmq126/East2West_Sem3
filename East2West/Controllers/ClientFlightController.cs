@@ -19,7 +19,7 @@ namespace East2West.Controllers
         public ActionResult GetListFlight(string sortType, int? page, string destinationId, string departureId, int? status, string keyword, string price_range, DateTime? from_date, DateTime? to_date)
         {
             int pageNumber = (page ?? 1);
-            int pageSize = 10;
+            int pageSize = 5;
             ViewBag.SortType = sortType;
             ViewBag.Status = status;
             ViewBag.DepartureId = departureId;

@@ -18,18 +18,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
-                        <h1>@ViewBag.LocationDeparture - @ViewBag.LocationDestination</h1>
-                        <span>@Model.Id</span>
-                        <span class="rating">
-                            @if (Model.Status == 1)
-                            {
-                                <i class="icon-smile voted"></i>
-                            }
-                            else
-                            {
-                                <i class="icon-smile voted" style="color: gray;"></i>
-                            }
-                        </span>
+                        <h1>@ViewBag.LocationDeparture - @ViewBag.LocationDestination</h1>                        
                     </div>
                     <div class="col-md-4">
                         <div id="price_single_main">
@@ -50,7 +39,7 @@
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="/ClientFlight/GetLishFight">Flight</a>
+                    <a href="/ClientFlight/GetListFight">Flight</a>
                 </li>
                 <li>Detail</li>
             </ul>
@@ -70,11 +59,7 @@
                     <ul>
                         <li><i class="icon_set_2_icon-116"></i>Plasma TV</li>
                         <li><i class="icon_set_1_icon-86"></i>Free Wifi</li>
-                        <li><i class="icon_set_2_icon-110"></i>Poll</li>
-                        <li><i class="icon_set_1_icon-59"></i>Breakfast</li>
-                        <li><i class="icon_set_1_icon-22"></i>Pet allowed</li>
-                        <li><i class="icon_set_1_icon-13"></i>Accessibiliy</li>
-                        <li><i class="icon_set_1_icon-27"></i>Parking</li>
+                        <li><i class="icon_set_1_icon-59"></i>Meal</li>
                     </ul>
                 </div>
 
@@ -94,29 +79,18 @@
                     }
                     else
                     {
-                        List<String> imgList = Model.Thumbnail.Split(',').ToList<String>();
+                        var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
+                        if (Model.Thumbnail != null)
+                        {
+                            img = Model.Thumbnail.Split(',').ToList<String>().First();
+                        }
                         <div id="Img_carousel" class="slider-pro">
                             <div class="sp-slides">
-                                @foreach (var item in imgList)
-                                {
-                                    if (item == "")
-                                    {
-                                        break;
-                                    }
-                                    <div class="sp-slide">
-                                        <img alt="Image" class="sp-image" src="@item" data-src="@item" data-small="@item" data-medium="@item" data-large="@item" data-retina="@item">
-                                    </div>
-                                }
+                                <div class="sp-slide">
+                                    <img alt="Image" class="sp-image" src="@img" data-src="@img" data-small="@img" data-medium="@img" data-large="@img" data-retina="@img">
+                                </div>
                             </div>
                             <div class="sp-thumbnails">
-                                @foreach (var item in imgList)
-                                {
-                                    if (item == "")
-                                    {
-                                        break;
-                                    }
-                                    <img alt="Image" class="sp-thumbnail" src="@item">
-                                }
                             </div>
                         </div>
                     }
@@ -126,13 +100,30 @@
 
                 <div class="row">
                     <div class="col-lg-3">
-                        <h3>Description</h3>
+                        <h3>Detail:</h3>
                     </div>
                     <div class="col-lg-9">
                         @Html.Raw(HttpUtility.HtmlDecode(Model.Detail))
                     </div>
                 </div>
                 <hr>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h3>Departure At:</h3>
+                    </div>
+                    <div class="col-lg-9">
+                        @Html.Raw(Model.DepartureAt)
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h3>Return At:</h3>
+                    </div>
+                    <div class="col-lg-9">
+                        @Html.Raw(Model.ReturnAt)
+                    </div>
+                </div>
                 <hr>
                 <div class="row">
                     <div class="col-lg-3">

@@ -210,10 +210,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207071129418_initDb.cs" />
-    <Compile Include="Migrations\202207071129418_initDb.Designer.cs">
-      <DependentUpon>202207071129418_initDb.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppRole.cs" />
     <Compile Include="Models\Car.cs" />
@@ -1096,6 +1092,7 @@
     <Content Include="Views\Orders\GetCar.cshtml" />
     <Content Include="tmp1954.tmp" />
     <Content Include="Views\ClientFlight\GetListFlight.cshtml" />
+    <Content Include="Views\ClientFlight\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1109,11 +1106,6 @@
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202207071129418_initDb.resx">
-      <DependentUpon>202207071129418_initDb.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
