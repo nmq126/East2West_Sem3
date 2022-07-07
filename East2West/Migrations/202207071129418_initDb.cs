@@ -3,7 +3,7 @@ namespace East2West.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class inittable : DbMigration
+    public partial class initDb : DbMigration
     {
         public override void Up()
         {
@@ -39,8 +39,11 @@ namespace East2West.Migrations
                         Thumbnail = c.String(nullable: false, storeType: "ntext"),
                         LisencePlate = c.String(nullable: false, maxLength: 50),
                         HasAirConditioner = c.Boolean(nullable: false),
+                        HasDriver = c.Boolean(nullable: false),
                         SeatCapacity = c.Int(nullable: false),
                         PricePerDay = c.Double(nullable: false),
+                        Description = c.String(nullable: false, storeType: "ntext"),
+                        Rating = c.Double(nullable: false),
                         Status = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(),
@@ -102,7 +105,7 @@ namespace East2West.Migrations
                         DepartureAt = c.DateTime(nullable: false),
                         Duration = c.String(nullable: false, maxLength: 50),
                         Price = c.Double(nullable: false),
-                        ReturnAt = c.DateTime(nullable: false),
+                        ReturnAt = c.DateTime(),
                         Detail = c.String(nullable: false, storeType: "ntext"),
                         Status = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
@@ -185,6 +188,7 @@ namespace East2West.Migrations
                         AvailableSeat = c.Int(nullable: false),
                         Price = c.Double(nullable: false),
                         Discount = c.Int(nullable: false),
+                        Status = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(),
                         DeletedAt = c.DateTime(),
@@ -231,7 +235,6 @@ namespace East2West.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 50),
                         UserId = c.String(nullable: false, maxLength: 128),
-                        RefundId = c.String(maxLength: 50),
                         TotalPrice = c.Double(nullable: false),
                         Type = c.Int(nullable: false),
                         Status = c.Int(nullable: false),
@@ -298,7 +301,7 @@ namespace East2West.Migrations
                         Password = c.String(),
                         Address = c.String(nullable: false, storeType: "ntext"),
                         Thumbnail = c.String(nullable: false, storeType: "ntext"),
-                        Description = c.String(nullable: false, storeType: "ntext"),
+                        Description = c.String(storeType: "ntext"),
                         Status = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(),

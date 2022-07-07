@@ -40,7 +40,7 @@ namespace East2West.Models
         [Required]
         public Double Price { get; set; }
 
-        public DateTime ReturnAt { get; set; }
+        public DateTime? ReturnAt { get; set; }
 
         [Column(TypeName = "ntext")]
         [Required]

@@ -17,47 +17,52 @@ namespace East2West.Controllers
         private DBContext db = new DBContext();
 
         // GET: Flights
-        public ActionResult Index(string id, string sortType, int? page, string locationDepartureName, string locationDestinationName, int? status)
+        public ActionResult Index(string id, string sortType, int? page, string keyword,string departureId,string destinationId,  int? status)
         {
             int pageNumber = (page ?? 1);
-            int pageSize = 10;
+            int pageSize = 5;
+            ViewBag.LocationList = from l in db.Locations select l;
             ViewBag.Id = id;
             ViewBag.SortType = sortType;
             ViewBag.Status = status;
-            ViewBag.LocationDepartureName = locationDepartureName;
-            ViewBag.LocationDestinationName = locationDestinationName;
+            ViewBag.Keywork = keyword;
+            ViewBag.DepartureId = departureId;
+            ViewBag.DestinationId = destinationId;
+            var flights = db.Flights.Include(f => f.LocationDeparture).Include(f => f.LocationDestination);
 
-            var flights = db.Flights.Include(f => f.LocationDeparture).Include(f => f.LocationDestination).ToList();
-
-            flights = (status > 0) ? flights.Where(M => M.Status == status).ToList() : flights.ToList();
+            flights = (status > 0) ? flights.Where(M => M.Status == status) : flights;
             if (!String.IsNullOrEmpty(id))
             {
-                flights = flights.Where(t => t.Id.Contains(id)).ToList();
+                flights = flights.Where(t => t.Id == id);
             }
-            if (!String.IsNullOrEmpty(locationDepartureName))
+            if (!String.IsNullOrEmpty(keyword))
             {
-                flights = flights.Where(t => t.LocationDeparture.Name.Contains(locationDepartureName)).ToList();
+                flights = flights.Where(t => t.LocationDeparture.Name.Contains(keyword) ||  t.LocationDestination.Name.Contains(keyword) || t.Detail.Contains(keyword));
             }
-            if (!String.IsNullOrEmpty(locationDestinationName))
+            if (!String.IsNullOrEmpty(departureId))
             {
-                flights = flights.Where(t => t.LocationDestination.Name.Contains(locationDestinationName)).ToList();
+                flights = flights.Where(t => t.DepartureId == departureId);
+            }
+            if (!String.IsNullOrEmpty(destinationId))
+            {
+                flights = flights.Where(t => t.DestinationId == destinationId);
             }
             switch (sortType)
             {
                 case "createdAt_asc":
-                    flights = flights.OrderBy(s => s.CreatedAt).ToList();
+                    flights = flights.OrderBy(s => s.CreatedAt);
                     break;
                 case "createdAt_desc":
-                    flights = flights.OrderByDescending(s => s.CreatedAt).ToList();
+                    flights = flights.OrderByDescending(s => s.CreatedAt);
                     break;
                 case "duration_asc":
-                    flights = flights.OrderBy(t => t.Duration).ToList();
+                    flights = flights.OrderBy(t => t.Duration);
                     break;
                 case "duration_desc":
-                    flights = flights.OrderByDescending(t => t.Duration).ToList();
+                    flights = flights.OrderByDescending(t => t.Duration);
                     break;
                 default:
-                    flights = flights.OrderBy(s => s.CreatedAt).ToList();
+                    flights = flights.OrderBy(s => s.CreatedAt);
                     break;
             }
 
