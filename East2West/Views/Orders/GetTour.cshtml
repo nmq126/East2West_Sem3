@@ -128,8 +128,8 @@
                             <div class="select mb-3">
                                 <select name="unit_price_range" id="unit_price_range" class="custom-select form-control">
                                     <option value="all" @(ViewBag.UnitPriceRange == "all" ? "selected" : "")>All</option>
-                                    <option value="lte200" @(ViewBag.UnitPriceRange == "lte200" ? "selected" : "")>Ticket<= $200</option>
-                                    <option value="200to500" @(ViewBag.UnitPriceRange == "200to500" ? "selected" : "")>$200 < Ticket < $500</option>
+                                    <option value="lt200" @(ViewBag.UnitPriceRange == "lt200" ? "selected" : "")>Ticket < $200</option>
+                                    <option value="200to500" @(ViewBag.UnitPriceRange == "200to500" ? "selected" : "")>$200 <= Ticket <= $500</option>
                                     <option value="gt500" @(ViewBag.UnitPriceRange == "gt500" ? "selected" : "")>Ticket > $500</option>
 
                                 </select>

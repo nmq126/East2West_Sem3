@@ -70,15 +70,30 @@
                             @Html.ValidationMessageFor(model => model.SeatCapacity, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-6">
+                    <div class="form-group" style="display:flex">
+                        <div class="col-md-3">
                             <label class="control-label">Has Air Conditioner</label>
                             <div class="styled-checkbox">
                                 <input type="checkbox" name="HasAirConditioner" id="HasAirConditioner" value="true">
                                 <label for="HasAirConditioner">Yes</label>
                             </div>
                             @Html.ValidationMessageFor(model => model.HasAirConditioner, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label">Has Driver</label>
+                            <div class="styled-checkbox">
+                                <input type="checkbox" name="HasDriver" id="HasDriver" value="true">
+                                <label for="HasDriver">Yes</label>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.HasDriver, "", new { @class = "text-danger" })
 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Description</label>
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = 3 })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <ul class="pager wizard text-right">
@@ -113,10 +128,9 @@
                     var imgTag = document.getElementById('upload_button_holder');
                     imgTag.innerHTML +=
                         `<div class="p-2" style="position: relative">
-                                                                            <button id="button_${i}" class="cls_btn" data-token="${result.info.delete_token}" data-url="${result.info.secure_url}" type="button" style="position: absolute; right: 0px"><span>x</span></button>
-                                                                            <img style="height: 150px" src="${result.info.secure_url}" alt="" class="img-thumbnail mr-2">
-                                                                        </div>`;
-
+                                                                                            <button id="button_${i}" class="cls_btn" data-token="${result.info.delete_token}" data-url="${result.info.secure_url}" type="button" style="position: absolute; right: 0px"><span>x</span></button>
+                                                                                            <img style="height: 150px" src="${result.info.secure_url}" alt="" class="img-thumbnail mr-2">
+                                                                                        </div>`;
                     var doButtonPress = function (id, delete_token, secure_url) {
                         deleteByToken('nmq126', delete_token);//xoa anh tren cloudinary
                         $("#" + id).parent().remove();//xoa div
@@ -130,18 +144,15 @@
                             document.forms['car-create']['Thumbnail'].value = "";
                         }
                     }
-
                     $('.cls_btn').click(function () {
                         doButtonPress(this.id, this.getAttribute('data-token'), this.getAttribute('data-url'));
                     });
                     i += 1;
                 }
             })
-
             document.getElementById("upload_widget").addEventListener("click", function () {
                 myWidget.open();
             }, false);
-
             function deleteByToken(cloud_name, token) {
                 $.ajax({
                     url: "https://api.cloudinary.com/v1_1/" + cloud_name + "/delete_by_token",
@@ -159,6 +170,10 @@
                 })
             }
         </script>
+        <script src="https://cdn.ckeditor.com/4.17.1/standard-all/ckeditor.js"></script>
+        <script>
+
+            CKEDITOR.replace('Description');
+        </script>
     }
 </div>
-

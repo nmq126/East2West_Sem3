@@ -147,6 +147,22 @@ namespace East2West.Controllers
                     break;
             }
 
+            switch (unit_price_range)
+            {
+                case "lt200":
+                    orders = orders.Where(o => o.OrderTours.FirstOrDefault().UnitPrice < 200);
+                    break;
+                case "200to500":
+                    orders = orders.Where(o => o.OrderTours.FirstOrDefault().UnitPrice >= 200 && o.OrderTours.FirstOrDefault().UnitPrice <= 500);
+                    break;
+                case "gt5":
+                    orders = orders.Where(o => o.OrderTours.FirstOrDefault().UnitPrice > 500);
+                    break;
+                case "all":
+                default:
+                    break;
+            }
+
             switch (sortType)
             {
                 case "createdAt_asc":
