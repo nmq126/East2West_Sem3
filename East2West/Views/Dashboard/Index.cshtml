@@ -375,11 +375,24 @@
                                 {
                                     <li class="list-group-item" style="padding:10px">
                                         <div class="media">
+                                            <div class="media-left align-self-center ">
+                                                @if (item.Type == 2)
+                                                {
+                                                    <i style="font-size: 2em;" class="ti ti-car"></i>
+
+                                                }
+                                                else
+                                                {
+                                                    <i style="font-size: 2em;" class="ti ti-package"></i>
+                                                }
+                                                
+
+                                            </div>
                                             <div class="media-body align-self-center">
                                                 <div class="username">
                                                     <span style="color:black">#@item.Id</span>
                                                 </div>
-                                                
+
                                                 <div class="meta">
                                                     <span class="mr-3">@(DateTimeUtil.GetPrettyDate(item.CreatedAt))</span>
                                                 </div>
@@ -389,7 +402,7 @@
                                                     <span>$@item.TotalPrice</span>
                                                 </div>
                                                 <div class="status">
-                                                    @switch (item.Type)
+                                                    @switch (item.Status)
                                                     {
                                                         case 1:
                                                             <span style="color:forestgreen" class="">Paid</span>
@@ -398,13 +411,13 @@
                                                             <span style="color:deepskyblue">Unpaid</span>
                                                             break;
                                                         case 0:
-                                                            <span style="color: grey"class="">Cancel</span>
+                                                            <span style="color: grey" class="">Cancel</span>
                                                             break;
                                                         case -2:
-                                                            <span style="color:yellow"class="">Pending refund</span>
+                                                            <span style="color:yellow" class="">Pending refund</span>
                                                             break;
                                                         case 2:
-                                                            <span style="color:red"class="">Refunded</span>
+                                                            <span style="color:red" class="">Refunded</span>
                                                             break;
                                                         default:
                                                             break;

@@ -7,81 +7,47 @@ namespace East2West.Util
 {
     public class DateTimeUtil
     {
-        public static string GetPrettyDate(DateTime d)
+        const int SECOND = 1;
+        const int MINUTE = 60 * SECOND;
+        const int HOUR = 60 * MINUTE;
+        const int DAY = 24 * HOUR;
+        const int MONTH = 30 * DAY;
+        public static string GetPrettyDate(DateTime date)
         {
-            // 1.
-            // Get time span elapsed since the date.
-            TimeSpan s = DateTime.Now.Subtract(d);
+            var ts = new TimeSpan(DateTime.UtcNow.Ticks - date.Ticks);
+            double delta = Math.Abs(ts.TotalSeconds);
 
-            // 2.
-            // Get total number of days elapsed.
-            int dayDiff = (int)s.TotalDays;
+            if (delta < 1 * MINUTE)
+                return ts.Seconds == 1 ? "one second ago" : ts.Seconds + " seconds ago";
 
-            // 3.
-            // Get total number of seconds elapsed.
-            int secDiff = (int)s.TotalSeconds;
+            if (delta < 2 * MINUTE)
+                return "a minute ago";
 
-            // 4.
-            // Don't allow out of range values.
-            if (dayDiff < 0 || dayDiff >= 31)
-            {
-                return null;
-            }
+            if (delta < 45 * MINUTE)
+                return ts.Minutes + " minutes ago";
 
-            // 5.
-            // Handle same-day times.
-            if (dayDiff == 0)
-            {
-                // A.
-                // Less than one minute ago.
-                if (secDiff < 60)
-                {
-                    return "just now";
-                }
-                // B.
-                // Less than 2 minutes ago.
-                if (secDiff < 120)
-                {
-                    return "1 minute ago";
-                }
-                // C.
-                // Less than one hour ago.
-                if (secDiff < 3600)
-                {
-                    return string.Format("{0} minutes ago",
-                        Math.Floor((double)secDiff / 60));
-                }
-                // D.
-                // Less than 2 hours ago.
-                if (secDiff < 7200)
-                {
-                    return "1 hour ago";
-                }
-                // E.
-                // Less than one day ago.
-                if (secDiff < 86400)
-                {
-                    return string.Format("{0} hours ago",
-                        Math.Floor((double)secDiff / 3600));
-                }
-            }
-            // 6.
-            // Handle previous days.
-            if (dayDiff == 1)
-            {
+            if (delta < 90 * MINUTE)
+                return "an hour ago";
+
+            if (delta < 24 * HOUR)
+                return ts.Hours + " hours ago";
+
+            if (delta < 48 * HOUR)
                 return "yesterday";
-            }
-            if (dayDiff < 7)
+
+            if (delta < 30 * DAY)
+                return ts.Days + " days ago";
+
+            if (delta < 12 * MONTH)
             {
-                return string.Format("{0} days ago",
-                    dayDiff);
+                int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
+                return months <= 1 ? "one month ago" : months + " months ago";
             }
-            if (dayDiff < 31)
+            else
             {
-                return string.Format("{0} weeks ago",
-                    Math.Ceiling((double)dayDiff / 7));
+                int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
+                return years <= 1 ? "one year ago" : years + " years ago";
             }
-            return null;
         }
     }
 }
