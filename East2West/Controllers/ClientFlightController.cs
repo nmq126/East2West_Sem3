@@ -19,7 +19,7 @@ namespace East2West.Controllers
         public ActionResult GetListFlight(string sortType, int? page, string destinationId, string departureId, int? status, string keyword, string price_range, DateTime? from_date, DateTime? to_date)
         {
             int pageNumber = (page ?? 1);
-            int pageSize = 10;
+            int pageSize = 5;
             ViewBag.SortType = sortType;
             ViewBag.Status = status;
             ViewBag.DepartureId = departureId;
@@ -29,32 +29,32 @@ namespace East2West.Controllers
             ViewBag.FromDate = from_date;
             ViewBag.ToDate = to_date;
 
-            var flights = db.Flights.ToList();
+            var flights = from f in db.Flights select f;
             var locations = db.Locations.ToList();
             ViewBag.LocationList = db.Locations.ToList();
 
 
-            flights = (status > 0) ? flights.Where(M => M.Status == status).ToList() : flights.ToList();
+            flights = (status > 0) ? flights.Where(M => M.Status == status) : flights;
 
             if (!String.IsNullOrEmpty(destinationId))
             {
-                flights = flights.Where(f => f.DestinationId == destinationId).ToList();
+                flights = flights.Where(f => f.DestinationId == destinationId);
             }
             if (!String.IsNullOrEmpty(departureId))
             {
-                flights = flights.Where(f => f.DepartureId == departureId).ToList();
+                flights = flights.Where(f => f.DepartureId == departureId);
             }
             if (!String.IsNullOrEmpty(keyword))
             {
-                flights = flights.Where(f => f.LocationDestination.Name.ToLower().Contains(keyword.ToLower()) || f.LocationDeparture.Name.ToLower().Contains(keyword.ToLower())).ToList();
+                flights = flights.Where(f => f.LocationDestination.Name.ToLower().Contains(keyword.ToLower()) || f.LocationDeparture.Name.ToLower().Contains(keyword.ToLower()));
             }
             if (from_date != null)
             {
-                flights = flights.Where(f => f.DepartureAt >= from_date).ToList();
+                flights = flights.Where(f => f.DepartureAt >= from_date);
             }
             if (to_date != null)
             {
-                flights = flights.Where(f => f.ReturnAt <= to_date).ToList();
+                flights = flights.Where(f => f.ReturnAt <= to_date);
             }
 
             switch (price_range)
@@ -63,19 +63,19 @@ namespace East2West.Controllers
                     break;
 
                 case "lt100":
-                    flights = flights.Where(t => t.Price <= 100).ToList();
+                    flights = flights.Where(t => t.Price <= 100);
                     break;
 
                 case "100to500":
-                    flights = flights.Where(t => t.Price > 100 && t.Price <= 500).ToList();
+                    flights = flights.Where(t => t.Price > 100 && t.Price <= 500);
                     break;
 
                 case "500t1000":
-                    flights = flights.Where(t => t.Price > 500 && t.Price <= 1000).ToList();
+                    flights = flights.Where(t => t.Price > 500 && t.Price <= 1000);
                     break;
 
                 case "gt1000":
-                    flights = flights.Where(t => t.Price > 1000).ToList();
+                    flights = flights.Where(t => t.Price > 1000);
                     break;
 
                 default:
@@ -85,19 +85,19 @@ namespace East2West.Controllers
             switch (sortType)
             {
                 case "createdAt_asc":
-                    flights = flights.OrderBy(s => s.CreatedAt).ToList();
+                    flights = flights.OrderBy(s => s.CreatedAt);
                     break;
                 case "createdAt_desc":
-                    flights = flights.OrderByDescending(s => s.CreatedAt).ToList();
+                    flights = flights.OrderByDescending(s => s.CreatedAt);
                     break;
                 case "duration_asc":
-                    flights = flights.OrderBy(t => t.Duration).ToList();
+                    flights = flights.OrderBy(t => t.Duration);
                     break;
                 case "duration_desc":
-                    flights = flights.OrderByDescending(t => t.Duration).ToList();
+                    flights = flights.OrderByDescending(t => t.Duration);
                     break;
                 default:
-                    flights = flights.OrderBy(s => s.CreatedAt).ToList();
+                    flights = flights.OrderBy(s => s.CreatedAt);
                     break;
             }
 
