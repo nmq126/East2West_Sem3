@@ -19,7 +19,8 @@ namespace East2West.Controllers
 
         public ActionResult GetListHotel(string sortType, string keyword, string price_range, string locationId, string rating, int? page)
         {
-            var hotels = from h in db.Hotels select h;
+            var hotels = from h in db.Hotels where h.Status !=0 select h ;
+          
             ViewBag.LocationList = from l in db.Locations select l;
             ViewBag.SortType = sortType;
             ViewBag.Keyword = keyword;

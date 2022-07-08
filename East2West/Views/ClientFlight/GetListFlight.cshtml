@@ -65,7 +65,7 @@
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="/ClientFlight/GetListFlight">Flight</a>
+                    <a href="@Url.Action("GetListFlight", "ClientFlight")">Flight</a>
                 </li>
                 <li>List Flight</li>
             </ul>
@@ -195,7 +195,7 @@
                                         </div>
 
                                         <div class="img_list">
-                                            <a href="/ClientFlight/Details?id=@flight.Id">
+                                            <a href="@Url.Action("Details", "ClientFlight", new { id = flight.Id })">
                                                 <img src="@img" alt="Image">
                                             </a>
                                         </div>
@@ -263,7 +263,7 @@
                                                 <small>*From/Per flight</small>
 
                                                 <p>
-                                                    <a href="/ClientFlight/Details?id=@flight.Id" class="btn_1">Details</a>
+                                                    <a href="@Url.Action("Details", "ClientFlight", new { id = flight.Id })" class="btn_1">Details</a>
                                                 </p>
                                             </div>
                                         </div>
