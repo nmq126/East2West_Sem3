@@ -1,0 +1,337 @@
+﻿@model PagedList.IPagedList<East2West.Models.Refund>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "List refund";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .pagination-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .pagination-container ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /*background-color: #333;*/
+        }
+
+        .pagination-container li {
+            float: left;
+            border-right: 1px solid #bbb;
+        }
+
+            .pagination-container li:last-child {
+                border-right: none;
+            }
+
+            .pagination-container li a {
+                display: block;
+                color: Black;
+                text-align: center;
+                padding: 8px 10px;
+                text-decoration: none;
+            }
+
+                .pagination-container li a:hover:not(.active) {
+                    background-color: white;
+                }
+
+        .pagination-container .active {
+            background-color: white;
+        }
+</style>
+
+<div class="row">
+
+
+    <div class="col-xl-12">
+        <div class="widget has-shadow">
+            <div class="widget-body">
+                @using (Html.BeginForm("Index", "Refunds", FormMethod.Get))
+                {
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Status</label>
+                            <div class="select mb-3">
+                                <select name="status" id="status" class="custom-select form-control">
+                                    <option value="2" @(ViewBag.Status == 2 ? "selected" : "")>All</option>
+                                    <option value="1" @(ViewBag.Status == 1 ? "selected" : "")>Refunded</option>
+                                    <option value="0" @(ViewBag.Status == 0 ? "selected" : "")>Pending</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Type</label>
+                            <div class="select mb-3">
+                                <select name="typeId" id="typeId" class="custom-select form-control">
+                                    <option value="0" @(ViewBag.TypeId == 0 ? "selected" : "")>All</option>
+                                    <option value="1" @(ViewBag.TypeId == 1 ? "selected" : "")>Tour</option>
+                                    <option value="2" @(ViewBag.TypeId == 2 ? "selected" : "")>Car</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Sort by</label>
+                            <div class="select mb-3">
+                                <select name="sortType" id="sortType" class="custom-select form-control">
+                                    <option value="">Sort by (Lastest default)</option>
+                                    <option value="createdAt_asc" @(ViewBag.SortType == "createdAt_asc" ? "selected" : "")>Latest</option>
+                                    <option value="createdAt_desc" @(ViewBag.SortType == "createdAt_desc" ? "selected" : "")>Oldest</option>
+                                    <option value="price_asc" @(ViewBag.SortType == "price_asc" ? "selected" : "")>Total price (Increase)</option>
+                                    <option value="price_desc" @(ViewBag.SortType == "price_desc" ? "selected" : "")>Total price (Decrease)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Percent</label>
+                            <div class="select mb-3">
+                                <select name="percentId" id="percentId" class="custom-select form-control">
+                                    <option value="0">All</option>
+                                    <option value="75" @(ViewBag.SortType == "75" ? "selected" : "")>75% (1 day)</option>
+                                    <option value="80" @(ViewBag.SortType == "80" ? "selected" : "")>80% (2 days)</option>
+                                    <option value="85" @(ViewBag.SortType == "85" ? "selected" : "")>85% (3 days)</option>
+                                    <option value="90" @(ViewBag.SortType == "90" ? "selected" : "")>90% (4 days)</option>
+                                    <option value="95" @(ViewBag.SortType == "95" ? "selected" : "")>95% (>5 days)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Search by Id</label>
+                            <div class="">
+                                @Html.TextBox("id", ViewBag.Id as string, new { @class = "form-control", placeholder = "Search by refund id" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Search by order id</label>
+                            <div class="">
+                                @Html.TextBox("orderId", ViewBag.OrderId as string, new { @class = "form-control", placeholder = "Search by order id" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Search by user id</label>
+                            <div class="">
+                                @Html.TextBox("userId", ViewBag.UserId as string, new { @class = "form-control", placeholder = "Search by user id" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 mt-3">
+                            <label class="form-control-label">Created Date Time Range</label>
+                            <div class="input-group ">
+                                <span class="input-group-addon addon-secondary">
+                                    <i class="la la-calendar"></i>
+                                </span>
+                                @{
+                                    var createdString = "";
+                                    if (!String.IsNullOrEmpty(ViewBag.StartCreatedDay) && !String.IsNullOrEmpty(ViewBag.EndCreatedDay))
+                                    {
+                                        createdString = @ViewBag.StartCreatedDay + " - " + @ViewBag.EndCreatedDay;
+                                    }
+                                }
+                                <input type="text" class="form-control" id="datetimerange" value="@createdString">
+                                <input type="hidden" class="form-control" name="startCreatedDay" , id="startCreatedDay" value="@ViewBag.StartCreatedDay">
+                                <input type="hidden" class="form-control" name="endCreatedDay" , id="endCreatedDay" value="@ViewBag.EndCreatedDay">
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                        </div>
+                        <div class="col-lg-3 text-right">
+                            <div style="height:28px"></div>
+                            <div>
+                                <button type="submit" class="btn btn-primary mr-1 mb-2">Search</button>
+                                <button type="reset" class="btn btn btn-outline-secondary mr-1 mb-2">@Html.ActionLink("Clear", "Index", "Refunds")</button>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+        <!-- Default -->
+        <div class="widget has-shadow">
+            <div class="widget-body">
+                @if (Model == null || Model.Count() == 0)
+                {
+                    <div class="text-center">
+                        <i class="la la-search"></i>
+                        Nothing found
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-bordered mb-0">
+                            <thead>
+                                <tr>
+                                    <th width="5%">#</th>
+                                    <th width="5%">Id</th>
+                                    <th width="5%">Order Id</th>
+                                    <th width="5%">User Id</th>
+                                    <th width="10%">Type</th>
+                                    <th width="10%">Percent</th>
+                                    <th width="15%">Total price</th>
+                                    <th width="15%">Status</th>
+                                    <th width="15%">Created At</th>
+                                    <th width="15%">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{var i = 1;
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td><span class="text-primary">@i</span></td>
+                                            <td><span>@item.Id</span></td>
+                                            <td>@item.Order.Id</td>
+                                            <td>@item.Order.UserId</td>
+                                            @if (item.Order.Type == 1)
+                                            {
+                                                <td>
+                                                    <span class="badge-text badge-text-small info">Tour</span>
+                                                </td>
+                                             }
+                                            else
+                                            {
+                                                <td>
+                                                    <span class="badge-text badge-text-small success">Car</span>
+                                                </td>
+                                            }
+                                            <td>@item.Percent %</td>
+                                            <td>$@item.TotalPrice</td>
+                                            <td>
+                                                <select id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
+                                                    <option value="1" @(ViewBag.Status == 1 ? "selected" : "")>Refunded</option>
+                                                    <option value="-1" @(ViewBag.Status == -1 ? "selected" : "")>Pending</option>
+                                                </select>
+                                            </td>
+                                            <td>@item.CreatedAt</td>
+                                            <td class="td-actions">
+                                                <a href="@Url.Action("Details", "Refunds", new { id = item.Id })">
+                                                    <i class="la la-info-circle" data-toggle="tooltip" title="Information"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        @Html.PagedListPager(Model, page => Url.Action("Index", "Refunds",
+                                    new
+                                         {
+                                        id = ViewBag.Id,
+                                        sortType = ViewBag.SortType,
+                                        userId = ViewBag.UserId,
+                                        orderId = ViewBag.OrderId,
+                                        typeId = ViewBag.TypeId,
+                                        percentId = ViewBag.PercentId,
+                                        status = ViewBag.Status,
+                                        startCreatedDay = ViewBag.StartCreatedDay,
+                                        endCreatedDay = ViewBag.EndCreatedDay,
+                                        page
+                                         }),
+                                    new PagedListRenderOptions
+                                    {
+                                        DisplayItemSliceAndTotal = true,
+                                        ItemSliceAndTotalFormat = "Showing {0} to {1} of {2} total item(s).",
+                                        DisplayLinkToIndividualPages = true,
+                                        DisplayPageCountAndCurrentLocation = false,
+                                        MaximumPageNumbersToDisplay = 10,
+                                        LinkToFirstPageFormat = "««",
+                                        LinkToPreviousPageFormat = "«",
+                                        LinkToIndividualPageFormat = "{0}",
+                                        LinkToNextPageFormat = "»",
+                                        LinkToLastPageFormat = "»»",
+                                        ContainerDivClasses = new string[] { "pagination-container mt-3" },
+                                        UlElementClasses = new string[] { "pagination" },
+                                        LiElementClasses = new string[] { "page-item" }
+                                    })
+                    </div>
+                }
+
+            </div>
+        </div>
+        <!-- End Default -->
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Content/admin_vendor/js/bootstrap-select/bootstrap-select.min.js"></script>
+
+    <script src="~/Content/admin_vendor/js/datepicker/moment.min.js"></script>
+    <script src="~/Content/admin_vendor/js/datepicker/daterangepicker.js"></script>
+    <script src="~/Content/admin_js/components/datepicker/datepicker.js"></script>
+    <script>
+        $('#datetimerange').daterangepicker({
+            showDropdowns: true,
+            timePickerSeconds: true,
+            timePicker24Hour: true,
+            timePicker: true,
+            autoUpdateInput: false,
+            autoApply: true,
+            locale: {
+                format: 'HH:mm:ss DD/MM/YYYY'
+            },
+        });
+        $('#datetimerange').on('apply.daterangepicker', function (ev, picker) {
+            $(this).val(picker.startDate.format('HH:mm:ss DD/MM/YYYY') + ' - ' + picker.endDate.format('HH:mm:ss DD/MM/YYYY'));
+            $('#startCreatedDay').val(picker.startDate.format('HH:mm:ss DD/MM/YYYY'))
+            $('#endCreatedDay').val(picker.endDate.format('HH:mm:ss DD/MM/YYYY'))
+        });
+        function changeStatus(obj) {
+            var id = obj.getAttribute('data-id')
+            var status = obj.value
+            var cnfrmMsg = "activate " + id
+            if (status == 0) {
+                cnfrmMsg = "disable " + id
+            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "To " + cnfrmMsg,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, do it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#preloader2").show();
+                    $.ajax({
+                        type: "GET",
+                        url: "/Tours/ChangeStatus",
+                        data: {
+                            id: id,
+                            status: status
+                        },
+                        success: function (msg) {
+                            $("#preloader2").hide();
+                            Swal.fire(
+                                'Success!',
+                                msg,
+                                'success'
+                            )
+                        },
+                        error: function () {
+                            $("#preloader2").hide();
+                        },
+                    });
+
+                }
+                else {
+                    alert(oke)
+                }
+            })
+        }
+
+    </script>
+}

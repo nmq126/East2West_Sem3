@@ -14,6 +14,7 @@ namespace East2West
             //admin
             string adminUserUrl = "admin/users";
             string adminOrderUrl = "admin/orders";
+            string adminRefundUrl = "admin/refunds";
             string adminTourUrl = "admin/tours";
             string adminTourDetailUrl = "admin/tour-details";
             string adminCarUrl = "admin/cars";
@@ -34,6 +35,8 @@ namespace East2West
                 url: "admin/dashboard",
                 defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
             );
+
+            //ORDER
             routes.MapRoute(
                 name: "Tour Analysis",
                 url: adminOrderUrl + "/tours",
@@ -48,6 +51,18 @@ namespace East2West
                 name: "Order Detail",
                 url: adminOrderUrl + "/{id}",
                 defaults: new { controller = "Orders", action = "Details", id = UrlParameter.Optional }
+            );
+
+            //REFUND
+            routes.MapRoute(
+                name: "Refund list",
+                url: adminRefundUrl,
+                defaults: new { controller = "Refunds", action = "Index", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "Refund Detail",
+                url: adminOrderUrl + "/{id}",
+                defaults: new { controller = "Refunds", action = "Details", id = UrlParameter.Optional }
             );
 
             //USER admin

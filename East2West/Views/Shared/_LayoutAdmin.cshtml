@@ -151,6 +151,14 @@
 
                             </ul>
                         </li>
+                        </li>
+                        <li class="@(url.Contains("/Refunds") || url.Contains("/admin/refunds") ? "active" : "" )">
+                            <a href="#dropdown-db9" aria-expanded="false" data-toggle="collapse"><i class="la la-refresh"></i><span>Refund</span></a>
+                            <ul id="dropdown-db9" class="collapse list-unstyled @(url.Contains("/Refunds") || url.Contains("/admin/refunds") ? "show" : "" ) pt-0">
+                                <li><a class="@(rawUrl.Equals("/Refunds/Index") || rawUrl.Equals("/admin/refunds") ? "active" : "" )" href="@Url.Action("Index", "Refunds")">Refund list</a></li>
+
+                            </ul>
+                        </li>
                         <li class="@(url.Contains("/Users") || url.Contains("/admin/users") ? "active" : "" )">
                             <a href="#dropdown-db5" aria-expanded="false" data-toggle="collapse"><i class="la la-user"></i><span>Users</span></a>
                             <ul id="dropdown-db5" class="collapse list-unstyled @(url.Contains("/Users") || url.Contains("/admin/users") ? "show" : "" ) pt-0">

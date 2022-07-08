@@ -201,6 +201,7 @@
     <Compile Include="Controllers\OrderCarController.cs" />
     <Compile Include="Controllers\OrderTourController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\RefundsController.cs" />
     <Compile Include="Controllers\TourDetailsController.cs" />
     <Compile Include="Controllers\TourSchedulesController.cs" />
     <Compile Include="Controllers\ToursController.cs" />
@@ -1093,6 +1094,8 @@
     <Content Include="tmp1954.tmp" />
     <Content Include="Views\ClientFlight\GetListFlight.cshtml" />
     <Content Include="Views\ClientFlight\Details.cshtml" />
+    <Content Include="Views\Refunds\Details.cshtml" />
+    <Content Include="Views\Refunds\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

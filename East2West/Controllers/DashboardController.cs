@@ -3,6 +3,7 @@ using East2West.Models.ChartModel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,21 +23,52 @@ namespace East2West.Controllers
         private readonly string carACTitle = "Revenue by air-conditioned car share";
         private readonly string carDriverTitle = "Revenue by car having driver share";
         private static string carDateRange;
+        private readonly string[] ListofMonth = new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
         // GET: Dashboard
         public ActionResult Index()
         {
             ViewBag.BreadCrumb = "Dashboard";
             ViewBag.TotalOrder = db.Orders.Count();
             ViewBag.TotalUser = db.Users.Count();
-            ViewBag.TotalRevenue = db.Orders.Where(x => x.Status == 1).Sum(x => x.TotalPrice);
+            ViewBag.TotalRevenue = db.Orders.Where(x => x.Status == 1).Sum(x => x.TotalPrice).ToString("C", CultureInfo.GetCultureInfo("en-US"));
             tourDateRange = carDateRange = "All time";
+
             ViewBag.DataTour = GetOrderTourDataByDuration(db.Orders.Where(x => x.Type == 1 && x.Status == 1));
             ViewBag.DataCar = GetOrderCarDataByModel(db.Orders.Where(x => x.Type == 2 && x.Status == 1));
-            ViewBag.LatestOrder = db.Orders.OrderByDescending(o => o.CreatedAt).Take(10);
+            ViewBag.DataSaleChart = GetSaleChartData(2022);
+            ViewBag.LatestOrders = db.Orders.OrderByDescending(o => o.CreatedAt).Take(10);
+            ViewBag.LatestUsers = db.Users.OrderByDescending(o => o.CreatedAt).Take(5);
 
             return View();
         }
+        public String GetSaleChartData(int year)
+        {
+            List<DataPoint> DataRevenue = new List<DataPoint>();
+            List<DataPoint> DataSale = new List<DataPoint>();
+            for (int i = 0; i <= 11; i++)
+            {
+                var month = ListofMonth[i];
+                var ordersItem = db.Orders.Where(s => s.CreatedAt.Month == i+1 && s.CreatedAt.Year == year);
+                if (!ordersItem.Any())
+                {
+                    DataRevenue.Add(new DataPoint(month, 0));
+                    DataSale.Add(new DataPoint(month, 0));
 
+                }
+                else
+                {
+                    DataRevenue.Add(new DataPoint(month, ordersItem.Sum(o => o.TotalPrice)));
+                    DataSale.Add(new DataPoint(month, ordersItem.Count()));
+                }
+            }
+            var obj = new
+            {
+                title = "Monthly Sales Data in " + year,
+                data1 = DataRevenue,
+                data2 = DataSale
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
         public String GetTourChartData(string typeId, string startDay, string endDay)
         {
             var orders = GetOrderInDateRange(startDay, endDay, 1);
@@ -147,7 +179,7 @@ namespace East2West.Controllers
             return JsonConvert.SerializeObject(obj);
         }
 
-        public IQueryable<Models.Order> GetOrderInDateRange(string startDay, string endDay, int type)
+        private IQueryable<Models.Order> GetOrderInDateRange(string startDay, string endDay, int type)
         {
             var orders = db.Orders.Where(x => x.Type == type && x.Status == 1);
             if (!String.IsNullOrWhiteSpace(startDay) && !String.IsNullOrWhiteSpace(endDay))
