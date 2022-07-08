@@ -72,9 +72,9 @@
                                 @Html.LabelFor(model => model.ReturnAt, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     @Html.TextBoxFor(model => model.ReturnAt, new { @type = "date", @class = "form-control datepicker" })
-                                    @Html.ValidationMessageFor(model => model.ReturnAt, "", new { @class = "text-danger" })                                
+                                    @Html.ValidationMessageFor(model => model.ReturnAt, "", new { @class = "text-danger" })
                                 </div>
-                               
+
                             </div>
 
                             <div class="form-group">
@@ -92,7 +92,13 @@
                                     @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = 3 })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div ass="col-md-10">
