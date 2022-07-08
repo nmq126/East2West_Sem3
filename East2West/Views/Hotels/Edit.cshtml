@@ -18,7 +18,7 @@
 
                 <div class="widget has-shadow">
                     <div class="widget-header bordered no-actions d-flex align-items-center">
-                        <h4>Edit Tour #@Html.DisplayFor(model => model.Id)</h4>
+                        <h4>Edit Hotel: #@Html.DisplayFor(model => model.Id)</h4>
                     </div>
                     <div class="widget-body">
                         <div class="col-10 ml-auto">
@@ -139,63 +139,6 @@
                 </div>
             }
         </div>
-        <div class="col-xl-12">
-            @*<div class="widget has-shadow">
-                <div class="widget-body">
-                    <div class="col-10 ml-auto">
-                        <div class="section-title mt-3 mb-5">
-                            <h4>02. Schedule Informations</h4>
-                        </div>
-                    </div>
-                    @if (Model.TourSchedules == null || Model.TourSchedules.Count() == 0)
-                    {
-                        <p class="col-10 ml-auto">No Schedule for this tour added yet</p>
-                    }
-                    else
-                    {
-                        <table class="table mb-0">
-                            <thead>
-                                <tr>
-                                    <th width="5%">#</th>
-                                    <th width="5%">Id</th>
-                                    <th width="15%">Name</th>
-                                    <th width="65%">Detail</th>
-                                    <th width="10%">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var schedule in Model.TourSchedules.OrderBy(s => s.ScheduleOrder).ToList())
-                                {
-                                    <tr>
-                                        <td class="text-primary">@Html.Raw(schedule.ScheduleOrder)</td>
-                                        <td><span>@Html.Raw(schedule.Id)</span></td>
-                                        <td>@Html.Raw(schedule.Name)</td>
-                                        <td>@Html.Raw(HttpUtility.HtmlDecode(schedule.Detail))</td>
-                                        <td class="td-actions">
-                                            <a href="@Url.Action("Details", "TourSchedules", new { id = schedule.Id })">
-                                                <i class="ion ion-information"></i>
-                                            </a>
-                                            <a href="@Url.Action("Edit", "TourSchedules", new { id = schedule.Id })">
-                                                <i class="ion ion-edit"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                }
-
-                            </tbody>
-                        </table>
-
-
-                    }
-
-
-                    <div class="em-separator separator-dashed"></div>
-
-                </div>
-            </div>*@
-        </div>
-
-
         <div>
             @Html.ActionLink("Back to List", "Index")
         </div>

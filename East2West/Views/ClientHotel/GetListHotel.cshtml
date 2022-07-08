@@ -65,7 +65,7 @@
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="/ClientHotel/GetListHotel">Hotel</a>
+                    <a href="@Url.Action("GetListHotel", "ClientHotel")">Hotel</a>
                 </li>
                 <li>List Hotel</li>
             </ul>
@@ -183,7 +183,7 @@
                                         </div>
 
                                         <div class="img_list">
-                                            <a href="/ClientHotel/Details?id=@hotel.Id">
+                                            <a href="@Url.Action("Details", "ClientHotel", new { id = hotel.Id })">
                                                 <img src="@img" alt="Image">
                                             </a>
                                         </div>
@@ -273,7 +273,7 @@
                                                 <small>*From/Per night</small>
 
                                                 <p>
-                                                    <a href="/ClientHotel/Details?id=@hotel.Id" class="btn_1">Details</a>
+                                                    <a href="@Url.Action("Details", "ClientHotel", new { id = hotel.Id })" class="btn_1">Details</a>
                                                 </p>
                                             </div>
                                         </div>

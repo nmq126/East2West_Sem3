@@ -29,7 +29,7 @@ namespace East2West.Controllers
             ViewBag.FromDate = from_date;
             ViewBag.ToDate = to_date;
 
-            var flights = from f in db.Flights select f;
+            var flights = from f in db.Flights where f.Status !=0 select f;
             var locations = db.Locations.ToList();
             ViewBag.LocationList = db.Locations.ToList();
 
@@ -46,7 +46,7 @@ namespace East2West.Controllers
             }
             if (!String.IsNullOrEmpty(keyword))
             {
-                flights = flights.Where(f => f.LocationDestination.Name.ToLower().Contains(keyword.ToLower())|| f.Description.ToLower().Contains(keyword.ToLower()) ||f.Detail.ToLower().Contains(keyword.ToLower())|| f.LocationDeparture.Name.ToLower().Contains(keyword.ToLower()));
+                flights = flights.Where(f => f.LocationDestination.Name.Contains(keyword)|| f.Description.Contains(keyword) ||f.Detail.Contains(keyword)|| f.LocationDeparture.Name.Contains(keyword));
             }
             if (from_date != null)
             {
