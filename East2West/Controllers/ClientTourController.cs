@@ -168,12 +168,12 @@ namespace East2West.Controllers
             ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Error404", "Home");
             }
             Tour tour = db.Tours.Include(t => t.TourSchedules).Include(t => t.TourDetails).FirstOrDefault(t => t.Id == id);
             if (tour == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Error404", "Home");
             }
             ViewBag.TourDetailPrice = Math.Round(tour.TourDetails.First().Price * (1 - Convert.ToDouble(tour.TourDetails.First().Discount) / 100), 2);
             ViewBag.TourDetailSeat = tour.TourDetails.First().AvailableSeat;

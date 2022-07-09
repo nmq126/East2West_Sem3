@@ -42,5 +42,11 @@ namespace East2West.Controllers
             ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
             return View();
         }
+
+        public ActionResult Error404()
+        {
+            ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            return View();
+        }
     }
 }

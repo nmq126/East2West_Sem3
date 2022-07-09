@@ -36,8 +36,8 @@
     <link href="~/Content/client_css/admin.css" rel="stylesheet">
 </head>
 
-<body>
 
+<body>
     <div id="preloader">
         <div class="sk-spinner sk-spinner-wave">
             <div class="sk-rect1"></div>
@@ -140,20 +140,20 @@
                 <div class="col-md-3">
                     <h3>About</h3>
                     <ul>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Login</a></li>
-                        <li><a href="#">Register</a></li>
-                        <li><a href="#">Terms and condition</a></li>
+                        <li><a href="@Url.Action("About", "Home")">About us</a></li>
+                        <li><a href="@Url.Action("Contact", "Home")">Contact us</a></li>
+                        <li><a href="@Url.Action("Login", "User")">Login</a></li>
+                        <li><a href="@Url.Action("Register", "User")">Register</a></li>
+
                     </ul>
                 </div>
                 <div class="col-md-3">
                     <h3>Discover</h3>
                     <ul>
-                        <li><a href="#">Community blog</a></li>
-                        <li><a href="#">Tour guide</a></li>
-                        <li><a href="#">Wishlist</a></li>
-                        <li><a href="#">Gallery</a></li>
+                        <li><a href="@Url.Action("GetListCar", "ClientCar")">Cars</a></li>
+                        <li><a href="@Url.Action("GetListTour", "ClientTour")">Tours</a></li>
+                        <li><a href="@Url.Action("GetListHotel", "ClientHotel")">Hotels</a></li>
+                        <li><a href="@Url.Action("GetListFlight", "ClientFlight")">Flights</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2">
@@ -333,5 +333,7 @@
             $(this).parent().parent().parent().fadeOut('slow', function (c) { });
         });
     </script>
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61895564148c8cbb"></script>
 </body>
 </html>

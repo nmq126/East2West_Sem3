@@ -26,6 +26,10 @@ namespace East2West
             string clientTourUrl = "home/tours";
             string clientHotelUrl = "home/hotels";
             string clientFlightUrl = "home/flights";
+            string aboutUsUrl = "home/about-us";
+            string contactUsUrl = "home/contact-us";
+            string thankYouUrl = "home/thank-you";
+            string error404Url = "home/page-404";
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
@@ -274,6 +278,31 @@ namespace East2West
                 url: clientFlightUrl + "/{id}",
                 defaults: new { controller = "ClientFlight", action = "Details", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "About Us",
+                url: aboutUsUrl,
+                defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Contact Us",
+                url: contactUsUrl,
+                defaults: new { controller = "Home", action = "Contact", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Thank you",
+                url: thankYouUrl,
+                defaults: new { controller = "Home", action = "ThankYou", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "404",
+                url: error404Url,
+                defaults: new { controller = "Home", action = "Error404", id = UrlParameter.Optional }
+            );
+
             //KHONG DUOC XOA
             routes.MapRoute(
                name: "Default",
