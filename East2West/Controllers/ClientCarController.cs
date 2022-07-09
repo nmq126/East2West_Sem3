@@ -40,7 +40,7 @@ namespace East2West.Controllers
             var cars = db.Cars.Include(c => c.CarModel)
                 .Include("CarModel.CarBrand")
                 .Include(c => c.CarType)
-                .Include(c => c.Location);
+                .Include(c => c.Location).Where(c => c.Status != 0);
 
             if (!String.IsNullOrEmpty(keyword))
             {
@@ -157,7 +157,7 @@ namespace East2West.Controllers
             ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Error404", "Home");
             }
             Car car = db.Cars.Include(c => c.Location)
                 .Include(c => c.CarModel)
@@ -169,7 +169,7 @@ namespace East2West.Controllers
             ViewBag.Location = db.Cars.FirstOrDefault(c => c.Id == id).Location.Name;
             if (car == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Error404", "Home");
             }
             return View(car);
         }

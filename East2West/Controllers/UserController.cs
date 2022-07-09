@@ -56,7 +56,7 @@ namespace East2West.Controllers
                 var result = await userManager.CreateAsync(user, user.Password);
                 if (result.Succeeded)
                 {
-                    return Redirect("/User/Login");
+                    return RedirectToAction("Login", "User");
                 }
                 else
                 {
@@ -138,7 +138,7 @@ namespace East2West.Controllers
                     SignInManager<User, string> signInManager = new SignInManager<User, string>(userManager, Request.GetOwinContext().Authentication);
                     await signInManager.SignInAsync(user, false, false);
 
-                    return Redirect("/Home");
+                    return RedirectToAction("Index", "Home");
                 }
             }
 
@@ -148,7 +148,7 @@ namespace East2West.Controllers
         public ActionResult LogOut()
         {
             HttpContext.GetOwinContext().Authentication.SignOut();
-            return Redirect("/Home");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult ShowInformation(string id)
@@ -156,13 +156,13 @@ namespace East2West.Controllers
             ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Error404", "Home");
             }
             var user = myIdentityDbContext.Users.Include(u => u.Orders).Include("Orders.OrderTours").Include("Orders.OrderCars").Include("Orders.OrderCars.CarSchedule.Car.CarModel").FirstOrDefault(u => u.Id == id);
 
             if (user == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Error404", "Home");
             }
             return View(user);
         }

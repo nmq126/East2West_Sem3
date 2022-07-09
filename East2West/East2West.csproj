@@ -1045,7 +1045,6 @@
     <Content Include="Views\Tours\Index.cshtml" />
     <Content Include="Views\Tours\TourScheduleRow.cshtml" />
     <Content Include="Views\Shared\_LayoutPageClient.cshtml" />
-    <Content Include="Views\Home\GetListTour.cshtml" />
     <Content Include="Views\ClientTour\GetListTour.cshtml" />
     <Content Include="Views\ClientTour\Details.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
@@ -1072,7 +1071,6 @@
     <Content Include="Views\Hotels\Details.cshtml" />
     <Content Include="Views\Hotels\Edit.cshtml" />
     <Content Include="Views\Hotels\Index.cshtml" />
-    <Content Include="Views\Home\Page_404.cshtml" />
     <Content Include="Views\Home\ThankYou.cshtml" />
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Shared\_LayoutSidePage.cshtml" />
@@ -1094,15 +1092,13 @@
     <Content Include="tmp1954.tmp" />
     <Content Include="Views\ClientFlight\GetListFlight.cshtml" />
     <Content Include="Views\ClientFlight\Details.cshtml" />
+    <Content Include="Views\Home\Error404.cshtml" />
     <Content Include="Views\Refunds\Details.cshtml" />
     <Content Include="Views\Refunds\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
-    <Folder Include="Views\OrderCar\" />
-    <Folder Include="Views\Order\" />
-    <Folder Include="Views\TourSchedules\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

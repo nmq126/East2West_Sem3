@@ -91,7 +91,7 @@
             <div class="row">
                 <div class="col-3">
                     <div id="logo_home">
-                        <h1><a href="index.html" title="City tours travel template">City Tours travel template</a></h1>
+                        <h1><a href="/" title="East2West">East2West</a></h1>
                     </div>
                 </div>
                 <nav class="col-9">
@@ -115,7 +115,7 @@
                                 <a href="@Url.Action("GetListCar", "ClientCar")" class="show-submenu"><i class="fa-solid fa-car"></i>  Cars &nbsp;</a>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:void(0);" class="show-submenu"><i class="fa-solid fa-plane"></i>  Flights &nbsp;</a>
+                                <a href="@Url.Action("GetListFlight", "ClientFlight")" class="show-submenu"><i class="fa-solid fa-plane"></i>  Flights &nbsp;</a>
                             </li>
                             <li class="submenu">
                                 <a href="@Url.Action("About", "Home")" class="show-submenu"><i class="fa-solid fa-users"></i>  About Us &nbsp;</a>
@@ -332,7 +332,7 @@
                             <img src="~/Content/client_img/hinh-nen-vinh-ha-long-quang-ninh-dep.jpg" alt="Tours" class="img-fluid">
                             <div class="wrapper">
                                 <h2>Tours</h2>
-                                <p>1150 Locations</p>
+                                <p>@ViewBag.TotalTour Locations</p>
                             </div>
                         </a>
                     </div>
@@ -343,7 +343,7 @@
                                     <img src="~/Content/client_img/ve-may-bay-di-vietnam-airlines.jpg" alt="Flights" class="img-fluid">
                                     <div class="wrapper">
                                         <h2>Flights</h2>
-                                        <p>800 Flights</p>
+                                        <p>@ViewBag.TotalFlight Flights</p>
                                     </div>
                                 </a>
                             </div>
@@ -352,7 +352,7 @@
                                     <img src="~/Content/client_img/img_cat_home_3.jpg" alt="Hotels" class="img-fluid">
                                     <div class="wrapper">
                                         <h2>Hotels</h2>
-                                        <p>650 Locations</p>
+                                        <p>@ViewBag.TotalHotel Hotels</p>
                                     </div>
                                 </a>
                             </div>
@@ -361,7 +361,7 @@
                                     <img src="~/Content/client_img/xe.jpg" alt="Cars" class="img-fluid">
                                     <div class="wrapper">
                                         <h2>Cars</h2>
-                                        <p>113 Cars</p>
+                                        <p>@ViewBag.TotalCar Cars</p>
                                     </div>
                                 </a>
                             </div>
@@ -394,7 +394,7 @@
                             <div class="ribbon_3"><span>Top rated</span></div>
                             <div class="img_container">
                                 <a href="@Url.Action("Details", "ClientTour", new { id = tour.Id })">
-                                    <img src="@img" width="450" height="300"  alt="image" style="object-fit:cover">
+                                    <img src="@img" width="450" height="300" alt="image" style="object-fit:cover">
                                     <div class="short_info">
                                         <span class="price"><sup>$</sup>@tour.TourDetails.First().Price</span>
                                     </div>
@@ -478,20 +478,19 @@
                 <div class="col-md-3">
                     <h3>About</h3>
                     <ul>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Login</a></li>
-                        <li><a href="#">Register</a></li>
-                        <li><a href="#">Terms and condition</a></li>
+                        <li><a href="@Url.Action("About", "Home")">About us</a></li>
+                        <li><a href="@Url.Action("Contact", "Home")">Contact us</a></li>
+                        <li><a href="@Url.Action("Login", "User")">Login</a></li>
+                        <li><a href="@Url.Action("Register", "User")">Register</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
                     <h3>Discover</h3>
                     <ul>
-                        <li><a href="#">Community blog</a></li>
-                        <li><a href="#">Tour guide</a></li>
-                        <li><a href="#">Wishlist</a></li>
-                        <li><a href="#">Gallery</a></li>
+                        <li><a href="@Url.Action("GetListCar", "ClientCar")">Cars</a></li>
+                        <li><a href="@Url.Action("GetListTour", "ClientTour")">Tours</a></li>
+                        <li><a href="@Url.Action("GetListHotel", "ClientHotel")">Hotels</a></li>
+                        <li><a href="@Url.Action("GetListFlight", "ClientFlight")">Flights</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2">
@@ -716,9 +715,9 @@
             }
         });
     </script>
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61895564148c8cbb"></script>
 
     <!-- SWITCHER  -->
 </body>
-
-<!-- Mirrored from ansonika.com/citytours/index_17.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 16 Jun 2022 02:55:48 GMT -->
 </html>
