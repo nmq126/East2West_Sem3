@@ -15,7 +15,7 @@
             $('#totalCost').text($('#bookDays').text() * pricePerDay);
             var errorMessage = document.getElementById('error_message');
             errorMessage.style.display = "none";
-        } else {
+        } else if (startDate > endDate) {
             var errorMessage = document.getElementById('error_message');
             errorMessage.style.display = "";
             $('#totalAmount').text('1x ' + pricePerDay)
@@ -71,7 +71,7 @@
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    window.location.href = "/User/ShowInformation?id=" + $('#userId').val();
+                    window.location.href = "/home/users/profile/" + $('#userId').val();
                 }
 
                 else {
@@ -81,7 +81,7 @@
                         showConfirmButton: false,
                         timer: 4000
                     })
-                    window.location.href = "/User/Login";
+                    window.location.href = "/home/users/login";
                 }
             }
         });
@@ -123,7 +123,7 @@
                             showConfirmButton: false,
                             timer: 1500
                         })
-                        window.location.href = "/User/ShowInformation?id=" + $('#userId').val();
+                        window.location.href = "/home/users/profile/" + $('#userId').val();
                     }
 
                     else if (response.status == -1) {
@@ -133,7 +133,7 @@
                             showConfirmButton: false,
                             timer: 2000
                         })
-                        window.location.href = "/User/Login";
+                        window.location.href = "/home/users/login";
                     }
                     else if (response.status == 0) {
                         Swal.fire({
@@ -173,7 +173,7 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             })
-                            window.location.href = "/User/ShowInformation?id=" + $('#userId').val();
+                            window.location.href = "/home/users/profile/" + $('#userId').val();
                         }
                     }
                 });
@@ -207,13 +207,11 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             })
-                            window.location.href = "/User/ShowInformation?id=" + $('#userId').val();
+                            window.location.href = "/home/users/profile/" + $('#userId').val();
                         }
                     }
                 });
             }
         })
     })
-
-    
 });

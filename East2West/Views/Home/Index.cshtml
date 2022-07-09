@@ -394,7 +394,7 @@
                             <div class="ribbon_3"><span>Top rated</span></div>
                             <div class="img_container">
                                 <a href="@Url.Action("Details", "ClientTour", new { id = tour.Id })">
-                                    <img src="@img" width="450" height="300"  alt="image" style="object-fit:cover">
+                                    <img src="@img" width="450" height="300" alt="image" style="object-fit:cover">
                                     <div class="short_info">
                                         <span class="price"><sup>$</sup>@tour.TourDetails.First().Price</span>
                                     </div>
@@ -478,20 +478,20 @@
                 <div class="col-md-3">
                     <h3>About</h3>
                     <ul>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Login</a></li>
-                        <li><a href="#">Register</a></li>
-                        <li><a href="#">Terms and condition</a></li>
+                        <li><a href="@Url.Action("About", "Home")">About us</a></li>
+                        <li><a href="@Url.Action("Contact", "Home")">Contact us</a></li>
+                        <li><a href="@Url.Action("Login", "User")">Login</a></li>
+                        <li><a href="@Url.Action("Register", "User")">Register</a></li>
+                        
                     </ul>
                 </div>
                 <div class="col-md-3">
                     <h3>Discover</h3>
                     <ul>
-                        <li><a href="#">Community blog</a></li>
-                        <li><a href="#">Tour guide</a></li>
-                        <li><a href="#">Wishlist</a></li>
-                        <li><a href="#">Gallery</a></li>
+                        <li><a href="@Url.Action("GetListCar", "ClientCar")">Cars</a></li>
+                        <li><a href="@Url.Action("GetListTour", "ClientTour")">Tours</a></li>
+                        <li><a href="@Url.Action("GetListHotel", "ClientHotel")">Hotels</a></li>
+                        <li><a href="@Url.Action("GetListFlight", "ClientFlight")">Flights</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2">
@@ -716,9 +716,9 @@
             }
         });
     </script>
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61895564148c8cbb"></script>
 
     <!-- SWITCHER  -->
 </body>
-
-<!-- Mirrored from ansonika.com/citytours/index_17.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 16 Jun 2022 02:55:48 GMT -->
 </html>
