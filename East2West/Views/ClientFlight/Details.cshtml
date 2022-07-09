@@ -1,7 +1,7 @@
 ﻿@model East2West.Models.Flight
 
 @{
-    ViewBag.Title = "East2West - Flight";
+    ViewBag.Title = "East2West - " + @ViewBag.LocationDeparture + "-" + @ViewBag.LocationDestination;
     Layout = "~/Views/Shared/_LayoutPageClient.cshtml";
 }
 @section Section

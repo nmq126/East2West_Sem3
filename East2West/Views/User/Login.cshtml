@@ -1,11 +1,10 @@
 ﻿@model East2West.Models.User
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "East2West - Login";
     Layout = "~/Views/Shared/_LayoutPageAuthen.cshtml";
 
 }
-
 
 @using (Html.BeginForm())
 {
@@ -27,7 +26,6 @@
                                     </div>
                                     @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger float-left mt-2 mb-2" })
                                 </div>
-
 
                                 <div class="form-group ui search focus mt-15">
                                     <div class=" ui left icon input swdh11 swdh19">

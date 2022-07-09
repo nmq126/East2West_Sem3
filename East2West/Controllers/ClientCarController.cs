@@ -40,7 +40,7 @@ namespace East2West.Controllers
             var cars = db.Cars.Include(c => c.CarModel)
                 .Include("CarModel.CarBrand")
                 .Include(c => c.CarType)
-                .Include(c => c.Location);
+                .Include(c => c.Location).Where(c => c.Status != 0);
 
             if (!String.IsNullOrEmpty(keyword))
             {

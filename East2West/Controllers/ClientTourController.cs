@@ -27,7 +27,7 @@ namespace East2West.Controllers
         public ActionResult GetListTour(string sortType, string keyword, string price_range, string duration_range, string departureId, string destinationId, string categoryId, string rating, int? page)
         {
             ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            var tours = from t in db.Tours select t;
+            var tours = from t in db.Tours where t.Status != 0 select t;
             ViewBag.CategoryList = from c in db.TourCategories select c;
             ViewBag.LocationList = from l in db.Locations select l;
 
@@ -113,11 +113,11 @@ namespace East2West.Controllers
                     break;
 
                 case "100to500":
-                    tours = tours.Where(t => t.TourDetails.FirstOrDefault().Price > 100 && t.TourDetails.First().Price <= 500);
+                    tours = tours.Where(t => t.TourDetails.FirstOrDefault().Price > 100 && t.TourDetails.FirstOrDefault().Price <= 500);
                     break;
 
                 case "500t1000":
-                    tours = tours.Where(t => t.TourDetails.FirstOrDefault().Price > 500 && t.TourDetails.First().Price <= 1000);
+                    tours = tours.Where(t => t.TourDetails.FirstOrDefault().Price > 500 && t.TourDetails.FirstOrDefault().Price <= 1000);
                     break;
 
                 case "gt1000":
