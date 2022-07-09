@@ -232,26 +232,40 @@ namespace East2West.Controllers
             ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name");
             return View(car);
         }
-
-        public String ChangeStatus(string id, int status)
+        public String ChangeStatus(string ids, int status)
         {
-            if (id == null)
-            {
-                return "Bad Request";
-            }
-            Car car = db.Cars.Find(id);
-            if (car == null)
-            {
-                return "Car not found";
-            }
-            car.Status = status;
+            var listId = ids.Split(',').ToList();
             string newStatus = "ACTIVE";
             if (status == 0)
             {
-                newStatus = "DISABLE"; 
+                newStatus = "DISABLE";
             }
-            db.SaveChanges();
-            return "Car #" + id + " status change to " + newStatus;
+            foreach (var itemId in listId)
+            {
+                if (itemId == null)
+                {
+                    return "Bad Request";
+                }
+                Car car = db.Cars.Find(itemId);
+                if (car == null)
+                {
+                    return "Bad request car " + itemId + " not found";
+                }
+                car.Status = status;
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return "Update fail";
+            }
+            if (listId.Count > 1)
+            {
+                return "Update success";
+            }
+            return "Car #" + listId[0] + " status change to " + newStatus;
         }
 
         protected override void Dispose(bool disposing)

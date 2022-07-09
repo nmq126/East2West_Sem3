@@ -174,15 +174,14 @@
                             <thead>
                                 <tr>
                                     <th width="5%">#</th>
-                                    <th width="5%">Id</th>
                                     <th width="5%">Order Id</th>
                                     <th width="5%">User Id</th>
                                     <th width="10%">Type</th>
                                     <th width="10%">Percent</th>
                                     <th width="15%">Total price</th>
-                                    <th width="15%">Status</th>
+                                    <th width="20%">Status</th>
                                     <th width="15%">Created At</th>
-                                    <th width="15%">Action</th>
+                                    <th width="10%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -191,7 +190,6 @@
                                     {
                                         <tr>
                                             <td><span class="text-primary">@i</span></td>
-                                            <td><span>@item.Id</span></td>
                                             <td>@item.Order.Id</td>
                                             <td>@item.Order.UserId</td>
                                             @if (item.Order.Type == 1)
@@ -210,11 +208,11 @@
                                             <td>$@item.TotalPrice</td>
                                             <td>
                                                 <select id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
-                                                    <option value="1" @(ViewBag.Status == 1 ? "selected" : "")>Refunded</option>
-                                                    <option value="-1" @(ViewBag.Status == -1 ? "selected" : "")>Pending</option>
+                                                    <option value="1" @(item.Status == 1 ? "selected" : "")>Refunded</option>
+                                                    <option value="0" @(item.Status == 0 ? "selected" : "")>Pending refund</option>
                                                 </select>
                                             </td>
-                                            <td>@item.CreatedAt</td>
+                                            <td>@item.CreatedAt.ToString("HH:mm:ss dd/M/yyyy")</td>
                                             <td class="td-actions">
                                                 <a href="@Url.Action("Details", "Refunds", new { id = item.Id })">
                                                     <i class="la la-info-circle" data-toggle="tooltip" title="Information"></i>

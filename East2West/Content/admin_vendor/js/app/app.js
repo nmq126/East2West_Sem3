@@ -86,16 +86,16 @@
     // ------------------------------------------------------- //
     // Custom Checkbox (check, heart, star)
     // ------------------------------------------------------ //
-	$('.checkbox').click(function(){
-        $(this).toggleClass('is-checked');
-    });
+	//$('.checkbox').click(function(){
+ //       $(this).toggleClass('is-checked');
+ //   });
 		
     // ------------------------------------------------------- //
     // Check / Uncheck all checkboxes
     // ------------------------------------------------------ //
-    $("#check-all").change(function () {
-        $("input:checkbox").prop('checked', $(this).prop("checked"));
-    });
+    //$("#check-all").change(function () {
+    //    $("input:checkbox").prop('checked', $(this).prop("checked"));
+    //});
 
     // ------------------------------------------------------- //
     // Card Close

@@ -300,9 +300,13 @@
                         },
                     });
 
-                }
-                else {
-                    alert(oke)
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    var a = document.getElementById("Status");
+                    if (status == 0) {
+                        a.options[0].selected = true;
+                    } else {
+                        a.options[1].selected = true;
+                    }
                 }
             })
         }

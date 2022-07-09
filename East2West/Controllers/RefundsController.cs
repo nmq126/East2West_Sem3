@@ -101,8 +101,8 @@ namespace East2West.Controllers
             }
             switch (sortType)
             {
-                case "createdAt_desc":
-                    refunds = refunds.OrderByDescending(r => r.CreatedAt);
+                case "createdAt_asc":
+                    refunds = refunds.OrderBy(r => r.CreatedAt);
                     break;
                 case "price_asc":
                     refunds = refunds.OrderBy(r => r.TotalPrice);
@@ -110,9 +110,9 @@ namespace East2West.Controllers
                 case "price_desc":
                     refunds = refunds.OrderByDescending(r => r.TotalPrice);
                     break;
-                case "createdAt_asc":
+                case "createdAt_desc":
                 default:
-                    refunds = refunds.OrderByDescending(r => r.TotalPrice);
+                    refunds = refunds.OrderByDescending(r => r.CreatedAt);
                     break;
             }
             int pageNumber = (page ?? 1);

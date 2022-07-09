@@ -160,11 +160,28 @@
         </div>
         <!-- Default -->
         <div class="widget has-shadow">
+            @if (Model != null && Model.Count() > 0)
+            {
+                <div class="widget-header bordered d-flex align-items-center">
+                    <div class="styled-checkbox mt-2">
+                        <input type="checkbox" name="check-all" id="check-all">
+                        <label for="check-all">Select all</label>
+                    </div>
+                    <div class="col-4">
+                        <select id="checkboxStatus" name="checkboxStatus" class="custom-select form-control" onchange="changeByCheckbox(this)">
+                            <option>Change selected item status</option>
+                            <option value="1">Active</option>
+                            <option value="0">Disable</option>
+                        </select>
+                    </div>
+                </div>
+            }
             <div class="widget-body">
                 <div class="table-responsive">
                     <table class="table table-bordered mb-0">
                         <thead>
                             <tr>
+                                <th width="5%"></th>
                                 <th width="5%">#</th>
                                 <th width="5%">Id</th>
                                 <th width="5%">Car Id</th>
@@ -182,7 +199,15 @@
                             @{var i = 1;
                                 foreach (var item in Model)
                                 {
+                                    string cbId = "cb" + i;
+                                    var prevStatus = item.Status;
                                     <tr>
+                                        <td>
+                                            <div class="styled-checkbox mt-2">
+                                                <input type="checkbox" name=@cbId id=@cbId value="@(item.Id)">
+                                                <label for=@cbId></label>
+                                            </div>
+                                         </td>
                                         <td><span class="text-primary">@i</span></td>
                                         <td><span>@item.Id</span></td>
                                         <td>@Html.ActionLink(@item.CarId, "Details", "Cars", new { id = @item.CarId }, null)</td>
@@ -193,7 +218,7 @@
                                         <td>@item.EndDay.ToShortDateString()</td>
                                         <td>@item.CreatedAt.ToString("HH:mm:ss dd/M/yyyy")</td>
                                         <td>
-                                            <select id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
+                                            <select name="Status" id=@(item.Id) data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this, @prevStatus)">
                                                 <option value="3" @(item.Status == 3 ? "selected" : "")>Dropped off</option>
                                                 <option value="2" @(item.Status == 2 ? "selected" : "")>Picked up</option>
                                                 <option value="1" @(item.Status == 1 ? "selected" : "")>Paid</option>
@@ -242,21 +267,154 @@
 
 @section Scripts{
     <script src="~/Content/admin_vendor/js/bootstrap-select/bootstrap-select.min.js"></script>
-    <script src="~/Scripts/toastr.js"></script>
     <script>
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true,
-            "positionClass": "toast-bottom-right",
-            "preventDuplicates": false,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
+        $("#check-all").change(function () {
+            $("input:checkbox").prop('checked', $(this).prop("checked"));
+        });
+        function changeByCheckbox(obj) {
+            var ids = "";
+            $("input:checkbox[name!=check-all]:checked").each(function () {
+                ids == "" ? ids += $(this).val() : ids += "," + $(this).val()
+            });
+            var statusString = ""
+            var status = obj.value
+            switch (status) {
+                case "3":
+                    statusString = "Dropped off"
+                    break;
+                case "2":
+                    statusString = "Picked up"
+                    break;
+                case "1":
+                    statusString = "Paid"
+                    break;
+                case "0":
+                    statusString = "Pending"
+                    break;
+                case "-1":
+                    statusString = "Refunded"
+                    break;
+                default:
+                    break;
+            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "To change selected item" + id + " status to " + statusString,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, do it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#preloader2").show();
+                    $.ajax({
+                        type: "GET",
+                        url: "/CarSchedules/ChangeStatus",
+                        data: {
+                            status: status,
+                            ids: ids
+                        },
+                        success: function (msg) {
+                            $("#preloader2").hide();
+                            Swal.fire({
+                                title: 'Success!',
+                                text: msg,
+                                timer: 2000,
+                                icon: "success"
+                            }).then(function () {
+                                location.reload()
+                            });
+                        },
+                        error: function () {
+                            $("#preloader2").hide();
+                        },
+                    });
+
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    var a = document.getElementById("checkboxStatus");
+                    a.options[0].selected = true;
+                }
+            })
+        }
+        function changeStatus(obj, prevStatus) {
+            var id = obj.getAttribute('data-id')
+            var status = obj.value
+            console.log(prevStatus)
+            var statusString = ""
+            switch (status) {
+                case "3":
+                    statusString = "Dropped off"
+                    break;
+                case "2":
+                    statusString = "Picked up"
+                    break;
+                case "1":
+                    statusString = "Paid"
+                    break;
+                case "0":
+                    statusString = "Pending"
+                    break;
+                case "-1":
+                    statusString = "Refunded"
+                    break;
+                default:
+                    break;
+            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "To change car schedule #" + id + " status to " + statusString,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, do it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#preloader2").show();
+                    $.ajax({
+                        type: "GET",
+                        url: "/CarSchedules/ChangeStatus",
+                        data: {
+                            ids: id,
+                            status: status
+                        },
+                        success: function (msg) {
+                            $("#preloader2").hide();
+                            Swal.fire(
+                                'Success!',
+                                msg,
+                                'success'
+                            )
+                        },
+                        error: function () {
+                            $("#preloader2").hide();
+                        },
+                    });
+
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    var a = document.getElementById(id);
+                    switch (prevStatus) {
+                        case 3:
+                            obj.options[0].selected = true;
+                            break;
+                        case 2:
+                            obj.options[1].selected = true;
+                            break;
+                        case 1:
+                            obj.options[2].selected = true;
+                            break;
+                        case 0:
+                            obj.options[3].selected = true;
+                            break;
+                        case -1:
+                            obj.options[4].selected = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            })
         }
     </script>
 }

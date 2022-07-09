@@ -213,6 +213,22 @@
         </div>
         <!-- Default -->
         <div class="widget has-shadow">
+            @if (Model != null && Model.Count() > 0)
+            {
+                <div class="widget-header bordered d-flex align-items-center">
+                    <div class="styled-checkbox mt-2">
+                        <input type="checkbox" name="check-all" id="check-all">
+                        <label for="check-all">Select all</label>
+                    </div>
+                    <div class="col-4">
+                        <select id="checkboxStatus" name="checkboxStatus" class="custom-select form-control" onchange="changeByCheckbox(this)">
+                            <option>Change selected item status</option>
+                            <option value="1">Active</option>
+                            <option value="0">Disable</option>
+                        </select>
+                    </div>
+                </div>
+            }
             <div class="widget-body">
                 @if (Model == null || Model.Count() == 0)
                 {
@@ -227,10 +243,10 @@
                         <table class="table table-bordered mb-0">
                             <thead>
                                 <tr>
+                                    <th width="5%"></th>
                                     <th width="5%">#</th>
                                     <th width="5%">Id</th>
                                     <th width="15%">Thumbnail</th>
-                                    <th width="10%">Brand</th>
                                     <th width="10%">Model</th>
                                     <th width="10%">Type</th>
                                     <th width="5%">Location</th>
@@ -238,7 +254,7 @@
                                     <th width="5%">Price</th>
                                     <th width="5%">AC</th>
                                     <th width="5%">Driver</th>
-                                    <th width="10%">Status</th>
+                                    <th width="15%">Status</th>
                                     <th width="10%">Action</th>
                                 </tr>
                             </thead>
@@ -246,17 +262,22 @@
                                 @{var i = 1;
                                     foreach (var item in Model)
                                     {
-
+                                        string cbId = "cb" + i;
                                         var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
                                         if (item.Thumbnail != null)
                                         {
                                             img = item.Thumbnail.Split(',').ToList<String>().First();
                                         }
                                         <tr>
+                                            <td>
+                                                <div class="styled-checkbox mt-2">
+                                                    <input type="checkbox" name=@cbId id=@cbId value="@(item.Id)">
+                                                    <label for=@cbId></label>
+                                                </div>
+                                            </td>
                                             <td><span class="text-primary">@i</span></td>
                                             <td><span>@Html.DisplayFor(modelItem => item.Id)</span></td>
                                             <td><img width="150" src=@img alt="thumbnail" /></td>
-                                            <td>@item.CarModel.CarBrand.Name</td>
                                             <td>@item.CarModel.Name</td>
                                             <td>@item.CarType.Name</td>
                                             <td>@item.Location.Name</td>
@@ -265,7 +286,7 @@
                                             <td><p>@(item.HasAirConditioner == true ? "✅" : "✖")</p></td>
                                             <td><p>@(item.HasDriver == true ? "✅" : "✖")</p></td>
                                             <td>
-                                                <select id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
+                                                <select name="Status" id=@(item.Id) data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
                                                     <option value="1" @(item.Status == 1 ? "selected" : "")>Active</option>
                                                     <option value="0" @(item.Status == 0 ? "selected" : "")>Disable</option>
                                                 </select>
@@ -326,6 +347,63 @@
 @section Scripts{
     <script src="~/Content/admin_vendor/js/bootstrap-select/bootstrap-select.min.js"></script>
     <script>
+        $("#check-all").change(function () {
+            $("input:checkbox").prop('checked', $(this).prop("checked"));
+        });
+        function changeByCheckbox(obj) {
+            var ids = "";
+            $("input:checkbox[name!=check-all]:checked").each(function () {
+                ids == "" ? ids += $(this).val() : ids += "," + $(this).val()
+            });
+            console.log(ids)
+            var status = obj.value
+            var cnfrmMsg;
+            if (status == 0) {
+                cnfrmMsg = "disable selected item"
+            } else {
+                cnfrmMsg = "activate selected item"
+            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "To " + cnfrmMsg,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, do it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#preloader2").show();
+                    $.ajax({
+                        type: "GET",
+                        url: "/Cars/ChangeStatus",
+                        contentType: 'application/json; charset=utf-8',
+                        data: {
+                            status: status,
+                            ids: ids
+                        },
+                        success: function (msg) {
+                            $("#preloader2").hide();
+                            Swal.fire({
+                                title: 'Success!',
+                                text: msg,
+                                timer: 2000,
+                                icon: "success"
+                            }).then(function () {
+                                location.reload()
+                            });
+                        },
+                        error: function () {
+                            $("#preloader2").hide();
+                        },
+                    });
+
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    var a = document.getElementById("checkboxStatus");
+                    a.options[0].selected = true;
+                }
+            })
+        }
         function changeStatus(obj) {
             var id = obj.getAttribute('data-id')
             var status = obj.value
@@ -348,7 +426,7 @@
                         type: "GET",
                         url: "/Cars/ChangeStatus",
                         data: {
-                            id: id,
+                            ids: id,
                             status: status
                         },
                         success: function (msg) {
@@ -364,9 +442,13 @@
                         },
                     });
 
-                }
-                else {
-                    alert(oke)
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    var a = document.getElementById(id);
+                    if (status == 0) {
+                        obj.options[0].selected = true;
+                    } else {
+                        obj.options[1].selected = true;
+                    }
                 }
             })
         }
