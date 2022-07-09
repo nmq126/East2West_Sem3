@@ -332,7 +332,7 @@
                             <img src="~/Content/client_img/hinh-nen-vinh-ha-long-quang-ninh-dep.jpg" alt="Tours" class="img-fluid">
                             <div class="wrapper">
                                 <h2>Tours</h2>
-                                <p>1150 Locations</p>
+                                <p>@ViewBag.TotalTour Locations</p>
                             </div>
                         </a>
                     </div>
@@ -343,7 +343,7 @@
                                     <img src="~/Content/client_img/ve-may-bay-di-vietnam-airlines.jpg" alt="Flights" class="img-fluid">
                                     <div class="wrapper">
                                         <h2>Flights</h2>
-                                        <p>800 Flights</p>
+                                        <p>@ViewBag.TotalFlight Flights</p>
                                     </div>
                                 </a>
                             </div>
@@ -352,7 +352,7 @@
                                     <img src="~/Content/client_img/img_cat_home_3.jpg" alt="Hotels" class="img-fluid">
                                     <div class="wrapper">
                                         <h2>Hotels</h2>
-                                        <p>650 Locations</p>
+                                        <p>@ViewBag.TotalHotel Hotels</p>
                                     </div>
                                 </a>
                             </div>
@@ -361,7 +361,7 @@
                                     <img src="~/Content/client_img/xe.jpg" alt="Cars" class="img-fluid">
                                     <div class="wrapper">
                                         <h2>Cars</h2>
-                                        <p>113 Cars</p>
+                                        <p>@ViewBag.TotalCar Cars</p>
                                     </div>
                                 </a>
                             </div>
@@ -482,7 +482,6 @@
                         <li><a href="@Url.Action("Contact", "Home")">Contact us</a></li>
                         <li><a href="@Url.Action("Login", "User")">Login</a></li>
                         <li><a href="@Url.Action("Register", "User")">Register</a></li>
-                        
                     </ul>
                 </div>
                 <div class="col-md-3">
