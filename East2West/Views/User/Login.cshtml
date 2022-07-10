@@ -7,7 +7,7 @@
 }
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Login", "User", FormMethod.Post, new { id = "loginform" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -25,7 +25,9 @@
                                     <div class=" ui left icon input swdh11 swdh19">
                                         @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control prompt srch_explore", placeholder = @Html.DisplayNameFor(m => m.UserName) } })
                                     </div>
-                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger float-left mt-2 mb-2" })
+                                    <p id="usercheck" hidden style="color: red;">
+                                        **Username is missing
+                                    </p>
                                 </div>
 
 
@@ -33,12 +35,14 @@
                                     <div class=" ui left icon input swdh11 swdh19">
                                         @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control prompt srch_explore", placeholder = @Html.DisplayNameFor(m => m.Password) } })
                                     </div>
-                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger float-left mt-2 mb-2" })
+                                    <p id="conpasscheck" hidden style="color: red;">
+                                        **Password didn't match
+                                    </p>
                                 </div>
                                 <p class="small">
                                     <a href="#">Forgot Password?</a>
                                 </p>
-                                <button class="btn_full" type="submit">Login</button>
+                                <button class="btn_full" type="button" onclick="login()">Login</button>
                                 <a href="/User/Register" class="btn_full_outline">Register</a>
                             </form>
                         </div>
@@ -50,4 +54,47 @@
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+    function login() {
+       
+        if (validateFormLogin()) {
+            document.getElementById("loginform").submit();
+        }
+    }
+
+    function validateFormLogin() {
+        alert("không được lỗi");
+        var usernameValue = $("#usernames");
+        if (usernameValue.val() == "") {
+            $("#usercheck").show();
+            usernameError = false;
+            return false;
+        } else if (usernameValue.length < 3 || usernameValue.length > 10) {
+            $("#usercheck").show();
+            $("#usercheck").html("**length of username must be between 3 and 10");
+            usernameError = false;
+            return false;
+        } else {
+            $("#usercheck").hide();
+        }
+        var passwordValue = $("#password");
+        if (passwordValue.val() == "") {
+            $("#passcheck").show();
+            passwordError = false;
+            return false;
+        }
+        if (passwordValue.length < 3 || passwordValue.length > 10) {
+            $("#passcheck").show();
+            $("#passcheck").html(
+                "**length of your password must be between 3 and 10"
+            );
+            $("#passcheck").css("color", "red");
+            passwordError = false;
+            return false;
+        } else {
+            $("#passcheck").hide();
+        }
+        return true;
+    }
+    </script>
 }

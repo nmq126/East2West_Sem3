@@ -63,19 +63,17 @@
                                     @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger float-left mt-2 mb-2" })
                                 </div>
 
-                                <div class="form-group ui search focus">
-                                    <div class=" ui left icon input swdh11 swdh19">
-                                        @Html.EditorFor(model => model.Thumbnail, new { htmlAttributes = new { @class = "form-control prompt srch_explore", placeholder = @Html.DisplayNameFor(m => m.Thumbnail) } })
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Thumbnail, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <button id="upload_widget" class="cloudinary-button" type="button">Upload files</button>
+                                        <div class="upload_button_holder" style="display:flex;flex-wrap:wrap;">
+                                        </div>
+                           
                                     </div>
-                                    @Html.ValidationMessageFor(model => model.Thumbnail, "", new { @class = "text-danger float-left mt-2 mb-2" })
                                 </div>
 
-                                <div class="form-group ui search focus">
-                                    <div class=" ui left icon input swdh11 swdh19">
-                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control prompt srch_explore", placeholder = @Html.DisplayNameFor(m => m.Description) } })
-                                    </div>
-                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger float-left mt-2 mb-2" })
-                                </div>
 
                                 <div class="form-group ui search focus">
                                     <div class=" ui left icon input swdh11 swdh19">
@@ -99,4 +97,52 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/admin_vendor/js/bootstrap-wizard/bootstrap.wizard.min.js"></script>
+    <script src="~/Content/admin_js/components/wizard/form-wizard.min.js"></script>
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var myWidget = cloudinary.createUploadWidget({
+            cloudName: 'nmq126',
+            uploadPreset: 'jkyvknsj'
+        }, (error, result) => {
+            if (!error && result && result.event === "success") {
+                $(".Thumbnail").val(result.info.secure_url)
+                console.log('Done! Here is the image info: ', result.info);
+                $(".upload_button_holder").html(function () {
+                    return `
+                        <div class="p-2" style="position: relative;width:200px">
+                            <input type="hidden" value="${result.info.secure_url}" id="Thumbnail", name="Thumbnail"/>
+                            <img data-delete="${result.info.delete_token}" class="border border-primary" style="margin:5px;padding:5px;height:150px;object-fit:cover;width:200px;" src="${result.info.secure_url}" />
+                            <input onclick="removeImg()" class="btn btn-warning uk-padding-remove" style="position:absolute;top:0;left:90%;height:30px;" type="button" value="X">
+                        </div>`;
+                })
+            }
+        }
+        )
+        document.getElementById("upload_widget").addEventListener("click", function () {
+            myWidget.open();
+        }, false);
+        function removeImg() {
+            $(".uk-padding-remove").click(function () {
+                var parent = $(this).parent(".p-2");
+                var delete_token = $(this).prev().attr("data-delete");
+                $.ajax({
+                    type: "POST",
+                    url: "https://api.cloudinary.com/v1_1/nmq126/delete_by_token",
+                    cache: false,
+                    data: { token: delete_token },// serializes the form's elements.
+                    success: function (data) {
+                        console.log(data.result);
+                        parent.remove();
+                    }
+                }, parent);
+            });
+        }
+    </script>
+   
+    <script src="https://cdn.ckeditor.com/4.17.1/standard-all/ckeditor.js"></script>
+
+    <script>
+        CKEDITOR.replace("Detail");
+    </script>
 }
