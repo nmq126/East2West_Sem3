@@ -17,6 +17,10 @@ namespace East2West.Controllers
         public ActionResult Index()
         {
             ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            ViewBag.TotalTour = db.Tours.Count();
+            ViewBag.TotalCar = db.Cars.Count();
+            ViewBag.TotalHotel = db.Hotels.Count();
+            ViewBag.TotalFlight = db.Flights.Count();
             var tours = db.Tours.Include(t => t.TourCategory).Include(t => t.TourDetails).Where(t => t.Rating == 5).ToList();
             return View(tours.ToList());
         }
@@ -38,6 +42,12 @@ namespace East2West.Controllers
         }
 
         public ActionResult ThankYou()
+        {
+            ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            return View();
+        }
+
+        public ActionResult Error404()
         {
             ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
             return View();

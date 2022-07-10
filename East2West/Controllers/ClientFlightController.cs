@@ -29,10 +29,9 @@ namespace East2West.Controllers
             ViewBag.FromDate = from_date;
             ViewBag.ToDate = to_date;
 
-            var flights = from f in db.Flights select f;
+            var flights = from f in db.Flights where f.Status != 0 select f;
             var locations = db.Locations.ToList();
             ViewBag.LocationList = db.Locations.ToList();
-
 
             flights = (status > 0) ? flights.Where(M => M.Status == status) : flights;
 
@@ -46,7 +45,7 @@ namespace East2West.Controllers
             }
             if (!String.IsNullOrEmpty(keyword))
             {
-                flights = flights.Where(f => f.LocationDestination.Name.ToLower().Contains(keyword.ToLower()) || f.LocationDeparture.Name.ToLower().Contains(keyword.ToLower()));
+                flights = flights.Where(f => f.LocationDestination.Name.Contains(keyword) || f.Description.Contains(keyword) || f.Detail.Contains(keyword) || f.LocationDeparture.Name.Contains(keyword));
             }
             if (from_date != null)
             {
@@ -87,15 +86,19 @@ namespace East2West.Controllers
                 case "createdAt_asc":
                     flights = flights.OrderBy(s => s.CreatedAt);
                     break;
+
                 case "createdAt_desc":
                     flights = flights.OrderByDescending(s => s.CreatedAt);
                     break;
+
                 case "duration_asc":
                     flights = flights.OrderBy(t => t.Duration);
                     break;
+
                 case "duration_desc":
                     flights = flights.OrderByDescending(t => t.Duration);
                     break;
+
                 default:
                     flights = flights.OrderBy(s => s.CreatedAt);
                     break;
@@ -103,12 +106,13 @@ namespace East2West.Controllers
 
             return View(flights.ToPagedList(pageNumber, pageSize));
         }
+
         public ActionResult Details(string id)
         {
             ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Error404", "Home");
             }
             var flights = db.Flights.ToList();
             var locations = db.Locations.ToList();
@@ -120,7 +124,7 @@ namespace East2West.Controllers
 
             if (flight == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Error404", "Home");
             }
             ViewBag.LocationDeparture = name_departure ?? "";
             ViewBag.LocationDestination = name_destination ?? "";

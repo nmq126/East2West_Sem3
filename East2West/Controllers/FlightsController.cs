@@ -37,7 +37,7 @@ namespace East2West.Controllers
             }
             if (!String.IsNullOrEmpty(keyword))
             {
-                flights = flights.Where(t => t.LocationDeparture.Name.Contains(keyword) ||  t.LocationDestination.Name.Contains(keyword) || t.Detail.Contains(keyword));
+                flights = flights.Where(t => t.LocationDeparture.Name.Contains(keyword) || t.Detail.Contains(keyword) || t.Description.Contains(keyword) ||  t.LocationDestination.Name.Contains(keyword) || t.Detail.Contains(keyword));
             }
             if (!String.IsNullOrEmpty(departureId))
             {
@@ -82,7 +82,9 @@ namespace East2West.Controllers
                 return HttpNotFound();
             }
             var locationName = db.Locations.ToList().Where(M => M.Id == flight.LocationDestination.Id);
+            var departureName = db.Locations.ToList().Where(M => M.Id == flight.LocationDeparture.Id);
             ViewBag.LocationName = locationName.FirstOrDefault().Name;
+            ViewBag.DepartureName = departureName.FirstOrDefault().Name;
             return View(flight);
         }
 

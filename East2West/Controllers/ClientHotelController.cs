@@ -19,7 +19,8 @@ namespace East2West.Controllers
 
         public ActionResult GetListHotel(string sortType, string keyword, string price_range, string locationId, string rating, int? page)
         {
-            var hotels = from h in db.Hotels select h;
+            var hotels = from h in db.Hotels where h.Status != 0 select h;
+
             ViewBag.LocationList = from l in db.Locations select l;
             ViewBag.SortType = sortType;
             ViewBag.Keyword = keyword;
@@ -30,7 +31,7 @@ namespace East2West.Controllers
             int pageSize = 5;
             if (!String.IsNullOrEmpty(keyword))
             {
-               hotels = hotels.Where(h=>h.Name.Contains(keyword) || h.Description.Contains(keyword)|| h.Detail.Contains(keyword) || h.Address.Contains(keyword));
+                hotels = hotels.Where(h => h.Name.Contains(keyword) || h.Description.Contains(keyword) || h.Detail.Contains(keyword) || h.Address.Contains(keyword));
             }
             if (!String.IsNullOrEmpty(locationId))
             {
@@ -92,6 +93,7 @@ namespace East2West.Controllers
                 case "createdAt_desc":
                     hotels = hotels.OrderByDescending(s => s.CreatedAt);
                     break;
+
                 case "rating_asc":
                     hotels = hotels.OrderBy(t => t.Rating);
                     break;
@@ -104,20 +106,21 @@ namespace East2West.Controllers
                     hotels = hotels.OrderBy(s => s.CreatedAt);
                     break;
             }
-            
-            return View(hotels.ToPagedList(pageNumber , pageSize));
+
+            return View(hotels.ToPagedList(pageNumber, pageSize));
         }
+
         public ActionResult Details(string id)
         {
             ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Error404", "Home");
             }
-            Hotel hotel = db.Hotels.Include(x=>x.Location).FirstOrDefault(x=> x.Id == id);
-            if(hotel == null)
+            Hotel hotel = db.Hotels.Include(x => x.Location).FirstOrDefault(x => x.Id == id);
+            if (hotel == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Error404", "Home");
             }
             ViewBag.Location = hotel.Location;
             return View(hotel);
