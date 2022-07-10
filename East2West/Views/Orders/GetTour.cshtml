@@ -128,8 +128,8 @@
                             <div class="select mb-3">
                                 <select name="unit_price_range" id="unit_price_range" class="custom-select form-control">
                                     <option value="all" @(ViewBag.UnitPriceRange == "all" ? "selected" : "")>All</option>
-                                    <option value="lte200" @(ViewBag.UnitPriceRange == "lte200" ? "selected" : "")>Ticket<= $200</option>
-                                    <option value="200to500" @(ViewBag.UnitPriceRange == "200to500" ? "selected" : "")>$200 < Ticket < $500</option>
+                                    <option value="lt200" @(ViewBag.UnitPriceRange == "lt200" ? "selected" : "")>Ticket < $200</option>
+                                    <option value="200to500" @(ViewBag.UnitPriceRange == "200to500" ? "selected" : "")>$200 <= Ticket <= $500</option>
                                     <option value="gt500" @(ViewBag.UnitPriceRange == "gt500" ? "selected" : "")>Ticket > $500</option>
 
                                 </select>
@@ -215,7 +215,32 @@
 
                     </div>
                     <div class="row">
-                        <div class="col-lg-9"></div>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Select Tour</label>
+                            <div class="select mb-3">
+                                <select name="tourId" id="tourId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var tour in ViewBag.TourList)
+                                    {
+                                        if (tour.Id == ViewBag.TourId)
+                                        {
+                                            <option value=@tour.Id selected>@tour.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@tour.Id>@tour.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Search by tour detail id</label>
+                            <div class="">
+                                @Html.TextBox("tourDetailId", ViewBag.TourDetail as string, new { @class = "form-control", placeholder = "Enter tour detail id" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3"></div>
                         <div class="col-lg-3 text-right">
                             <div style="height:28px"></div>
                             <div>
@@ -300,6 +325,8 @@
                                     new
                                     {
                                         orderId = ViewBag.OrderId,
+                                        tourId = ViewBag.TourId,
+                                        tourDetailId = ViewBag.TourDetail,
                                         sortType = ViewBag.SortType,
                                         username = ViewBag.Username,
                                         departureId = ViewBag.DepartureId,

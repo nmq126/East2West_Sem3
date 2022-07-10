@@ -4,10 +4,12 @@ using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using static East2West.Models.TourDetail;
 
 namespace East2West.Controllers
 {
@@ -15,12 +17,15 @@ namespace East2West.Controllers
     {
         private DBContext db = new DBContext();
         // GET: TourDetails
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string tourId, string startDepartureAt, string endDepartureAt, string sortType, string priceRange,
+            string id)
         {
             ViewBag.BreadCrumb = "Tour Detail List";
             int pageNumber = (page ?? 1);
             int pageSize = 10;
             var tourDetails = from t in db.TourDetails select t;
+
+            ViewBag.TicketSold = db.OrderTours.Select(x => x.TourDetailId).Distinct().Count();
             tourDetails = tourDetails.OrderBy(x => x.DepartureDay);
             return View(tourDetails.ToPagedList(pageNumber, pageSize));
         }

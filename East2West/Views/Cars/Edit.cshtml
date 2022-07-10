@@ -80,13 +80,21 @@
                                 @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        
+
                         <div class="form-group row d-flex align-items-center mb-5">
                             <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Has Air Conditioner</label>
                             <div class="col-lg-6 text-left">
                                 <input @(Model.HasAirConditioner == true ? "checked" : "") type="checkbox" name="HasAirConditioner" id="HasAirConditioner" value="true">
                                 <label for="HasAirConditioner">Yes</label>
                                 @Html.ValidationMessageFor(model => model.HasAirConditioner, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Has Driver</label>
+                            <div class="col-lg-6 text-left">
+                                <input @(Model.HasDriver == true ? "checked" : "") type="checkbox" name="HasDriver" id="HasDriver" value="true">
+                                <label for="HasAirConditioner">Yes</label>
+                                @Html.ValidationMessageFor(model => model.HasDriver, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group row d-flex align-items-center mb-5">
@@ -124,6 +132,15 @@
                             </div>
                         </div>
 
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Description</label>
+                            <div class="col-lg-9">
+                                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = 5 })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
                         @Html.EditorFor(model => model.Thumbnail, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
                         @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
                         @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
@@ -150,6 +167,11 @@
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
+        <script src="https://cdn.ckeditor.com/4.17.1/standard-all/ckeditor.js"></script>
+        <script>
+
+            CKEDITOR.replace('Description');
+        </script>
     }
 
 </div>

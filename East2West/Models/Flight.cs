@@ -44,6 +44,9 @@ namespace East2West.Models
 
         [Column(TypeName = "ntext")]
         [Required]
+        public String Description { get; set; }
+        [Column(TypeName = "ntext")]
+        [Required]
         public String Detail { get; set; }
 
         public int Status { get; set; }

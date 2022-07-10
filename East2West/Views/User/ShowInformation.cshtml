@@ -23,7 +23,10 @@
     </section>
 }
 <main>
-
+    <input type="range" value="5" step="0.25" id="backing5">
+    <div class="rateit" data-rateit-backingfld="#backing5" data-rateit-resetable="false" data-rateit-ispreset="true"
+         data-rateit-min="0" data-rateit-max="10">
+    </div>
     <div id="position">
         <div class="container">
             <ul>
@@ -107,7 +110,10 @@
                                             else if (order.Status == 1)
                                             {
                                                 <a href="#0" data-id="@order.Id" class="btn_3 refundButton" style="background-color: #f44336; color: white;">Refund</a>
+                                                <a href="#0" class="btn_3" style="min-width: 100px; background-color: mediumpurple; color: white;"
+                                                   data-id="@(order.Id)" onclick="showModalFeedback(this)">Leave a feedback</a>
                                             }
+
                                             else
                                             {
                                                 <a href="@Url.Action("Details", "ClientTour", new { id = tourId})" class="btn_2 white">Order again</a>
@@ -377,3 +383,18 @@
     </div>
     <div id="overlay"></div>
 </main>
+<script src="~/Scripts/jquery.rateit.min.js"></script>
+
+<script>
+
+    function showModalFeedback(obj) {
+        Swal.fire({
+            title: "cac",
+            html:
+                '<input type="range" value="5" step="0.25" id="backing5">' +
+                '<div class= "rateit" data-rateit-backingfld="#backing5" data-rateit-resetable="false"  data-rateit-ispreset="true"' +
+                'data-rateit-min="0" data-rateit-max="10"></div>',
+            text: "cac"
+        })
+    }
+</script>
