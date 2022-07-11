@@ -80,6 +80,7 @@ namespace East2West.Controllers
             }
             else
             {
+                Session["currentUrl"] = "/home/cars/" + carId;
                 return Json(new
                 {
                     message = "You must login to order.",

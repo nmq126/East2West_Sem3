@@ -96,6 +96,7 @@ namespace East2West.Controllers
                 return View("ViewError");
             }
         }
+
         [Authorize(Roles = "Super Admin")]
         public async Task<String> AddUserToRole(string UserId, string RoleId)
         {
@@ -142,8 +143,16 @@ namespace East2West.Controllers
                 {
                     SignInManager<User, string> signInManager = new SignInManager<User, string>(userManager, Request.GetOwinContext().Authentication);
                     await signInManager.SignInAsync(user, false, false);
-
-                    return RedirectToAction("Index", "Home");
+                    string redirectUrl = (string)Session["currentUrl"];
+                    if (String.IsNullOrEmpty(redirectUrl))
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else if (redirectUrl != null)
+                    {
+                        Session.Remove("currentUrl");
+                        return Redirect(redirectUrl);
+                    }
                 }
             }
 
@@ -182,16 +191,19 @@ namespace East2West.Controllers
             }
             return RedirectToAction("LoginAdmin");
         }
+
         public ActionResult LogOut()
         {
             HttpContext.GetOwinContext().Authentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
+
         public ActionResult LogOutAdmin()
         {
             HttpContext.GetOwinContext().Authentication.SignOut();
             return RedirectToAction("LoginAdmin", "User");
         }
+
         public ActionResult ShowInformation(string id)
         {
             ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
