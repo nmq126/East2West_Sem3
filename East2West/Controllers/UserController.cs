@@ -204,10 +204,15 @@ namespace East2West.Controllers
             return RedirectToAction("LoginAdmin", "User");
         }
 
+
         public ActionResult ShowInformation(string id)
         {
             ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());
             if (id == null)
+            {
+                return RedirectToAction("Error404", "Home");
+            }
+            if(id != System.Web.HttpContext.Current.User.Identity.GetUserId())
             {
                 return RedirectToAction("Error404", "Home");
             }
