@@ -79,7 +79,7 @@ namespace East2West.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Super Admin")]
         public async Task<ActionResult> AddRole(string RoleName)
         {
             AppRole appRole = new AppRole()
@@ -96,7 +96,7 @@ namespace East2West.Controllers
                 return View("ViewError");
             }
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Super Admin")]
         public async Task<String> AddUserToRole(string UserId, string RoleId)
         {
             var user = myIdentityDbContext.Users.Find(UserId);
@@ -187,7 +187,11 @@ namespace East2West.Controllers
             HttpContext.GetOwinContext().Authentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
-
+        public ActionResult LogOutAdmin()
+        {
+            HttpContext.GetOwinContext().Authentication.SignOut();
+            return RedirectToAction("LoginAdmin", "User");
+        }
         public ActionResult ShowInformation(string id)
         {
             ViewBag.UserId = Convert.ToString(System.Web.HttpContext.Current.User.Identity.GetUserId());

@@ -16,7 +16,7 @@ namespace East2West.App_Start
                 app.UseCookieAuthentication(new CookieAuthenticationOptions
                 {
                     AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                    LoginPath = new PathString("/User/Login"),
+                    LoginPath = new PathString("/admin/login"),
                 });
             }
     }
