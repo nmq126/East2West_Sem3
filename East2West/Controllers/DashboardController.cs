@@ -3,6 +3,7 @@ using East2West.Models.ChartModel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,7 @@ using System.Web.Mvc;
 
 namespace East2West.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class DashboardController : Controller
     {
         private DBContext db = new DBContext();
@@ -38,8 +40,37 @@ namespace East2West.Controllers
             ViewBag.DataSaleChart = GetSaleChartData(2022);
             ViewBag.LatestOrders = db.Orders.OrderByDescending(o => o.CreatedAt).Take(10);
             ViewBag.LatestUsers = db.Users.OrderByDescending(o => o.CreatedAt).Take(5);
-
+            var bestTour = FindBestSellingTour().Split(',').ToList();
+            ViewBag.BestTour = db.Tours.Find(bestTour[0]);
+            ViewBag.BestTourTicket = bestTour[1];
+            ViewBag.BestTourSale = String.Format("{0:C}", bestTour[2]);
             return View();
+        }
+        private string FindBestSellingTour()
+        {
+            var odt = db.OrderTours.Where(o => o.Order.Status == 1)
+                .GroupBy(o => o.TourDetailId)
+                .OrderByDescending(o => o.Sum(oi => oi.Quantity))
+                .Select(o => new 
+                { 
+                    Id = o.Key,
+                    Quantity = o.Sum(oi => oi.Quantity),
+                    TotalSale = o.Sum(oi => oi.Quantity * oi.UnitPrice)
+                });
+            string keyOfMaxValue = "";
+            int maxQuantity = 0;
+            double maxTotalSale = 0;
+            foreach (var item in odt)
+            {
+                if (item.Quantity > maxQuantity)
+                {
+                    maxQuantity = item.Quantity;
+                    var x = db.TourDetails.Where(t => t.Id == item.Id).Select(t => new { Id = t.TourId }).First();
+                    keyOfMaxValue = x.Id;
+                    maxTotalSale = item.TotalSale;
+                }
+            }
+            return keyOfMaxValue + "," + maxQuantity + "," + maxTotalSale;
         }
         public String GetSaleChartData(int year)
         {

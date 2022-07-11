@@ -2,7 +2,7 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "List Orders";
+    ViewBag.Title = "Admin | Orders Tour List";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -582,6 +582,9 @@
                                         break;
                                 }
                             } else {
+                                if (status == 0 || status == 2) {
+                                    obj.prop('disabled', true);
+                                }
                                 Swal.fire(
                                     'Success!',
                                     msg,

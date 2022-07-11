@@ -14,6 +14,7 @@ using PagedList;
 
 namespace East2West.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class ToursController : Controller
     {
         private DBContext db = new DBContext();
@@ -22,7 +23,7 @@ namespace East2West.Controllers
         public ActionResult Index(int? status, string id, string sortType, string keyword, string duration_range,
             string departureId, string destinationId, string categoryId, int? page)
         {
-            ViewBag.BreadCrumb = "Tour List";
+            ViewBag.BreadCrumb = "List Tour";
             var tours = from t in db.Tours select t;
 
             ViewBag.CategoryList = from c in db.TourCategories select c;

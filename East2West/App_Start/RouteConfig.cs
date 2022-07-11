@@ -35,21 +35,26 @@ namespace East2West
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             //ADMIN
+            routes.MapRoute(
+                name: "Login",
+                url: "admin/login",
+                defaults: new { controller = "User", action = "LoginAdmin", id = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "Dashboard",
-                url: "admin/dashboard",
+                url: "admin",
                 defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
             );
 
             //ORDER
             routes.MapRoute(
-                name: "Tour Analysis",
+                name: "Order Tour",
                 url: adminOrderUrl + "/tours",
                 defaults: new { controller = "Orders", action = "GetTour", id = UrlParameter.Optional }
             );
             routes.MapRoute(
-                name: "Car Analysis",
+                name: "Order Car",
                 url: adminOrderUrl + "/cars",
                 defaults: new { controller = "Orders", action = "GetCar", id = UrlParameter.Optional }
             );

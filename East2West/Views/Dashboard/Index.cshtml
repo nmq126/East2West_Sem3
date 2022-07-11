@@ -1,16 +1,16 @@
 ﻿@using East2West.Util
-
+@using East2West.Models
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Admin | Dashboard";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <div class="row flex-row">
     <!-- Begin Facebook -->
-    <div class="col-3">
+    <div class="col-4">
         <div class="widget widget-12 has-shadow">
             <div class="widget-body">
                 <div class="media">
-                    <div class="align-self-center ml-2 mr-2">
+                    <div class="align-self-center ml-5 mr-5">
                         <i class="ion-bag text-facebook"></i>
                     </div>
                     <div class="media-body align-self-center">
@@ -23,11 +23,11 @@
     </div>
     <!-- End Facebook -->
     <!-- Begin Twitter -->
-    <div class="col-3">
+    <div class="col-4">
         <div class="widget widget-12 has-shadow">
             <div class="widget-body">
                 <div class="media">
-                    <div class="align-self-center ml-2 mr-2">
+                    <div class="align-self-center ml-5 mr-5">
                         <i class="ion-person text-twitter"></i>
                     </div>
                     <div class="media-body align-self-center">
@@ -40,11 +40,11 @@
     </div>
     <!-- End Twitter -->
     <!-- Begin Linkedin -->
-    <div class="col-xl-3">
+    <div class="col-4">
         <div class="widget widget-12 has-shadow">
             <div class="widget-body">
                 <div class="media">
-                    <div class="align-self-center ml-2 mr-2">
+                    <div class="align-self-center ml-5 mr-5">
                         <i class="ion-cash text-linkedin"></i>
                     </div>
                     <div class="media-body align-self-center">
@@ -279,27 +279,6 @@
                                     </div>
                                     <div class="mr-3">
                                         <span>$@item.TotalPrice</span>
-                                        <br />
-                                        @switch (item.Status)
-                                        {
-                                            case 1:
-                                                <span style="color:forestgreen" class="">Paid</span>
-                                                break;
-                                            case -1:
-                                                <span style="color:deepskyblue">Unpaid</span>
-                                                break;
-                                            case 0:
-                                                <span style="color: grey" class="">Cancel</span>
-                                                break;
-                                            case -2:
-                                                <span style="color:yellow" class="">Pending refund</span>
-                                                break;
-                                            case 2:
-                                                <span style="color:red" class="">Refunded</span>
-                                                break;
-                                            default:
-                                                break;
-                                        }
                                     </div>
                                 </div>
                             </li>
@@ -313,6 +292,65 @@
         </div>
         <!-- End Widget 06 -->
     </div>
+    <div class="col-xl-4 col-md-6">
+        <!-- Begin Widget 05 -->
+        <div class="widget widget-05 has-shadow">
+            <!-- Begin Widget Header -->
+            <div class="widget-header bordered d-flex align-items-center">
+                <h2>Top Selling Tour</h2>
+            </div>
+            <!-- End Widget Header -->
+            <!-- Begin Widget Body -->
+            @{
+                Tour tour = ViewBag.BestTour;
+                var img2 = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
+                if (tour.Thumbnail != null)
+                {
+                    img2 = tour.Thumbnail.Split(',').ToList<String>().First();
+                }
+
+                <div class="widget-body no-padding hidden">
+                    <div class="author-avatar">
+
+                        <img style="object-fit:cover;height:80px;width:80px" src=@img2 alt="..." class="rounded-circle">
+                    </div>
+                    
+                    <div class="chart">
+                        <div class="row no-margin justify-content-center">
+                            <div class="col-12 col-xl-8 col-md-8 col-sm-8">
+                                <div class="row no-margin align-items-center">
+                                    <!-- Begin Chart -->
+                                    <div class="author-name">
+                                        @tour.Name
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-stats">
+                        <div class="row d-flex justify-content-between">
+                            <div class="col-6 text-center">
+                                <i class="la la-ticket followers"></i>
+                                <div class="counter">@ViewBag.BestTourTicket</div>
+                                <div class="heading">tickets</div>
+                            </div>
+                            <div class="col-6 text-center">
+                                <i class="la la-dollar dribbble"></i>
+                                <div class="counter">@ViewBag.BestTourSale</div>
+                                <div class="heading">USD</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions text-center mt-5">
+                        <a href=@Url.Action("Details", "Tours", new { id = tour.Id }) class="btn btn-gradient-01">View Detail</a>
+                    </div>
+                </div>
+            }
+            <!-- End Widget Body -->
+        </div>
+        <!-- End Widget 05 -->
+    </div>
+
 </div>
 
 

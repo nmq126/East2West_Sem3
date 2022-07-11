@@ -14,6 +14,7 @@ using PagedList;
 
 namespace East2West.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class OrdersController : Controller
     {
         private DBContext db = new DBContext();
@@ -23,8 +24,7 @@ namespace East2West.Controllers
             string ticket_number, string duration_range, string orderId, string username, string startDepartureDay, string endDepartureDay
             , string startCreatedDay, string endCreatedDay, string tourId, string tourDetailId)
         {
-            ViewBag.BreadCrumb = "Tour analysis";
-
+            ViewBag.BreadCrumb = "List order tour";
             var orders = db.Orders.Where(o => o.Type == 1)
                 .Include(o => o.OrderTours)
                 .Include(o => o.Refund)
@@ -203,7 +203,7 @@ namespace East2West.Controllers
             string modelId, string typeId, string orderId, string username, string startPickUpDay, string endPickUpDay, string locationId,
             string startDropOffDay, string endDropOffDay, string startCreatedDay, string endCreatedDay)
         {
-            ViewBag.BreadCrumb = "Car analysis";
+            ViewBag.BreadCrumb = "List order car";
 
             var orders = db.Orders.Where(o => o.Type == 2)
                 .Include(o => o.OrderCars)

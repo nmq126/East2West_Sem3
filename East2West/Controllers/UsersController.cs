@@ -14,6 +14,7 @@ using PagedList;
 
 namespace East2West.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private DBContext db = new DBContext();
@@ -22,8 +23,8 @@ namespace East2West.Controllers
         public ActionResult Index(int? status, string id, string sortType, string username, string firstName,
             string lastName, string address, int? roleId, int? page, int? order)
         {
-            ViewBag.BreadCrumb = "User List";
-            var users = db.Users.Include(u => u.Orders);
+            ViewBag.BreadCrumb = "List User";
+            var users = db.Users.Include(u => u.Orders).Include(u => u.Roles);
             ViewBag.Status = status;
             ViewBag.Id = id;
             ViewBag.SortType = sortType;

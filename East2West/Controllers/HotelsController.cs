@@ -14,6 +14,7 @@ using PagedList;
 
 namespace East2West.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class HotelsController : Controller
     {
         private DBContext db = new DBContext();
@@ -119,7 +120,7 @@ namespace East2West.Controllers
         // GET: Hotels/Details/5
         public ActionResult Details(string id)
         {
-            ViewBag.BreadCrum = "Hotel detail";
+            ViewBag.BreadCrumb = "Hotel Detail";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

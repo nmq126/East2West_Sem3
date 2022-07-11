@@ -1095,10 +1095,12 @@
     <Content Include="Views\Home\Error404.cshtml" />
     <Content Include="Views\Refunds\Details.cshtml" />
     <Content Include="Views\Refunds\Index.cshtml" />
+    <Content Include="Views\User\LoginAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\TourSchedules\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

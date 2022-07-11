@@ -2,7 +2,7 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "List Orders Car";
+    ViewBag.Title = "Admin | Orders Car List";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -561,9 +561,7 @@
                                     'Error!',
                                     msg,
                                     'error'
-                                ).then(function () {
-                                    location.reload()
-                                });
+                                )
                             } else {
                                 Swal.fire({
                                     title: 'Success!',
@@ -641,32 +639,36 @@
                                     msg,
                                     'error'
                                 )
+                                switch (prevStatus) {
+                                    case -1:
+                                        obj.options[0].selected = true;
+                                        break;
+                                    case 1:
+                                        obj.options[1].selected = true;
+                                        break;
+                                    case 0:
+                                        obj.options[2].selected = true;
+                                        break;
+                                    case -2:
+                                        obj.options[3].selected = true;
+                                        break;
+                                    case 2:
+                                        obj.options[4].selected = true;
+                                        break;
+                                    default:
+                                        break;
+                                }
                             } else {
+                                if (status == 0 || status == 2) {
+                                    obj.prop('disabled', true);
+                                }
                                 Swal.fire(
                                     'Success!',
                                     msg,
                                     'success'
                                 )
                             }
-                            switch (prevStatus) {
-                                case -1:
-                                    obj.options[0].selected = true;
-                                    break;
-                                case 1:
-                                    obj.options[1].selected = true;
-                                    break;
-                                case 0:
-                                    obj.options[2].selected = true;
-                                    break;
-                                case -2:
-                                    obj.options[3].selected = true;
-                                    break;
-                                case 2:
-                                    obj.options[4].selected = true;
-                                    break;
-                                default:
-                                    break;
-                            }
+
 
                         },
                         error: function () {

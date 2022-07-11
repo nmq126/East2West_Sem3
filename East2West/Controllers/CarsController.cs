@@ -12,6 +12,7 @@ using PagedList;
 
 namespace East2West.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class CarsController : Controller
     {
         private DBContext db = new DBContext();
@@ -137,6 +138,8 @@ namespace East2West.Controllers
         // GET: Cars/Details/5
         public ActionResult Details(string id)
         {
+            ViewBag.BreadCrumb = "Car Detail";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -157,6 +160,8 @@ namespace East2West.Controllers
         // GET: Cars/Create
         public ActionResult Create()
         {
+            ViewBag.BreadCrumb = "Create Car";
+
             ViewBag.CarBrandId = new SelectList(db.CarBrands, "Id", "Name");
             ViewBag.CarModelId = new SelectList(db.CarModels, "Id", "Name");
             ViewBag.CarTypeId = new SelectList(db.CarTypes, "Id", "Name");
@@ -194,6 +199,8 @@ namespace East2West.Controllers
         // GET: Cars/Edit/5
         public ActionResult Edit(string id)
         {
+            ViewBag.BreadCrumb = "Edit Car";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

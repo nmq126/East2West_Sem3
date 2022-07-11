@@ -12,6 +12,7 @@ using PagedList;
 
 namespace East2West.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class RefundsController : Controller
     {
         private DBContext db = new DBContext();

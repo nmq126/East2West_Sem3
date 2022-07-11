@@ -18,7 +18,6 @@
             <div class="widget-body">
                 <div class="col-10">
                     <div class="section-title mt-3 mb-5">
-                        <h2>01. General Informations</h2>
                     </div>
                 </div>
                 <form class="form-horizontal">
@@ -43,7 +42,7 @@
                     <div class="form-group row d-flex align-items-center mb-5">
                         <div class="col-lg-2 text-right">Status:</div>
                         <div class="select">
-                            <select name="status" id="status" class="custom-select form-control">
+                            <select name="status" id="status" class="custom-select form-control" disabled>
                                 <option value="-1" @(Model.Status == -1 ? "selected" : "")>Unpaid</option>
                                 <option value="1" @(Model.Status == 1 ? "selected" : "")>Paid</option>
                                 <option value="0" @(Model.Status == 0 ? "selected" : "")>Cancel</option>
