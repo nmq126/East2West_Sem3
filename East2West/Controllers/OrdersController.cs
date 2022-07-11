@@ -81,7 +81,7 @@ namespace East2West.Controllers
             {
                 var start = DateTime.Parse(startDepartureDay);
                 var end = DateTime.Parse(endDepartureDay);
-                orders = orders.Where(o => o.OrderTours.FirstOrDefault().TourDetail.DepartureDay >=  start
+                orders = orders.Where(o => o.OrderTours.FirstOrDefault().TourDetail.DepartureDay >= start
                                         && o.OrderTours.FirstOrDefault().TourDetail.DepartureDay <= end);
             }
             if (!String.IsNullOrEmpty(startCreatedDay) && !String.IsNullOrEmpty(endCreatedDay))
@@ -94,21 +94,27 @@ namespace East2West.Controllers
             {
                 case 3:
                     break;
+
                 case 2:
                     orders = orders.Where(t => t.Status == 2);
                     break;
+
                 case 1:
                     orders = orders.Where(t => t.Status == 1);
                     break;
+
                 case 0:
                     orders = orders.Where(t => t.Status == 0);
                     break;
+
                 case -1:
                     orders = orders.Where(t => t.Status == -1);
                     break;
+
                 case -2:
                     orders = orders.Where(t => t.Status == -2);
                     break;
+
                 default:
                     break;
             }
@@ -117,15 +123,19 @@ namespace East2West.Controllers
             {
                 case "all":
                     break;
+
                 case "lte3":
                     orders = orders.Where(o => o.OrderTours.FirstOrDefault().TourDetail.Tour.Duration <= 3);
                     break;
+
                 case "4to7":
                     orders = orders.Where(o => o.OrderTours.FirstOrDefault().TourDetail.Tour.Duration >= 4 && o.OrderTours.FirstOrDefault().TourDetail.Tour.Duration <= 7);
                     break;
+
                 case "gt7":
                     orders = orders.Where(o => o.OrderTours.FirstOrDefault().TourDetail.Tour.Duration > 7);
                     break;
+
                 default:
                     break;
             }
@@ -134,15 +144,19 @@ namespace East2West.Controllers
             {
                 case "all":
                     break;
+
                 case "lte2":
                     orders = orders.Where(o => o.OrderTours.FirstOrDefault().Quantity <= 2);
                     break;
+
                 case "2to5":
                     orders = orders.Where(o => o.OrderTours.FirstOrDefault().Quantity > 2 && o.OrderTours.FirstOrDefault().Quantity <= 5);
                     break;
+
                 case "gt5":
                     orders = orders.Where(o => o.OrderTours.FirstOrDefault().Quantity > 5);
                     break;
+
                 default:
                     break;
             }
@@ -152,12 +166,15 @@ namespace East2West.Controllers
                 case "lt200":
                     orders = orders.Where(o => o.OrderTours.FirstOrDefault().UnitPrice < 200);
                     break;
+
                 case "200to500":
                     orders = orders.Where(o => o.OrderTours.FirstOrDefault().UnitPrice >= 200 && o.OrderTours.FirstOrDefault().UnitPrice <= 500);
                     break;
+
                 case "gt5":
                     orders = orders.Where(o => o.OrderTours.FirstOrDefault().UnitPrice > 500);
                     break;
+
                 case "all":
                 default:
                     break;
@@ -168,21 +185,27 @@ namespace East2West.Controllers
                 case "createdAt_asc":
                     orders = orders.OrderBy(s => s.CreatedAt);
                     break;
+
                 case "createdAt_desc":
                     orders = orders.OrderByDescending(s => s.CreatedAt);
                     break;
+
                 case "departureAt_asc":
                     orders = orders.OrderBy(o => o.OrderTours.FirstOrDefault().TourDetail.DepartureDay);
                     break;
+
                 case "departureAt_desc":
                     orders = orders.OrderByDescending(o => o.OrderTours.FirstOrDefault().TourDetail.DepartureDay);
                     break;
+
                 case "totalPrice_asc":
                     orders = orders.OrderBy(t => t.TotalPrice);
                     break;
+
                 case "totalPrice_desc":
                     orders = orders.OrderBy(t => t.TotalPrice);
                     break;
+
                 default:
                     orders = orders.OrderByDescending(s => s.CreatedAt);
                     break;
@@ -295,18 +318,23 @@ namespace East2West.Controllers
                 case 2:
                     orders = orders.Where(t => t.Status == 2);
                     break;
+
                 case 1:
                     orders = orders.Where(t => t.Status == 1);
                     break;
+
                 case 0:
                     orders = orders.Where(t => t.Status == 0);
                     break;
+
                 case -1:
                     orders = orders.Where(t => t.Status == -1);
                     break;
+
                 case -2:
                     orders = orders.Where(t => t.Status == -2);
                     break;
+
                 case 3:
                 default:
                     break;
@@ -316,9 +344,11 @@ namespace East2West.Controllers
                 case 1:
                     orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.Car.HasAirConditioner == true);
                     break;
+
                 case 0:
                     orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.Car.HasAirConditioner == false);
                     break;
+
                 case 2:
                 default:
                     break;
@@ -328,9 +358,11 @@ namespace East2West.Controllers
                 case 1:
                     orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.Car.HasDriver == true);
                     break;
+
                 case 0:
                     orders = orders.Where(o => o.OrderCars.FirstOrDefault().CarSchedule.Car.HasDriver == false);
                     break;
+
                 case 2:
                 default:
                     break;
@@ -340,12 +372,15 @@ namespace East2West.Controllers
                 case "createdAt_asc":
                     orders = orders.OrderBy(s => s.CreatedAt);
                     break;
+
                 case "totalPrice_asc":
                     orders = orders.OrderBy(t => t.TotalPrice);
                     break;
+
                 case "totalPrice_desc":
                     orders = orders.OrderByDescending(t => t.TotalPrice);
                     break;
+
                 case "createdAt_desc":
                 default:
                     orders = orders.OrderByDescending(s => s.CreatedAt);
@@ -468,44 +503,53 @@ namespace East2West.Controllers
 
                 if (status == -2)
                 {
-                var presentTime = DateTime.Now;
-                if (order.UpdatedAt != null)
-                {
-                    span = presentTime.Subtract((DateTime)order.UpdatedAt);
+                    var presentTime = DateTime.Now;
+                    if (order.UpdatedAt != null)
+                    {
+                        span = presentTime.Subtract((DateTime)order.UpdatedAt);
+                    }
+                    int percent;
+                    switch (span.Days)
+                    {
+                        case 1:
+                            percent = 75;
+                            break;
+
+                        case 2:
+                            percent = 80;
+                            break;
+
+                        case 3:
+                            percent = 85;
+                            break;
+
+                        case 4:
+                            percent = 90;
+                            break;
+
+                        case 5:
+                        default:
+                            percent = 95;
+                            break;
+                    }
+                    var refund = new Models.Refund()
+                    {
+                        Percent = percent,
+                        Status = 0,
+                        TotalPrice = order.TotalPrice * (Convert.ToDouble(percent) / 100),
+                        CreatedAt = DateTime.Now
+                    };
+                    order.Refund = refund;
+                    if (order.Type == 1)
+                    {
+                        order.OrderTours.First().TourDetail.AvailableSeat += order.OrderTours.First().Quantity;
+                    }
+                    else
+                    {
+                        order.OrderCars.First().CarSchedule.Status = -1;
+                    }
+                    db.Refunds.Add(refund);
                 }
-                int percent;
-                switch (span.Days)
-                {
-                    case 1:
-                        percent = 75;
-                        break;
-
-                    case 2:
-                        percent = 80;
-                        break;
-
-                    case 3:
-                        percent = 85;
-                        break;
-
-                    case 4:
-                        percent = 90;
-                        break;
-                    case 5:
-                    default:
-                        percent = 95;
-                        break;
-                }
-                var refund = new Models.Refund()
-                {
-                    Percent = percent,
-                    Status = 0,
-                    TotalPrice = order.TotalPrice * (Convert.ToDouble(percent) / 100),
-                    CreatedAt = DateTime.Now
-                };
-                order.Refund = refund;
-                db.Refunds.Add(refund);
-            }
                 order.Status = status;
                 order.UpdatedAt = DateTime.Now;
             }

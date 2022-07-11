@@ -54,27 +54,33 @@
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <form>
-                    <div class="group material-input">
-                        @Html.EditorFor(model => model.UserName)
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>Username</label>
-                    </div>
-                    <div class="group material-input">
-                        @Html.EditorFor(model => model.Password)
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>Password</label>
-                    </div>
-                    @Html.ValidationMessage("LoginError", new { @class = "text-danger float-left mb-4" })
-                    <div class="button text-center">
-                        <button type="submit" class="btn btn-lg btn-gradient-01">
-                            Sign in
-                        </button>
-                    </div>
-                </form>
-                        
+                        <form>
+                            <div class="group material-input">
+                                @Html.EditorFor(model => model.UserName)
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Username</label>
+                                <p id="usercheck" class="small mt-1" style="color: red; display:none;">
+                                    **Username is required
+                                </p>
+                            </div>
+                            <div class="group material-input">
+                                @Html.EditorFor(model => model.Password)
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Password</label>
+                                <p id="conpasscheck" class="small mt-1" style="color: red; display: none">
+                                    **Password is required
+                                </p>
+                            </div>
+                            @Html.ValidationMessage("LoginError", new { @class = "text-danger float-left mb-4" })
+                            <div class="button text-center">
+                                <button id="btn_login" class="btn btn-lg btn-gradient-01">
+                                    Sign in
+                                </button>
+                            </div>
+                        </form>
+
                     }
                 </div>
             </div>
@@ -90,5 +96,40 @@
     <script src="~/Content/admin_vendor/js/app/app.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
     <!-- End Page Vendor Js -->
+    <script>
+        $('#btn_login').on('click', function (e) {
+            e.preventDefault();
+            var userName = $('#UserName').val();
+            var password = $('#Password').val();
+            if (userName === "") {
+                $('#usercheck').show();
+            }
+            if (password === "") {
+                $('#conpasscheck').show();
+            }
+
+            if (userName !== "" && password !== "") {
+                $('#btn_login').unbind('click').click();
+            }
+        });
+
+        $('#UserName').on('keyup', function () {
+            var userName = $('#UserName').val();
+            if (userName === "") {
+                $('#usercheck').show();
+            } else {
+                $('#usercheck').hide();
+            }
+        });
+
+        $('#Password').on('keyup', function () {
+            var password = $('#Password').val();
+            if (password === "") {
+                $('#conpasscheck').show();
+            } else {
+                $('#conpasscheck').hide();
+            }
+        });
+    </script>
 </body>
 </html>
