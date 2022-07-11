@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace East2West.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class DashboardController : Controller
     {
         private DBContext db = new DBContext();
