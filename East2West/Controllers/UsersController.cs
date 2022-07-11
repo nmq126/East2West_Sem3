@@ -21,7 +21,7 @@ namespace East2West.Controllers
 
         // GET: Users
         public ActionResult Index(int? status, string id, string sortType, string username, string firstName,
-            string lastName, string address, int? roleId, int? page, int? order)
+            string lastName, int? roleId, int? page, int? order)
         {
             ViewBag.BreadCrumb = "List User";
             var users = db.Users.Include(u => u.Orders).Include(u => u.Roles);
@@ -30,7 +30,6 @@ namespace East2West.Controllers
             ViewBag.SortType = sortType;
             ViewBag.FirstName = firstName;
             ViewBag.LastName = lastName;
-            ViewBag.Address = address;
             ViewBag.Username = username;
             ViewBag.RoleId = roleId;
             ViewBag.Order = order;
@@ -53,11 +52,21 @@ namespace East2West.Controllers
             {
                 users = users.Where(x => x.FirstName.Contains(firstName));
             }
-            if (!String.IsNullOrEmpty(address))
+            switch (roleId)
             {
-                users = users.Where(x => x.Address.Contains(address));
+                case 1:
+                    users = users.Where(u => u.Roles.Count() == 1);
+                    break;
+                case 9999:
+                    users = users.Where(u => u.Roles.Count() == 2);
+                    break;
+                case 0:
+                    users = users.Where(u => u.Roles.Count() == 0);
+                    break;
+                case 2:
+                default:
+                    break;
             }
-
             switch (status)
             {
                 case 2:
@@ -205,25 +214,58 @@ namespace East2West.Controllers
             return View(user);
         }
 
-        public String ChangeStatus(string id, int status)
+        [Authorize(Roles = "Admin")]
+        public String ChangeStatus(string id, string ids, int status)
         {
-            if (id == null)
+            if (id == null && ids == null)
             {
                 return "Bad Request";
             }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return "User not found";
-            }
-            user.Status = status;
             string newStatus = "ACTIVE";
             if (status == 0)
             {
                 newStatus = "DISABLE";
             }
-            db.SaveChanges();
-            return "User #" + id + " status change to " + newStatus;
+            if (id != null)
+            {
+                User user = db.Users.Find(id);
+                if (user == null)
+                {
+                    return "User not found";
+                }
+                user.Status = status;
+            }
+            if (ids != null)
+            {
+                var listId = ids.Split(',').ToList();
+                foreach (var itemId in listId)
+                {
+                    if (itemId == null)
+                    {
+                        return "Bad Request";
+                    }
+                    User user = db.Users.Find(itemId);
+                    if (user == null)
+                    {
+                        return "Bad request user " + itemId + " not found";
+                    }
+                    user.Status = status;
+                }
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return "Update fail";
+            }
+            if (ids != null)
+            {
+                return "Update success";
+            }
+            return "Tour #" + id + " status change to " + newStatus;
+
         }
         protected override void Dispose(bool disposing)
         {

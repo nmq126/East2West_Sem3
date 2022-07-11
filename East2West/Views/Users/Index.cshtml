@@ -58,10 +58,11 @@
                         <div class="col-lg-3">
                             <label class="form-control-label">Role</label>
                             <div class="select mb-3">
-                                <select name="role" id="role" class="custom-select form-control">
-                                    <option value="2" @(ViewBag.Status == 2 ? "selected" : "")>All</option>
-                                    <option value="1" @(ViewBag.Status == 1 ? "selected" : "")>Admin</option>
-                                    <option value="0" @(ViewBag.Status == 0 ? "selected" : "")>User</option>
+                                <select name="roleId" id="roleId" class="custom-select form-control">
+                                    <option value="2" @(ViewBag.RoleId == 2 ? "selected" : "")>All</option>
+                                    <option value="9999" @(ViewBag.RoleId == 9999 ? "selected" : "")>Super Admin</option>
+                                    <option value="1" @(ViewBag.RoleId == 1 ? "selected" : "")>Admin</option>
+                                    <option value="0" @(ViewBag.RoleId == 0 ? "selected" : "")>User</option>
                                 </select>
                             </div>
                         </div>
@@ -115,14 +116,6 @@
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            <label class="form-control-label">Search by address</label>
-                            <div class="">
-                                @Html.TextBox("address", ViewBag.Address as string, new { @class = "form-control", placeholder = "Find by address" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3">
                             <label class="form-control-label">Order paid</label>
                             <div class="select mb-3">
                                 <select name="order" id="order" class="custom-select form-control">
@@ -133,13 +126,16 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                    </div>
+                    <div class="row mt-3">
+                        
+                        <div class="col-lg-9">
                         </div>
                         <div class="col-lg-3 text-right">
                             <div style="height:28px"></div>
                             <div>
                                 <button type="submit" class="btn btn-primary mr-1 mb-2">Search</button>
-                                <button type="reset" class="btn btn btn-outline-secondary mr-1 mb-2"><a href="/Tours">Clear</a></button>
+                                <button type="reset" class="btn btn btn-outline-secondary mr-1 mb-2"><a href=@Url.Action("Index", "Users")>Clear</a></button>
                             </div>
                         </div>
                     </div>
@@ -149,6 +145,22 @@
         </div>
         <!-- Default -->
         <div class="widget has-shadow">
+            @if (Model != null && Model.Count() > 0)
+            {
+                <div class="widget-header bordered d-flex align-items-center">
+                    <div class="styled-checkbox mt-2">
+                        <input type="checkbox" name="check-all" id="check-all">
+                        <label for="check-all">Select all</label>
+                    </div>
+                    <div class="col-4">
+                        <select id="checkboxStatus" name="checkboxStatus" class="custom-select form-control" onchange="changeByCheckbox(this)">
+                            <option>Change selected item status</option>
+                            <option value="1">Active</option>
+                            <option value="0">Disable</option>
+                        </select>
+                    </div>
+                </div>
+            }
             <div class="widget-body">
                 @if (Model == null || Model.Count() == 0)
                 {
@@ -163,47 +175,55 @@
                         <table class="table table-bordered mb-0">
                             <thead>
                                 <tr>
+                                    <th width="5%"></th>
                                     <th width="5%">#</th>
                                     <th width="5%">Id</th>
                                     <th width="5%">Username</th>
-                                    <th width="10%">Role</th>
+                                    <th width="15%">Role</th>
                                     <th width="10%">First Name</th>
                                     <th width="10%">Last Name</th>
                                     <th width="5%">Order paid</th>
                                     <th width="15%">Status</th>
-                                    <th width="15%">Address</th>
                                     <th width="10%">Created At</th>
-                                    <th width="10%">Action</th>
+                                    <th width="15%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @{var i = 1;
                                     foreach (var item in Model)
                                     {
-
-
+                                        string cbId = "cb" + i;
                                         <tr>
+                                            <td>
+                                                <div class="styled-checkbox mt-2">
+                                                    <input @(item.Roles.Count() == 2 ? "disabled" : "") type="checkbox" name=@cbId id=@cbId value="@(item.Id)">
+                                                    <label for=@cbId></label>
+                                                </div>
+                                            </td>
                                             <td><span class="text-primary">@i</span></td>
                                             <td><span>@item.Id</span></td>
                                             <td>@item.UserName</td>
-                                            @if (item.Roles.FirstOrDefault() == null)
+                                            @if (item.Roles.Count() == 0)
                                             {
                                                 <td><span class="badge-text badge-text-small info">User</span></td>
                                             }
                                             else
                                             {
+                                                var sAdmin = false;
                                                 foreach (var role in item.Roles)
                                                 {
                                                     if (role.RoleId == "9999")
                                                     {
-                                                        <td><span class="badge-text badge-text-small danger">SUPER ADMIN</span></td>
-                                                        break;
+                                                        sAdmin = true;
                                                     }
-                                                    if (role.RoleId == "1")
-                                                    {
-                                                        <td><span class="badge-text badge-text-small success">Admin</span></td>
-                                                        break;
-                                                    }
+                                                }
+                                                if (sAdmin)
+                                                {
+                                                    <td><span class="badge-text badge-text-small danger">Super Admin</span></td>
+                                                }
+                                                else
+                                                {
+                                                    <td><span class="badge-text badge-text-small success">Admin</span></td>
                                                 }
 
                                             }
@@ -221,12 +241,11 @@
                                                 @numberOfOrder
                                             </td>
                                             <td>
-                                                <select  id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)" @(User.Identity.Name == item.UserName ? "disabled" : "")>
+                                                <select id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)" @(item.Roles.Count() == 2 ? "disabled" : "")>
                                                     <option value="1" @(item.Status == 1 ? "selected" : "")>Active</option>
                                                     <option value="0" @(item.Status == 0 ? "selected" : "")>Disable</option>
                                                 </select>
                                             </td>
-                                            <td>@item.Address</td>
                                             <td>@item.CreatedAt</td>
                                             <td class="td-actions">
                                                 <a href="@Url.Action("Details", "Users", new { id = item.Id })">
@@ -235,6 +254,11 @@
                                                 <a href="@Url.Action("Edit", "Users", new { id = item.Id })">
                                                     <i class="la la-edit" data-toggle="tooltip" title="Edit"></i>
                                                 </a>
+                                                @if (item.Roles.Count() == 0 && User.IsInRole("Super Admin"))
+                                                {
+                                                    <a style="cursor:pointer" data-id="@(item.Id)" data-username="@(item.UserName)" onclick="addRoleAdmin(this)"><i class="la la-plus-circle" data-toggle="tooltip" title="Set as admin"></i></a>
+
+                                                }
                                             </td>
                                         </tr>
                                         i++;
@@ -251,7 +275,6 @@
                                         username = ViewBag.Username,
                                         firstName = ViewBag.FirstName,
                                         lastName = ViewBag.LastName,
-                                        address = ViewBag.Address,
                                         roleId = ViewBag.RoleId,
                                         order = ViewBag.Order,
                                         page
@@ -284,6 +307,103 @@
 @section Scripts{
     <script src="~/Content/admin_vendor/js/bootstrap-select/bootstrap-select.min.js"></script>
     <script>
+        $("#check-all").change(function () {
+            $("input:checkbox:not(:disabled)").prop('checked', $(this).prop("checked"));
+        });
+        function changeByCheckbox(obj) {
+            var ids = "";
+            $("input:checkbox[name!=check-all]:checked").each(function () {
+                ids == "" ? ids += $(this).val() : ids += "," + $(this).val()
+            });
+            console.log(ids)
+            var status = obj.value
+            var cnfrmMsg;
+            if (status == 0) {
+                cnfrmMsg = "disable selected item"
+            } else {
+                cnfrmMsg = "activate selected item"
+            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "To " + cnfrmMsg,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, do it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#preloader2").show();
+                    $.ajax({
+                        type: "GET",
+                        url: "/Users/ChangeStatus",
+                        contentType: 'application/json; charset=utf-8',
+                        data: {
+                            status: status,
+                            ids: ids
+                        },
+                        success: function (msg) {
+                            $("#preloader2").hide();
+                            Swal.fire({
+                                title: 'Success!',
+                                text: msg,
+                                timer: 2000,
+                                icon: "success"
+                            }).then(function () {
+                                location.reload()
+                            });
+                        },
+                        error: function () {
+                            $("#preloader2").hide();
+                        },
+                    });
+
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    var a = document.getElementById("checkboxStatus");
+                    a.options[0].selected = true;
+                }
+            })
+        }
+
+        function addRoleAdmin(obj) {
+            var id = obj.getAttribute('data-id')
+            var username = obj.getAttribute('data-username')
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "To make user " + username + " as an Administrator",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, do it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#preloader2").show();
+                    $.ajax({
+                        type: "GET",
+                        url: "/User/AddUserToRole",
+                        data: {
+                            UserId: id,
+                            RoleId: "1"
+                        },
+                        success: function (msg) {
+                            $("#preloader2").hide();
+                            Swal.fire(
+                                'Success!',
+                                msg,
+                                'success'
+                            )
+                        },
+                        error: function () {
+                            $("#preloader2").hide();
+                        },
+                    });
+
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                }
+            })
+        }
+
         function changeStatus(obj) {
             var id = obj.getAttribute('data-id')
             var status = obj.value

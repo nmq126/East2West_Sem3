@@ -83,10 +83,10 @@
                             <ul aria-labelledby="user" class="user-size dropdown-menu">
                                 <li class="welcome">
                                     <img src="@Url.Content("~/Content/admin_img/avatar/avatar-01.jpg")" alt="..." class="rounded-circle">
-                                    <span style="text-align:center">Hello admin</span>
+                                    <span style="text-align:center">Hello @User.Identity.Name</span>
                                 </li>
                                 <li>
-                                    <a href="pages-profile.html" class="dropdown-item">
+                                    <a href=@Url.Action("LogOutAdmin", "User") class="dropdown-item">
                                         Logout
                                     </a>
                                 </li>
