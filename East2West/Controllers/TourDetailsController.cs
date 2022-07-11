@@ -13,7 +13,7 @@ using static East2West.Models.TourDetail;
 
 namespace East2West.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class TourDetailsController : Controller
     {
         private DBContext db = new DBContext();

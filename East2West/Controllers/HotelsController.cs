@@ -14,7 +14,7 @@ using PagedList;
 
 namespace East2West.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class HotelsController : Controller
     {
         private DBContext db = new DBContext();
