@@ -49,6 +49,9 @@ namespace East2West.Controllers
             }
             else
             {
+                var tourDetail = db.TourDetails.Find(tourDetailId);
+                var tourId = tourDetail.TourId;
+                Session["currentUrl"] = "/home/tours/" + tourId;
                 return Json(new
                 {
                     message = "You must login to order.",

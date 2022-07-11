@@ -135,7 +135,7 @@
                         @foreach (var schedule in Model.TourSchedules)
                         {
                             <div class="table-responsive">
-                                @schedule.Name
+                                <h4>@schedule.Name</h4>
                                 @Html.Raw(HttpUtility.HtmlDecode(@schedule.Detail))
                             </div>
                         }
