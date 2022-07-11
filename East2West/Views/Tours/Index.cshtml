@@ -2,7 +2,7 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "List tour";
+    ViewBag.Title = "Admin | List Tour";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <style>
@@ -47,87 +47,87 @@
 
 <div class="row">
 
-    
+
     <div class="col-xl-12">
         <div class="widget has-shadow">
             <div class="widget-body">
                 @using (Html.BeginForm("Index", "Tours", FormMethod.Get))
                 {
-                <div class="row">
-                    <div class="col-lg-3">
-                        <label class="form-control-label">Select Depature location</label>
-                        <div class="select mb-3">
-                            <select name="departureId" id="departureId" class="custom-select form-control">
-                                <option value="">All</option>
-                                @foreach (var departure in ViewBag.LocationList)
-                                {
-                                    if (departure.Id == ViewBag.DepartureId)
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Select Depature location</label>
+                            <div class="select mb-3">
+                                <select name="departureId" id="departureId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var departure in ViewBag.LocationList)
                                     {
-                                        <option value=@departure.Id selected>@departure.Name</option>
+                                        if (departure.Id == ViewBag.DepartureId)
+                                        {
+                                            <option value=@departure.Id selected>@departure.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@departure.Id>@departure.Name</option>
+                                        }
                                     }
-                                    else
-                                    {
-                                        <option value=@departure.Id>@departure.Name</option>
-                                    }
-                                }
-                            </select>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <label class="form-control-label">Select Destination</label>
-                        <div class="select mb-3">
-                            <select name="destinationId" id="destinationId" class="custom-select form-control">
-                                <option value="">All</option>
-                                @foreach (var destination in ViewBag.LocationList)
-                                {
-                                    if (destination.Id == ViewBag.DestinationId)
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Select Destination</label>
+                            <div class="select mb-3">
+                                <select name="destinationId" id="destinationId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var destination in ViewBag.LocationList)
                                     {
-                                        <option value=@destination.Id selected>@destination.Name</option>
+                                        if (destination.Id == ViewBag.DestinationId)
+                                        {
+                                            <option value=@destination.Id selected>@destination.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@destination.Id>@destination.Name</option>
+                                        }
                                     }
-                                    else
-                                    {
-                                        <option value=@destination.Id>@destination.Name</option>
-                                    }
-                                }
-                            </select>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <label class="form-control-label">Select Category</label>
-                        <div class="select mb-3">
-                            <select name="categoryId" id="categoryId" class="custom-select form-control">
-                                <option value="">All</option>
-                                @foreach (var category in ViewBag.CategoryList)
-                                {
-                                    if (category.Id == ViewBag.CategoryId)
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Select Category</label>
+                            <div class="select mb-3">
+                                <select name="categoryId" id="categoryId" class="custom-select form-control">
+                                    <option value="">All</option>
+                                    @foreach (var category in ViewBag.CategoryList)
                                     {
-                                        <option value=@category.Id selected>@category.Name</option>
+                                        if (category.Id == ViewBag.CategoryId)
+                                        {
+                                            <option value=@category.Id selected>@category.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@category.Id>@category.Name</option>
+                                        }
                                     }
-                                    else
-                                    {
-                                        <option value=@category.Id>@category.Name</option>
-                                    }
-                                }
-                            </select>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-3">
-                        <label class="form-control-label">Sort by</label>
-                        <div class="select mb-3">
-                            <select name="sortType" id="sortType" class="custom-select form-control">
-                                <option value="">Sort by (Lastest default)</option>
-                                <option value="createdAt_asc" @(ViewBag.SortType == "createdAt_asc" ? "selected" : "")>Latest</option>
-                                <option value="createdAt_desc" @(ViewBag.SortType == "createdAt_desc" ? "selected" : "")>Oldest</option>
-                                <option value="duration_asc" @(ViewBag.SortType == "duration_asc" ? "selected" : "")>Duration (Increase)</option>
-                                <option value="duration_desc" @(ViewBag.SortType == "duration_desc" ? "selected" : "")>Duration (Decrease)</option>
-                                <option value="rating_asc" @(ViewBag.SortType == "rating_asc" ? "selected" : "")>Rating (Increase)</option>
-                                <option value="rating_desc" @(ViewBag.SortType == "rating_desc" ? "selected" : "")>Rating (Decrease)</option>
-                            </select>
+                        <div class="col-lg-3">
+                            <label class="form-control-label">Sort by</label>
+                            <div class="select mb-3">
+                                <select name="sortType" id="sortType" class="custom-select form-control">
+                                    <option value="">Sort by (Lastest default)</option>
+                                    <option value="createdAt_asc" @(ViewBag.SortType == "createdAt_asc" ? "selected" : "")>Latest</option>
+                                    <option value="createdAt_desc" @(ViewBag.SortType == "createdAt_desc" ? "selected" : "")>Oldest</option>
+                                    <option value="duration_asc" @(ViewBag.SortType == "duration_asc" ? "selected" : "")>Duration (Increase)</option>
+                                    <option value="duration_desc" @(ViewBag.SortType == "duration_desc" ? "selected" : "")>Duration (Decrease)</option>
+                                    <option value="rating_asc" @(ViewBag.SortType == "rating_asc" ? "selected" : "")>Rating (Increase)</option>
+                                    <option value="rating_desc" @(ViewBag.SortType == "rating_desc" ? "selected" : "")>Rating (Decrease)</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                </div>
+                    </div>
                     <div class="row">
                         <div class="col-lg-3">
                             <label class="form-control-label">Status</label>
@@ -180,6 +180,23 @@
         </div>
         <!-- Default -->
         <div class="widget has-shadow">
+            @if (Model != null && Model.Count() > 0)
+            {
+                <div class="widget-header bordered d-flex align-items-center">
+                    <div class="styled-checkbox mt-2">
+                        <input type="checkbox" name="check-all" id="check-all">
+                        <label for="check-all">Select all</label>
+                    </div>
+                    <div class="col-4">
+                        <select id="checkboxStatus" name="checkboxStatus" class="custom-select form-control" onchange="changeByCheckbox(this)">
+                            <option>Change selected item status</option>
+                            <option value="1">Active</option>
+                            <option value="0">Disable</option>
+                        </select>
+                    </div>
+                </div>
+            }
+
             <div class="widget-body">
                 @if (Model == null || Model.Count() == 0)
                 {
@@ -194,6 +211,7 @@
                         <table class="table table-bordered mb-0">
                             <thead>
                                 <tr>
+                                    <th width="5%"></th>
                                     <th width="5%">#</th>
                                     <th width="5%">Id</th>
                                     <th width="15%">Name</th>
@@ -204,20 +222,27 @@
                                     <th width="15%">Status</th>
                                     <th width="5%">Rating</th>
                                     <th width="5%">Duration</th>
-                                    <th width="10%">Action</th>
+                                    <th width="5%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @{var i = 1;
+                                @{
+                                    int i = 1;
                                     foreach (var item in Model)
                                     {
-
+                                        string cbId = "cb" + i;
                                         var img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
                                         if (item.Thumbnail != null)
                                         {
                                             img = item.Thumbnail.Split(',').ToList<String>().First();
                                         }
                                         <tr>
+                                            <td>
+                                                <div class="styled-checkbox mt-2">
+                                                    <input type="checkbox" name=@cbId id=@cbId value="@(item.Id)">
+                                                    <label for=@cbId></label>
+                                                </div>
+                                            </td>
                                             <td><span class="text-primary">@i</span></td>
                                             <td><span>@Html.DisplayFor(modelItem => item.Id)</span></td>
                                             <td>@item.Name</td>
@@ -226,7 +251,7 @@
                                             <td>@item.LocationDestination.Name</td>
                                             <td>@item.TourCategory.Name</td>
                                             <td>
-                                                <select id="Status" name="Status" data-name="@(item.Name)" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
+                                                <select name="Status" id=@(item.Id) data-name="@(item.Name)" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
                                                     <option value="1" @(item.Status == 1 ? "selected" : "")>Active</option>
                                                     <option value="0" @(item.Status == 0 ? "selected" : "")>Disable</option>
                                                 </select>
@@ -283,11 +308,72 @@
         </div>
         <!-- End Default -->
     </div>
+    <button class="btn btn-primary mr-1 mb-2" onclick="changeByCheckbox()">Click</button>
+
 </div>
 
 @section Scripts{
     <script src="~/Content/admin_vendor/js/bootstrap-select/bootstrap-select.min.js"></script>
+
+
     <script>
+        $("#check-all").change(function () {
+            $("input:checkbox").prop('checked', $(this).prop("checked"));
+        });
+        function changeByCheckbox(obj) {
+            var ids = "";
+            $("input:checkbox[name!=check-all]:checked").each(function () {
+                ids == "" ? ids += $(this).val() : ids += "," + $(this).val()
+            });
+            console.log(ids)
+            var status = obj.value
+            var cnfrmMsg;
+            if (status == 0) {
+                cnfrmMsg = "disable selected item"
+            } else {
+                cnfrmMsg = "activate selected item"
+            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "To " + cnfrmMsg,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, do it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#preloader2").show();
+                    $.ajax({
+                        type: "GET",
+                        url: "/Tours/ChangeStatus",
+                        contentType: 'application/json; charset=utf-8',
+                        data: {
+                            status: status,
+                            ids: ids
+                        },
+                        success: function (msg) {
+                            $("#preloader2").hide();
+                            Swal.fire({
+                                title: 'Success!',
+                                text: msg,
+                                timer: 2000,
+                                icon: "success"
+                            }).then(function () {
+                                location.reload()
+                            });
+                        },
+                        error: function () {
+                            $("#preloader2").hide();
+                        },
+                    });
+
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    var a = document.getElementById("checkboxStatus");
+                    a.options[0].selected = true;
+                }
+            })
+        }
         function changeStatus(obj) {
             var id = obj.getAttribute('data-id')
             var status = obj.value
@@ -310,8 +396,8 @@
                         type: "GET",
                         url: "/Tours/ChangeStatus",
                         data: {
-                            id: id,
-                            status: status
+                            status: status,
+                            ids: id
                         },
                         success: function (msg) {
                             $("#preloader2").hide();
@@ -325,10 +411,14 @@
                             $("#preloader2").hide();
                         },
                     });
-                    
-                }
-                else {
-                    alert(oke)
+
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    var a = document.getElementById(id);
+                    if (status == 0) {
+                        a.options[0].selected = true;
+                    } else {
+                        a.options[1].selected = true;
+                    }
                 }
             })
         }

@@ -1,5 +1,6 @@
 ﻿@model PagedList.IPagedList<East2West.Models.User>
 @using PagedList.Mvc;
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "List User";
@@ -185,10 +186,31 @@
                                             <td><span class="text-primary">@i</span></td>
                                             <td><span>@item.Id</span></td>
                                             <td>@item.UserName</td>
-                                            <td><span class="badge-text badge-text-small info">User</span></td>
+                                            @if (item.Roles.FirstOrDefault() == null)
+                                            {
+                                                <td><span class="badge-text badge-text-small info">User</span></td>
+                                            }
+                                            else
+                                            {
+                                                foreach (var role in item.Roles)
+                                                {
+                                                    if (role.RoleId == "9999")
+                                                    {
+                                                        <td><span class="badge-text badge-text-small danger">SUPER ADMIN</span></td>
+                                                        break;
+                                                    }
+                                                    if (role.RoleId == "1")
+                                                    {
+                                                        <td><span class="badge-text badge-text-small success">Admin</span></td>
+                                                        break;
+                                                    }
+                                                }
+
+                                            }
                                             <td>@item.FirstName</td>
                                             <td>@item.LastName</td>
-                                            <td>@{
+                                            <td>
+                                                @{
                                                     var order = item.Orders.Where(o => o.Status == 1);
                                                     var numberOfOrder = 0;
                                                     if (order != null && order.Count() > 0)
@@ -196,10 +218,10 @@
                                                         numberOfOrder = order.Count();
                                                     }
                                                 }
-                                            @numberOfOrder
+                                                @numberOfOrder
                                             </td>
                                             <td>
-                                                <select id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
+                                                <select  id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)" @(User.Identity.Name == item.UserName ? "disabled" : "")>
                                                     <option value="1" @(item.Status == 1 ? "selected" : "")>Active</option>
                                                     <option value="0" @(item.Status == 0 ? "selected" : "")>Disable</option>
                                                 </select>
@@ -300,9 +322,13 @@
                         },
                     });
 
-                }
-                else {
-                    alert(oke)
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    var a = document.getElementById("Status");
+                    if (status == 0) {
+                        a.options[0].selected = true;
+                    } else {
+                        a.options[1].selected = true;
+                    }
                 }
             })
         }

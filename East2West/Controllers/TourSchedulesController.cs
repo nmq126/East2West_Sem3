@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace East2West.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class TourSchedulesController : Controller
     {
         // GET: TourSchedules

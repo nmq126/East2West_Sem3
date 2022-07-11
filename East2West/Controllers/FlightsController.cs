@@ -12,6 +12,7 @@ using PagedList;
 
 namespace East2West.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class FlightsController : Controller
     {
         private DBContext db = new DBContext();
@@ -19,6 +20,7 @@ namespace East2West.Controllers
         // GET: Flights
         public ActionResult Index(string id, string sortType, int? page, string keyword,string departureId,string destinationId,  int? status)
         {
+            ViewBag.BreadCrumb = "Flight List";
             int pageNumber = (page ?? 1);
             int pageSize = 5;
             ViewBag.LocationList = from l in db.Locations select l;
@@ -72,6 +74,8 @@ namespace East2West.Controllers
         // GET: Flights/Details/5
         public ActionResult Details(string id)
         {
+            ViewBag.BreadCrumb = "Flight Detail";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -91,6 +95,8 @@ namespace East2West.Controllers
         // GET: Flights/Create
         public ActionResult Create()
         {
+            ViewBag.BreadCrumb = "Create Flight";
+
             ViewBag.DepartureId = new SelectList(db.Locations, "Id", "Name");
             ViewBag.DestinationId = new SelectList(db.Locations, "Id", "Name");
             return View();
@@ -128,6 +134,8 @@ namespace East2West.Controllers
         // GET: Flights/Edit/5
         public ActionResult Edit(string id)
         {
+            ViewBag.BreadCrumb = "Edit Flight";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

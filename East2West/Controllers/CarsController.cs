@@ -12,6 +12,7 @@ using PagedList;
 
 namespace East2West.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class CarsController : Controller
     {
         private DBContext db = new DBContext();
@@ -137,6 +138,8 @@ namespace East2West.Controllers
         // GET: Cars/Details/5
         public ActionResult Details(string id)
         {
+            ViewBag.BreadCrumb = "Car Detail";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -157,6 +160,8 @@ namespace East2West.Controllers
         // GET: Cars/Create
         public ActionResult Create()
         {
+            ViewBag.BreadCrumb = "Create Car";
+
             ViewBag.CarBrandId = new SelectList(db.CarBrands, "Id", "Name");
             ViewBag.CarModelId = new SelectList(db.CarModels, "Id", "Name");
             ViewBag.CarTypeId = new SelectList(db.CarTypes, "Id", "Name");
@@ -194,6 +199,8 @@ namespace East2West.Controllers
         // GET: Cars/Edit/5
         public ActionResult Edit(string id)
         {
+            ViewBag.BreadCrumb = "Edit Car";
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -232,26 +239,40 @@ namespace East2West.Controllers
             ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name");
             return View(car);
         }
-
-        public String ChangeStatus(string id, int status)
+        public String ChangeStatus(string ids, int status)
         {
-            if (id == null)
-            {
-                return "Bad Request";
-            }
-            Car car = db.Cars.Find(id);
-            if (car == null)
-            {
-                return "Car not found";
-            }
-            car.Status = status;
+            var listId = ids.Split(',').ToList();
             string newStatus = "ACTIVE";
             if (status == 0)
             {
-                newStatus = "DISABLE"; 
+                newStatus = "DISABLE";
             }
-            db.SaveChanges();
-            return "Car #" + id + " status change to " + newStatus;
+            foreach (var itemId in listId)
+            {
+                if (itemId == null)
+                {
+                    return "Bad Request";
+                }
+                Car car = db.Cars.Find(itemId);
+                if (car == null)
+                {
+                    return "Bad request car " + itemId + " not found";
+                }
+                car.Status = status;
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return "Update fail";
+            }
+            if (listId.Count > 1)
+            {
+                return "Update success";
+            }
+            return "Car #" + listId[0] + " status change to " + newStatus;
         }
 
         protected override void Dispose(bool disposing)

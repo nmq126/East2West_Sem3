@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace East2West.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class FeedbackController : Controller
     {
         private DBContext db = new DBContext();

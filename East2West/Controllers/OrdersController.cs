@@ -14,6 +14,7 @@ using PagedList;
 
 namespace East2West.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class OrdersController : Controller
     {
         private DBContext db = new DBContext();
@@ -23,8 +24,7 @@ namespace East2West.Controllers
             string ticket_number, string duration_range, string orderId, string username, string startDepartureDay, string endDepartureDay
             , string startCreatedDay, string endCreatedDay, string tourId, string tourDetailId)
         {
-            ViewBag.BreadCrumb = "Tour analysis";
-
+            ViewBag.BreadCrumb = "List order tour";
             var orders = db.Orders.Where(o => o.Type == 1)
                 .Include(o => o.OrderTours)
                 .Include(o => o.Refund)
@@ -203,7 +203,7 @@ namespace East2West.Controllers
             string modelId, string typeId, string orderId, string username, string startPickUpDay, string endPickUpDay, string locationId,
             string startDropOffDay, string endDropOffDay, string startCreatedDay, string endCreatedDay)
         {
-            ViewBag.BreadCrumb = "Car analysis";
+            ViewBag.BreadCrumb = "List order car";
 
             var orders = db.Orders.Where(o => o.Type == 2)
                 .Include(o => o.OrderCars)
@@ -414,6 +414,110 @@ namespace East2West.Controllers
                 return HttpNotFound();
             }
             return View(order);
+        }
+
+        public String ChangeStatusOrder(string ids, int status)
+        {
+            var listId = ids.Split(',').ToList();
+            foreach (var itemId in listId)
+            {
+                if (itemId == null)
+                {
+                    return "Bad Request";
+                }
+                Order order = db.Orders.Find(itemId);
+                if (order == null)
+                {
+                    return "Bad request item " + itemId + " not found";
+                }
+                if (order.Status == 0 || order.Status == 2)
+                {
+                    return "Bad request! Item " + itemId + " can not change status due to the policy";
+                }
+                if (status == -1)
+                {
+                    return "Bad request! Item " + itemId + " status can not be changed to UNPAID due to the policy";
+                }
+                if (order.Status != -1 & status == 1)
+                {
+                    return "Bad request! Item " + itemId + " status can not be changed to PAID due to the policy";
+                }
+                if (order.Status != -2 & status == 2)
+                {
+                    return "Bad request! Item " + itemId + " status can not be changed to REFUNDED due to the policy";
+                }
+                if (order.Status != 1 & status == -2)
+                {
+                    return "Bad request! Item " + itemId + " status can not be changed to PENDING REFUND due to the policy";
+                }
+                if (order.Status != -1 & status == 0)
+                {
+                    return "Bad request! Item " + itemId + " status can not be changed to CANCEL due to the policy";
+                }
+                if (status == 2)
+                {
+                    var refund = db.Refunds.Find(itemId);
+                    if (refund == null)
+                    {
+                        return "Bad request refund of order " + itemId + " not found";
+                    }
+                    refund.Status = 1;
+                    refund.UpdatedAt = DateTime.Now;
+                }
+                TimeSpan span = new TimeSpan(1, 0, 0, 0);
+
+                if (status == -2)
+                {
+                var presentTime = DateTime.Now;
+                if (order.UpdatedAt != null)
+                {
+                    span = presentTime.Subtract((DateTime)order.UpdatedAt);
+                }
+                int percent;
+                switch (span.Days)
+                {
+                    case 1:
+                        percent = 75;
+                        break;
+
+                    case 2:
+                        percent = 80;
+                        break;
+
+                    case 3:
+                        percent = 85;
+                        break;
+
+                    case 4:
+                        percent = 90;
+                        break;
+                    case 5:
+                    default:
+                        percent = 95;
+                        break;
+                }
+                var refund = new Models.Refund()
+                {
+                    Percent = percent,
+                    Status = 0,
+                    TotalPrice = order.TotalPrice * (Convert.ToDouble(percent) / 100),
+                    CreatedAt = DateTime.Now
+                };
+                order.Refund = refund;
+                db.Refunds.Add(refund);
+            }
+                order.Status = status;
+                order.UpdatedAt = DateTime.Now;
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return "Update fail";
+            }
+            return "Update success";
         }
 
         protected override void Dispose(bool disposing)

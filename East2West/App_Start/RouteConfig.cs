@@ -14,6 +14,7 @@ namespace East2West
             //admin
             string adminUserUrl = "admin/users";
             string adminOrderUrl = "admin/orders";
+            string adminRefundUrl = "admin/refunds";
             string adminTourUrl = "admin/tours";
             string adminTourDetailUrl = "admin/tour-details";
             string adminCarUrl = "admin/cars";
@@ -34,19 +35,26 @@ namespace East2West
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             //ADMIN
+            routes.MapRoute(
+                name: "Login",
+                url: "admin/login",
+                defaults: new { controller = "User", action = "LoginAdmin", id = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "Dashboard",
-                url: "admin/dashboard",
+                url: "admin",
                 defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
             );
+
+            //ORDER
             routes.MapRoute(
-                name: "Tour Analysis",
+                name: "Order Tour",
                 url: adminOrderUrl + "/tours",
                 defaults: new { controller = "Orders", action = "GetTour", id = UrlParameter.Optional }
             );
             routes.MapRoute(
-                name: "Car Analysis",
+                name: "Order Car",
                 url: adminOrderUrl + "/cars",
                 defaults: new { controller = "Orders", action = "GetCar", id = UrlParameter.Optional }
             );
@@ -54,6 +62,18 @@ namespace East2West
                 name: "Order Detail",
                 url: adminOrderUrl + "/{id}",
                 defaults: new { controller = "Orders", action = "Details", id = UrlParameter.Optional }
+            );
+
+            //REFUND
+            routes.MapRoute(
+                name: "Refund list",
+                url: adminRefundUrl,
+                defaults: new { controller = "Refunds", action = "Index", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "Refund Detail",
+                url: adminOrderUrl + "/{id}",
+                defaults: new { controller = "Refunds", action = "Details", id = UrlParameter.Optional }
             );
 
             //USER admin

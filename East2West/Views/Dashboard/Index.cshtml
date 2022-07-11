@@ -1,17 +1,12 @@
 ﻿@using East2West.Util
+@using East2West.Models
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Admin | Dashboard";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-@*<style>
-    .media-right *{
-        float: right;
-        display: block
-    }
-</style>*@
 <div class="row flex-row">
     <!-- Begin Facebook -->
-    <div class="col-xl-4 col-md-6 col-sm-6">
+    <div class="col-4">
         <div class="widget widget-12 has-shadow">
             <div class="widget-body">
                 <div class="media">
@@ -28,7 +23,7 @@
     </div>
     <!-- End Facebook -->
     <!-- Begin Twitter -->
-    <div class="col-xl-4 col-md-6 col-sm-6">
+    <div class="col-4">
         <div class="widget widget-12 has-shadow">
             <div class="widget-body">
                 <div class="media">
@@ -45,7 +40,7 @@
     </div>
     <!-- End Twitter -->
     <!-- Begin Linkedin -->
-    <div class="col-xl-4 col-md-6 col-sm-6">
+    <div class="col-4">
         <div class="widget widget-12 has-shadow">
             <div class="widget-body">
                 <div class="media">
@@ -54,7 +49,7 @@
                     </div>
                     <div class="media-body align-self-center">
                         <div class="title text-linkedin">All time revenue</div>
-                        <div class="number">$@ViewBag.TotalRevenue</div>
+                        <div class="number">@ViewBag.TotalRevenue</div>
                     </div>
                 </div>
             </div>
@@ -62,46 +57,31 @@
     </div>
     <!-- End Linkedin -->
 </div>
-
+<!-- Sale chart -->
 <div class="row flex-row">
     <div class="col-xl-12 col-md-6">
-        <!-- Begin Widget 09 -->
         <div class="widget widget-09 has-shadow">
-            <!-- Begin Widget Header -->
             <div class="widget-header">
                 <div class="row">
                     <div class="col-lg-3">
-                        <label class="form-control-label">Analyze by</label>
+                        <label class="form-control-label">Select Year</label>
                         <div class="select mb-3">
-                            <select name="" id="" class="custom-select form-control">
-                                <option value="2">Tour Duration</option>
-                                <option value="1">Tour Category</option>
-                                <option value="0">Season</option>
-
+                            <select name="yearSelectSaleChart" id="yearSelectSaleChart" class="custom-select form-control">
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <label class="form-control-label">Date Range</label>
-                        <div class="input-group">
-                            <span class="input-group-addon addon-secondary">
-                                <i class="la la-calendar"></i>
-                            </span>
-                            <input type="text" class="form-control" id="" value="">
-                            <input type="hidden" class="form-control" name="" , id="" value="">
-                            <input type="hidden" class="form-control" name="" , id="" value="">
-
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- End Widget Header -->
-            <!-- Begin Widget Body -->
             <div class="widget-body">
                 <div class="row">
                     <div class="col-12 no-padding">
                         <div>
-                            <div id="chartContainerColumn" style="height: 370px; width: 100%;"></div>
+                            <div id="chartSale" style="height: 370px; width: 100%;"></div>
                         </div>
                     </div>
                 </div>
@@ -110,12 +90,10 @@
         <!-- End Widget 09 -->
     </div>
 </div>
-
+<!-- Tour pie chart -->
 <div class="row flex-row">
-    <div class="col-xl-12 col-md-6">
-        <!-- Begin Widget 09 -->
+    <div class="col-12">
         <div class="widget widget-09 has-shadow">
-            <!-- Begin Widget Header -->
             <div class="widget-header">
                 <div class="row">
                     <div class="col-lg-3">
@@ -144,8 +122,6 @@
                     </div>
                 </div>
             </div>
-            <!-- End Widget Header -->
-            <!-- Begin Widget Body -->
             <div class="widget-body">
                 <div class="row">
                     <div class="col-10 no-padding">
@@ -157,9 +133,12 @@
                 </div>
             </div>
         </div>
-        <!-- End Widget 09 -->
+    </div>
+</div>
+<!-- Car pie chart -->
+<div class="row flex-row">
+    <div class="col-xl-12 col-md-6">
         <div class="widget widget-09 has-shadow">
-            <!-- Begin Widget Header -->
             <div class="widget-header">
                 <div class="row">
                     <div class="col-lg-3">
@@ -189,8 +168,7 @@
                     </div>
                 </div>
             </div>
-            <!-- End Widget Header -->
-            <!-- Begin Widget Body -->
+
             <div class="widget-body">
                 <div class="row">
                     <div class="col-xl-10 col-12 no-padding">
@@ -202,243 +180,177 @@
                 </div>
             </div>
         </div>
-        <!-- Begin Row -->
-        <div class="row flex-row">
-            <div class="col-xl-4 col-md-6">
-                <!-- Begin Widget 04 -->
-                <div class="widget widget-04 has-shadow">
-                    <!-- Begin Widget Header -->
-                    <div class="widget-header bordered d-flex align-items-center">
-                        <h2>Post</h2>
-                        <div class="widget-options">
-                            <div class="dropdown">
-                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
-                                    <i class="la la-ellipsis-h"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a href="#" class="dropdown-item">
-                                        <i class="la la-check"></i>Valid Post
-                                    </a>
-                                    <a href="#" class="dropdown-item">
-                                        <i class="la la-edit"></i>Edit Widget
-                                    </a>
-                                    <a href="faq.html" class="dropdown-item faq">
-                                        <i class="la la-question-circle"></i>FAQ
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Widget Header -->
-                    <!-- Begin Widget Body -->
-                    <div class="widget-body p-0">
-                        <div class="post-container">
-                            <div class="media mb-3">
-                                <div class="media-left align-self-center user">
-                                    <a href="pages-profile.html"><img src="assets/img/avatar/avatar-07.jpg" class="rounded-circle" alt="..."></a>
-                                </div>
-                                <div class="media-body align-self-center ml-3">
-                                    <div class="title">
-                                        <span class="username">Lisa Garett</span> posted an image
-                                    </div>
-                                    <div class="time">42 min ago</div>
-                                </div>
-                            </div>
-                            <img src="assets/img/background/01.jpg" alt="..." class="img-fluid">
-                            <div class="col no-padding d-flex justify-content-end mt-3">
-                                <div class="meta">
-                                    <ul>
-                                        <li><a href="#"><i class="la la-comment"></i><span class="numb">38</span></a></li>
-                                        <li><a href="#"><i class="la la-heart"></i><span class="numb">94</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Begin Write Comment -->
-                        <div class="input-group mt-5">
-                            <input type="text" class="form-control pr-0" placeholder="Write a comment ...">
-                            <span class="input-group-addon">
-                                <button class="btn" type="button">
-                                    <i class="la la-smile-o la-2x"></i>
-                                </button>
-                            </span>
-                            <span class="input-group-addon">
-                                <button class="btn pr-3" type="button">
-                                    <i class="la la-pencil la-2x"></i>
-                                </button>
-                            </span>
-                        </div>
-                        <!-- End Write Comment -->
-                    </div>
-                    <!-- End Widget Body -->
-                </div>
-                <!-- End Widget 04 -->
-            </div>
-            <div class="col-xl-4 col-md-6">
-                <!-- Begin Widget 05 -->
-                <div class="widget widget-05 has-shadow">
-                    <!-- Begin Widget Header -->
-                    <div class="widget-header bordered d-flex align-items-center">
-                        <h2>Top Author</h2>
-                        <div class="widget-options">
-                            <div class="dropdown">
-                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
-                                    <i class="la la-ellipsis-h"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a href="#" class="dropdown-item">
-                                        <i class="la la-edit"></i>Edit Widget
-                                    </a>
-                                    <a href="#" class="dropdown-item faq">
-                                        <i class="la la-question-circle"></i>FAQ
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Widget Header -->
-                    <!-- Begin Widget Body -->
-                    <div class="widget-body no-padding hidden">
-                        <div class="author-avatar">
-                            <span class="badge-pulse-green"></span>
-                            <img src="assets/img/avatar/avatar-03.jpg" alt="..." class="img-fluid rounded-circle">
-                        </div>
-                        <div class="author-name">
-                            Louis Henry
-                            <span>Designer</span>
-                        </div>
-                        <div class="chart">
-                            <div class="row no-margin justify-content-center">
-                                <div class="col-12 col-xl-8 col-md-8 col-sm-8">
-                                    <div class="row no-margin align-items-center">
-                                        <!-- Begin Chart -->
-                                        <div class="col-9 no-padding">
-                                            <div class="chart-graph">
-                                                <div class="chart">
-                                                    <canvas id="sales-stats"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-3 no-padding text-center">
-                                            <div class="chart-text">
-                                                <span class="heading">Sales</span>
-                                                <span class="number">364</span>
-                                                <span class="cxg text-green">+35%</span>
-                                            </div>
-                                        </div>
-                                        <!-- End Chart -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="social-stats">
-                            <div class="row d-flex justify-content-between">
-                                <div class="col-4 text-center">
-                                    <i class="la la-users followers"></i>
-                                    <div class="counter">+124</div>
-                                    <div class="heading">Followers</div>
-                                </div>
-                                <div class="col-4 text-center">
-                                    <i class="la la-dribbble dribbble"></i>
-                                    <div class="counter">+357</div>
-                                    <div class="heading">Likes</div>
-                                </div>
-                                <div class="col-4 text-center">
-                                    <i class="la la-behance behance"></i>
-                                    <div class="counter">+98</div>
-                                    <div class="heading">Followers</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="actions text-center">
-                            <a href="pages-profile.html" class="btn btn-gradient-01">View Profile</a>
-                        </div>
-                    </div>
-                    <!-- End Widget Body -->
-                </div>
-                <!-- End Widget 05 -->
-            </div>
-            <div class="col-xl-4">
-                <!-- Begin Widget 06 -->
-                <div class="widget widget-06 has-shadow">
-                    <!-- Begin Widget Header -->
-                    <div class="widget-header bordered d-flex align-items-center">
-                        <h2>Latest Order</h2>
-                        <div style="text-align:right">View all</div>
-                    </div>
-                    <!-- End Widget Header -->
-                    <!-- Begin Widget Body -->
-                    <div class="widget-body p-0">
-                        <div id="list-group" class="widget-scroll" style="max-height:490px;">
-                            <ul class="reviews list-group w-100">
-                                @foreach (var item in ViewBag.LatestOrder)
-                                {
-                                    <li class="list-group-item" style="padding:10px">
-                                        <div class="media">
-                                            <div class="media-left align-self-center ">
-                                                @if (item.Type == 2)
-                                                {
-                                                    <i style="font-size: 2em;" class="ti ti-car"></i>
-
-                                                }
-                                                else
-                                                {
-                                                    <i style="font-size: 2em;" class="ti ti-package"></i>
-                                                }
-                                                
-
-                                            </div>
-                                            <div class="media-body align-self-center">
-                                                <div class="username">
-                                                    <span style="color:black">#@item.Id</span>
-                                                </div>
-
-                                                <div class="meta">
-                                                    <span class="mr-3">@(DateTimeUtil.GetPrettyDate(item.CreatedAt))</span>
-                                                </div>
-                                            </div>
-                                            <div style="margin-left:auto">
-                                                <div class="price">
-                                                    <span>$@item.TotalPrice</span>
-                                                </div>
-                                                <div class="status">
-                                                    @switch (item.Status)
-                                                    {
-                                                        case 1:
-                                                            <span style="color:forestgreen" class="">Paid</span>
-                                                            break;
-                                                        case -1:
-                                                            <span style="color:deepskyblue">Unpaid</span>
-                                                            break;
-                                                        case 0:
-                                                            <span style="color: grey" class="">Cancel</span>
-                                                            break;
-                                                        case -2:
-                                                            <span style="color:yellow" class="">Pending refund</span>
-                                                            break;
-                                                        case 2:
-                                                            <span style="color:red" class="">Refunded</span>
-                                                            break;
-                                                        default:
-                                                            break;
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                }
-                            </ul>
-                        </div>
-                        <!-- End List -->
-                    </div>
-                    <!-- End Widget Body -->
-                </div>
-                <!-- End Widget 06 -->
-            </div>
-        </div>
-        <!-- End Row -->
     </div>
+</div>
+<!-- USER ORDER LATEST -->
+<div class="row flex-row">
+    <div class="col-xl-4">
+        <div class="widget widget-06 has-shadow">
+            <!-- Begin Widget Header -->
+            <div class="widget-header bordered d-flex align-items-center">
+                <h2>New Users</h2>
+                <div style="text-align:right">@Html.ActionLink("View all", "Index", "Users")</div>
+            </div>
+            <!-- End Widget Header -->
+            <!-- Begin Widget Body -->
+            <div class="widget-body p-0">
+                <div id="list-group" class="widget-scroll" style="max-height:490px;">
+                    <ul class="reviews list-group w-100">
+                        @foreach (var item in ViewBag.LatestUsers)
+                        {
+                            var img = "";
+                            if (item.Thumbnail == null)
+                            {
+                                img = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
+                            }
+                            else
+                            {
+                                img = item.Thumbnail;
+                            }
+                            <li class="list-group-item">
+                                <div class="media">
+                                    <div class="media-left align-self-start">
+                                        <img src=@img class="user-img rounded-circle" alt=".">
+                                    </div>
+                                    <div class="media-body align-self-center">
+                                        <div class="username">
+                                            <span style="color:black">@item.FirstName @item.LastName</span>
+                                        </div>
+                                        <div class="meta">
+                                            <span class="mr-3">Registered @(DateTimeUtil.GetPrettyDate(item.CreatedAt))</span>
+                                        </div>
+                                    </div>
+                                    <div class="media-right pr-3 align-self-center">
+                                        <div class="like text-center">
+                                            <a href="@Url.Action("Details", "Users", new { id = item.Id })"><i class="ion-information-circled"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+                <!-- End List -->
+            </div>
+            <!-- End Widget Body -->
+        </div>
+    </div>
+
+    <div class="col-xl-4">
+        <!-- Begin Widget ORDER -->
+        <div class="widget widget-06 has-shadow">
+            <!-- Begin Widget Header -->
+            <div class="widget-header bordered d-flex align-items-center">
+                <h2>Latest Orders</h2>
+                <div style="text-align:right">@Html.ActionLink("View all", "GetTour", "Orders")</div>
+            </div>
+            <!-- End Widget Header -->
+            <!-- Begin Widget Body -->
+            <div class="widget-body p-0">
+                <div id="list-group" class="widget-scroll" style="max-height:490px;">
+                    <ul class="reviews list-group w-100">
+                        @foreach (var item in ViewBag.LatestOrders)
+                        {
+                            string id = @item.Id;
+                            <li class="list-group-item" style="padding:10px">
+                                <div class="media">
+                                    <div class="media-left align-self-center ">
+                                        @if (item.Type == 2)
+                                        {
+                                            <i style="font-size: 2em;" class="ti ti-car"></i>
+
+                                        }
+                                        else
+                                        {
+                                            <i style="font-size: 2em;" class="ti ti-package"></i>
+                                        }
+
+
+                                    </div>
+                                    <div class="media-body align-self-center">
+                                        <div class="username">
+                                            <span style="color:black">@Html.ActionLink(id, "Details", "Orders", new { id = @item.Id }, null)</span>
+                                        </div>
+
+                                        <div class="meta">
+                                            <span class="mr-3">@(DateTimeUtil.GetPrettyDate(item.CreatedAt))</span>
+                                        </div>
+                                    </div>
+                                    <div class="mr-3">
+                                        <span>$@item.TotalPrice</span>
+                                    </div>
+                                </div>
+                            </li>
+
+                        }
+                    </ul>
+                </div>
+                <!-- End List -->
+            </div>
+            <!-- End Widget Body -->
+        </div>
+        <!-- End Widget 06 -->
+    </div>
+    <div class="col-xl-4 col-md-6">
+        <!-- Begin Widget 05 -->
+        <div class="widget widget-05 has-shadow">
+            <!-- Begin Widget Header -->
+            <div class="widget-header bordered d-flex align-items-center">
+                <h2>Top Selling Tour</h2>
+            </div>
+            <!-- End Widget Header -->
+            <!-- Begin Widget Body -->
+            @{
+                Tour tour = ViewBag.BestTour;
+                var img2 = "https://res.cloudinary.com/nmqdec6/image/upload/v1655735551/Project%20East2West/default-thumbnail_bd4eth.jpg";
+                if (tour.Thumbnail != null)
+                {
+                    img2 = tour.Thumbnail.Split(',').ToList<String>().First();
+                }
+
+                <div class="widget-body no-padding hidden">
+                    <div class="author-avatar">
+
+                        <img style="object-fit:cover;height:80px;width:80px" src=@img2 alt="..." class="rounded-circle">
+                    </div>
+                    
+                    <div class="chart">
+                        <div class="row no-margin justify-content-center">
+                            <div class="col-12 col-xl-8 col-md-8 col-sm-8">
+                                <div class="row no-margin align-items-center">
+                                    <!-- Begin Chart -->
+                                    <div class="author-name">
+                                        @tour.Name
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-stats">
+                        <div class="row d-flex justify-content-between">
+                            <div class="col-6 text-center">
+                                <i class="la la-ticket followers"></i>
+                                <div class="counter">@ViewBag.BestTourTicket</div>
+                                <div class="heading">tickets</div>
+                            </div>
+                            <div class="col-6 text-center">
+                                <i class="la la-dollar dribbble"></i>
+                                <div class="counter">@ViewBag.BestTourSale</div>
+                                <div class="heading">USD</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions text-center mt-5">
+                        <a href=@Url.Action("Details", "Tours", new { id = tour.Id }) class="btn btn-gradient-01">View Detail</a>
+                    </div>
+                </div>
+            }
+            <!-- End Widget Body -->
+        </div>
+        <!-- End Widget 05 -->
+    </div>
+
 </div>
 
 
@@ -482,38 +394,102 @@
                 format: 'DD/MM/YYYY'
             },
         });
-        
+
     </script>
 
     <script>
-        $(function () {
-            var chartColumn = new CanvasJS.Chart("chartContainerColumn", {
-	            animationEnabled: true,
-	            theme: "light2", // "light1", "dark1", "dark2"
-	            exportEnabled: true,
-	            title: {
-                    text: "Revenue by year"
-	            },
-	            data: [{
-                    type: "column",
-		            dataPoints: [
-			{ x: 10, y: 71 },
-			{ x: 20, y: 55 },
-			{ x: 30, y: 50 },
-			{ x: 40, y: 65 },
-			{ x: 50, y: 92, indexLabel: "\u2605 Highest" },
-			{ x: 60, y: 68 },
-			{ x: 70, y: 38 },
-			{ x: 80, y: 71 },
-			{ x: 90, y: 54 },
-			{ x: 100, y: 60 },
-			{ x: 110, y: 36 },
-			{ x: 120, y: 49 },
-			{ x: 130, y: 21, indexLabel: "\u2691 Lowest" }
-		]
-	            }]
+        // Handle combinational chart here
+        window.onload = function () {
+            var year = $('#yearSelectSaleChart');
+            var obj = @Html.Raw(ViewBag.DataSaleChart);
+
+            var optionsSale = {
+                exportEnabled: true,
+                animationEnabled: true,
+                theme: "light1",
+                title: {
+                    text: "Monthly Sales Data in " + year.val()
+                },
+                axisY: {
+                    prefix: "$",
+                    title: "Revenue (in $)",
+                    titleFontColor: "#C24642",
+                    lineColor: "#C24642"
+                },
+                axisY2: {
+                    title: "Sale",
+                    titleFontColor: "#369EAD",
+                    lineColor: "#369EAD"
+                },
+                toolTip: {
+                    shared: true
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemclick: toggleDataSeries
+                },
+                data: [
+                    {
+                        type: "column",
+                        color: "#369EAD",
+                        name: "Sales",
+                        showInLegend: true,
+                        axisYType: "secondary",
+                        yValueFormatString: "#",
+                        dataPoints: obj.data2
+                    },
+                    {
+                        type: "line",
+                        color: "#C24642",
+                        name: "Revenue",
+                        showInLegend: true,
+                        yValueFormatString: "$#,##0.##",
+                        dataPoints: obj.data1
+                    }]
+            };
+            $("#chartSale").CanvasJSChart(optionsSale);
+
+            function toggleDataSeries(e) {
+                if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                    e.dataSeries.visible = false;
+                } else {
+                    e.dataSeries.visible = true;
+                }
+                e.chart.render();
+            }
+
+            $('#yearSelectSaleChart').on('change', () => {
+                GetDataSaleChart(year.val())
             });
-            chartColumn.render();
+
+            var chartSale = $("#chartSale").CanvasJSChart();
+
+            function GetDataSaleChart(year) {
+                $("#preloader2").show();
+                $.ajax({
+                    type: "GET",
+                    url: "/Dashboard/GetSaleChartData",
+                    data: {
+                        year: year
+                    },
+                    success: function (obj) {
+                        var item = JSON.parse(obj);
+                        chartSale.options.title.text = item.title
+                        chartSale.options.data[0].dataPoints = item.data2
+                        chartSale.options.data[1].dataPoints = item.data1
+                        chartSale.render()
+                        $("#preloader2").hide()
+
+                    },
+                    error: function () {
+                        $("#preloader2").hide()
+                    },
+                });
+            }
+
+        }
+        // Handle 2 pie chart here
+        $(function () {
             var obj = @Html.Raw(ViewBag.DataTour);
             var obj1 = @Html.Raw(ViewBag.DataCar);
             var options = {
@@ -588,7 +564,6 @@
                         endDay: end
                     },
                     success: function (obj) {
-                        console.log(item)
                         if (typeOrder == 1) {
                             if (obj === "") {
                                 $("#chartContainer").hide()
@@ -665,5 +640,5 @@
 
 
 
-    
+
 }

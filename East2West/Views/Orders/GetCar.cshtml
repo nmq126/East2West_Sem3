@@ -2,7 +2,7 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "List Orders Car";
+    ViewBag.Title = "Admin | Orders Car List";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -282,6 +282,25 @@
         </div>
         <!-- Default -->
         <div class="widget has-shadow">
+            @if (Model != null && Model.Count() > 0)
+            {
+                <div class="widget-header bordered d-flex align-items-center">
+                    <div class="styled-checkbox mt-2">
+                        <input type="checkbox" name="check-all" id="check-all">
+                        <label for="check-all">Select all</label>
+                    </div>
+                    <div class="col-4">
+                        <select id="checkboxStatus" name="checkboxStatus" class="custom-select form-control" onchange="changeByCheckbox(this)">
+                            <option>Change selected item status</option>
+                            <option value="-1">Unpaid</option>
+                            <option value="1">Paid</option>
+                            <option value="0">Cancel</option>
+                            <option value="-2">Pending refund</option>
+                            <option value="2">Refunded</option>
+                        </select>
+                    </div>
+                </div>
+            }
             <div class="widget-body">
                 @if (Model == null || Model.Count() == 0)
                 {
@@ -296,15 +315,15 @@
                         <table class="table table-bordered mb-0">
                             <thead>
                                 <tr>
+                                    <th width="5%"></th>
                                     <th width="5%">#</th>
                                     <th width="5%">Id</th>
-                                    <th width="10%">Car Model</th>
                                     <th width="10%">Car Id</th>
                                     <th width="5%">Username</th>
                                     <th width="10%">Pick up date</th>
                                     <th width="10%">Drop off date</th>
                                     <th width="5%">Total Price</th>
-                                    <th width="15%">Status</th>
+                                    <th width="20%">Status</th>
                                     <th width="10%">Created At</th>
                                     <th width="5%">Action</th>
                                 </tr>
@@ -313,11 +332,18 @@
                                 @{var i = 1;
                                     foreach (var item in Model)
                                     {
+                                        string cbId = "cb" + i;
+                                        var prevStatus = item.Status;
                                         var carId = item.OrderCars.First().CarSchedule.Car.Id;
                                         <tr>
+                                            <td>
+                                                <div class="styled-checkbox mt-2">
+                                                    <input  @(item.Status == 0 || item.Status== 2 ? "disabled" : "") type="checkbox" name=@cbId id=@cbId value="@(item.Id)">
+                                                    <label for=@cbId></label>
+                                                </div>
+                                            </td>
                                             <td><span class="text-primary">@i</span></td>
                                             <td><span>@item.Id</span></td>
-                                            <td>@item.OrderCars.First().CarSchedule.Car.CarModel.Name</td>
                                             <td>
                                                 @item.OrderCars.First().CarSchedule.Car.Id
                                                 <i data-id="@(carId)" onclick="getCarDetailModal(this)" class="la la-info-circle"></i>
@@ -327,12 +353,12 @@
                                             <td>@item.OrderCars.First().CarSchedule.EndDay.ToShortDateString()</td>
                                             <td>$@item.TotalPrice</td>
                                             <td>
-                                                <select id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this)">
+                                                <select @(item.Status == 0 || item.Status == 2 ? "disabled" : "") id="Status" name="Status" data-id="@(item.Id)" class="custom-select form-control" onchange="changeStatus(this, @prevStatus)">
                                                     <option value="-1" @(item.Status == -1 ? "selected" : "")>Unpaid</option>
                                                     <option value="1" @(item.Status == 1 ? "selected" : "")>Paid</option>
                                                     <option value="0" @(item.Status == 0 ? "selected" : "")>Cancel</option>
                                                     <option value="-2" @(item.Status == -2 ? "selected" : "")>Pending refund</option>
-                                                    <option value="2" @(item.Status == 0 ? "selected" : "")>Refunded</option>
+                                                    <option value="2" @(item.Status == 2 ? "selected" : "")>Refunded</option>
                                                 </select>
                                             </td>
                                             <td>@item.CreatedAt.ToString("HH:mm:ss dd/M/yyyy")</td>
@@ -344,7 +370,7 @@
                                         </tr>
                                         i++;
                                     }
-                            }
+                                }
                             </tbody>
                         </table>
                         @Html.PagedListPager(Model, page => Url.Action("GetCar",
@@ -386,7 +412,7 @@
                                         LiElementClasses = new string[] { "page-item" }
                                     })
                     </div>
-                                    }
+                }
 
             </div>
         </div>
@@ -444,66 +470,6 @@
         });
     </script>
     <script>
-        function changeStatus(obj) {
-            var id = obj.getAttribute('data-id')
-            var status = obj.value
-            var statusString = ""
-            switch (status) {
-                case "-1":
-                    statusString = "UNPAID"
-                    break;
-                case "1":
-                    statusString = "PAID"
-                    break;
-                case "0":
-                    statusString = "CANCEL"
-                    break;
-                case "-2":
-                    statusString = "PENDING REFUND"
-                    break;
-                case "2":
-                    statusString = "REFUNDED"
-                    break;
-                default:
-                    break;
-            }
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "To change order #" + id + " to " + statusString,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, do it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $("#preloader2").show();
-                    $.ajax({
-                        type: "GET",
-                        url: "/Orders/ChangeStatusCar",
-                        data: {
-                            id: id,
-                            status: status
-                        },
-                        success: function (msg) {
-                            $("#preloader2").hide();
-                            Swal.fire(
-                                'Success!',
-                                msg,
-                                'success'
-                            )
-                        },
-                        error: function () {
-                            $("#preloader2").hide();
-                        },
-                    });
-
-                }
-                else {
-                    alert(oke)
-                }
-            })
-        }
         function getCarDetailModal(obj) {
             var id = obj.getAttribute('data-id')
             $("#preloader2").show();
@@ -539,4 +505,208 @@
             });
         }
     </script>
+    <script>
+        $("#check-all").change(function () {
+            $("input:checkbox:not(:disabled)").prop('checked', $(this).prop("checked"));
+        });
+        function changeByCheckbox(obj) {
+            var ids = "";
+            $("input:checkbox[name!=check-all]:checked").each(function () {
+                ids == "" ? ids += $(this).val() : ids += "," + $(this).val()
+            });
+            var statusString = ""
+            var status = obj.value
+            switch (status) {
+                case "-1":
+                    statusString = "UNPAID"
+                    break;
+                case "1":
+                    statusString = "PAID"
+                    break;
+                case "0":
+                    statusString = "CANCEL"
+                    break;
+                case "-2":
+                    statusString = "PENDING REFUND"
+                    break;
+                case "2":
+                    statusString = "REFUNDED"
+                    break;
+                default:
+                    break;
+            }
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "To change selected order status to " + statusString,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, do it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#preloader2").show();
+                    $.ajax({
+                        type: "GET",
+                        url: "/Orders/ChangeStatusOrder",
+                        data: {
+                            status: status,
+                            ids: ids,
+                        },
+                        success: function (msg) {
+                            $("#preloader2").hide();
+                            if (!msg.includes("success")) {
+                                Swal.fire(
+                                    'Error!',
+                                    msg,
+                                    'error'
+                                )
+                            } else {
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: msg,
+                                    timer: 2000,
+                                    icon: "success"
+                                }).then(function () {
+                                    location.reload()
+                                });
+                            }
+
+                        },
+                        error: function () {
+                            $("#preloader2").hide();
+                            Swal.fire(
+                                'Error!',
+                                "Something is wrong here. Try again later",
+                                'error'
+                            )
+                        },
+                    });
+
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    var a = document.getElementById("checkboxStatus");
+                    a.options[0].selected = true;
+                }
+            })
+        }
+        function changeStatus(obj, prevStatus) {
+            var id = obj.getAttribute('data-id')
+            var status = obj.value
+            var statusString = ""
+            switch (status) {
+                case "-1":
+                    statusString = "UNPAID"
+                    break;
+                case "1":
+                    statusString = "PAID"
+                    break;
+                case "0":
+                    statusString = "CANCEL"
+                    break;
+                case "-2":
+                    statusString = "PENDING REFUND"
+                    break;
+                case "2":
+                    statusString = "REFUNDED"
+                    break;
+                default:
+                    break;
+            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "To change order #" + id + " to " + statusString,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, do it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#preloader2").show();
+                    $.ajax({
+                        type: "GET",
+                        url: "/Orders/ChangeStatusOrder",
+                        data: {
+                            ids: id,
+                            status: status
+                        },
+                        success: function (msg) {
+                            $("#preloader2").hide();
+                            if (!msg.includes("success")) {
+                                Swal.fire(
+                                    'Error!',
+                                    msg,
+                                    'error'
+                                )
+                                switch (prevStatus) {
+                                    case -1:
+                                        obj.options[0].selected = true;
+                                        break;
+                                    case 1:
+                                        obj.options[1].selected = true;
+                                        break;
+                                    case 0:
+                                        obj.options[2].selected = true;
+                                        break;
+                                    case -2:
+                                        obj.options[3].selected = true;
+                                        break;
+                                    case 2:
+                                        obj.options[4].selected = true;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            } else {
+                                if (status == 0 || status == 2) {
+                                    obj.prop('disabled', true);
+                                }
+                                Swal.fire(
+                                    'Success!',
+                                    msg,
+                                    'success'
+                                )
+                            }
+
+
+                        },
+                        error: function () {
+                            $("#preloader2").hide();
+                            $("#preloader2").hide();
+                            Swal.fire(
+                                'Error!',
+                                "Something is wrong here. Try again later",
+                                'error'
+                            )
+                        },
+                    });
+
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    var a = document.getElementById(id);
+                    switch (prevStatus) {
+                        case -1:
+                            obj.options[0].selected = true;
+                            break;
+                        case 1:
+                            obj.options[1].selected = true;
+                            break;
+                        case 0:
+                            obj.options[2].selected = true;
+                            break;
+                        case -2:
+                            obj.options[3].selected = true;
+                            break;
+                        case 2:
+                            obj.options[4].selected = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            })
+        }
+
+    </script>
+
 }

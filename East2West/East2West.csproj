@@ -201,6 +201,7 @@
     <Compile Include="Controllers\OrderCarController.cs" />
     <Compile Include="Controllers\OrderTourController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\RefundsController.cs" />
     <Compile Include="Controllers\TourDetailsController.cs" />
     <Compile Include="Controllers\TourSchedulesController.cs" />
     <Compile Include="Controllers\ToursController.cs" />
@@ -1096,10 +1097,14 @@
     <Content Include="Views\ClientFlight\GetListFlight.cshtml" />
     <Content Include="Views\ClientFlight\Details.cshtml" />
     <Content Include="Views\Home\Error404.cshtml" />
+    <Content Include="Views\Refunds\Details.cshtml" />
+    <Content Include="Views\Refunds\Index.cshtml" />
+    <Content Include="Views\User\LoginAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\TourSchedules\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

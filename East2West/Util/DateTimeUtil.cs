@@ -14,7 +14,7 @@ namespace East2West.Util
         const int MONTH = 30 * DAY;
         public static string GetPrettyDate(DateTime date)
         {
-            var ts = new TimeSpan(DateTime.UtcNow.Ticks - date.Ticks);
+            var ts = new TimeSpan(DateTime.Now.Ticks - date.Ticks);
             double delta = Math.Abs(ts.TotalSeconds);
 
             if (delta < 1 * MINUTE)

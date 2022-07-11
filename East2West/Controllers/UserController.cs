@@ -96,23 +96,23 @@ namespace East2West.Controllers
                 return View("ViewError");
             }
         }
-
-        public async Task<ActionResult> AddUserToRole(string UserId, string RoleId)
+        //[Authorize(Roles = "Admin")]
+        public async Task<String> AddUserToRole(string UserId, string RoleId)
         {
             var user = myIdentityDbContext.Users.Find(UserId);
             var role = myIdentityDbContext.Roles.Find(RoleId);
             if (role == null || user == null)
             {
-                return View("ViewError");
+                return "Bad Request";
             }
             var result = await userManager.AddToRoleAsync(user.Id, role.Name);
             if (result.Succeeded)
             {
-                return View("ViewSucceeded");
+                return "Role added successfully";
             }
             else
             {
-                return View("ViewError");
+                return "Action fail";
             }
         }
 
@@ -133,6 +133,11 @@ namespace East2West.Controllers
                     ModelState.AddModelError("LoginError", "The user name or password provided is incorrect.");
                     return View();
                 }
+                else if (user.Status == 0)
+                {
+                    ModelState.AddModelError("LoginError", "Account locked! Contact our support to unlock.");
+                    return View();
+                }
                 else
                 {
                     SignInManager<User, string> signInManager = new SignInManager<User, string>(userManager, Request.GetOwinContext().Authentication);
@@ -145,6 +150,38 @@ namespace East2West.Controllers
             return RedirectToAction("Login");
         }
 
+        public ActionResult LoginAdmin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LoginAdmin(string UserName, string Password)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindAsync(UserName, Password);
+                if (user == null)
+                {
+                    ModelState.AddModelError("LoginError", "The user name or password provided is incorrect.");
+                    return View();
+                }
+                else if (user.Status == 0)
+                {
+                    ModelState.AddModelError("LoginError", "Account locked! Contact our support to unlock.");
+                    return View();
+                }
+                else
+                {
+                    SignInManager<User, string> signInManager = new SignInManager<User, string>(userManager, Request.GetOwinContext().Authentication);
+                    await signInManager.SignInAsync(user, false, false);
+
+                    return RedirectToAction("Index", "Dashboard");
+                }
+            }
+            return RedirectToAction("LoginAdmin");
+        }
         public ActionResult LogOut()
         {
             HttpContext.GetOwinContext().Authentication.SignOut();

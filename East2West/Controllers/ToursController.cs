@@ -9,10 +9,12 @@ using System.Web;
 using System.Web.Mvc;
 using East2West.Data;
 using East2West.Models;
+using Newtonsoft.Json;
 using PagedList;
 
 namespace East2West.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class ToursController : Controller
     {
         private DBContext db = new DBContext();
@@ -21,7 +23,7 @@ namespace East2West.Controllers
         public ActionResult Index(int? status, string id, string sortType, string keyword, string duration_range,
             string departureId, string destinationId, string categoryId, int? page)
         {
-            ViewBag.BreadCrumb = "Tour List";
+            ViewBag.BreadCrumb = "List Tour";
             var tours = from t in db.Tours select t;
 
             ViewBag.CategoryList = from c in db.TourCategories select c;
@@ -242,26 +244,42 @@ namespace East2West.Controllers
             ViewBag.DestinationId = new SelectList(db.Locations, "Id", "Name", tour.DestinationId);
             return View(tour);
         }
+        
 
-        public String ChangeStatus(string id, int status)
+        public String ChangeStatus(string ids, int status)
         {
-            if (id == null)
-            {
-                return "Bad Request";
-            }
-            Tour tour = db.Tours.Find(id);
-            if (tour == null)
-            {
-                return "Tour not found";
-            }
-            tour.Status = status;
+            var listId = ids.Split(',').ToList();
             string newStatus = "ACTIVE";
             if (status == 0)
             {
                 newStatus = "DISABLE";
             }
-            db.SaveChanges();
-            return  "Tour #" + id + " status change to " + newStatus;
+            foreach (var itemId in listId)
+            {
+                if (itemId == null)
+                {
+                    return "Bad Request";
+                }
+                Tour tour = db.Tours.Find(itemId);
+                if (tour == null)
+                {
+                    return "Bad request tour " + itemId + " not found";
+                }
+                tour.Status = status;
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return "Update fail";
+            }
+            if (listId.Count > 1)
+            {
+                return "Update success";
+            }
+            return  "Tour #" + listId[0] + " status change to " + newStatus;
         }
 
         protected override void Dispose(bool disposing)
