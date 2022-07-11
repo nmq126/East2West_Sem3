@@ -69,7 +69,7 @@
                         icon: 'success',
                         title: response.message,
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 2000
                     })
                     window.location.href = "/home/users/profile/" + $('#userId').val();
                 }
@@ -79,7 +79,7 @@
                         icon: 'error',
                         title: response.message,
                         showConfirmButton: false,
-                        timer: 4000
+                        timer: 6000
                     })
                     window.location.href = "/home/users/login";
                 }
@@ -121,7 +121,7 @@
                             icon: 'success',
                             title: response.message,
                             showConfirmButton: false,
-                            timer: 1500
+                            timer: 2000
                         })
                         window.location.href = "/home/users/profile/" + $('#userId').val();
                     }
@@ -131,7 +131,7 @@
                             icon: 'error',
                             title: response.message,
                             showConfirmButton: false,
-                            timer: 2000
+                            timer: 6000
                         })
                         window.location.href = "/home/users/login";
                     }

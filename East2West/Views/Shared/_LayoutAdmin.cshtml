@@ -58,7 +58,7 @@
                 <div class="navbar-holder d-flex align-items-center align-middle justify-content-between">
                     <!-- Begin Logo -->
                     <div class="navbar-header">
-                        <a href="db-default.html" class="navbar-brand">
+                        <a href="/admin" class="navbar-brand">
                             <div class="brand-image brand-big">
                                 <img src="@Url.Content("~/Content/img/logo_sticky.png")" alt="logo" class="logo-big">
                             </div>
@@ -113,29 +113,25 @@
                         }
                         <li class="@(url.Contains("/Dashboard") ? "active" : "" )">
                             <a class="@(url.Contains("/Dashboard") ? "active" : "" )" href="@Url.Action("Index", "Dashboard")"><i class="la la la-columns"></i><span>Dashboard</span></a>
-
                         </li>
                         <li class="@(url.Contains("/Orders") || url.Contains("/admin/orders") ? "active" : "" )">
                             <a href="#dropdown-db0" aria-expanded="false" data-toggle="collapse"><i class="la la-shopping-cart"></i><span>Orders</span></a>
                             <ul id="dropdown-db0" class="collapse list-unstyled @(url.Contains("/Orders") || url.Contains("/admin/orders") ? "show" : "" ) pt-0">
                                 <li><a class="@(rawUrl.Contains("/Orders/GetTour") || rawUrl.Contains("/admin/orders/tours") ? "active" : "" )" href="@Url.Action("GetTour", "Orders")">Order Tour</a></li>
                                 <li><a class="@(rawUrl.Contains("/Orders/GetCar") || rawUrl.Contains("/admin/orders/cars") ? "active" : "" )" href="@Url.Action("GetCar", "Orders")">Order Car</a></li>
-
                             </ul>
                         </li>
                         </li>
                         <li class="@(url.Contains("/Refunds") || url.Contains("/admin/refunds") ? "active" : "" )">
                             <a href="#dropdown-db9" aria-expanded="false" data-toggle="collapse"><i class="la la-refresh"></i><span>Refund</span></a>
                             <ul id="dropdown-db9" class="collapse list-unstyled @(url.Contains("/Refunds") || url.Contains("/admin/refunds") ? "show" : "" ) pt-0">
-                                <li><a class="@(rawUrl.Equals("/Refunds/Index") || rawUrl.Equals("/admin/refunds") ? "active" : "" )" href="@Url.Action("Index", "Refunds")">Refund list</a></li>
-
+                                <li><a class="@(rawUrl.Equals("/Refunds/Index") || rawUrl.Equals("/admin/refunds") ? "active" : "" )" href="@Url.Action("Index", "Refunds")">Refund List</a></li>
                             </ul>
                         </li>
                         <li class="@(url.Contains("/Users") || url.Contains("/admin/users") ? "active" : "" )">
                             <a href="#dropdown-db5" aria-expanded="false" data-toggle="collapse"><i class="la la-user"></i><span>Users</span></a>
                             <ul id="dropdown-db5" class="collapse list-unstyled @(url.Contains("/Users") || url.Contains("/admin/users") ? "show" : "" ) pt-0">
                                 <li><a class="@(rawUrl.Equals("/Users/Index") || rawUrl.Equals("/admin/users") ? "active" : "" )" href="@Url.Action("Index", "Users")">Users List</a></li>
-
                             </ul>
                         </li>
                         <li class="@(url.Contains("/Tour") || url.Contains("/admin/tour") ? "active" : "" )">
@@ -143,8 +139,8 @@
                             <ul id="dropdown-db1" class="collapse list-unstyled @(url.Contains("/Tour") || url.Contains("/admin/tour") ? "show" : "" ) pt-0">
                                 <li><a class="@(rawUrl.Contains("/Tours") || rawUrl.Contains("/Tours/Index") || rawUrl.Equals("/admin/tours") && !rawUrl.Equals("/admin/tours/create") ? "active" : "" )" href="@Url.Action("Index", "Tours")">Tours List</a></li>
                                 <li><a class="@(rawUrl.Equals("/Tours/Create") || rawUrl.Equals("/admin/tours/create")  ? "active" : "" )" href="@Url.Action("Create", "Tours")">Create Tour</a></li>
-                                <li><a class="@(rawUrl.Equals("/TourDetails") || rawUrl.Equals("/TourDetails/Index") || rawUrl.Equals("/admin/tour-details") ? "active" : "" )" href="@Url.Action("Index", "TourDetails")">Tour detail List</a></li>
-                                <li><a class="@(rawUrl.Equals("/TourDetails/Create") || rawUrl.Equals("/admin/tour-details/create") ? "active" : "" )" href="@Url.Action("Create", "TourDetails")">Create Tour detail</a></li>
+                                <li><a class="@(rawUrl.Equals("/TourDetails") || rawUrl.Equals("/TourDetails/Index") || rawUrl.Equals("/admin/tour-details") ? "active" : "" )" href="@Url.Action("Index", "TourDetails")">Tour Detail List</a></li>
+                                <li><a class="@(rawUrl.Equals("/TourDetails/Create") || rawUrl.Equals("/admin/tour-details/create") ? "active" : "" )" href="@Url.Action("Create", "TourDetails")">Create Tour Detail</a></li>
                             </ul>
                         </li>
                         <li class="@(url.Contains("/Car") || url.Contains("/admin/car") ? "active" : "" )">
@@ -186,7 +182,7 @@
                                 <h2 class="page-header-title">@ViewBag.BreadCrumb</h2>
                                 <div>
                                     <ul class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="db-default.html"><i class="ti ti-home"></i></a></li>
+                                        <li class="breadcrumb-item"><a href="/admin"><i class="ti ti-home"></i></a></li>
                                         <li class="breadcrumb-item active">@ViewBag.BreadCrumb</li>
                                     </ul>
                                 </div>
@@ -196,7 +192,6 @@
                     <!-- End Page Header -->
 
                     @RenderBody()
-
                 </div>
                 <!-- End Container -->
                 <!-- Begin Page Footer-->
