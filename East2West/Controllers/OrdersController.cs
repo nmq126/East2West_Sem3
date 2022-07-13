@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -214,11 +215,14 @@ namespace East2West.Controllers
             int pageSize = 10;
 
             double revenue = 0;
+            int quantity = 0;
             foreach (var item in orders.Where(o => o.Status == 1))
             {
                 revenue += item.TotalPrice;
+                quantity += item.OrderTours.First().Quantity;
             }
-            ViewBag.TotalRevenue = revenue;
+            ViewBag.TotalRevenue = revenue.ToString("C", CultureInfo.GetCultureInfo("en-US"));
+            ViewBag.TotalTicket = quantity;
             return View(orders.ToPagedList(pageNumber, pageSize));
         }
 
@@ -394,7 +398,7 @@ namespace East2West.Controllers
             {
                 revenue += item.TotalPrice;
             }
-            ViewBag.TotalRevenue = revenue;
+            ViewBag.TotalRevenue = revenue.ToString("C", CultureInfo.GetCultureInfo("en-US")); ;
             return View(orders.ToPagedList(pageNumber, pageSize));
         }
 
@@ -460,7 +464,7 @@ namespace East2West.Controllers
                 {
                     return "Bad Request";
                 }
-                Order order = db.Orders.Find(itemId);
+                var order = db.Orders.Include(o => o.OrderCars).Include(o => o.OrderTours).FirstOrDefault(c => c.Id == itemId);
                 if (order == null)
                 {
                     return "Bad request item " + itemId + " not found";
