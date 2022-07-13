@@ -174,6 +174,13 @@
                                 showConfirmButton: false,
                                 timer: 2500
                             })
+                        } else if (response.status == -1 || response.status == -2) {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: response.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
                         }
                     }
                 });
@@ -218,6 +225,13 @@
                                         showConfirmButton: false,
                                         timer: 1500
                                     })
+                                } else if (response.status == -1 || response.status == -2) {
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        title: response.message,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
                                 }
                             }
                         });
@@ -226,7 +240,5 @@
                 })
             }
         })
-
-        
     })
 });
