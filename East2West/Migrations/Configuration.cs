@@ -55,21 +55,21 @@
                  );
             }
 
-            //Địa điểm 
-            context.Locations.AddOrUpdate(x => x.Id,
-                new Location() { Id = "LOCAL_1", Name = "Ha Noi", Description = "Hanoi is a dreamy city that has infatuated the human heart." },
-                new Location() { Id = "LOCAL_2", Name = "Bangkok", Description = "Bangkok, officially known in Thai as Krung Thep Maha Nakhon and colloquially as Krung Thep, is the capital and most populous city of Thailand." },
-                new Location() { Id = "LOCAL_3", Name = "Kathmandu", Description = "Kathmandu, officially the Kathmandu Metropolitan City, is the capital and the most populous city of Nepal " },
-                new Location() { Id = "LOCAL_4", Name = "Da Nang", Description = "Da Nang is a city directly under the central government, located in the South Central Coast region of Vietnam, is the central and largest city in the Central - Central Highlands region. " },
-                new Location() { Id = "LOCAL_5", Name = "Phu Quoc", Description = "Phu Quoc is an island located in the Gulf of Thailand and is the largest island in Vietnam. Administratively, Phu Quoc island, together with neighboring smaller islands and Tho Chu archipelago, 55 nautical miles to the southwest, composes Phu Quoc island city under Kien Giang province. " },
-                new Location() { Id = "LOCAL_6", Name = "Scotland", Description = "Scotland is a country in the United Kingdom of Great Britain and Northern Ireland. Scotland occupies the northern third of the island of Great Britain, is bordered by England to the south, the Atlantic Ocean surrounds the remaining sides: of which the North Sea is to the east, and the North Strait and the Irish Sea to the west -male." },
-                new Location() { Id = "LOCAL_7", Name = "Phu Yen", Description = "Phu Yen is known as a wild and beautiful land with many beaches, lagoons, historical and cultural relics such as Nhan Mountain, Da Bia Mountain, Vung Ro, Bai Mon - Mui Dien, O Loan lagoon, Ganh Da Dia, Mang Lang Church, Xuan Dai Bay, Dong Cam Dam. In addition, Phu Yen has many other scenic spots such as Bai Xep, Vinh Hoa beach, Tu Nham sand hill, Nua island, Chua island, Nhat Tu Son island, Bau beach, Yen island, Ganh Den, Cay Du waterfall, H'Ly waterfall. , Van Hoa Plateau..." },
-                new Location() { Id = "LOCAL_8", Name = "Turkey", Description = "Turkey is a democratic, secular, unitary, and constitutional republic with a diverse cultural heritage." },
-                new Location() { Id = "LOCAL_9", Name = "Sri Lanka", Description = "Sri Lanka, officially the Democratic Socialist Republic of Sri Lanka is an island nation with a majority Buddhist population in South Asia, located about 33 miles off the coast of the southern Indian state of Tamil Nadu. The country is often referred to as the 'Pearl of the Indian Ocean'." },
-                new Location() { Id = "LOCAL_10", Name = "Ha Long", Description = "Ha Long is the capital city of Quang Ninh province, Vietnam. The city is named after Ha Long Bay, the bay located to the south of the city and a famous heritage site of Vietnam. The name 'Ha Long' means 'dragon flying down'" },
-                new Location() { Id = "LOCAL_11", Name = "Ta Xua", Description = "Not only a bright spot on the province's tourist map, Ta Xua is also attractive with two famous specialties: ancient Shan Tuyet tea and meo apples." },
-                new Location() { Id = "LOCAL_12", Name = "Russia", Description = "Russia is a place of cultural exchange between Asia and Europe. If you have read information about Russia, you will see that Russia's area is extremely large, more than 17 million square kilometers." }
-                );
+            //Địa điểm
+                        context.Locations.AddOrUpdate(x => x.Id,
+                            new Location() { Id = "LOCAL_1", Name = "Ha Noi", Description = "Hanoi is a dreamy city that has infatuated the human heart." },
+                            new Location() { Id = "LOCAL_2", Name = "Bangkok", Description = "Bangkok, officially known in Thai as Krung Thep Maha Nakhon and colloquially as Krung Thep, is the capital and most populous city of Thailand." },
+                            new Location() { Id = "LOCAL_3", Name = "Kathmandu", Description = "Kathmandu, officially the Kathmandu Metropolitan City, is the capital and the most populous city of Nepal " },
+                            new Location() { Id = "LOCAL_4", Name = "Da Nang", Description = "Da Nang is a city directly under the central government, located in the South Central Coast region of Vietnam, is the central and largest city in the Central - Central Highlands region. " },
+                            new Location() { Id = "LOCAL_5", Name = "Phu Quoc", Description = "Phu Quoc is an island located in the Gulf of Thailand and is the largest island in Vietnam. Administratively, Phu Quoc island, together with neighboring smaller islands and Tho Chu archipelago, 55 nautical miles to the southwest, composes Phu Quoc island city under Kien Giang province. " },
+                            new Location() { Id = "LOCAL_6", Name = "Scotland", Description = "Scotland is a country in the United Kingdom of Great Britain and Northern Ireland. Scotland occupies the northern third of the island of Great Britain, is bordered by England to the south, the Atlantic Ocean surrounds the remaining sides: of which the North Sea is to the east, and the North Strait and the Irish Sea to the west -male." },
+                            new Location() { Id = "LOCAL_7", Name = "Phu Yen", Description = "Phu Yen is known as a wild and beautiful land with many beaches, lagoons, historical and cultural relics such as Nhan Mountain, Da Bia Mountain, Vung Ro, Bai Mon - Mui Dien, O Loan lagoon, Ganh Da Dia, Mang Lang Church, Xuan Dai Bay, Dong Cam Dam. In addition, Phu Yen has many other scenic spots such as Bai Xep, Vinh Hoa beach, Tu Nham sand hill, Nua island, Chua island, Nhat Tu Son island, Bau beach, Yen island, Ganh Den, Cay Du waterfall, H'Ly waterfall. , Van Hoa Plateau..." },
+                            new Location() { Id = "LOCAL_8", Name = "Turkey", Description = "Turkey is a democratic, secular, unitary, and constitutional republic with a diverse cultural heritage." },
+                            new Location() { Id = "LOCAL_9", Name = "Sri Lanka", Description = "Sri Lanka, officially the Democratic Socialist Republic of Sri Lanka is an island nation with a majority Buddhist population in South Asia, located about 33 miles off the coast of the southern Indian state of Tamil Nadu. The country is often referred to as the 'Pearl of the Indian Ocean'." },
+                            new Location() { Id = "LOCAL_10", Name = "Ha Long", Description = "Ha Long is the capital city of Quang Ninh province, Vietnam. The city is named after Ha Long Bay, the bay located to the south of the city and a famous heritage site of Vietnam. The name 'Ha Long' means 'dragon flying down'" },
+                            new Location() { Id = "LOCAL_11", Name = "Ta Xua", Description = "Not only a bright spot on the province's tourist map, Ta Xua is also attractive with two famous specialties: ancient Shan Tuyet tea and meo apples." },
+                            new Location() { Id = "LOCAL_12", Name = "Russia", Description = "Russia is a place of cultural exchange between Asia and Europe. If you have read information about Russia, you will see that Russia's area is extremely large, more than 17 million square kilometers." }
+                            );
             context.TourCategories.AddOrUpdate(x => x.Id,
                 new TourCategory() { Id = "TOURC_1", Name = "City Sightseeing" },
                 new TourCategory() { Id = "TOURC_2", Name = "Historic Buildings " },
@@ -81,7 +81,7 @@
                 new TourCategory() { Id = "TOURC_7", Name = "Skyline tours" }
                 );
 
-           // Tour
+            // Tour
             context.Tours.AddOrUpdate(x => x.Id,
                 new Tour() { Id = "TOUR_1", TourCategoryId = "TOURC_8", DepartureId = "LOCAL_1", DestinationId = "LOCAL_3", Name = "NAGARKOT SUNRISE TOUR", Description = "Coming to Nepal, it is impossible to ignore this ideal place to relax, the village of Nagarkot in Nepal is nestled next to the Himalayan mountainside like a miniature paradise in the majestic scenery of nature.", Detail = "Enjoy the best view of the Kathmandu valley on this hike. Discover rural traditions and exceptional hiking routes and admire the striking mountains and rural landscapes.", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1656760637/e2w/nepal-pokhara-phewa-tal-lake-wallpaper-preview_n8kxny.jpg,https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655638385/e2w/download_dfibfd.jpg , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655741011/e2w/c25c92fc-Nagarkot-Sunrise-Tour_ddhk9b.webp , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655741058/e2w/28c46a14-Nagarkot-Sunrise-Tour_rxpiey.webp , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655741084/e2w/357b7a05-Nagarkot-sunrise-5_slmcls.webp", Duration = 3, Rating = 5, Policy = "BOOKING ON BEHALF OF OTHERS: If you make a booking for anyone other than yourself, you are considered the designated contact person for those other travelers. You represent and warrant that you are legally authorized to act on their behalf; that you have obtained all required consents; and that you will inform them of these Terms and warrant that they accept and agree to them. You are also responsible for making all payments due for your booking; notifying us if any changes or cancellations are required; and keeping the other travelers informed of all information relevant to your trip. REGISTRATION: After you complete your booking, we'll send you an email containing a link to a secure traveler registration form. For most packages, you must complete this form within 5 days of booking. Let us know if you are unable to complete it within this timeframe, or your booking may be subject to cancellation. CONFIRMATION: After we receive your booking and deposit, we will confirm availability of all components and send you a confirmation email within 1–2 business days. If any option or component you selected is not available, we will alert you and give you the option to modify your booking or to cancel and receive a refund of your deposit.", SummarySchedule = "Ha Noi - Nepal - Nagarkot ", Status = 1, CreatedAt = Convert.ToDateTime("2020-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
                 new Tour() { Id = "TOUR_2", TourCategoryId = "TOURC_1", DepartureId = "LOCAL_1", DestinationId = "LOCAL_4", Name = "SERIES | HA NOI - DA NANG", Description = "SERIES | HANOI - DA NANG - BA NA - HOI AN", Detail = "Coming to Da Nang, visitors not only have the opportunity to visit the beautiful scenery of the sea but also have the opportunity to enjoy unforgettable special dishes, visit the charming natural scenery of the river and enjoy many famous specialties here. this. In addition, in the travel itinerary with Hanoitourist's Da Nang - Hoi An tour, you can also feel the peaceful beauty of Hoi An ancient town and the culinary beauty here.", Thumbnail = "https://res.cloudinary.com/dyrfhqz3j/image/upload/v1656760444/e2w/vietnam-h%E1%BB%99i-an-reflections-asia_hikq00.jpg , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655794879/e2w/63451_mwh9h0.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655794883/e2w/63453_nq69ji.png , https://res.cloudinary.com/dyrfhqz3j/image/upload/v1655794886/e2w/63455_vsf0fm.png", Duration = 4, Rating = 5, Policy = "<p>Price includes:</p><p>Air tickets and airport fees Hanoi - Da Nang - Hanoi (Vietnam Airlines ticket includes 20kg of checked baggage).</p><p>Modern air-conditioned cars exclusively for the group (with hand sanitizer on board)</p><p>Sekong 3 *** hotel on the seafront (early check-in time from 14h00; check-out at 12h00): 02 adults/room - odd group of guests use room 3, children sleep with parents without standard private room )</p><p>Meals according to the program 120,000 VND / person / main meal * 06 main meals. Breakfast buffet at the hotel.</p><p>You can take care of the entrance tickets at the tourist attractions in the program.</p><p>You can buy travel insurance throughout the route with a maximum compensation of 120,000,000 VND/person.</p><p>Guests are served cold towels, mineral water in the car, the norm is 1 bottle / person / day, the limit is 1 mask / day / person.</p><p>Tour guide picks you up at the airport in Hanoi</p><p>Tour guide in Da Nang, enthusiastic experience, explain the route, serve the group according to the program.</p><p>Price does not include:</p><p>Cable car tickets &amp; games at Ba Na + Eating Ba Na resort: 850,000 VND/pax (fares may change at the time of using the service)</p><p>If going to Cu Lao Cham: 600,000 VND/pax</p><p>If going to Vinpearl Nam Hoi An: 700,000 VND/pax.</p><p>Single room sleep, drinks. Personal expenses other than the program.</p><p>Tipping for drivers and guides.</p><p>SUPPLY FOR SINGLE ROOM: 1,100,000 VND</p><p>Cancellation policy:</p><p>Note:</p><p><br></p><p>The order of attractions can be changed to match the actual program of the group, but still ensure the full range of attractions.</p><p>Flight time may change according to flight time of Vietnam Airlines.</p>", SummarySchedule = "HANOI - DA NANG - BA NA - HUE - HOI AN - HANOI", Status = 1, CreatedAt = Convert.ToDateTime("2020-08-09T23:49:58+02:00"), UpdatedAt = DateTime.Now, DeletedAt = DateTime.Now },
@@ -561,7 +561,7 @@
                  new CarBrand() { Id = "CARBR_6", Name = "Bentley" },
                  new CarBrand() { Id = "CARBR_7", Name = "Rolls-Royce" }
                  );
-           // Mẫu xe
+            // Mẫu xe
             context.CarModels.AddOrUpdate(x => x.Id,
                 new CarModel() { Id = "CARMD_1", CarBrandId = "CARBR_1", Name = "Honda City" },
                 new CarModel() { Id = "CARMD_2", CarBrandId = "CARBR_2", Name = "Camry 2.0" },
@@ -1103,7 +1103,6 @@ new Hotel()
                             CreatedAt = DateTime.Now
                         }
                 );
-
             var userId = db.Users.Select(u => u.Id).ToList();
 
             var tourDetail = db.TourDetails.ToList();
@@ -1113,9 +1112,13 @@ new Hotel()
 
 
 
-            for (int i = 1; i < 11; i++)
+            for (int i = 1; i < 50; i++)
             {
-
+                var orderId = "ORD_" + i;
+                if (db.Orders.Find(orderId) != null)
+                {
+                    continue;
+                }
                 var tourDetailChosen = tourDetail.OrderBy(s => Guid.NewGuid()).First();
                 var unitPrice = tourDetailChosen.Price * (1 - tourDetailChosen.Discount / 100);
                 int randomQuantity = gen.Next(1, 10);
@@ -1124,7 +1127,7 @@ new Hotel()
                 context.Orders.AddOrUpdate(x => x.Id,
                     new Order()
                     {
-                        Id = "ORD_" + i,
+                        Id = orderId,
                         UserId = userId.OrderBy(s => Guid.NewGuid()).First(),
                         TotalPrice = totalPrice,
                         Type = 1,
@@ -1135,25 +1138,30 @@ new Hotel()
                 context.OrderTours.AddOrUpdate(x => new { x.OrderId, x.TourDetailId },
                     new OrderTour()
                     {
-                        OrderId = "ORD_" + i,
-                        TourDetailId = "TOURDT_" + random,
+                        OrderId = orderId,
+                        TourDetailId = tourDetailChosen.Id,
                         UnitPrice = unitPrice,
                         Quantity = randomQuantity
                     }
                     );
             }
 
-            for (int i = 11; i < 21; i++)
+            for (int i = 51; i < 90; i++)
             {
+                var orderId = "ORD_" + i;
+                if (db.Orders.Find(orderId) != null)
+                {
+                    continue;
+                }
                 var carChosen = carList.OrderBy(s => Guid.NewGuid()).First();
                 var carStartDay = RandomDay();
                 int randomDuration = gen.Next(1, 10);
                 var unitPrice = carChosen.PricePerDay * randomDuration;
-                var createdAt = carStartDay.AddDays(-randomDuration);
+                var createdAt = GetRandomDate(carStartDay.AddDays(-randomDuration), carStartDay);
                 context.Orders.AddOrUpdate(x => x.Id,
                     new Order()
                     {
-                        Id = "ORD_" + i,
+                        Id = orderId,
                         UserId = userId.OrderBy(s => Guid.NewGuid()).First(),
                         TotalPrice = unitPrice,
                         Type = 2,
@@ -1175,7 +1183,7 @@ new Hotel()
                 context.OrderCars.AddOrUpdate(x => new { x.OrderId, x.CarScheduleId },
                   new OrderCar()
                   {
-                      OrderId = "ORD_" + i,
+                      OrderId = orderId,
                       CarScheduleId = "CARSCH_" + i,
                       UnitPrice = unitPrice,
                   }
@@ -1199,7 +1207,6 @@ new Hotel()
             //    );
 
             db.SaveChanges();
-
         }
 
     }

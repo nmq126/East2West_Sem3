@@ -255,7 +255,7 @@
                 }
 
                 <div class="em-separator separator-dashed"></div>
-                <h3 style="color: #5d5386">Total Revenue: $@ViewBag.TotalRevenue</h3>
+                <h3 style="color: #5d5386">Total Revenue: @ViewBag.TotalRevenue  (@ViewBag.TotalTicket tickets)</h3>
             </div>
         </div>
         <!-- Default -->
@@ -582,9 +582,6 @@
                                         break;
                                 }
                             } else {
-                                if (status == 0 || status == 2) {
-                                    obj.prop('disabled', true);
-                                }
                                 Swal.fire(
                                     'Success!',
                                     msg,

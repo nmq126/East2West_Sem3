@@ -114,7 +114,7 @@ namespace East2West.Controllers
                     tours = tours.OrderByDescending(t => t.Rating);
                     break;
                 default:
-                    tours = tours.OrderBy(s => s.CreatedAt);
+                    tours = tours.OrderByDescending(s => s.CreatedAt);
                     break;
             }
             tours = tours.Include(t => t.TourCategory);

@@ -40,19 +40,19 @@ namespace East2West.Controllers
             ViewBag.DataSaleChart = GetSaleChartData(2022);
             ViewBag.LatestOrders = db.Orders.OrderByDescending(o => o.CreatedAt).Take(10);
             ViewBag.LatestUsers = db.Users.OrderByDescending(o => o.CreatedAt).Take(5);
-            var bestTour = FindBestSellingTour().Split(',').ToList();
+            var bestTour = FindBestSellingTour(1).Split(',').ToList();
             ViewBag.BestTour = db.Tours.Find(bestTour[0]);
             ViewBag.BestTourTicket = bestTour[1];
-            ViewBag.BestTourSale = String.Format("{0:C}", bestTour[2]);
+            ViewBag.BestTourSale = String.Format("{0:N2}", bestTour[2]);
             return View();
         }
-        private string FindBestSellingTour()
+        private string FindBestSellingTour(int type)
         {
             var odt = db.OrderTours.Where(o => o.Order.Status == 1)
                 .GroupBy(o => o.TourDetailId)
                 .OrderByDescending(o => o.Sum(oi => oi.Quantity))
-                .Select(o => new 
-                { 
+                .Select(o => new
+                {
                     Id = o.Key,
                     Quantity = o.Sum(oi => oi.Quantity),
                     TotalSale = o.Sum(oi => oi.Quantity * oi.UnitPrice)
@@ -60,14 +60,31 @@ namespace East2West.Controllers
             string keyOfMaxValue = "";
             int maxQuantity = 0;
             double maxTotalSale = 0;
-            foreach (var item in odt)
+            if (type == 1)
             {
-                if (item.Quantity > maxQuantity)
+                foreach (var item in odt)
                 {
-                    maxQuantity = item.Quantity;
-                    var x = db.TourDetails.Where(t => t.Id == item.Id).Select(t => new { Id = t.TourId }).First();
-                    keyOfMaxValue = x.Id;
-                    maxTotalSale = item.TotalSale;
+                    if (item.TotalSale > maxTotalSale)
+                    {
+                        maxQuantity = item.Quantity;
+                        var x = db.TourDetails.Where(t => t.Id == item.Id).Select(t => new { Id = t.TourId }).First();
+                        keyOfMaxValue = x.Id;
+                        maxTotalSale = item.TotalSale;
+                    }
+                }
+
+            }
+            else
+            {
+                foreach (var item in odt)
+                {
+                    if (item.Quantity > maxQuantity)
+                    {
+                        maxQuantity = item.Quantity;
+                        var x = db.TourDetails.Where(t => t.Id == item.Id).Select(t => new { Id = t.TourId }).First();
+                        keyOfMaxValue = x.Id;
+                        maxTotalSale = item.TotalSale;
+                    }
                 }
             }
             return keyOfMaxValue + "," + maxQuantity + "," + maxTotalSale;
@@ -154,7 +171,7 @@ namespace East2West.Controllers
             }
             List<DataPoint> dataPoints = new List<DataPoint>();
 
-            var ordersItem = orders.Where(x => new[] { 3, 4, 5 }.Contains(x.CreatedAt.Month));
+            var ordersItem = orders.Where(x => x.Type == type && x.Status == 1).Where(x => new[] { 3, 4, 5 }.Contains(x.CreatedAt.Month));
             if (ordersItem == null || ordersItem.Count() == 0)
             {
                 dataPoints.Add(new DataPoint("Spring", 0));
@@ -164,7 +181,7 @@ namespace East2West.Controllers
             {
                 dataPoints.Add(new DataPoint("Spring", ordersItem.Sum(o => o.TotalPrice)));
             }
-            ordersItem = orders.Where(x => x.Type == 1 && x.Status == 1).Where(x => new[] { 6, 7, 8 }.Contains(x.CreatedAt.Month));
+            ordersItem = orders.Where(x => x.Type == type && x.Status == 1).Where(x => new[] { 6, 7, 8 }.Contains(x.CreatedAt.Month));
             if (ordersItem == null || ordersItem.Count() == 0)
             {
                 dataPoints.Add(new DataPoint("Summer", 0));
@@ -173,7 +190,7 @@ namespace East2West.Controllers
             {
                 dataPoints.Add(new DataPoint("Summer", ordersItem.Sum(o => o.TotalPrice)));
             }
-            ordersItem = orders.Where(x => x.Type == 1 && x.Status == 1).Where(x => new[] { 9, 10, 11 }.Contains(x.CreatedAt.Month));
+            ordersItem = orders.Where(x => x.Type == type && x.Status == 1).Where(x => new[] { 9, 10, 11 }.Contains(x.CreatedAt.Month));
             if (ordersItem == null || ordersItem.Count() == 0)
             {
                 dataPoints.Add(new DataPoint("Fall", 0));
@@ -183,7 +200,7 @@ namespace East2West.Controllers
             {
                 dataPoints.Add(new DataPoint("Fall", ordersItem.Sum(o => o.TotalPrice)));
             }
-            ordersItem = orders.Where(x => x.Type == 1 && x.Status == 1).Where(x => new[] { 12, 1, 2 }.Contains(x.CreatedAt.Month));
+            ordersItem = orders.Where(x => x.Type == type && x.Status == 1).Where(x => new[] { 12, 1, 2 }.Contains(x.CreatedAt.Month));
             if (ordersItem == null || ordersItem.Count() == 0)
             {
                 dataPoints.Add(new DataPoint("Winter", 0));

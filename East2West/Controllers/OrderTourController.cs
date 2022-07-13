@@ -242,8 +242,13 @@ namespace East2West.Controllers
                     status = -2
                 });
             }
+            TimeSpan span = new TimeSpan(1, 0, 0, 0);
+
             var presentTime = DateTime.Now;
-            TimeSpan span = presentTime.Subtract((DateTime)order.UpdatedAt);
+            if (order.UpdatedAt != null)
+            {
+                span = presentTime.Subtract((DateTime)order.UpdatedAt);
+            }
             int percent;
             switch (span.Days)
             {
