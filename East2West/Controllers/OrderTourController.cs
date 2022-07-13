@@ -243,7 +243,6 @@ namespace East2West.Controllers
                 });
             }
             TimeSpan span = new TimeSpan(1, 0, 0, 0);
-
             var presentTime = DateTime.Now;
             if (order.UpdatedAt != null)
             {
