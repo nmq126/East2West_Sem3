@@ -18,7 +18,7 @@ namespace East2West.Controllers
         private DBContext db = new DBContext();
 
         // GET: CarSchedules
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string carId, string id, string locationId)
         {
             int pageNumber = (page ?? 1);
             int pageSize = 10;
@@ -26,9 +26,27 @@ namespace East2West.Controllers
                 .Include(c => c.Car)
                 .Include("Car.CarModel")
                 .Include("Car.CarType")
-                .Include("Car.CarModel.CarBrand")
-                .OrderBy(c => c.CreatedAt);
-            return View(carSchedules.ToPagedList(pageNumber, pageSize));
+                .Include("Car.CarModel.CarBrand");
+
+            ViewBag.CarId = carId;
+            ViewBag.LocationId = locationId ;
+            ViewBag.Id = id;
+            ViewBag.CarList = from t in db.Cars select t;
+            ViewBag.LocationList = from t in db.Locations select t;
+            if (!String.IsNullOrEmpty(id))
+            {
+                carSchedules = carSchedules.Where(o => o.Id.Contains(id));
+            }
+
+            if (!String.IsNullOrEmpty(carId))
+            {
+                carSchedules = carSchedules.Where(o => o.CarId == carId);
+            }
+            if (!String.IsNullOrEmpty(locationId))
+            {
+                carSchedules = carSchedules.Where(o => o.Car.LocationId == locationId);
+            }
+            return View(carSchedules.OrderByDescending(c => c.CreatedAt).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: CarSchedules/Details/5
