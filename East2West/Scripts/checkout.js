@@ -149,6 +149,7 @@
     });
 
     $('.cancelButton').on('click', function (e) {
+        e.preventDefault;
         Swal.fire({
             title: 'Are you sure want to cancel this service?',
             text: "You won't be able to revert this!",
@@ -171,12 +172,19 @@
                                 icon: 'success',
                                 title: response.message,
                                 showConfirmButton: false,
+                                timer: 2500
+                            })
+                        } else if (response.status == -1 || response.status == -2) {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: response.message,
+                                showConfirmButton: false,
                                 timer: 1500
                             })
-                            window.location.href = "/home/users/profile/" + $('#userId').val();
                         }
                     }
                 });
+                window.location.href = "/home/users/profile/" + $('#userId').val();
             }
         })
     })
@@ -184,33 +192,52 @@
     $('.refundButton').on('click', function (e) {
         e.preventDefault;
         Swal.fire({
-            title: 'Are you sure want to refund this service?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
+            title: 'Refund Policy',
+            html: '<p>Before 1 day – 75%</p>' + '<p>Before 2 days – 80%</p>' + '<p>Before 3 days – 85%</p>' + '<p>Before 4 days – 90%</p>' + '<p>Before 5 days or more – 95%</p>' + '<p><b>You still want to refund?</b></p>',
+            icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, refund it!'
+            confirmButtonText: 'Yes, I want to refund'
         }).then((result) => {
             if (result.isConfirmed) {
-                var orderId = $(this).data("id");
-                $.ajax({
-                    url: "/OrderTour/RefundPayment?id=" + orderId,
-                    type: "POST",
-                    dataType: "json",
-                    contentType: "application/json;charset=utf-8",
-                    success: function (response) {
-                        if (response.status == 1) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: response.message,
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                            window.location.href = "/home/users/profile/" + $('#userId').val();
-                        }
+                Swal.fire({
+                    title: 'Are you sure want to refund this service?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, refund it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var orderId = $(this).data("id");
+                        $.ajax({
+                            url: "/OrderTour/RefundPayment?id=" + orderId,
+                            type: "POST",
+                            dataType: "json",
+                            contentType: "application/json;charset=utf-8",
+                            success: function (response) {
+                                if (response.status == 1) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: response.message,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                } else if (response.status == -1 || response.status == -2) {
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        title: response.message,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                }
+                            }
+                        });
+                        window.location.href = "/home/users/profile/" + $('#userId').val();
                     }
-                });
+                })
             }
         })
     })

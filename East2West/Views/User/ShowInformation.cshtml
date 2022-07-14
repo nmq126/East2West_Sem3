@@ -102,13 +102,12 @@
                                             {
                                                 var tourDetailId = @order.OrderTours.Where(o => o.OrderId == order.Id).FirstOrDefault().TourDetailId;
                                                 <a href="/OrderTour/PaymentWithPaypal?id=@order.Id&name=@name&price=@price&quantity=@quantity&idTourDetail=@tourDetailId" class="btn_2 white">Payment</a>
-                                                <a href="" data-id="@order.Id" class="btn_3 cancelButton">Cancel</a>
+                                                <a href="javascript:void(0);" data-id="@order.Id" class="btn_3 cancelButton">Cancel</a>
                                             }
                                             else if (order.Status == 1)
                                             {
-                                                <a href="" data-id="@order.Id" class="btn_3 refundButton" style="background-color: #f44336; color: white;">Refund</a>
-                                                @*<a href="#0" class="btn_3" style="min-width: 100px; background-color: mediumpurple; color: white;"
-                                                   data-id="@(order.Id)" onclick="showModalFeedback(this)">Leave a feedback</a>*@
+                                                <a href="javascript:void(0);" data-id="@order.Id" class="btn_3 refundButton" style="background-color: #f44336; color: white;">Refund</a>
+                                                
                                             }
 
                                             else
@@ -121,23 +120,23 @@
                                         <div class="booking_buttons">
                                             @if (order.Status == -1)
                                             {
-                                                <a href="" class="btn btn-warning btn_status" style="min-width:95px">Unpaid</a>
+                                                <a href="javascript:void(0);" class="btn btn-warning btn_status" style="min-width:95px">Unpaid</a>
                                             }
                                             else if (order.Status == 1)
                                             {
-                                                <a href="" class="btn btn-success btn_status" style="min-width:95px">Paid</a>
+                                                <a href="javascript:void(0);" class="btn btn-success btn_status" style="min-width:95px">Paid</a>
                                             }
                                             else if (order.Status == 0)
                                             {
-                                                <a href="" class="btn btn-secondary btn_status" style="min-width:95px">Canceled</a>
+                                                <a href="javascript:void(0);" class="btn btn-secondary btn_status" style="min-width:95px">Canceled</a>
                                             }
                                             else if (order.Status == 2)
                                             {
-                                                <a href="" class="btn btn-danger btn_status" style="min-width:95px">Refunded</a>
+                                                <a href="javascript:void(0);" class="btn btn-danger btn_status" style="min-width:95px">Refunded</a>
                                             }
                                             else if (order.Status == -2)
                                             {
-                                                <a href="" class="btn btn-danger btn_status" style="min-width:95px">Pending Refund</a>
+                                                <a href="javascript:void(0);" class="btn btn-danger btn_status" style="min-width:95px">Pending Refund</a>
                                             }
                                         </div>
                                     </div>
@@ -192,11 +191,11 @@
                                             @if (order.Status == -1)
                                             {
                                                 <a href="/OrderCar/PaymentWithPaypal?id=@order.Id&name=@carName&pricePerDay=@pricePerDay&rentDay=@span.Days&idCarSchedule=@carScheduleId" class="btn_2 white">Payment</a>
-                                                <a href="#0" data-id="@order.Id" class="btn_3 cancelButton">Cancel</a>
+                                                <a href="javascript:void(0);" data-id="@order.Id" class="btn_3 cancelButton">Cancel</a>
                                             }
                                             else if (order.Status == 1)
                                             {
-                                                <a href="#0" data-id="@order.Id" class="btn_3 refundButton" style="background-color: #f44336; color: white;">Refund</a>
+                                                <a  href="javascript:void(0);" data-id="@order.Id" class="btn_3 refundButton" style="background-color: #f44336; color: white;">Refund</a>
                                             }
                                             else
                                             {
@@ -209,23 +208,23 @@
                                         <div class="booking_buttons">
                                             @if (order.Status == -1)
                                             {
-                                                <a href="#" class="btn btn-warning btn_status" style="min-width:95px">Unpaid</a>
+                                                <a href="javascript:void(0);" class="btn btn-warning btn_status" style="min-width:95px">Unpaid</a>
                                             }
                                             else if (order.Status == 1)
                                             {
-                                                <a href="#" class="btn btn-success btn_status" style="min-width:95px">Paid</a>
+                                                <a href="javascript:void(0);" class="btn btn-success btn_status" style="min-width:95px">Paid</a>
                                             }
                                             else if (order.Status == 0)
                                             {
-                                                <a href="#" class="btn btn-secondary btn_status" style="min-width:95px">Canceled</a>
+                                                <a href="javascript:void(0);" class="btn btn-secondary btn_status" style="min-width:95px">Canceled</a>
                                             }
                                             else if (order.Status == 2)
                                             {
-                                                <a href="#" class="btn btn-danger btn_status" style="min-width:95px">Refunded</a>
+                                                <a href="javascript:void(0);" class="btn btn-danger btn_status" style="min-width:95px">Refunded</a>
                                             }
                                             else if (order.Status == -2)
                                             {
-                                                <a href="#" class="btn btn-danger btn_status" style="min-width:95px">Pending Refund</a>
+                                                <a href="javascript:void(0);" class="btn btn-danger btn_status" style="min-width:95px">Pending Refund</a>
                                             }
                                         </div>
                                     </div>
@@ -260,7 +259,7 @@
                         </div>
                         <div class="col-md-6">
                             <p>
-                                <img src="@Model.Thumbnail" alt="Image" class="img-fluid styled profile_pic">
+                                <img src="@Model.Thumbnail" alt="Image" class="img-fluid styled profile_pic" style="max-width: 300px; max-height: 450px">
                             </p>
                         </div>
                     </div>
