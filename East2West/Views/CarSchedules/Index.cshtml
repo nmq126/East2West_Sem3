@@ -51,36 +51,36 @@
     <div class="col-xl-12">
         <div class="widget has-shadow">
             <div class="widget-body">
-                @*@using (Html.BeginForm("Index", "TourDetails", FormMethod.Get))
+                @using (Html.BeginForm("Index", "CarSchedules", FormMethod.Get))
                     {
                         <div class="row">
                             <div class="col-lg-3">
-                                <label class="form-control-label">Select Tour</label>
+                                <label class="form-control-label">Select Car</label>
                                 <div class="select mb-3">
-                                    <select name="tourId" id="tourId" class="custom-select form-control">
-                                        <option value="">Select Departure</option>
-                                        @foreach (var tour in ViewBag.TourList)
+                                    <select name="carId" id="carId" class="custom-select form-control">
+                                        <option value="">All</option>
+                                        @foreach (var car in ViewBag.CarList)
                                         {
-                                            if (tour.Id == ViewBag.TourId)
+                                            if (car.Id == ViewBag.CarId)
                                             {
-                                                <option value=@tour.Id selected>@tour.Name</option>
+                                                <option value=@car.Id selected>@car.Id</option>
                                             }
                                             else
                                             {
-                                                <option value=@tour.Id>@tour.Name</option>
+                                                <option value=@car.Id>@car.Id</option>
                                             }
                                         }
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                <label class="form-control-label">Select Destination location</label>
+                                <label class="form-control-label">Select car location</label>
                                 <div class="select mb-3">
-                                    <select name="destinationId" id="destinationId" class="custom-select form-control">
-                                        <option value="">Select Destination</option>
+                                    <select name="locationId" id="locationId" class="custom-select form-control">
+                                        <option value="">All</option>
                                         @foreach (var destination in ViewBag.LocationList)
                                         {
-                                            if (destination.Id == ViewBag.DestinationId)
+                                            if (destination.Id == ViewBag.LocationId)
                                             {
                                                 <option value=@destination.Id selected>@destination.Name</option>
                                             }
@@ -92,65 +92,27 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="col-lg-3">
-                                <label class="form-control-label">Sort by</label>
-                                <div class="select mb-3">
-                                    <select name="sortType" id="sortType" class="custom-select form-control">
-                                        <option value="">Sort by (Lastest default)</option>
-                                        <option value="createdAt_asc" @(ViewBag.SortType == "createdAt_asc" ? "selected" : "")>Latest</option>
-                                        <option value="createdAt_desc" @(ViewBag.SortType == "createdAt_desc" ? "selected" : "")>Oldest</option>
-                                        <option value="duration_asc" @(ViewBag.SortType == "duration_asc" ? "selected" : "")>Duration (Increase)</option>
-                                        <option value="duration_desc" @(ViewBag.SortType == "duration_desc" ? "selected" : "")>Duration (Decrease)</option>
-                                        <option value="rating_asc" @(ViewBag.SortType == "rating_asc" ? "selected" : "")>Rating (Increase)</option>
-                                        <option value="rating_desc" @(ViewBag.SortType == "rating_desc" ? "selected" : "")>Rating (Decrease)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <label class="form-control-label">Status</label>
-                                <div class="select mb-3">
-                                    <select name="status" id="status" class="custom-select form-control">
-                                        <option value="2" @(ViewBag.Status == 2 ? "selected" : "")>All</option>
-                                        <option value="1" @(ViewBag.Status == 1 ? "selected" : "")>Active</option>
-                                        <option value="0" @(ViewBag.Status == 0 ? "selected" : "")>Disable</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <label class="form-control-label">Duration</label>
-                                <div class="select mb-3">
-                                    <select name="duration_range" id="duration_range" class="custom-select form-control">
-                                        <option value="all" @(ViewBag.DurationRange == "all" ? "selected" : "")>All</option>
-                                        <option value="lte3" @(ViewBag.DurationRange == "lte3" ? "selected" : "")><= 3 days</option>
-                                        <option value="4to7" @(ViewBag.DurationRange == "4to7" ? "selected" : "")>4 - 7 days</option>
-                                        <option value="gt7" @(ViewBag.DurationRange == "gt7" ? "selected" : "")>> 7 days</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
+                             <div class="col-lg-3">
                                 <label class="form-control-label">Search by Id</label>
                                 <div class="">
                                     @Html.TextBox("id", ViewBag.Id as string, new { @class = "form-control", placeholder = "Find by id" })
                                 </div>
                             </div>
-                            <div class="col-lg-3">
-                                <label class="form-control-label">Search by keyword</label>
-                                <div class="">
-                                    @Html.TextBox("keyword", ViewBag.Keyword as string, new { @class = "form-control", placeholder = "Name/Description/Detail/Teacher" })
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-9">
                             </div>
+                           
+                            
                             <div class="col-lg-3 text-right">
                                 <div style="height:28px"></div>
                                 <div>
                                     <button type="submit" class="btn btn-primary mr-1 mb-2">Search</button>
-                                    <button type="reset" class="btn btn btn-outline-secondary mr-1 mb-2"><a href="/Tours">Clear</a></button>
+                                    <button type="reset" class="btn btn btn-outline-secondary mr-1 mb-2"><a href="@Url.Action("Index", "CarSchedules")">Clear</a></button>
                                 </div>
                             </div>
                         </div>
-                    }*@
+                    }
             </div>
         </div>
         <!-- Default -->
@@ -179,14 +141,12 @@
                                 <th width="5%"></th>
                                 <th width="5%">#</th>
                                 <th width="5%">Id</th>
-                                <th width="5%">Car Id</th>
-                                <th width="10%">Car Model</th>
-                                <th width="10%">Car Type</th>
+                                <th width="15%">Car Id</th>
                                 <th width="10%">License plate</th>
                                 <th width="10%">Start Day</th>
                                 <th width="10%">End Day</th>
                                 <th width="10%">Created At</th>
-                                <th width="10%">Status</th>
+                                <th width="20%">Status</th>
                                 <th width="10%">Action</th>
                             </tr>
                         </thead>
@@ -205,9 +165,10 @@
                                         </td>
                                         <td><span class="text-primary">@i</span></td>
                                         <td><span>@item.Id</span></td>
-                                        <td>@Html.ActionLink(@item.CarId, "Details", "Cars", new { id = @item.CarId }, null)</td>
-                                        <td>@item.Car.CarModel.Name</td>
-                                        <td>@item.Car.CarType.Name</td>
+                                        <td>@Html.ActionLink(@item.CarId, "Details", "Cars", new { id = @item.CarId }, null)
+                                            <i data-id="@(item.CarId)" onclick="getCarDetailModal(this)" class="la la-info-circle"></i>
+                                        </td>
+                                        
                                         <td>@item.Car.LisencePlate</td>
                                         <td>@item.StartDay.ToShortDateString()</td>
                                         <td>@item.EndDay.ToShortDateString()</td>
@@ -236,7 +197,7 @@
                         </tbody>
                     </table>
                     @Html.PagedListPager(Model, page => Url.Action("Index",
-                                new { page }),
+                                new { page, id = ViewBag.Id, carId = ViewBag.CarId, locationId = ViewBag.LocationId }),
                                 new PagedListRenderOptions
                                 {
                                     DisplayItemSliceAndTotal = true,
@@ -410,6 +371,42 @@
                     }
                 }
             })
+        }
+    </script>
+    <script>
+        function getCarDetailModal(obj) {
+            var id = obj.getAttribute('data-id')
+            $("#preloader2").show();
+            $.ajax({
+                type: "GET",
+                url: "/Orders/GetCarDetails/" + id,
+                success: function (msg) {
+                    var car = JSON.parse(msg)
+                    var ac = car.hasAc == true ? "Yes" : "No"
+                    var driver = car.hasDriver == true ? "Yes" : "No"
+                    var link = "/admin/cars/" + car.id
+                    $("#preloader2").hide();
+                    Swal.fire({
+                        title: car.brand + "-" + car.model,
+                        html:
+                            '<p>Id: ' + car.id + '</p>' +
+                            '<p>Brand: ' + car.brand + '</p>' +
+                            '<p>Model: ' + car.model + '</p>' +
+                            '<p>License Plate: ' + car.licensePlate + '</p>' +
+                            '<p>Location: ' + car.location + '</p>' +
+                            '<p>Air conditioner: ' + ac + '</p>' +
+                            '<p>Driver: ' + driver + '</p>' +
+                            '<a href=' + link + '>Go to Detail</a> ',
+                        text: car.licensePlate,
+                        imageUrl: car.thumbnail,
+                        imageHeight: 300,
+                        imageAlt: 'thumbnail',
+                    })
+                },
+                error: function () {
+                    $("#preloader2").hide();
+                },
+            });
         }
     </script>
 }

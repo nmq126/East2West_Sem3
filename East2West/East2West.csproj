@@ -198,9 +198,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207101617393_initdb.cs" />
-    <Compile Include="Migrations\202207101617393_initdb.Designer.cs">
-      <DependentUpon>202207101617393_initdb.cs</DependentUpon>
+    <Compile Include="Migrations\202207130416330_init-db.cs" />
+    <Compile Include="Migrations\202207130416330_init-db.Designer.cs">
+      <DependentUpon>202207130416330_init-db.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppRole.cs" />
@@ -1129,8 +1129,8 @@
     <Content Include="Scripts\jquery-3.6.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202207101617393_initdb.resx">
-      <DependentUpon>202207101617393_initdb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207130416330_init-db.resx">
+      <DependentUpon>202207130416330_init-db.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

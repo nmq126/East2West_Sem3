@@ -18,15 +18,27 @@ namespace East2West.Controllers
     {
         private DBContext db = new DBContext();
         // GET: TourDetails
-        public ActionResult Index(int? page, string tourId, string startDepartureAt, string endDepartureAt, string sortType, string priceRange,
-            string id)
+        public ActionResult Index(int? page, string tourId, string id)
         {
+            ViewBag.TourId = tourId;
+            ViewBag.Id = id;
+            ViewBag.TourList = from t in db.Tours select t;
+
             ViewBag.BreadCrumb = "Tour Detail List";
             int pageNumber = (page ?? 1);
             int pageSize = 10;
             var tourDetails = from t in db.TourDetails select t;
 
-            ViewBag.TicketSold = db.OrderTours.Select(x => x.TourDetailId).Distinct().Count();
+            if (!String.IsNullOrEmpty(id))
+            {
+                tourDetails = tourDetails.Where(o => o.Id.Contains(id));
+            }
+
+            if (!String.IsNullOrEmpty(tourId))
+            {
+                tourDetails = tourDetails.Where(o => o.TourId == tourId);
+            }
+
             tourDetails = tourDetails.OrderBy(x => x.DepartureDay);
             return View(tourDetails.ToPagedList(pageNumber, pageSize));
         }
